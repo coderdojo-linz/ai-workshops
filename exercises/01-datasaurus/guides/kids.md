@@ -59,7 +59,7 @@ Falls nicht habe ich wieder ein paar Fragen für dich die du den Fuchs stellen k
 
 -  was könnten wir als nächtes tun? 
 
-## 💡 Tipp: Es steht immer etwas vor der Zahl! Villeicht ein Name für etwas? Wir suchen den Stern! 
+## 💡 Tipp: Es steht immer ein Wort vor den folgenden zwei Zahl! Villeicht ein Name für etwas? Wir suchen den Stern! 
 
 
 Hat dir der Tipp was geholfen? Du kannst ihn sonst auch gerne genauso so deinen Freund schreiben! Villeicht versteht er den Tipp und kann dir sofort helfen 😁
@@ -83,6 +83,21 @@ Jetzt Habe ich wieder ein paar Hilfreiche Fragen für dich die du stellen kannst
 - Inwiefern kann mir das helfen meinen Stern zu finden? 
 
 ## 💡Tipp: In einen Koordinaten System kann man Punkte ganz genau einzeichnen! 
+
+Du weist nicht oder nicht mehr was ein koordinaten System genau ist? Keine sorge😇
+
+## 🗺️ Was ist ein Koordinatensystem?
+Ein Koordinatensystem ist wie eine Schatzkarte mit vielen kleinen Kästchen.
+Damit kannst du genau sagen, wo etwas ist.
+Jeder Punkt auf der Karte hat zwei Zahlen:
+Die erste Zahl (x) sagt, wie weit du nach rechts gehst.
+Die zweite Zahl (y) zeigt, wie weit du dann nach oben gehst.
+Zum Beispiel:
+Der Punkt S (5, 5) bedeutet:
+👉 5 Schritte nach rechts, dann 5 Schritte nach oben.
+Jeder Punkt auf dem Bild hat einen Buchstaben-Namen.
+
+![Koordinatensystem](images/koordinatensystem_kinder.png)
 
 Seit ihr schon weiter gekommen? 
 Ganz sicher! Jetzt wirds nähmlich spannend🧐!
