@@ -3,16 +3,16 @@
 ### 🗺️ Das Geheimnis der komischen Karte
 Hallo kleiner Entdecker / kleine Entdeckerin!
 Oh nein! Du hast dich im Dschungel verirrt – aber keine Sorge, du bist nicht allein.
-Du hast eine geheime Karte bei dir. Sie sieht ziemlich seltsam aus – lauter Punkte und Zahlen!
+Du hast eine geheime Karte bei dir. Sie sieht ziemlich seltsam aus – lauter Buchstaben und Zahlen!
 Du verstehst sie noch nicht? Kein Problem! Diese Karte zeigt dir versteckte Figuren, die dir helfen können, wieder nach Hause zu finden. 🏡✨
 
 ### 🔍 Deine Aufgaben
 Mit Hilfe der geheimen Karte kannst du besondere Figuren entdecken:
 Vielleicht findest du den Datasaurus, der dich im Wald beschützt. 🦖
-Oder den guten Stern, der dir selbst im Dunkeln den Weg zeigt. 🌟
 Da gibt es auch ein magisches Auge, das alles sehen kann – es bringt dich blitzschnell in Sicherheit, wenn Gefahr droht. 👁️
 Und wenn du den Kreis findest, hast du eine Schutzblase um dich – kein Monster kommt da rein! 🛡️
-Wenn du mindestens zwei dieser Helfer findest, wirst du ganz bestimmt wieder nach Hause finden!
+Aber am wichtigsten ist der Stern 🌟 den dieser zeigt dir den weg nachhause egal wie dunkel es ist. 
+Ich bin mir sicher wenn du dann noch eine zweite Figur endeckst das du sicherlich bald wieder daheim bist!
 
 ### 🦊 Dein Freund der schlauer Fuchs
 Aber keine Angst – du bist nicht ganz allein unterwegs!
@@ -27,8 +27,11 @@ Dann werdet ihr zusammen den Weg nach Hause schaffen! 💫🦊
 
 ### Fangen wir an unseren Stern zu suchen 👀🔍
 
-Ganz am Anfang! Hier kannst du dem Fuchs schreiben 💬
-![Alt-Text](images/DatasaurusAi.png)
+Ganz am Anfang! Wenn du nicht weiter kommst kannst du immer deine Mentoren frage, diese helfen dir immer gerne weiter! 
+
+Hier kannst du dem Fuchs schreiben 💬
+
+//TODO UI Bild 
 
 Der Fuchs hat deine Karte bereits gesehen! 🎉
 
@@ -79,19 +82,22 @@ Jetzt Habe ich wieder ein paar Hilfreiche Fragen für dich die du stellen kannst
 
 - Inwiefern kann mir das helfen meinen Stern zu finden? 
 
-## 💡Tipp: In einen Koordinaten System kann man Punkte einzeichnen! 
+## 💡Tipp: In einen Koordinaten System kann man Punkte ganz genau einzeichnen! 
 
 Seit ihr schon weiter gekommen? 
-Ganz sicher! Jetzt musst du deinen Freund kurz helfen ! 🙈
+Ganz sicher! Jetzt wirds nähmlich spannend🧐!
 
-Siehst du dieses Zeichen? 
+Euch hat hoffentlich der Tipp mit den Koordinaten System geholfen!
+Weist du das der Fuchs auch was zeichnen kann für dich? 
+Frag ihn doch mal ob er dir so ein Koordinatensystem erstellt und einmal alle punkte eintragt. 
+Villeicht erkennst du ja was ? 
 
-![Alt-Text](images/CodeInterprator.png)
+## 💡Tipp: Es steht immer etwas vor den Zahlen, die den Punkt bilden! Errinner dich ganz an den Anfang!
 
-Klicke es an dann müsste es so aussehen
+Erkennst du schon unseren Stern am Nachthimmel 🤩 ? 
+Super!! Du hast schon einen Enorm großen Teil fertig für Heimmreise!
 
-![Alt-Text](images/CodeInterpratorBlau.png)
+Suche dir eine von den restlichen 3 Figuren aus und probiere diese noch mal von Anfang an zu finden! 
+Du schaffst das sicherlich auch ohne mich! 😃 Du kannst gerne Fragen die du bei unseren Stern gestellt hast jetzt genauso stellen! 
 
-Wenn es blau ist hast du es geschafft!🎉
 
-Jetzt kommt der nächste Schritt 
