@@ -24,9 +24,9 @@ export async function POST(request: NextRequest) {
     }
 
     if (!datasaurusFileId) {
-      datasaurusFileId = await client.files.getFileId('datasaurus.csv');
+      datasaurusFileId = await client.files.getFileId('daten-hoehle.csv');
       if (!datasaurusFileId) {
-        const inputStream = fs.createReadStream(path.join(process.cwd(), 'prompts', 'datasaurus.csv'));
+        const inputStream = fs.createReadStream(path.join(process.cwd(), 'prompts', 'daten-hoehle.csv'));
         const file = await client.files.create({
           file: inputStream,
           purpose: 'user_data',
