@@ -1,133 +1,62 @@
-# 🔎 Dein großer Detektiv-Guide: Wie echte IT-Detektive arbeiten und was du lernen kannst 🕵️‍♂️🕵️‍♀️
+# Guide für Kinder: Auf Entdeckungstour in der IT‑Forensik 🕵️‍♀️🔍
 
 ---
 
-## 1. 🌟 Was machen echte Detektive in einem Cyber-Fall?
-
-Echte IT-Detektive (man nennt sie auch **Security-Analysten**) untersuchen, **wer** wann **was** in einem Computersystem gemacht hat. Sie suchen gezielt nach Spuren, die zeigen:
-
-1. **Wer** hat auf den Computer zugegriffen?  
-2. **Wann** und **wie** oft gab es Versuche?  
-3. **Was** wurde heruntergeladen oder verändert?
-
-**Warum ist das wichtig?**
-
-- Jeder Klick, jedes Einloggen und jeder Download hinterlässt Spuren.  
-- Wenn man diese Spuren versteht, kann man einen Einbrecher enttarnen, bevor er großen Schaden anrichtet. 🛡️
+## 1. Unsere Mission  
+In eurer fiktiven Firma werden geheimnisvolle Forschungsdaten entwickelt. Jemand könnte versuchen, diese Daten zu stehlen und weiterzuverkaufen. Ihr seid jetzt IT‑Forensiker:innen – Detektiv:innen für Computer‑Spuren!
 
 ---
 
-## 2. 🤓 Dein Detektiv-Plan – mit viel Erklärung, warum jeder Schritt zählt
-
-### Schritt 1: Logs genau ansehen
-
-**Was sind Logs?**
-
-- Wie ein Tagebuch, das alles aufschreibt: Uhrzeit, Benutzername, Ergebnis (erfolgreich oder fehlgeschlagen), Aktion (Login oder Download).  
-- Echte Detektive starten immer mit dem Lesen dieser Logs, um den „Tatort“ kennenzulernen.
-
-**Warum?**
-
-- Ohne Überblick weißt du nicht, wo du anfangen sollst.
+## 2. Was ist IT‑Forensik?  
+- **IT‑Forensik** bedeutet, digitale Spuren zu untersuchen, ähnlich wie echte Detektive Fingerabdrücke finden.  
+- Ihr untersucht **Logs** (das Tagebuch des Computers) und sucht nach **Anomalien** – ungewöhnlichen Mustern, die nicht in den normalen Alltag passen.
 
 ---
 
-### Schritt 2: Viele Fehlversuche zählen 🔐
+## 3. Wichtige Anomalie‑Typen  
 
-**So geht’s:**
-
-- Erstelle eine Tabelle mit allen Benutzer:innen.  
-- Zähle, wie oft jeder `fail` (fehlgeschlagenes Einloggen) hatte.
-
-| Nutzer:in | Fehlversuche |
-|-----------|--------------|
-| Anna      |              |
-| Ben       |              |
-| Clara     |              |
-| David     |              |
-| Eva       |              |
-
-**Warum ist das wichtig?**
-
-- Viele Fehlversuche können zeigen: Jemand probiert wieder und wieder, ein fremdes Konto zu knacken – wie ein Einbrecher, der an vielen Türen rüttelt. 🚪
+| Anomalie               | Was ist das?                                                                                   |
+|------------------------|-----------------------------------------------------------------------------------------------|
+| **Viele Fehlversuche**   | Jemand probiert immer wieder das falsche Passwort („Brute Force“)                              |
+| **Impossible Travel**    | Zwei Logins an weit entfernten Orten in zu kurzer Zeit – physikalisch nicht möglich           |
+| **Ungewöhnliche Zeiten** | Zugriff mitten in der Nacht oder am Wochenende, wenn normalerweise niemand arbeitet          |
+| **Fremde Geräte**        | Einloggen mit einem Gerät, das sonst nie verwendet wird (z. B. ein Handy statt PC)           |
+| **Großer Datenexport**   | Auf einmal riesige Datenmengen herunterladen oder kopieren, ohne dass es einen Grund gibt    |
 
 ---
 
-### Schritt 3: Nacht-Aktivität prüfen 🌙
-
-**So geht’s:**
-
-- Suche in den Logs nach Einträgen zwischen **0:00 und 6:00 Uhr**.  
-- Schau, wer in dieser Zeit erfolgreich eingeloggt ist.
-
-**Warum?**
-
-- Firmen arbeiten tagsüber. Wenn jemand mitten in der Nacht arbeitet, ist das ungewöhnlich – das ist wie Fußspuren im Dunkeln! 👣
+## 4. Warum ist das spannend?  
+- In der echten Welt schützen Firmen ihre geheimen Daten mit IT‑Forensik.  
+- Anomalien lösen Alarm aus und helfen, Cyberkriminelle zu stoppen.  
+- Ihr lernt, wie man aus ganz normalen Log‑Zeilen spannende Geschichten herausliest!
 
 ---
 
-### Schritt 4: Größe der Downloads anschauen 📥
-
-**So geht’s:**
-
-- Filtere alle Aktionen `download`.  
-- Unterscheide zwischen **small** (kleine Datei) und **large** (große Datei).  
-- Markiere, wer große Dateien runtergeladen hat.
-
-**Warum?**
-
-- Große Dateien könnten geheime Forschungsdaten sein. Ein echter Dieb lädt oft die größten Schätze runter. 💎
-
----
-
-### Schritt 5: Spuren zusammenführen 🧩
-
-**So geht’s:**
-
-- Schreibe dir drei Listen:  
-  1. Viele Fehlversuche  
-  2. Nacht-Login  
-  3. Große Downloads  
-- Schau, welcher Name in allen drei Listen vorkommt.
-
-**Warum?**
-
-- Ein kluger Detektiv verbindet Hinweise. Wer alle drei Merkmale hat, ist besonders verdächtig!
+## 5. Wie könnt ihr vorgehen?  
+1. **Logs anschauen**  
+   - Jeder Eintrag zeigt, wer sich wann angemeldet hat.  
+2. **Fragen stellen**  
+   - „Warum probiert jemand immer wieder das falsche Passwort?“  
+   - „Ist es möglich, in fünf Minuten von einem Ort zum anderen zu sein?“  
+3. **Beispiele vergleichen**  
+   - Normale Logins (im Büro, tagsüber) vs. seltsame Logins (nachts, fremde Geräte).  
+4. **KI‑Chatbot um Hilfe bitten**  
+   - Fragt: „Was bedeutet Impossible Travel?“ oder „Warum ist ein nächtlicher Zugriff verdächtig?“  
+   - Der Bot erklärt euch die Fachbegriffe, ohne direkt die Täterin zu verraten.
 
 ---
 
-## 3. 🔑 Wichtige Begriffe und ihre Bedeutung
-
-- **Logs**: Digitale Aufzeichnungen aller Aktionen.  
-- **fail**: Der Einbruchversuch schlug fehl.  
-- **success**: Die Tür ging auf – jemand war drin.  
-- **Login**: Einloggen ins System.  
-- **Download**: Herunterladen einer Datei.  
-- **Night Shift**: Aktivität in der normalen Schlafenszeit.
+## 6. Begriffe einfach erklärt  
+- **Log**: Digitales Tagebuch des Computers.  
+- **Anomalie**: Etwas Ungewöhnliches, das nicht in den Alltag passt.  
+- **Brute Force**: Viele schnelle Passwort‑Versuche.  
+- **Session‑Hijacking**: Jemand übernimmt eine laufende Sitzung.  
 
 ---
 
-## 4. 💡 Profi-Tipps von echten Detektiven
+## 7. Tipps für eure Entdeckung  
+- Seid neugierig: Stellt viele Fragen!  
+- Vergleicht immer mit „normalen“ Mustern.  
+- Nutzt den Chatbot, um Fachbegriffe zu verstehen.  
 
-1. **Dokumentiere alles**: Schreibe jeden Schritt auf – so verlierst du nie den Faden. 📝  
-2. **Arbeite systematisch**: Folge immer deinem Plan – von oben nach unten.  
-3. **Teile die Arbeit**: Im Team geht’s schneller – einer zählt Logs, der andere sucht Nacht-Einträge. 🤝  
-4. **Nutze Diagramme**: Ein Balken-Diagramm zeigt dir sofort, wer die meisten Fehlversuche hat. 📊  
-5. **Bleib neugierig**: Jeder neue Hinweis kann die Lösung sein.
-
----
-
-## 5. 🎉 Deine Detektiv-Challenge
-
-1. **Tabelle ausfüllen**: Fehlversuche pro Nutzer:in zählen.  
-2. **Nacht-Check**: Finde den, der um 2:30 Uhr drin war.  
-3. **Download-Liste**: Wer hat die großen Daten gezogen?  
-4. **Verdächtiger**: Welche Person taucht in allen drei Gruppen auf?
-
-Schreib deinen Tipp auf und präsentiere ihn dem Team! 
-
-**Wer ist unser Bösewicht?** 🦹‍♂️🦹‍♀️
-
----
-
-**Viel Erfolg, Detektiv!** 🕵️‍♂️🔍 Bleib aufmerksam, hab Spaß und finde den Datendieb!
+**Viel Spaß beim Rätseln und Entdecken – wer findet die spannendste Computer‑Spur? 🚀**  
