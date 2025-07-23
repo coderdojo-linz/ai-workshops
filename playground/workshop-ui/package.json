@@ -1,0 +1,26 @@
+{
+  "name": "workshop-ui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.6",
+    "iron-session": "^8.0.4",
+    "marked": "^16.1.1",
+    "next": "15.4.2",
+    "openai": "^5.10.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.15",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}
