@@ -5,6 +5,33 @@ import path from 'path';
 import { getSession } from '@/lib/session';
 import { randomUUID } from 'crypto';
 import '@/lib/files';
+import { FunctionTool } from 'openai/resources/responses/responses.mjs';
+
+const questSolvedFunctionDefinition: FunctionTool = {
+  type: 'function',
+  name: 'mark_quest_as_solved',
+  description: 'Marks the current quest as solved',
+  parameters: {
+      type: 'object',
+      properties: {},
+      required: [],
+      additionalProperties: false
+  },
+  strict: true
+};
+
+const knowKidsNameFunctionDefinition: FunctionTool = {
+  type: 'function',
+  name: 'mark_kids_name_as_known',
+  description: 'Must be called when the AI has learned the name of the child',
+  parameters: {
+      type: 'object',
+      properties: {},
+      required: [],
+      additionalProperties: false
+  },
+  strict: true
+};
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -61,6 +88,8 @@ export async function POST(request: NextRequest) {
       store: true,
       previous_response_id: previousResponseId,
       tools: [
+        //knowKidsNameFunctionDefinition,
+        //questSolvedFunctionDefinition,
         {
           type: 'code_interpreter',
           container: {
@@ -78,19 +107,19 @@ export async function POST(request: NextRequest) {
     const stream = new ReadableStream({
       async start(controller) {
         // Create log file with ISO8601 timestamp
-        // const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        // const logFileName = `${timestamp}.json`;
-        // const logFilePath = path.join(process.cwd(), logFileName);
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const logFileName = `${timestamp}.json`;
+        const logFilePath = path.join(process.cwd(), logFileName);
 
         try {
           for await (const event of openaiResponse) {
             // Log the event to file
-            // try {
-            //   const eventLog = JSON.stringify(event) + '\n';
-            //   await fs.promises.appendFile(logFilePath, eventLog, 'utf-8');
-            // } catch (logError) {
-            //   console.error('Error writing to log file:', logError);
-            // }
+            try {
+              const eventLog = JSON.stringify(event) + '\n';
+              await fs.promises.appendFile(logFilePath, eventLog, 'utf-8');
+            } catch (logError) {
+              console.error('Error writing to log file:', logError);
+            }
 
             switch (event.type) {
               case 'response.created':
