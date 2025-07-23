@@ -1,8 +1,8 @@
-# 👩‍🏫 Mentor:innen-Anleitung – *Projekt „Datasaurus“*
+# 👩‍🏫 Mentor:innen-Anleitung – *Projekt * Das verborgene Tier
 
 ## 🧩 Projektidee
 
-Im Projekt **DatenTiere** geht es darum, dass **eine Figur in Daten versteckt** ist. Das Kind ist in einer Höhle aufgewacht und eine eine Ki Nova zur hilfe um wieder raus zu kommen es gibt 4 verschiedene Tiere eine Mau einen Hund eine Katze und einen Dino. Das Tier was sich in den Daten versteckt ist das richtige womit sie wieder raus kommen. 
+Im Projekt **Das verborgene Tier** geht es darum, dass **eine Figur in Daten versteckt** ist. Das Kind ist in einer Höhle aufgewacht und eine eine Ki Nova zur hilfe um wieder raus zu kommen es gibt 4 verschiedene Knöpfe mit Tieren darauf, eine Mau einen Hund eine Katze und einen Dino. Das Tier was sich in den Daten versteckt ist das richtige womit sie wieder raus kommen. 
 Die Kinder sollen mit Hilfe einer **künstlichen Intelligenz (KI)** herausfinden, was diese Daten bedeuten und wie sie mit ihnen die versteckte Figure entdecken können.
 
 
@@ -11,25 +11,42 @@ Das Ziel ist, den Kindern **ein Verständnis für Daten, Muster und Visualisieru
 ---
 
 ## 🌴 Die Geschichte für die Kinder
+Du blinzelst.  
+Alles ist still.  
+Langsam öffnest du deine Augen…  
+**Wo bist du?!**
 
+Es ist kühl und dunkel um dich herum – du sitzt in einer **geheimnisvollen Höhle**! 😮🕳️  
+Vor dir steht eine **riesige steinerne Tür**, fest verschlossen. 🪨🚪
 
-Du springst auf, schaust dich um – und entdeckst eine schwere steinerne Tür.  
-Puh, zum Glück, ein Ausgang! 🪨🚪  
-Doch als du sie berührst… passiert nichts. ❌ Die Tür bleibt verschlossen.  
-Daneben siehst du **zwei Knöpfe** mit seltsamen Tier-Symbolen drauf: 🦖 ⭐
+An der Tür befinden sich **vier leuchtende Knöpfe** – auf jedem ist ein Tier abgebildet:  
+🐕 **Hund**  🐈‍⬛ **Katze**  🐁 **Maus**  🦖 **Dino**
+
+Daneben steht geschrieben:  
+> **„Drücke das richtige Tier – und die Tür öffnet sich.“**
+
+Doch welches Tier ist das richtige?
 
 ---
 
-## 💡 Plötzlich geht ein Licht an...
+## 💡 Der Bildschirm erwacht zum Leben…
 
-An der Wand erscheint ein Bildschirm – mitten in der Höhle! 😲💻  
+Plötzlich beginnt ein Bildschirm an der Höhlenwand zu leuchten – 💡💻  
 Eine freundliche Stimme spricht:
 
-> **„Hallo! Ich bin Nova, deine künstliche Intelligenz 🤖💬  
-> Ich bin hier, um dir zu helfen!  
-> Um die Tür zu öffnen, musst du die richtige Figur finden:  
->  Es gibt **Einen Hund 🐕**, **eine Katze🐈‍⬛**, **eine Maus🐁** oder einen **Dino🦖**
-> Das richtige Tier ist in einer riesigen Menge an Daten versteckt – und nur wer das Muster erkennt, kann es finden! Aber Achtung in den Daten verstecken sich auch andere Figuren nur sind das keine Tiere! Wenn du weist welches von den 4 T Tieren das richtige ist kannst du wieder raus“**
+> **„Willkommen, Entdeckerin! Willkommen, Entdecker!  
+> Ich bin Nova – deine KI-Helferin 🤖✨  
+>  
+> Um die Tür zu öffnen, müsst ihr gemeinsam das Rätsel lösen.  
+> In einem geheimen Datensatz ist ein Tier versteckt.  
+> Doch Achtung: Nur eines der vier Tiere auf den Knöpfen ist das richtige.  
+>  
+> Die Daten sind voll von seltsamen Wörtern und Zahlen –  
+> aber irgendwo darin liegt der Schlüssel!  
+>  
+> Wenn du herausfindest, welches Tier sich in den Daten verbirgt,  
+> dann weißt du auch, welchen Knopf du drücken musst!“**
+
 
 ---
 

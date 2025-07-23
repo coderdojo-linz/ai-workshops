@@ -1,30 +1,42 @@
 
-# 🗺️ Das Geheimnis der DatenTiere
 
-Nach einem tiefen, erholsamen Schlaf öffnest du langsam deine Augen.  
-Deine Sicht ist noch verschwommen… Es ist dunkel… Ist es noch Nacht? 🌌  
-Nein – du spürst plötzlich:  
-**Du bist in einer Höhle!** 😮🕳️
+# 🧭 Mission: Das verborgene Tier
 
-Du springst auf, schaust dich um – und entdeckst eine schwere steinerne Tür.  
-Puh, zum Glück, ein Ausgang! 🪨🚪  
-Doch als du sie berührst… passiert nichts. ❌ Die Tür bleibt verschlossen.  
-Daneben siehst du **zwei Knöpfe** mit seltsamen Tier-Symbolen drauf: 🦖 ⭐
+Du blinzelst.  
+Alles ist still.  
+Langsam öffnest du deine Augen…  
+**Wo bist du?!**
+
+Es ist kühl und dunkel um dich herum – du sitzt in einer **geheimnisvollen Kristall Höhle**! 😮🕳️  
+Vor dir steht eine **riesige steinerne Tür**, fest verschlossen. 🪨🚪
+
+An der Tür befinden sich **vier leuchtende Knöpfe** – auf jedem ist ein Tier abgebildet:  
+🐕 **Hund**  🐈‍⬛ **Katze**  🐁 **Maus**  🦖 **Dino**
+
+Daneben steht geschrieben:  
+> **„Drücke das richtige Tier – und die Tür öffnet sich.“**
+
+Doch welches Tier ist das richtige?
 
 ---
 
-## 💡 Plötzlich geht ein Licht an...
+## 💡 Der Bildschirm erwacht zum Leben…
 
-An der Wand erscheint ein Bildschirm – mitten in der Höhle! 😲💻  
+Plötzlich beginnt ein Bildschirm an der Höhlenwand zu leuchten – 💡💻  
 Eine freundliche Stimme spricht:
 
-> **„Hallo! Ich bin Nova, deine künstliche Intelligenz 🤖💬  
-> Ich bin hier, um dir zu helfen!  
-> Um die Tür zu öffnen, musst du die richtige Figur finden:  
-> **Einen Hund 🐕**, **eine Katze🐈‍⬛**, **eine Maus🐁** oder einen **Dino🦖**
-> Das richtige Tier ist in einer riesigen Menge an Daten versteckt – und nur wer das Muster erkennt, kann es finden! Wenn du weist welches von den Tieren das richtige ist kannst du wieder raus“**
+> **„Willkommen, Entdeckerin! Willkommen, Entdecker!  
+> Ich bin Nova – deine KI-Helferin 🤖✨  
+>  
+> Um die Tür zu öffnen, musst du das Rätsel lösen.  
+> In einem geheimen Datensatz ist ein Tier versteckt.  
 
----
+> Doch Achtung: Nur eines der vier Tiere auf den Knöpfen ist das richtige. 
+
+> Du hast nur einen Versuch also ist raten zu Riskant !
+>  
+> Wenn du herausfindest, welches Tier sich in den Daten verbirgt,  
+> dann weißt du auch, welchen Knopf du drücken musst!“**
 
 
 
@@ -63,9 +75,9 @@ Falls nicht habe ich wieder ein paar Fragen für dich die du Nova stellen kannst
 ## 💡 Tipp: Es steht immer ein Wort vor den folgenden zwei Zahl! Villeicht ein Code-Name für etwas? Wird dieser villeicht wiederholt?
 
 
-Hat dir der Tipp was geholfen? Du kannst ihn sonst auch gerne genauso so deinen Freund schreiben! Villeicht versteht er den Tipp und kann dir sofort helfen 😁
+Hat dir der Tipp was geholfen? Du kannst ihn sonst auch gerne genauso so deiner Freundinn schreiben! Villeicht versteht sie den Tipp und kann dir sofort helfen 😁
 
-Nah? schon was gefunden? Ich habe weitere Beispiele für dich die du deinen Freund fragen kannst ;) 
+Nah? schon was gefunden? Ich habe weitere Beispiele für dich die du Nova fragen kannst ;) 
 -  Was kann ich jetzt mit den Zahlen machen? 
 
 - Was könnten die Zahlen darstellen ? 
