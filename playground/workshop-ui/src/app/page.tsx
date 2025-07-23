@@ -58,7 +58,7 @@ export default function Home() {
     setCurrentBotMessage('');
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('/api/chat?exercise=datasaurus', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,0 +1,10 @@
+{
+  "exercises": {
+    "datasaurus": {
+        "title": "Ausbruch aus der Daten-Höhle",
+        "folder": "datasaurus",
+        "system_prompt_file": "system-prompt.md",
+        "data_file": "daten-hoehle.csv"
+    }
+  }
+}

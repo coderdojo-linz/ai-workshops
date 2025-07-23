@@ -6,18 +6,19 @@ import { getSession } from '@/lib/session';
 import { randomUUID } from 'crypto';
 import '@/lib/files';
 import { FunctionTool } from 'openai/resources/responses/responses.mjs';
+import { ExercisesFile, validateExercisesFile } from './exercise-schema';
 
 const questSolvedFunctionDefinition: FunctionTool = {
   type: 'function',
   name: 'mark_quest_as_solved',
   description: 'Marks the current quest as solved',
   parameters: {
-      type: 'object',
-      properties: {},
-      required: [],
-      additionalProperties: false
+    type: 'object',
+    properties: {},
+    required: [],
+    additionalProperties: false,
   },
-  strict: true
+  strict: true,
 };
 
 const knowKidsNameFunctionDefinition: FunctionTool = {
@@ -25,12 +26,12 @@ const knowKidsNameFunctionDefinition: FunctionTool = {
   name: 'mark_kids_name_as_known',
   description: 'Must be called when the AI has learned the name of the child',
   parameters: {
-      type: 'object',
-      properties: {},
-      required: [],
-      additionalProperties: false
+    type: 'object',
+    properties: {},
+    required: [],
+    additionalProperties: false,
   },
-  strict: true
+  strict: true,
 };
 
 const client = new OpenAI({
@@ -40,26 +41,49 @@ const client = new OpenAI({
 // In-memory store for session ID -> OpenAI response ID mapping
 // TODO: Persist this to a database later
 const sessionResponseMap = new Map<string, string>();
-let datasaurusFileId = '';
+let dataFileIds: Map<string, string> = new Map();
+let exercises: ExercisesFile | undefined;
 
 export async function POST(request: NextRequest) {
   try {
     const { message } = await request.json();
+    
+    // Get the exercise query parameter
+    const exercise = request.nextUrl.searchParams.get('exercise');
+    if (!exercise) {
+      return NextResponse.json({ error: 'Exercise parameter is required' }, { status: 400 });
+    }
+
+    if (!exercises) {
+      const exercisesFile = await fs.promises.readFile(path.join(process.cwd(), 'prompts', 'exercises.json'), { encoding: 'utf-8' });
+      try {
+        exercises = validateExercisesFile(JSON.parse(exercisesFile));
+      } catch (error) {
+        return NextResponse.json({ error: 'Error parsing exercises file' }, { status: 500 });
+      }
+    }
+
+    const exerciseData = exercises.exercises[exercise];
+    if (!exerciseData) {
+      return NextResponse.json({ error: 'Exercise not found' }, { status: 404 });
+    }
 
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
 
-    if (!datasaurusFileId) {
-      datasaurusFileId = await client.files.getFileId('daten-hoehle.csv');
-      if (!datasaurusFileId) {
-        const inputStream = fs.createReadStream(path.join(process.cwd(), 'prompts', 'daten-hoehle.csv'));
+    if (!dataFileIds.has(exerciseData.data_file)) {
+      let dataFileId = await client.files.getFileId(exerciseData.data_file);
+      if (!dataFileId) {
+        const inputStream = fs.createReadStream(path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.data_file));
         const file = await client.files.create({
           file: inputStream,
           purpose: 'user_data',
         });
-        datasaurusFileId = file.id;
+        dataFileId = file.id;
       }
+
+      dataFileIds.set(exerciseData.data_file, dataFileId);
     }
 
     // Get or create session ID
@@ -76,7 +100,7 @@ export async function POST(request: NextRequest) {
     const previousResponseId = sessionResponseMap.get(sessionId);
 
     // Read system prompt
-    const systemPromptPath = path.join(process.cwd(), 'prompts', 'system-prompt.md');
+    const systemPromptPath = path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.system_prompt_file);
     const systemPrompt = await fs.promises.readFile(systemPromptPath, { encoding: 'utf-8' });
 
     // Create the OpenAI stream
@@ -94,7 +118,7 @@ export async function POST(request: NextRequest) {
           type: 'code_interpreter',
           container: {
             type: 'auto',
-            file_ids: [datasaurusFileId],
+            file_ids: [dataFileIds.get(exerciseData.data_file)!],
           },
         },
       ],
@@ -131,7 +155,7 @@ export async function POST(request: NextRequest) {
                 break;
               }
               case 'response.code_interpreter_call.in_progress': {
-                const data = JSON.stringify({ delta: '\n\n\`\`\`py\n' });
+                const data = JSON.stringify({ delta: '\n\n```py\n' });
                 controller.enqueue(encoder.encode(`data: ${data}\n\n`));
                 break;
               }
@@ -141,8 +165,8 @@ export async function POST(request: NextRequest) {
                 break;
               }
               case 'response.code_interpreter_call.completed': {
-                const data = JSON.stringify({ delta: '\n\`\`\`\n\n' });
-                controller.enqueue(encoder.encode(`data: ${data}\n\n` ));
+                const data = JSON.stringify({ delta: '\n```\n\n' });
+                controller.enqueue(encoder.encode(`data: ${data}\n\n`));
                 break;
               }
               case 'response.output_text.annotation.added': {
@@ -153,14 +177,14 @@ export async function POST(request: NextRequest) {
                 // Write the content of the file into the public folder
                 const publicPath = path.join(process.cwd(), 'public', 'images', `${(event.annotation as any).filename}`);
                 await fs.promises.writeFile(publicPath, Buffer.from(await file.arrayBuffer()));
-                
+
                 // Create markdown image with data URI
-                const markdownImage = `![Generated Image](/${path.join("images", (event.annotation as any).filename)})`;
-                
+                const markdownImage = `![Generated Image](/${path.join('images', (event.annotation as any).filename)})`;
+
                 // Send as a text delta (like other content)
                 const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
                 controller.enqueue(encoder.encode(`data: ${data}\n\n`));
-                
+
                 break;
               }
               default:
