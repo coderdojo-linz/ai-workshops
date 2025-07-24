@@ -1,0 +1,131 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background-color: #f5f5f5;
+}
+
+.exerciseTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  flex: 1;
+}
+
+.headerSpacer {
+  width: 36px; /* Same width as back button to center the title */
+}
+
+.messagesContainer {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.userMessage {
+  font-style: italic;
+}
+
+.botMessage {
+  font-style: normal;
+}
+
+.inputForm {
+  display: flex;
+  gap: 10px;
+}
+
+.textInput {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.textInput:disabled {
+  background-color: #f5f5f5;
+}
+
+.sendButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;
+}
+
+.sendButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.messageCounter {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+/* Code snippet styles */
+.message pre {
+  background-color: #f5f5f5;
+  padding: 12px;
+  border-radius: 6px;
+  margin: 8px 0;
+  overflow-x: auto;
+}
+
+.message pre code {
+  background-color: transparent;
+  padding: 0;
+  font-family: 'Courier New', Consolas, Monaco, monospace;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.message code:not(pre code) {
+  background-color: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Courier New', Consolas, Monaco, monospace;
+  font-size: 14px;
+}

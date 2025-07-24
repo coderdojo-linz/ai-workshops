@@ -6,7 +6,7 @@ import { getSession } from '@/lib/session';
 import { randomUUID } from 'crypto';
 import '@/lib/files';
 import { FunctionTool } from 'openai/resources/responses/responses.mjs';
-import { ExercisesFile, validateExercisesFile } from './exercise-schema';
+import { ExercisesFile, validateExercisesFile } from '@/lib/exercise-schema';
 
 const questSolvedFunctionDefinition: FunctionTool = {
   type: 'function',

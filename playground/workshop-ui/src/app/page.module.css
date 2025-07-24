@@ -1,93 +1,72 @@
 .container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
 }
 
-.messagesContainer {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-.message {
-  margin-bottom: 10px;
-}
-
-.userMessage {
-  font-style: italic;
-}
-
-.botMessage {
-  font-style: normal;
-}
-
-.inputForm {
-  display: flex;
-  gap: 10px;
-}
-
-.textInput {
-  flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.textInput:disabled {
-  background-color: #f5f5f5;
-}
-
-.sendButton {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #007bff;
-}
-
-.sendButton:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.messageCounter {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #666;
+.title {
   text-align: center;
+  margin-bottom: 3rem;
 }
 
-/* Code snippet styles */
-.message pre {
-  background-color: #f5f5f5;
-  padding: 12px;
-  border-radius: 6px;
-  margin: 8px 0;
-  overflow-x: auto;
-}
-
-.message pre code {
-  background-color: transparent;
+.exerciseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 0;
   padding: 0;
-  font-family: 'Courier New', Consolas, Monaco, monospace;
-  font-size: 14px;
-  line-height: 1.4;
+  justify-items: center;
 }
 
-.message code:not(pre code) {
-  background-color: #f5f5f5;
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-family: 'Courier New', Consolas, Monaco, monospace;
-  font-size: 14px;
+.exerciseCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.exerciseCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.exerciseLink {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.exerciseTitle {
+  margin: 0;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .exerciseGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .exerciseCard {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .title {
+    margin-bottom: 2rem;
+  }
 }

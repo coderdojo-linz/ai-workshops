@@ -1,10 +1,16 @@
 {
   "exercises": {
-    "datasaurus": {
+    "data-cave": {
         "title": "Ausbruch aus der Daten-Höhle",
-        "folder": "datasaurus",
+        "folder": "data-cave",
         "system_prompt_file": "system-prompt.md",
-        "data_file": "daten-hoehle.csv"
+        "data_file": "data-cave.csv"
+    },
+    "detective-beginners": {
+      "title": "Wer klaut uns die Daten?",
+      "folder": "detective-beginners",
+      "system_prompt_file": "system-prompt.adoc",
+      "data_file": "detective-beginners.csv"
     }
   }
 }

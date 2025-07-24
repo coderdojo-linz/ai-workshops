@@ -11,6 +11,7 @@
   "dependencies": {
     "dompurify": "^3.2.6",
     "iron-session": "^8.0.4",
+    "lucide-react": "^0.525.0",
     "marked": "^16.1.1",
     "next": "^15.4.3",
     "openai": "^5.10.1",
