@@ -5,7 +5,9 @@ import styles from './page.module.css';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, FileText } from 'lucide-react';
+import Modal from '@/components/Modal';
+import SystemPrompt from '@/components/SystemPrompt';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -30,6 +32,8 @@ export default function Home() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [currentBotMessage, setCurrentBotMessage] = useState('');
+  const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -39,6 +43,24 @@ export default function Home() {
   useEffect(() => {
     scrollToBottom();
   }, [messages, currentBotMessage]);
+
+  // Fetch exercise metadata on component mount
+  useEffect(() => {
+    const fetchExerciseMetadata = async () => {
+      try {
+        const response = await fetch(`/api/exercises/${exercise}`);
+        if (response.ok) {
+          const metadata = await response.json();
+          setExerciseTitle(metadata.title);
+        }
+      } catch (error) {
+        console.error('Error fetching exercise metadata:', error);
+        // Keep using exercise ID as fallback
+      }
+    };
+
+    fetchExerciseMetadata();
+  }, [exercise]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,6 +166,14 @@ export default function Home() {
     router.push('/');
   };
 
+  const handleShowSystemPrompt = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className={styles.container}>
       {/* Header Bar */}
@@ -151,9 +181,20 @@ export default function Home() {
         <button onClick={handleBack} className={styles.backButton}>
           <ArrowLeft size={20} />
         </button>
-        <h1 className={styles.exerciseTitle}>{exercise}</h1>
-        <div className={styles.headerSpacer}></div>
+        <h1 className={styles.exerciseTitle}>{exerciseTitle}</h1>
+        <button onClick={handleShowSystemPrompt} className={styles.backButton} title="Show System Prompt">
+          <FileText size={20} />
+        </button>
       </div>
+
+      {/* System Prompt Modal */}
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+        title="System Prompt"
+      >
+        <SystemPrompt exerciseId={exercise} />
+      </Modal>
 
       {/* Conversation History */}
       <div className={styles.messagesContainer}>
