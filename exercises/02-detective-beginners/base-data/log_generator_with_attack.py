@@ -1,3 +1,5 @@
+# Modifizierte Version: Kombiniert Brute Force + Impossible Travel für Eva
+
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
@@ -5,20 +7,19 @@ from datetime import datetime, timedelta
 # Reproducibility
 np.random.seed(42)
 
-# Define users and home cities
+# Benutzer & Metadaten
 users = ["Anna", "Ben", "Clara", "David", "Eva"]
 cities_normal = ["Wien", "Berlin"]
+cities_attack = ["Moskau", "Peking"]
 devices = ["PC", "Tablet", "Handy"]
 
-# Assign each user a fixed home city (no travel anomalies)
+# Jede Person hat eine Home-City
 home_cities = dict(zip(users, np.random.choice(cities_normal, len(users), p=[0.7, 0.3])))
 
-# 1) Generate normal logs (998 entries to have a total of 1000 with 2 anomaly entries)
-n_normal = 998
+# 1) Normale Logins (993 Einträge)
+n_normal = 993
 start = datetime(2025, 7, 17, 9, 0)
 end = datetime(2025, 7, 20, 17, 0)
-
-# Generate timestamps uniformly
 timestamps = [
     start + timedelta(seconds=np.random.randint(0, int((end - start).total_seconds())))
     for _ in range(n_normal)
@@ -33,40 +34,56 @@ normal = pd.DataFrame({
     "action": ["login"] * n_normal,
     "download_size": ["small"] * n_normal
 })
-
-# Map each entry to the user's home city
 normal["city"] = normal["user"].map(home_cities)
 
-# 2) Generate "Impossible Travel" anomaly for Eva (2 entries)
-anomaly_entries = [
-    {
-        "time": datetime(2025, 7, 18, 10, 0),
+# 2) Brute Force + Impossible Travel Angriff auf Eva
+attack_entries = []
+base_time = datetime(2025, 7, 18, 3, 0)
+
+# a) Mehrere Fehlversuche aus Moskau (Brute Force)
+for i in range(5):
+    attack_entries.append({
+        "time": base_time + timedelta(minutes=i),
         "user": "Eva",
-        "result": "success",
-        "city": "Wien",
+        "result": "fail",
+        "city": "Moskau",
         "device": "PC",
         "action": "login",
-        "download_size": "small"
-    },
-    {
-        "time": datetime(2025, 7, 18, 10, 5),
-        "user": "Eva",
-        "result": "success",
-        "city": "Paris",
-        "device": "Tablet",
-        "action": "login",
-        "download_size": "small"
-    }
-]
-anomaly_df = pd.DataFrame(anomaly_entries)
+        "download_size": "none"
+    })
 
-# Combine, shuffle, save as CSV
-df = pd.concat([normal, anomaly_df], ignore_index=True)
-df = df.sample(frac=1, random_state=42).reset_index(drop=True)
+# b) Erfolgreicher Login kurz darauf aus Moskau (nach Brute Force)
+attack_entries.append({
+    "time": base_time + timedelta(minutes=5),
+    "user": "Eva",
+    "result": "success",
+    "city": "Moskau",
+    "device": "PC",
+    "action": "login",
+    "download_size": "none"
+})
 
-# Save file
-csv_path = "login_impossible_travel_clean.csv"
-df.to_csv(csv_path, index=False)
+# c) Eva war zuvor in Wien eingeloggt (Impossible Travel)
+attack_entries.insert(0, {
+    "time": base_time - timedelta(minutes=2),
+    "user": "Eva",
+    "result": "success",
+    "city": "Wien",
+    "device": "Tablet",
+    "action": "login",
+    "download_size": "none"
+})
 
-# Preview
-df.head()
+# Als DataFrame
+attack_df = pd.DataFrame(attack_entries)
+
+# Kombinieren, mischen, speichern
+full_df = pd.concat([normal, attack_df], ignore_index=True)
+full_df = full_df.sample(frac=1, random_state=42).reset_index(drop=True)
+
+# Speichern
+csv_path = "login_with_brute_force_and_impossible_travel.csv"
+full_df.to_csv(csv_path, index=False)
+
+# Vorschau anzeigen
+print(full_df.head())

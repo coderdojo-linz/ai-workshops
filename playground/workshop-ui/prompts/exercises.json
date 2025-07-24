@@ -9,7 +9,7 @@
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",
       "folder": "detective-beginners",
-      "system_prompt_file": "system-prompt.adoc",
+      "system_prompt_file": "system-prompt.md",
       "data_file": "detective-beginners.csv"
     }
   }
