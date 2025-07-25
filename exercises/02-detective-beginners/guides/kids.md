@@ -1,4 +1,4 @@
-# 🕵️‍♀️🔍 Guide für kleine Cyber‑Spürnasen in der **Datenschmiede**
+# 🕵️‍♀️🔍 Guide für kleine Cyber‑Spürnasen in der **Cyberwerk AG**
 
 Willkommen in der **Cyberwerk AG**, wo geniale Köpfe an fantastischen Erfindungen tüfteln! Doch ein schlauer Daten‑Dieb schleicht sich nachts in unser **Computer‑Tagebuch** und will unsere Geheimnisse stehlen. Eure Mission: Gemeinsam mit Cyber‑Spürnase deckt ihr ungewöhnliches Verhalten auf und schnappt den Bösewicht! 🚀
 
