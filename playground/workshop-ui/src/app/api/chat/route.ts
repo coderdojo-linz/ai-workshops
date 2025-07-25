@@ -131,19 +131,19 @@ export async function POST(request: NextRequest) {
     const stream = new ReadableStream({
       async start(controller) {
         // Create log file with ISO8601 timestamp
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const logFileName = `${timestamp}.json`;
-        const logFilePath = path.join(process.cwd(), logFileName);
+        // const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        // const logFileName = `${timestamp}.json`;
+        // const logFilePath = path.join(process.cwd(), logFileName);
 
         try {
           for await (const event of openaiResponse) {
             // Log the event to file
-            try {
-              const eventLog = JSON.stringify(event) + '\n';
-              await fs.promises.appendFile(logFilePath, eventLog, 'utf-8');
-            } catch (logError) {
-              console.error('Error writing to log file:', logError);
-            }
+            // try {
+            //   const eventLog = JSON.stringify(event) + '\n';
+            //   await fs.promises.appendFile(logFilePath, eventLog, 'utf-8');
+            // } catch (logError) {
+            //   console.error('Error writing to log file:', logError);
+            // }
 
             switch (event.type) {
               case 'response.created':

@@ -2,6 +2,7 @@
 
 public/images/cfile_*.png
 .idea
+2025-*.json
 
 # dependencies
 /node_modules

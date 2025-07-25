@@ -5,7 +5,7 @@ import { validateExercisesFile, type ExercisesFile } from '@/lib/exercise-schema
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id: exerciseId } = await params;
