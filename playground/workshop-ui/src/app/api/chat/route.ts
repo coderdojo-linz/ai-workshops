@@ -7,6 +7,7 @@ import { randomUUID } from 'crypto';
 import '@/lib/files';
 import { FunctionTool } from 'openai/resources/responses/responses.mjs';
 import { ExercisesFile, validateExercisesFile } from '@/lib/exercise-schema';
+import { BlobServiceClient, StorageSharedKeyCredential } from "@azure/storage-blob";
 
 const questSolvedFunctionDefinition: FunctionTool = {
   type: 'function',
@@ -33,6 +34,14 @@ const knowKidsNameFunctionDefinition: FunctionTool = {
   },
   strict: true,
 };
+
+const sharedKeyCredential = new StorageSharedKeyCredential(
+  process.env.STORAGE_ACCOUNT!, 
+  process.env.STORAGE_ACCOUNT_KEY!);
+const blobServiceClient = new BlobServiceClient(
+  `https://${process.env.STORAGE_ACCOUNT!}.blob.core.windows.net`,
+  sharedKeyCredential,
+);
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -174,12 +183,14 @@ export async function POST(request: NextRequest) {
                   container_id: (event.annotation as any).container_id,
                 });
 
-                // Write the content of the file into the public folder
-                const publicPath = path.join(process.cwd(), 'public', 'images', `${(event.annotation as any).filename}`);
-                await fs.promises.writeFile(publicPath, Buffer.from(await file.arrayBuffer()));
+                // Upload the file to the Azure Blob Storage
+                const containerClient = blobServiceClient.getContainerClient("ai-workshop");
+                const blockBlobClient = containerClient.getBlockBlobClient((event.annotation as any).filename);
+                const uploadBuffer = Buffer.from(await file.arrayBuffer());
+                await blockBlobClient.upload(uploadBuffer, uploadBuffer.length);
 
                 // Create markdown image with data URI
-                const markdownImage = `![Generated Image](/${path.join('images', (event.annotation as any).filename)})`;
+                const markdownImage = `![Generated Image](${blockBlobClient.url})`;
 
                 // Send as a text delta (like other content)
                 const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });

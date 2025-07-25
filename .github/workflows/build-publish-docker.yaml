@@ -31,6 +31,8 @@ jobs:
         run: |
           echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
           echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" >> .env
+          echo "STORAGE_ACCOUNT=${{ secrets.STORAGE_ACCOUNT }}" >> .env
+          echo "STORAGE_ACCOUNT_KEY=${{ secrets.STORAGE_ACCOUNT_KEY }}" >> .env
 
       - name: Build and push Docker image
         id: push
