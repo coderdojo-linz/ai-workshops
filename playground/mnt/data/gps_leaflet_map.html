@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <title>GPS-Daten Karte mit Leaflet (CSV Upload)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <style>
+        body { margin: 0; font-family: sans-serif; }
+        #mapid { height: 92vh; width: 100vw; }
+        #fileInput { margin: 10px; }
+    </style>
+</head>
+<body>
+<h2 style="margin:8px;">GPS-Daten-Karte (CSV-Upload, Leaflet, offline)</h2>
+<input type="file" id="fileInput" accept=".csv" />
+<div id="mapid"></div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    function parseCsv(content) {
+        let rows = content.split('\n');
+        let coords = [];
+        rows.forEach(line => {
+            let parts = line.split('|');
+            if(parts.length < 2) return;
+            let videoId = parts[0].trim();
+            let coordParts = parts[1].split(',');
+            if(coordParts.length < 2) return;
+            // Punkt als Dezimaltrenner und Whitespaces entfernen
+            let lat = parseFloat(coordParts[0].replace(',', '.').trim());
+            let lon = parseFloat(coordParts[1].replace(',', '.').trim());
+            if (!isFinite(lat) || !isFinite(lon)) return;
+            if(lat < -90 || lat > 90 || lon < -180 || lon > 180) return;
+            coords.push([videoId, lat, lon]);
+        });
+        return coords;
+    }
+
+    let map = L.map('mapid').setView([51, 10], 4);
+    let markers = [];
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap-Mitwirkende'
+    }).addTo(map);
+
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        let file = e.target.files[0];
+        if(!file) return;
+
+        let reader = new FileReader();
+        reader.onload = function(evt) {
+            let coords = parseCsv(evt.target.result);
+            // Alte Marker entfernen
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+            if(coords.length == 0) {
+                alert("Keine gültigen GPS-Daten gefunden!");
+                return;
+            }
+
+            // Mittelpunkt berechnen
+            let avgLat = coords.reduce((sum, c) => sum + c[1], 0) / coords.length;
+            let avgLon = coords.reduce((sum, c) => sum + c[2], 0) / coords.length;
+            map.setView([avgLat, avgLon], 5);
+
+            coords.forEach(c => {
+                let marker = L.marker([c[1], c[2]]).addTo(map)
+                    .bindPopup("Video ID: " + c[0]);
+                markers.push(marker);
+            });
+        };
+        reader.readAsText(file);
+    }, false);
+
+</script>
+</body>
+</html>
