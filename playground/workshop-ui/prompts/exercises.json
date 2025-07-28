@@ -11,6 +11,12 @@
       "folder": "detective-beginners",
       "system_prompt_file": "system-prompt.md",
       "data_file": "detective-beginners.csv"
+    },
+    "gps-art": {
+      "title": "Wer bin ich?",
+      "folder": "gps-art",
+      "system_prompt_file": "system-prompt.md",
+      "data_file": "gps-art.csv"
     }
   }
 }
