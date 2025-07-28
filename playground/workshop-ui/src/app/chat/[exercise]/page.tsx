@@ -13,6 +13,30 @@ type Message = {
   role: 'user' | 'assistant';
   content: string;
   html: string;
+  type?: 'text' | 'html';
+};
+
+// Function to extract the first HTML code island from markdown content
+const extractFirstHtmlIsland = (content: string): string | null => {
+  const lines = content.split('\n');
+  let inHtmlBlock = false;
+  let currentHtmlBlock = '';
+  
+  for (const line of lines) {
+    if (line.trim() === '```html' && !inHtmlBlock) {
+      inHtmlBlock = true;
+      currentHtmlBlock = '';
+    } else if (line.trim() === '```' && inHtmlBlock) {
+      if (currentHtmlBlock.trim()) {
+        return currentHtmlBlock.trim();
+      }
+      return null;
+    } else if (inHtmlBlock) {
+      currentHtmlBlock += line + '\n';
+    }
+  }
+  
+  return null;
 };
 
 // const renderer = {
@@ -80,6 +104,7 @@ export default function Home() {
         role: 'user' as const,
         content: userMessage,
         html: DOMPurify.sanitize(marked.parse(userMessage) as string),
+        type: 'text' as const,
       },
     ];
     setMessages(newMessages);
@@ -117,13 +142,29 @@ export default function Home() {
             const data = line.slice(6);
             if (data === '[DONE]') {
               // Finalize the assistant message
+              const assistantMsg: Message = {
+                role: 'assistant',
+                content: assistantMessage,
+                html: DOMPurify.sanitize(marked.parse(assistantMessage) as string),
+                type: 'text',
+              };
+              
+              // Extract first HTML island and create additional HTML message if found
+              const firstHtmlIsland = extractFirstHtmlIsland(assistantMessage);
+              const messagesToAdd = [assistantMsg];
+              
+              if (firstHtmlIsland) {
+                messagesToAdd.push({
+                  role: 'assistant',
+                  content: firstHtmlIsland,
+                  html: firstHtmlIsland, // Store raw HTML for iframe srcdoc
+                  type: 'html',
+                });
+              }
+              
               setMessages((prev) => [
                 ...prev,
-                {
-                  role: 'assistant',
-                  content: assistantMessage,
-                  html: DOMPurify.sanitize(marked.parse(assistantMessage) as string),
-                },
+                ...messagesToAdd,
               ]);
               setCurrentBotMessage('');
             } else {
@@ -148,6 +189,7 @@ export default function Home() {
           role: 'assistant',
           content: 'Sorry, there was an error processing your message.',
           html: DOMPurify.sanitize(marked.parse('Sorry, there was an error processing your message.') as string),
+          type: 'text',
         },
       ]);
     } finally {
@@ -201,7 +243,16 @@ export default function Home() {
         {messages.map((message, index) => (
           <div key={index} className={styles.message}>
             <strong>{message.role === 'user' ? 'You' : 'Bot'}:</strong>{' '}
-            <span className={message.role === 'user' ? styles.userMessage : styles.botMessage} dangerouslySetInnerHTML={{ __html: message.html }} />
+            {message.type === 'html' ? (
+              <iframe
+                srcDoc={message.html}
+                className={styles.htmlFrame}
+                sandbox="allow-scripts allow-same-origin"
+                style={{ width: '100%', minHeight: '200px', border: '1px solid #ccc', borderRadius: '4px' }}
+              />
+            ) : (
+              <span className={message.role === 'user' ? styles.userMessage : styles.botMessage} dangerouslySetInnerHTML={{ __html: message.html }} />
+            )}
           </div>
         ))}
         {currentBotMessage && (
