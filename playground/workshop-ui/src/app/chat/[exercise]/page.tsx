@@ -28,6 +28,7 @@ export default function Home() {
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
   const [isModalOpen, setIsModalOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isFirstCall, setIsFirstCall] = useState(true);
   
   // Cache for data file content - only fetch once per component session
@@ -99,6 +100,18 @@ export default function Home() {
  useEffect(() => {
     scrollToBottom();
   }, [messages, currentBotMessage]);
+
+  // Focus input field on component mount
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  // Focus input field after AI message is received
+  useEffect(() => {
+    if (messages.length > 0 && messages[messages.length - 1].role === 'assistant') {
+      inputRef.current?.focus();
+    }
+  }, [messages]);
 
   // Fetch exercise metadata on component mount
   useEffect(() => {
@@ -311,7 +324,15 @@ export default function Home() {
 
       {/* Input Form */}
       <form onSubmit={handleSubmit} className={styles.inputForm}>
-        <input type="text" value={input} onChange={handleInputChange} placeholder="Type your message..." disabled={isLoading} className={styles.textInput} />
+        <input 
+          ref={inputRef}
+          type="text" 
+          value={input} 
+          onChange={handleInputChange} 
+          placeholder="Type your message..." 
+          disabled={isLoading} 
+          className={styles.textInput} 
+        />
         <button type="submit" disabled={!input.trim() || isLoading || messages.length >= 100} className={styles.sendButton}>
           {isLoading ? 'Sending...' : 'Send'}
         </button>
