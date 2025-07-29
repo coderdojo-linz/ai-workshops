@@ -28,6 +28,7 @@ export default function Home() {
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
   const [isModalOpen, setIsModalOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [isFirstCall, setIsFirstCall] = useState(true);
   
   // Cache for data file content - only fetch once per component session
   const dataFileContentCache = useRef<string | null>(null);
@@ -147,8 +148,16 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({ 
+          message: userMessage,
+          resetConversation: isFirstCall 
+        }),
       });
+
+      // After the first successful call, set isFirstCall to false
+      if (isFirstCall) {
+        setIsFirstCall(false);
+      }
 
       if (!response.ok) {
         throw new Error('Failed to send message');

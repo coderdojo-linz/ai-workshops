@@ -55,7 +55,7 @@ let exercises: ExercisesFile | undefined;
 
 export async function POST(request: NextRequest) {
   try {
-    const { message } = await request.json();
+    const { message, resetConversation } = await request.json();
     
     // Get the exercise query parameter
     const exercise = request.nextUrl.searchParams.get('exercise');
@@ -103,6 +103,11 @@ export async function POST(request: NextRequest) {
       sessionId = randomUUID();
       session.sessionId = sessionId;
       await session.save();
+    }
+
+    // Handle conversation reset if requested
+    if (resetConversation === true) {
+      sessionResponseMap.delete(sessionId);
     }
 
     // Get previous response ID from in-memory store
