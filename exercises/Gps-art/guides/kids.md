@@ -1,5 +1,17 @@
-Das verlorene Flugzeug
+🎨✈️ Die verschwundenen Luft-Künstler
 
-
-Eine Gruppe an Künstlern haben es sich zur Aufgabe gemacht ungewöhnliche Bilder zu malen. An einen Tag hatten sie eine Mission und sind mit einem Flugzeug losgezogen, um ein neues Kunstwerk zu kreieren, aber dann sind sie verschwunden. Um nun zu wissen, wo wir anfangen zu suchen, müssen wir herausfinden in welchem Land unsere Künstler verschwunden sind.
-Suche also die Kunstwerke und das Land dazu. Die Künstler-Bande hat uns eine Menge von Koordinaten zurückgelassen. Mithilfe der KI kannst du nun anfangen zu suchen! 
+Eine geheimnisvolle Gruppe von Künstlern 🎨 hatte nur ein Ziel:
+👉 Die außergewöhnlichsten Bilder der Welt malen!
+Eines Morgens stiegen sie in ein kleines Flugzeug 🛩️.
+Ihre Mission:
+Ein riesiges Kunstwerk aus der Luft erschaffen,
+das die Welt noch nie gesehen hat 🌍✨.
+Doch plötzlich – wie von Zauberhand – waren sie verschwunden! 😱
+Kein Funk, kein Zeichen … nur eine geheimnisvolle Botschaft 📜:
+eine Liste mit seltsamen Koordinaten 🧭, die sie uns heimlich geschickt haben.
+Jetzt bist du dran! 🕵️‍♀️🔍
+Mit Hilfe von KI und deiner Spürnase kannst du die Rätsel lösen,
+die versteckten Kunstwerke finden und herausfinden,
+👉 in welchem Land die Künstler verschwunden sind!
+Jede Spur 🧩, jedes Bild 🖼️ bringt uns dem Geheimnis ein Stückchen näher –
+und vielleicht … findest du sogar die Künstler selbst! 🗺️💡
