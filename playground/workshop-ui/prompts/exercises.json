@@ -17,6 +17,12 @@
       "folder": "gps-art",
       "system_prompt_file": "system-prompt.md",
       "data_file": "gps-art.csv"
+    },
+    "gps-art-Leonie": {
+      "title": "Das verschwundene Flugzeug",
+      "folder": "gps-art-Leonie",
+      "system_prompt_file": "gps-art-Leonie-Prompt.md",
+      "data_file": "gps-art.csv"
     }
   }
 }
