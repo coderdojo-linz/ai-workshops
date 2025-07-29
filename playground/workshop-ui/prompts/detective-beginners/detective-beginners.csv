@@ -22,7 +22,7 @@ time,user,result,city,device,action,download_size
 2025-07-18 16:41:05,David,success,Wien,Handy,login,small
 2025-07-18 15:29:11,Eva,success,Wien,Tablet,login,small
 2025-07-18 16:30:29,Eva,success,Wien,Tablet,login,small
-2025-07-20 10:50:53,David,success,Wien,PC,login,smallv
+2025-07-20 10:50:53,David,success,Wien,PC,login,small
 2025-07-18 17:43:16,Ben,success,Berlin,Tablet,login,small
 2025-07-18 16:11:36,David,success,Wien,Handy,login,small
 2025-07-18 10:16:22,Clara,success,Berlin,Tablet,login,small
