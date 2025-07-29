@@ -16,37 +16,6 @@ type Message = {
   type?: 'text' | 'html';
 };
 
-// Function to extract the first HTML code island from markdown content
-const extractFirstHtmlIsland = (content: string): string | null => {
-  const lines = content.split('\n');
-  let inHtmlBlock = false;
-  let currentHtmlBlock = '';
-  
-  for (const line of lines) {
-    if (line.trim() === '```html' && !inHtmlBlock) {
-      inHtmlBlock = true;
-      currentHtmlBlock = '';
-    } else if (line.trim() === '```' && inHtmlBlock) {
-      if (currentHtmlBlock.trim()) {
-        return currentHtmlBlock.trim();
-      }
-      return null;
-    } else if (inHtmlBlock) {
-      currentHtmlBlock += line + '\n';
-    }
-  }
-  
-  return null;
-};
-
-// const renderer = {
-//   image(image: any) {
-//     console.log('rendering', JSON.stringify(image));
-//     return `<pre>${JSON.stringify(image)}</pre>`;
-//   },
-// };
-// marked.use({ renderer });
-
 export default function Home() {
   const params = useParams();
   const router = useRouter();
@@ -59,12 +28,74 @@ export default function Home() {
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
   const [isModalOpen, setIsModalOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Cache for data file content - only fetch once per component session
+  const dataFileContentCache = useRef<string | null>(null);
+  const dataFileContentFetched = useRef<boolean>(false);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // Function to extract the first HTML code island from markdown content and process <|DATA|> placeholders
+  const extractFirstHtmlIsland = async (content: string): Promise<string | null> => {
+    const lines = content.split('\n');
+    let inHtmlBlock = false;
+    let currentHtmlBlock = '';
+    
+    for (const line of lines) {
+      if (line.trim() === '```html' && !inHtmlBlock) {
+        inHtmlBlock = true;
+        currentHtmlBlock = '';
+      } else if (line.trim() === '```' && inHtmlBlock) {
+        if (currentHtmlBlock.trim()) {
+          let htmlContent = currentHtmlBlock.trim();
+          
+          // Check if HTML island contains <|DATA|> placeholder
+          if (htmlContent.includes('<|DATA|>')) {
+            // Check cache first
+            if (!dataFileContentFetched.current) {
+              try {
+                // Fetch exercise data with data file content only once
+                const exerciseResponse = await fetch(`/api/exercises/${exercise}?includeDataFileContent=true`);
+                if (exerciseResponse.ok) {
+                  const exerciseData = await exerciseResponse.json();
+                  dataFileContentCache.current = exerciseData.data_file_content || null;
+                }
+              } catch (error) {
+                console.error('Error fetching exercise data:', error);
+                dataFileContentCache.current = null;
+              } finally {
+                dataFileContentFetched.current = true;
+              }
+            }
+            
+            // Replace <|DATA|> with the cached data file content
+            if (dataFileContentCache.current) {
+              htmlContent = htmlContent.replace(/<\|DATA\|>/g, dataFileContentCache.current);
+            }
+          }
+          
+          return htmlContent;
+        }
+        return null;
+      } else if (inHtmlBlock) {
+        currentHtmlBlock += line + '\n';
+      }
+    }
+    
+       return null;
+ };
+ 
+ const scrollToBottom = () => {
+   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+ };
 
-  useEffect(() => {
+ // const renderer = {
+ //   image(image: any) {
+ //     console.log('rendering', JSON.stringify(image));
+ //     return `<pre>${JSON.stringify(image)}</pre>`;
+ //   },
+ // };
+ // marked.use({ renderer });
+
+ useEffect(() => {
     scrollToBottom();
   }, [messages, currentBotMessage]);
 
@@ -150,14 +181,14 @@ export default function Home() {
               };
               
               // Extract first HTML island and create additional HTML message if found
-              const firstHtmlIsland = extractFirstHtmlIsland(assistantMessage);
+              const firstHtmlIsland = await extractFirstHtmlIsland(assistantMessage);
               const messagesToAdd = [assistantMsg];
               
               if (firstHtmlIsland) {
                 messagesToAdd.push({
                   role: 'assistant',
                   content: firstHtmlIsland,
-                  html: firstHtmlIsland, // Store raw HTML for iframe srcdoc
+                  html: firstHtmlIsland, // Store processed HTML for iframe srcdoc
                   type: 'html',
                 });
               }
