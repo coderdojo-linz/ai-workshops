@@ -18,8 +18,8 @@ Doch anstatt einer klaren Nachricht tauchte nur ein mysteriöser Hinweis auf:
 die GPS-Daten des Kunstwerks🗺️!
 
 Jetzt kommst du ins Spiel!
-Mit Hilfe von KI und deinen detektivischen	🫆 Spürsinn willst du das Geheimnis lüften:
+Mit Hilfe von KI und deinen detektivischen	🫆 Spürsinn kannst du das Geheimnis lüften:
 •	WO befindet sich der Standort der Künstler❓
 •	Welche Figur wurde mit den GPS-Daten da gestellt❓
 DU kannst die KI alles fragen! Auch wenn du überhaupt keinen Ansatz 
-hast oder überhaupt nicht weiter weist 
+hast oder überhaupt nicht mehr weiter weißt 
