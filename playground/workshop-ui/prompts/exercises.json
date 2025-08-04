@@ -17,18 +17,6 @@
       "folder": "gps-art",
       "system_prompt_file": "system-prompt.md",
       "data_file": "gps-art-wer-bin-ich.csv"
-    },
-    "gps-art-Leonie": {
-      "title": "Das verschwundene Flugzeug",
-      "folder": "gps-art-Leonie",
-      "system_prompt_file": "gps-art-Leonie-Prompt.md",
-      "data_file": "gps-art-leonie.csv"
-    },
-    "gps-art-Sarah": {
-      "title": "Die verschwundenen Cartoon-Giganten",
-      "folder": "gps-art-Sarah",
-      "system_prompt_file": "system-promt-gps-art.md", 
-      "data_file": "gps-art-sarah.csv"
     }
   }
 }
