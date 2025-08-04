@@ -1,58 +1,81 @@
-# 🕵️‍♀️🔍 Guide für kleine Cyber‑Spürnasen in der **Cyberwerk AG**
 
-Willkommen in der **Cyberwerk AG**, wo geniale Köpfe an fantastischen Erfindungen tüfteln! Doch ein schlauer Daten‑Dieb schleicht sich nachts in unser **Computer‑Tagebuch** und will unsere Geheimnisse stehlen. Eure Mission: Gemeinsam mit Cyber‑Spürnase deckt ihr ungewöhnliches Verhalten auf und schnappt den Bösewicht! 🚀
+# 🕵️‍♀️🔍 **Cyber‑Spürnasen: Rettet den Lichtkristall!**
 
----
+Willkommen in der **Cyberwerk AG**, wo geniale Köpfe an fantastischen Erfindungen tüfteln!
+Doch ein schlauer **Daten‑Dieb** will sich nachts heimlich in unser **Computer‑Tagebuch** schleichen, unsere Geheimnisse stehlen und sich **als einer von uns ausgeben** – das nennt man **Identitätsdiebstahl**!
 
-## 1. Unsere geheime Mission
-In der Cyberwerk AG wird der **Lichtkristall** entwickelt, der ganze Städte zum Leuchten bringt. Ein fieser Eindringling will die Baupläne klauen! Ihr seid jetzt **IT‑Forensiker:innen** – Detektiv:innen für digitale Spuren. Augen auf! 👀
-
----
-
-## 2. Was ist IT‑Forensik?
-- **IT‑Forensik** ist wie Spurensuche im Computer: Ihr schaut ins **Computer‑Tagebuch** (die Logdateien) und sucht nach **Anomalien (= ungewöhnliches Verhalten)**.
-- Ein Login tagsüber im Büro ist normal. Alles, was anders ist, ist eine wertvolle Spur! 🔎
+Eure Mission: Gemeinsam mit **Cyber‑Spürnase** entdeckt ihr verdächtiges Verhalten, entlarvt den falschen „Mitarbeiter“ und schützt den **Lichtkristall**, der ganze Städte zum Leuchten bringt. 🚀✨
 
 ---
 
-## 3. Spannende Spurentypen
-Diese **Anomalien** bringen euch auf die richtige Fährte:
+## 1️⃣ Unsere geheime Mission
 
-| Spur                       | Erklärung                                                                                                                                   |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| ⚔️ **Brute Force**         | Wie ein hartnäckiger Ritter, der alle möglichen Türen ausprobiert, bis er eine findet – so viele Passwort‑Versuche, bis es klappt!            |
-| ⚡️ **Blitz‑Reise**         | Ein Login in Wien und wenige Minuten später in Peking – so schnell, als würde man auf einem Blitz reiten!                                   |
-| 🌙 **Ungewöhnliche Zeiten**| Einblick ins Tagebuch mitten in der Nacht oder am Wochenende, wenn normalerweise alle schlafen und träumen.                                               |
-| 📱 **Fremde Geräte**       | Plötzlich kommt die Anmeldung nicht von der gewohnten Computer‑Kiste, sondern von einem unbekannten Tablet oder Handy!                       |
+Ein Bösewicht will sich mit den **Zugangsdaten eines echten Mitarbeiters** anmelden und so tun, **als wäre er Teil der Cyberwerk AG**.
+🔑 **Identitätsdiebstahl bedeutet:** Jemand klaut z. B. dein Passwort oder deinen Namen und benutzt ihn, um Dinge zu tun, die nur du dürftest – wie ein Dieb, der sich deinen Hausschlüssel schnappt.
 
 ---
 
-## 4. So geht ihr vor
-1. **Computer‑Tagebuch öffnen**: Jeder Eintrag verrät, wer sich wann und wo angemeldet hat.
-2. **Spuren sammeln**: Achtet auf **Anomalien** (= ungewöhnliches Verhalten)! 👆
-3. **Neugierige Fragen stellen**:
-   - „Welcher Account wirkt gerade wie ein hartnäckiger Ritter?“
-   - „Wer reitet da Blitz‑schnell von Stadt zu Stadt?“
-4. **Hinweise kombinieren**: Verbindet Brute Force und Blitz‑Reise – wer könnte der Eindringling sein? 🕵️‍♀️
-5. **Cyber‑Spürnase fragen**: Wenn ihr nicht weiterkommt, stellt Fragen wie:
-   > „Was bedeutet hier Brute Force?“ oder „Warum ist dieser Sprung unmöglich?“
-   Jeder Hinweis bringt euch dem Dieb näher! 💡
+## 2️⃣ Was ist IT‑Forensik?
+
+* **IT‑Forensik** ist wie eine digitale Detektivarbeit: Ihr schaut in das **Computer‑Tagebuch** (Logdateien) und sucht nach **Anomalien (= ungewöhnlichem Verhalten)**.
+* So erkennt ihr, wenn ein fremder Eindringling versucht, als jemand anderes hineinzuschlüpfen – ein klassischer Fall von **Identitätsdiebstahl**. 👀
 
 ---
 
-## 5. Begriffserklärungen
-- **Computer‑Tagebuch**: Die unsichtbare Liste, die jeder Computer führt – wer war wann drin.
-- **Anomalie (= ungewöhnliches Verhalten)**: Alles, was aus dem Alltag des Tagebuchs fällt.
-- **Brute Force**: Ein Ritter, der immer wieder an den Zugang klopft, bis er es schafft – viele Passwort‑Versuche.
-- **Blitz‑Reise**: Ein superschneller Ortswechsel, so als reite man auf einem Blitz von Wien nach Peking! ⚡️
+## 3️⃣ Spannende Spuren, die der Daten‑Dieb hinterlässt
+
+| Spur                         | Erklärung                                                                                                                               |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| ⚔️ **Brute Force**           | Wie ein Ritter, der an jede Tür klopft, bis eine aufgeht – viele Passwort‑Versuche hintereinander.                                      |
+| ⚡️ **Blitz‑Reise**           | Ein Login in Wien und Minuten später in Peking – so schnell kann niemand reisen, außer ein Hacker auf einem digitalen Blitz!            |
+| 🌙 **Ungewöhnliche Zeiten**  | Ein Einbruch mitten in der Nacht oder am Wochenende, wenn alle schlafen und träumen.                                                    |
+| 📱 **Fremde Geräte**         | Plötzlich taucht ein unbekanntes Tablet oder Handy auf – und versucht, mit einem echten Konto hineinzukommen.                           |
+| 🕵️ **Gefälschte Identität** | Der Bösewicht nutzt gestohlene Namen und Passwörter, um so zu tun, als wäre er ein echter Mitarbeiter (Identitätsdiebstahl in Aktion!). |
 
 ---
 
-## 6. Abschluss‑Rätsel 🧩
-Am Ende dürft ihr tippen:
-> **Wer reitet auf einem Blitz, probiert unzählige Zugänge und schleicht sich heimlich in unser Computer‑Tagebuch?**
+## 4️⃣ Eure Schritte als Cyber‑Spürnasen
 
-Schreibt eure Vermutung auf und feiert jeden Tipp mit einem lauten:
+1. **Computer‑Tagebuch öffnen:** Dort steht, wer sich wann und von wo eingeloggt hat.
+2. **Spuren sammeln:** Achtet auf **Anomalien** (= ungewöhnliches Verhalten)! 👆
+3. **Fragen stellen:**
+
+   * „Welcher Ritter probiert ständig Passwörter?“
+   * „Wer reitet auf einem Blitz von Stadt zu Stadt?“
+   * „Wer benutzt den Namen eines echten Mitarbeiters – aber zu komischen Zeiten?“
+4. **Hinweise kombinieren:** Wenn Brute Force, Blitz‑Reise und gefälschte Identität zusammenpassen, habt ihr den Dieb fast geschnappt! 🕵️‍♀️
+5. **Cyber‑Spürnase fragen:** Kommt ihr nicht weiter, könnt ihr fragen:
+
+   > „Wie erkennt man, dass jemand eine Identität klaut?“
+   > „Warum ist dieser Login mitten in der Nacht verdächtig?“
+
+---
+
+## 5️⃣ Begriffe für Meister‑Detektive
+
+* **Computer‑Tagebuch:** Unsichtbare Liste, in die der Computer schreibt, wer wann drinnen war.
+* **Anomalie:** Alles, was nicht in den normalen Tagesablauf passt.
+* **Brute Force:** Viele Passwort‑Versuche – wie ein Ritter, der jede Tür testet.
+* **Blitz‑Reise:** Rasend schneller Ortswechsel, wie ein Hacker‑Blitz. ⚡️
+* **Identitätsdiebstahl:** Wenn jemand deine Zugangsdaten klaut und so tut, als wäre er du.
+
+---
+
+## 6️⃣ Abschluss‑Rätsel 🧩
+
+Am Ende dürft ihr raten:
+
+> **Wer reitet auf einem Blitz, klopft wie ein Ritter an alle Türen und gibt sich als echter Mitarbeiter aus, obwohl er ein Bösewicht ist?**
+
+Schreibt eure Vermutung auf und ruft gemeinsam:
+
 > „**Klasse entdeckt!** 🎉“
 
-**Viel Spaß bei eurer Mission in der Datenschmiede – auf die Spuren, fertig, los!** 🕵️💻✨
+---
+
+✨ **Mission geschafft:** Ihr habt gelernt, wie man digitale Spuren findet und Identitätsdiebstahl erkennt.
+So bleibt der Lichtkristall sicher und die Cyberwerk AG kann weiter ganze Städte zum Leuchten bringen! 🌟
+
+---
+
+Willst du, dass ich daraus auch ein **kindgerechtes Poster oder Comic‑Storyboard** mache (mit Cyber‑Spürnase als Figur)? 🎨🕵️‍♀️
