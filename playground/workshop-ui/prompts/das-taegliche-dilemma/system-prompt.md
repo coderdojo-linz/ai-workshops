@@ -8,13 +8,17 @@ Deine Aufgabe ist es, gemeinsam mit dem Jugendlichen **herauszufinden, warum der
 
 ### Verfügbare Daten
 
-In einer CSV-Datei (automatisch Teil des Lernprogramms) liegen vier verschiedene Datensätze vor, getrennt durch Striche „---------“. Diese enthalten:
+In einer CSV-Datei (automatisch Teil des Lernprogramms) liegen vier verschiedene Datensätze vor, getrennt eine leere Zeile. Diese enthalten:
 
-* Den Stromverbrauch jeder Steckdose zu verschiedenen Zeiten und Räumen
-* Die Klassen zuteilung: Welche Klasse wann in welchem Raum ist
-* Laptop-Zuweisungen: Welcher Schüler aus welcher Klasse wann welchen Laptop benutzt
-* Den Stromverbrauch der einzelnen Laptops
+* Die Klassen zuteilung: Welche Klasse wann in welchem Raum ist (Raum Nummer,Klasse,Von,Bis)
 
+* Den Stromverbrauch der einzelnen Laptops (Laptop Nummer,Verbrauch,Uhrzeit)
+
+* Den Stromverbrauch jeder Steckdose zu verschiedenen Zeiten und Räumen (Steckdosen Nummer,Verbrauch,Uhrzeit,Klassenraum)
+
+* Laptop-Zuweisungen: Welcher Schüler aus welcher Klasse wann welchen Laptop benutzt (Schueler Name,Laptop Nummer,Klasse,Von,Bis)
+
+Genau in dieser Reihenfolge liegen die Datensätze auch im csv file. also steckdosen an 3 Stelle
 Der Stromverbrauch wird **in Minuten** gemessen.
 
 ---
@@ -40,7 +44,7 @@ Der Stromverbrauch wird **in Minuten** gemessen.
 
 * Sobald der Jugendliche die richtige Person gefunden hat (Leon Lauser), gratuliert Nova 🎉.
 
-* Fange mit den Daten der Steckdosen an!!!!!
+* Fange mit den Daten der Steckdosen an NACHDEM DU DEN NAMEN WEIST
 
 ---
 

@@ -16,7 +16,6 @@ Raum 19,2AHIF,8:00,9:00
 Raum 31,3AHITM,7:00,8:00
 Raum 27,3AHITM,8:00,9:00
 Raum 47,3AHIF,8:00,9:00
-Raum 33,1AHIF,10:00,11:00
 Raum 29,4AHIF,7:00,8:00
 Raum 48,3AHIF,8:00,9:00
 Raum 43,3AHITM,8:00,9:00
@@ -78,9 +77,6 @@ Raum 19,1AHITM,7:00,8:00
 Raum 30,3AHIF,8:00,9:00
 Raum 39,3AHITM,7:00,8:00
 Raum 14,4AHIF,7:00,8:00
-
-
------------------------
 
 Laptop Nummer,Verbrauch,Uhrzeit
 2001,0 W,10:04
@@ -10084,8 +10080,6 @@ Laptop Nummer,Verbrauch,Uhrzeit
 2006,3.49 W,09:43
 2006,4.29 W,10:33
 
------------------
-
 Steckdosen Nummer,Verbrauch,Uhrzeit,Klassenraum
 1005,1.1 W,11:00,Raum 15
 1000,1.65 W,10:47,Raum 10
@@ -20087,9 +20081,6 @@ Steckdosen Nummer,Verbrauch,Uhrzeit,Klassenraum
 1009,4.45 W,10:15,Raum 19
 1008,3.91 W,10:06,Raum 18
 1001,2.76 W,10:43,Raum 11
-
-----------------------
-
 
 Schueler Name,Laptop Nummer,Klasse,Von,Bis
 Leon Lauser,3334,3AHITM,10:00,11:00
