@@ -1,7 +1,136 @@
+'use client';
+import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 
-export default function Home() {
+/*export default function Home() {
   return (
     <h1>Workshops (TODO!)</h1>
+  );
+}*/
+
+// File: src/app/workshops/page.tsx
+
+interface Workshop {
+  id: number;
+  title: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  description: string;
+  status: string;
+}
+
+export default function WorkshopsPage() {
+  const [workshops, setWorkshops] = useState<Workshop[]>([]);
+  const [formVisible, setFormVisible] = useState(false);
+  const [newWorkshop, setNewWorkshop] = useState({
+    title: '',
+    date: '',
+    startTime: '',
+    endTime: '',
+    description: '',
+  });
+
+  useEffect(() => {
+    fetch('/api/workshops')
+      .then(res => res.json())
+      .then(data => {
+        console.log('workshops:', data);
+        setWorkshops(data);
+      });
+  }, []);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setNewWorkshop({ ...newWorkshop, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit() {
+    const payload = {
+      ...newWorkshop,
+      status: 'abgeschlossen',
+    };
+    const res = await fetch('/api/workshops', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const created = await res.json();
+    setWorkshops(prev => [...prev, created]);
+    setFormVisible(false);
+    setNewWorkshop({ title: '', date: '', startTime: '', endTime: '', description: '' });
+  }
+
+  return (
+    <main className="min-h-screen bg-orange-50 p-8">
+      <h1 className="text-2xl font-bold mb-4">Workshops</h1>
+      <button
+        onClick={() => setFormVisible(!formVisible)}
+        className="bg-orange-500 text-white px-4 py-2 rounded mb-4"
+      >
+        + Neuer Workshop
+      </button>
+
+      {formVisible && (
+        <div className="bg-white p-4 rounded shadow mb-4">
+          <input
+            type="text"
+            name="title"
+            placeholder="Workshop Name"
+            value={newWorkshop.title}
+            onChange={handleChange}
+            className="border p-2 w-full mb-2"
+          />
+          <input
+            type="date"
+            name="date"
+            value={newWorkshop.date}
+            onChange={handleChange}
+            className="border p-2 w-full mb-2"
+          />
+          <div className="flex gap-2 mb-2">
+            <input
+              type="time"
+              name="startTime"
+              value={newWorkshop.startTime}
+              onChange={handleChange}
+              className="border p-2 w-full"
+            />
+            <input
+              type="time"
+              name="endTime"
+              value={newWorkshop.endTime}
+              onChange={handleChange}
+              className="border p-2 w-full"
+            />
+          </div>
+          <textarea
+            name="description"
+            value={newWorkshop.description}
+            onChange={handleChange}
+            placeholder="Beschreibung"
+            className="border p-2 w-full mb-2"
+          />
+          <button
+            onClick={handleSubmit}
+            className="bg-orange-500 text-white px-4 py-2 rounded"
+          >
+            Workshop erstellen
+          </button>
+        </div>
+      )}
+
+      <div className="space-y-4">
+        {workshops.map(w => (
+          <div key={w.id} className="bg-white p-4 rounded shadow">
+            <div className="flex justify-between">
+              <h2 className="text-xl font-semibold">{w.title}</h2>
+              <span className="bg-orange-100 text-orange-600 text-sm px-2 py-1 rounded">{w.status}</span>
+            </div>
+            <p className="text-sm text-gray-500">📅 {w.date} 🕒 {w.startTime} - {w.endTime}</p>
+            <p className="mt-2 text-gray-700">{w.description}</p>
+          </div>
+        ))}
+      </div>
+    </main>
   );
 }
