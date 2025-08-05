@@ -21,7 +21,7 @@
     "das-taegliche-dilemma": {
       "title": "Das tägliche Dilemma",
       "folder": "das-taegliche-dilemma",
-      "system_prompt_file": "system-prompt-04.md",
+      "system_prompt_file": "system-prompt.md",
       "data_file": "Data-taegliches-dilemma.csv"
     }
   }
