@@ -18,11 +18,11 @@
       "system_prompt_file": "system-prompt.md",
       "data_file": "gps-art-wer-bin-ich.csv"
     },
-    "das-tägliche-dilemma": {
+    "das-taegliche-dilemma": {
       "title": "Das tägliche Dilemma",
-      "folder": "das-tägliche-dilemma",
+      "folder": "das-taegliche-dilemma",
       "system_prompt_file": "system-prompt-04.md",
-      "data_file": "Data-tägliches-dilemma.csv"
+      "data_file": "Data-taegliches-dilemma.csv"
     }
   }
 }
