@@ -7,8 +7,8 @@ type ExerciseResponse = {
   title: string;
   folder: string;
   system_prompt_file: string;
-  data_file: string;
-  data_file_content?: string;
+  data_files: string[];
+  data_files_content?: { [filename: string]: string };
 };
 
 export async function GET(
@@ -39,18 +39,22 @@ export async function GET(
       title: exercise.title,
       folder: exercise.folder,
       system_prompt_file: exercise.system_prompt_file,
-      data_file: exercise.data_file
+      data_files: exercise.data_files
     };
     
-    // If requested, read and include data file content
-    if (includeDataFileContent && exercise.data_file) {
-      try {
-        const dataFilePath = path.join(process.cwd(), 'prompts', exercise.folder, exercise.data_file);
-        const dataFileContent = await fs.promises.readFile(dataFilePath, 'utf8');
-        response.data_file_content = dataFileContent;
-      } catch (dataFileError) {
-        console.error('Error reading data file:', dataFileError);
-        return NextResponse.json({ error: 'Data file not found' }, { status: 404 });
+    // If requested, read and include data files content
+    if (includeDataFileContent && exercise.data_files.length > 0) {
+      response.data_files_content = {};
+      
+      for (const dataFile of exercise.data_files) {
+        try {
+          const dataFilePath = path.join(process.cwd(), 'prompts', exercise.folder, dataFile);
+          const dataFileContent = await fs.promises.readFile(dataFilePath, 'utf8');
+          response.data_files_content[dataFile] = dataFileContent;
+        } catch (dataFileError) {
+          console.error(`Error reading data file ${dataFile}:`, dataFileError);
+          return NextResponse.json({ error: `Data file not found: ${dataFile}` }, { status: 404 });
+        }
       }
     }
     

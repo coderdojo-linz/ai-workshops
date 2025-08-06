@@ -81,18 +81,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
 
-    if (!dataFileIds.has(exerciseData.data_file)) {
-      let dataFileId = await client.files.getFileId(exerciseData.data_file);
-      if (!dataFileId) {
-        const inputStream = fs.createReadStream(path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.data_file));
-        const file = await client.files.create({
-          file: inputStream,
-          purpose: 'user_data',
-        });
-        dataFileId = file.id;
-      }
+    // Process all data files for this exercise
+    const exerciseFileIds: string[] = [];
+    for (const dataFile of exerciseData.data_files) {
+      if (!dataFileIds.has(dataFile)) {
+        let dataFileId = await client.files.getFileId(dataFile);
+        if (!dataFileId) {
+          const inputStream = fs.createReadStream(path.join(process.cwd(), 'prompts', exerciseData.folder, dataFile));
+          const file = await client.files.create({
+            file: inputStream,
+            purpose: 'user_data',
+          });
+          dataFileId = file.id;
+        }
 
-      dataFileIds.set(exerciseData.data_file, dataFileId);
+        dataFileIds.set(dataFile, dataFileId);
+      }
+      exerciseFileIds.push(dataFileIds.get(dataFile)!);
     }
 
     // Get or create session ID
@@ -132,7 +137,7 @@ export async function POST(request: NextRequest) {
           type: 'code_interpreter',
           container: {
             type: 'auto',
-            file_ids: [dataFileIds.get(exerciseData.data_file)!],
+            file_ids: exerciseFileIds,
           },
         },
       ],

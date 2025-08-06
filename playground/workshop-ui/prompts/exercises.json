@@ -4,25 +4,31 @@
         "title": "Ausbruch aus der Daten-Höhle",
         "folder": "data-cave",
         "system_prompt_file": "system-prompt.md",
-        "data_file": "data-cave.csv"
+        "data_files": "data-cave.csv"
     },
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",
       "folder": "detective-beginners",
       "system_prompt_file": "system-prompt.md",
-      "data_file": "detective-beginners.csv"
+      "data_files": "detective-beginners.csv"
     },
     "gps-art": {
       "title": "Wer bin ich?",
       "folder": "gps-art",
       "system_prompt_file": "system-prompt.md",
-      "data_file": "gps-art-wer-bin-ich.csv"
+      "data_files": "gps-art-wer-bin-ich.csv"
     },
     "das-taegliche-dilemma": {
       "title": "Das tägliche Dilemma",
       "folder": "das-taegliche-dilemma",
       "system_prompt_file": "system-prompt.md",
-      "data_file": "Data-taegliches-dilemma.csv"
+      "data_files": "Data-taegliches-dilemma.csv"
+    },
+    "multi-csv-test": {
+      "title": "Multi CSV Test",
+      "folder": "multi-csv-test",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": ["multi-csv-test1.csv", "multi-csv-test2.csv"]
     }
   }
 }

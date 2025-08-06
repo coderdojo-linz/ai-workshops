@@ -58,7 +58,15 @@ export default function Home() {
                 const exerciseResponse = await fetch(`/api/exercises/${exercise}?includeDataFileContent=true`);
                 if (exerciseResponse.ok) {
                   const exerciseData = await exerciseResponse.json();
-                  dataFileContentCache.current = exerciseData.data_file_content || null;
+                  
+                  // Only process <|DATA|> if there's exactly one data file
+                  if (exerciseData.data_files && exerciseData.data_files.length === 1) {
+                    const singleFileName = exerciseData.data_files[0];
+                    dataFileContentCache.current = exerciseData.data_files_content?.[singleFileName] || null;
+                  } else {
+                    // Multiple files - don't process <|DATA|> placeholders
+                    dataFileContentCache.current = null;
+                  }
                 }
               } catch (error) {
                 console.error('Error fetching exercise data:', error);
@@ -68,7 +76,7 @@ export default function Home() {
               }
             }
             
-            // Replace <|DATA|> with the cached data file content
+            // Replace <|DATA|> with the cached data file content (only for single file exercises)
             if (dataFileContentCache.current) {
               htmlContent = htmlContent.replace(/<\|DATA\|>/g, dataFileContentCache.current);
             }

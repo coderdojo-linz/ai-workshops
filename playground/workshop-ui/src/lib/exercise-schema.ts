@@ -5,7 +5,13 @@ const ExerciseSchema = z.object({
   title: z.string(),
   folder: z.string(),
   system_prompt_file: z.string(),
-  data_file: z.string(),
+  data_files: z.union([
+    z.string(),           // Single string
+    z.array(z.string())   // Array of strings
+  ]).transform((val) => {
+    // Always normalize to array format internally
+    return Array.isArray(val) ? val : [val];
+  }),
 });
 
 // Schema for the entire exercises file

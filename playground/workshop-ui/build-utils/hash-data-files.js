@@ -54,23 +54,29 @@ function hashDataFiles(promptsPath) {
     // Process each exercise
     for (const [exerciseKey, exercise] of Object.entries(exercisesData.exercises)) {
         const exerciseFolder = path.join(promptsPath, exercise.folder);
-        const dataFilePath = path.join(exerciseFolder, exercise.data_file);
         
-        // Check if data file exists
-        if (!fs.existsSync(dataFilePath)) {
-            console.warn(`Warning: Data file not found: ${dataFilePath}`);
-            continue;
+        // Process each data file
+        const newDataFiles = [];
+        for (const dataFile of exercise.data_files) {
+            const dataFilePath = path.join(exerciseFolder, dataFile);
+            
+            // Check if data file exists
+            if (!fs.existsSync(dataFilePath)) {
+                console.warn(`Warning: Data file not found: ${dataFilePath}`);
+                continue;
+            }
+            
+            // Calculate MD5 hash
+            const hash = calculateMD5Hash(dataFilePath);
+            console.log(`Calculated hash for ${dataFile}: ${hash}`);
+            
+            // Rename file with hash
+            const newFileName = renameFileWithHash(dataFilePath, hash);
+            newDataFiles.push(newFileName);
         }
         
-        // Calculate MD5 hash
-        const hash = calculateMD5Hash(dataFilePath);
-        console.log(`Calculated hash for ${exercise.data_file}: ${hash}`);
-        
-        // Rename file with hash
-        const newFileName = renameFileWithHash(dataFilePath, hash);
-        
-        // Update exercises.json with new filename
-        exercise.data_file = newFileName;
+        // Update exercises.json with new filenames
+        exercise.data_files = newDataFiles;
     }
     
     // Write updated exercises.json
