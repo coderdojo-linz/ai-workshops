@@ -57,7 +57,9 @@ function hashDataFiles(promptsPath) {
         
         // Process each data file
         const newDataFiles = [];
-        for (const dataFile of exercise.data_files) {
+        // Handle both string and array formats for data_files
+        const dataFiles = Array.isArray(exercise.data_files) ? exercise.data_files : [exercise.data_files];
+        for (const dataFile of dataFiles) {
             const dataFilePath = path.join(exerciseFolder, dataFile);
             
             // Check if data file exists
@@ -76,7 +78,8 @@ function hashDataFiles(promptsPath) {
         }
         
         // Update exercises.json with new filenames
-        exercise.data_files = newDataFiles;
+        // Maintain original format: string for single file, array for multiple files
+        exercise.data_files = newDataFiles.length === 1 ? newDataFiles[0] : newDataFiles;
     }
     
     // Write updated exercises.json
