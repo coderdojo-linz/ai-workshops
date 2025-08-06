@@ -1,8 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
+import { WorkshopSchema, type WorkshopInput } from '@/lib/workshop-schema';
+import type { ZodFormattedError } from 'zod';
 
+// ist das, was VOM USER im Formular eingegeben wird
+
+// ist das, was NACH DEM SPEICHERN im BACKEND existiert also MIT ID
 interface Workshop {
   id: number;
   title: string;
@@ -56,6 +61,17 @@ export default function WorkshopsPage() {
     return 'beendet';
   }
 
+  function isFormValidWithZod() {
+    const result = WorkshopSchema.safeParse(newWorkshop);
+    return result.success;
+  }
+
+  const validation = WorkshopSchema.safeParse(newWorkshop);
+  const errors: ZodFormattedError<WorkshopInput> = validation.success
+    ? {} as ZodFormattedError<WorkshopInput>
+    : validation.error.format();
+
+
   return (
     <main className={styles.pageWrapper}>
       <h1 className={styles.pageTitle}>Workshops</h1>
@@ -69,14 +85,38 @@ export default function WorkshopsPage() {
 
       {formVisible && (
         <div className={styles.formWrapper}>
-          <input type="text" name="title" placeholder="Titel" value={newWorkshop.title} onChange={handleChange} className={styles.input} />
+          <input type="text"
+                 name="title"
+                 placeholder="Titel"
+                 value={newWorkshop.title}
+                 onChange={handleChange}
+                 className={styles.input}
+          />
+          {errors?.title?._errors?.[0] && (
+            <p className={styles.error}>{errors.title._errors[0]}</p>
+          )}
           <input type="date" name="date" value={newWorkshop.date} onChange={handleChange} className={styles.input} />
           <div className={styles.timeRow}>
-            <input type="time" name="startTime" value={newWorkshop.startTime} onChange={handleChange} className={styles.input} />
-            <input type="time" name="endTime" value={newWorkshop.endTime} onChange={handleChange} className={styles.input} />
+            <input type="time" name="startTime" value={newWorkshop.startTime} onChange={handleChange}
+                   className={styles.input} />
+            <input type="time" name="endTime" value={newWorkshop.endTime} onChange={handleChange}
+                   className={styles.input} />
           </div>
-          <textarea name="description" placeholder="Beschreibung" value={newWorkshop.description} onChange={handleChange} className={styles.textarea} />
-          <button onClick={handleSubmit} className={styles.submitButton}>Workshop erstellen</button>
+          <textarea name="description" placeholder="Beschreibung" value={newWorkshop.description}
+                    onChange={handleChange} className={styles.textarea} />
+          <button onClick={handleSubmit} disabled={!isFormValidWithZod()} className={styles.submitButton}>
+            Workshop erstellen
+          </button>
+          <button
+            onClick={() => {
+              setFormVisible(false);
+              setNewWorkshop({ title: '', date: '', startTime: '', endTime: '', description: '' });
+            }}
+            type="button"
+            className={styles.cancelButton}
+          >
+            Abbrechen
+          </button>
         </div>
       )}
 

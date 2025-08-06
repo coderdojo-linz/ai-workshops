@@ -1,18 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { StatusCodes } from 'http-status-codes';
-
-const filePath = path.join(process.cwd(), 'workshops.json');
-
-function readWorkshops() {
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(raw);
-}
-
-function writeWorkshops(data: any) {
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-}
+import { readWorkshops,writeWorkshops } from '@/app/api/workshops/workshopService';
 
 export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
   const workshops = readWorkshops();

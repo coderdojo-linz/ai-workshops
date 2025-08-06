@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import styles from '../page.module.css';
+import { WorkshopSchema } from '@/lib/workshop-schema';
 
 interface Workshop {
   id: number;
@@ -17,6 +18,7 @@ export default function EditWorkshopPage() {
   const router = useRouter();
   const params = useParams();
   const { id } = params as { id: string };
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
 
   const [workshop, setWorkshop] = useState<Workshop | null>(null);
   const [loading, setLoading] = useState(true);
@@ -108,7 +110,7 @@ export default function EditWorkshopPage() {
             Abbrechen
           </button>
           <button onClick={handleDelete} className={styles.deleteButton}>
-            Löschen
+          Workshop LÖSCHEN
           </button>
         </div>
       </div>

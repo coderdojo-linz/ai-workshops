@@ -9,18 +9,26 @@
   },
   {
     "title": "SQL <3",
-    "date": "2025-08-12",
+    "date": "2025-08-04",
     "startTime": "11:07",
     "endTime": "23:00",
     "description": "SQL Basics halt you know",
     "id": 1754406388987
   },
   {
-    "title": "JS/TS",
-    "date": "2025-08-14",
-    "startTime": "12:00",
-    "endTime": "14:00",
-    "description": "keine Ahnung",
-    "id": 1754466853964
+    "title": "Informatik",
+    "date": "2025-08-06",
+    "startTime": "21:33",
+    "endTime": "23:00",
+    "description": "Microsoft 365",
+    "id": 1754508883163
+  },
+  {
+    "title": "Data Science",
+    "date": "2025-09-13",
+    "startTime": "04:07",
+    "endTime": "08:00",
+    "description": "ahh ich liebs",
+    "id": 1754511110290
   }
 ]
