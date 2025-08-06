@@ -47,7 +47,7 @@ export default function WorkshopsPage() {
   async function handleSubmit() {
     const payload = {
       ...newWorkshop,
-      status: 'abgeschlossen',
+      status: 'ausstehend',  //TODO Dynamisch Status laden
     };
     const res = await fetch('/api/workshops', {
       method: 'POST',
@@ -119,18 +119,24 @@ export default function WorkshopsPage() {
         </div>
       )}
 
-      <div className="space-y-4">
+      <div className={styles.workshopList}>
         {workshops.map(w => (
-          <div key={w.id} className="bg-white p-4 rounded shadow">
-            <div className="flex justify-between">
-              <h2 className="text-xl font-semibold">{w.title}</h2>
-              <span className="bg-orange-100 text-orange-600 text-sm px-2 py-1 rounded">{w.status}</span>
+          <div key={w.id} className={styles.workshopCard}>
+            <div className={styles.workshopHeader}>
+              <h2 className={styles.workshopTitle}>{w.title}</h2>
+              <div className={styles.workshopActions}>
+                <span className={styles.workshopStatus}>{w.status}</span>
+                <button className={styles.editButton}>Bearbeiten</button>
+              </div>
             </div>
-            <p className="text-sm text-gray-500">📅 {w.date} 🕒 {w.startTime} - {w.endTime}</p>
-            <p className="mt-2 text-gray-700">{w.description}</p>
+            <p className={styles.workshopDate}>
+              📅 {w.date} 🕒 {w.startTime} - {w.endTime}
+            </p>
+            <p className={styles.workshopDescription}>{w.description}</p>
           </div>
         ))}
       </div>
+
     </main>
   );
 }

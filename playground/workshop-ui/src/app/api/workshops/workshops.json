@@ -16,5 +16,14 @@
     "description": "SQL Basics halt you know",
     "status": "ausstehend",
     "id": 1754406388987
+  },
+  {
+    "title": "Mathe",
+    "date": "2025-08-29",
+    "startTime": "13:04",
+    "endTime": "14:00",
+    "description": "integrale",
+    "status": "ausstehend",
+    "id": 1754462087635
   }
 ]
