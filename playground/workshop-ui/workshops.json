@@ -1,11 +1,10 @@
 [
   {
-    "title": "Java Folter",
+    "title": "JAVA",
     "date": "2025-08-09",
     "startTime": "12:00",
     "endTime": "18:50",
     "description": "streams, javafx,...",
-    "status": "ausstehend",
     "id": 1754406109507
   },
   {
@@ -14,16 +13,14 @@
     "startTime": "11:07",
     "endTime": "23:00",
     "description": "SQL Basics halt you know",
-    "status": "ausstehend",
     "id": 1754406388987
   },
   {
-    "title": "Mathe",
-    "date": "2025-08-29",
-    "startTime": "13:04",
+    "title": "JS/TS",
+    "date": "2025-08-14",
+    "startTime": "12:00",
     "endTime": "14:00",
-    "description": "integrale",
-    "status": "ausstehend",
-    "id": 1754462087635
+    "description": "keine Ahnung",
+    "id": 1754466853964
   }
 ]

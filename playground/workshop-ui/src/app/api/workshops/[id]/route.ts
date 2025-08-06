@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { StatusCodes } from 'http-status-codes';
 
-const filePath = path.join(process.cwd(), 'src', 'app', 'workshops', 'workshops.json');
+const filePath = path.join(process.cwd(), 'workshops.json');
 
 function readWorkshops() {
   const raw = fs.readFileSync(filePath, 'utf-8');
@@ -18,7 +19,7 @@ export async function GET(_: NextRequest, { params }: { params: { id: string } }
   const workshop = workshops.find((w: any) => String(w.id) === params.id);
 
   if (!workshop) {
-    return NextResponse.json({ error: 'Workshop not found' }, { status: 404 });
+    return NextResponse.json({ error: 'Workshop not found' }, { status: StatusCodes.NOT_FOUND });
   }
 
   return NextResponse.json(workshop);
@@ -31,7 +32,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
   const index = workshops.findIndex((w: any) => String(w.id) === id);
   if (index === -1) {
-    return NextResponse.json({ error: 'Workshop not found' }, { status: 404 });
+    return NextResponse.json({ error: 'Workshop not found' }, { status: StatusCodes.NOT_FOUND });
   }
 
   workshops[index] = { ...workshops[index], ...updateFields };
@@ -46,7 +47,7 @@ export async function DELETE(_: NextRequest, { params }: { params: { id: string 
 
   const exists = workshops.some((w: any) => String(w.id) === id);
   if (!exists) {
-    return NextResponse.json({ error: 'Workshop not found' }, { status: 404 });
+    return NextResponse.json({ error: 'Workshop not found' }, { status: StatusCodes.NOT_FOUND });
   }
 
   const updated = workshops.filter((w: any) => String(w.id) !== id);
