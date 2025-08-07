@@ -22,7 +22,7 @@
       "title": "Das tägliche Dilemma",
       "folder": "das-taegliche-dilemma",
       "system_prompt_file": "system-prompt.md",
-      "data_files": "Data-taegliches-dilemma.csv"
+      "data_files": ["Klasse.csv","raum.csv","verbrauch.csv"]
     },
     "multi-csv-test": {
       "title": "Multi CSV Test",
