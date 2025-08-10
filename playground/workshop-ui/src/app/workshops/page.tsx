@@ -2,12 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
-import { WorkshopSchema, type WorkshopInput } from '@/lib/workshop-schema';
-import type { ZodFormattedError } from 'zod';
+import WorkshopForm from '@/components/WorkshopForm';
+import type { WorkshopInput } from '@/lib/workshop-schema';
 
-// ist das, was VOM USER im Formular eingegeben wird
-
-// ist das, was NACH DEM SPEICHERN im BACKEND existiert also MIT ID
 interface Workshop {
   id: number;
   title: string;
@@ -20,39 +17,38 @@ interface Workshop {
 export default function WorkshopsPage() {
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [formVisible, setFormVisible] = useState(false);
-  const [newWorkshop, setNewWorkshop] = useState({
-    title: '',
-    date: '',
-    startTime: '',
-    endTime: '',
-    description: '',
-  });
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
+    setLoading(true);
     fetch('/api/workshops')
-      .then(res => res.json())
-      .then(data => setWorkshops(data));
+      .then(async res => {
+        if (!res.ok) throw new Error('Fehler beim Laden der Workshops');
+        return res.json();
+      })
+      .then((data: Workshop[]) => setWorkshops(data))
+      .catch(err => setError(String(err)))
+      .finally(() => setLoading(false));
   }, []);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setNewWorkshop({ ...newWorkshop, [e.target.name]: e.target.value });
-  }
-
-  async function handleSubmit() {
+  async function createWorkshop(payload: WorkshopInput) {
     const res = await fetch('/api/workshops', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newWorkshop),
+      body: JSON.stringify(payload),
     });
-    const created = await res.json();
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(txt || 'Fehler beim Erstellen des Workshops');
+    }
+    const created: Workshop = await res.json();
     setWorkshops(prev => [...prev, created]);
     setFormVisible(false);
-    setNewWorkshop({ title: '', date: '', startTime: '', endTime: '', description: '' });
   }
 
-  function getWorkshopStatus(w: Workshop): string {
+  function getWorkshopStatus(w: Workshop) {
     const now = new Date();
     const start = new Date(`${w.date}T${w.startTime}`);
     const end = new Date(`${w.date}T${w.endTime}`);
@@ -61,86 +57,64 @@ export default function WorkshopsPage() {
     return 'beendet';
   }
 
-  function isFormValidWithZod() {
-    const result = WorkshopSchema.safeParse(newWorkshop);
-    return result.success;
-  }
-
-  const validation = WorkshopSchema.safeParse(newWorkshop);
-  const errors: ZodFormattedError<WorkshopInput> = validation.success
-    ? {} as ZodFormattedError<WorkshopInput>
-    : validation.error.format();
-
+  if (loading) return <main className={styles.pageWrapper}><p className={styles.pageTitle}>Lade...</p></main>;
+  if (error) return <main className={styles.pageWrapper}><p className={styles.pageTitle}>Fehler: {error}</p></main>;
 
   return (
     <main className={styles.pageWrapper}>
       <h1 className={styles.pageTitle}>Workshops</h1>
 
-      <button
-        onClick={() => setFormVisible(!formVisible)}
-        className={styles.newWorkshopButton}
-      >
-        + Neuer Workshop
+      <button onClick={() => setFormVisible(v => !v)} className={styles.newWorkshopButton}>
+        {formVisible ? 'Formular schließen' : '+ Neuer Workshop'}
       </button>
 
       {formVisible && (
-        <div className={styles.formWrapper}>
-          <input type="text"
-                 name="title"
-                 placeholder="Titel"
-                 value={newWorkshop.title}
-                 onChange={handleChange}
-                 className={styles.input}
-          />
-          {errors?.title?._errors?.[0] && (
-            <p className={styles.error}>{errors.title._errors[0]}</p>
-          )}
-          <input type="date" name="date" value={newWorkshop.date} onChange={handleChange} className={styles.input} />
-          <div className={styles.timeRow}>
-            <input type="time" name="startTime" value={newWorkshop.startTime} onChange={handleChange}
-                   className={styles.input} />
-            <input type="time" name="endTime" value={newWorkshop.endTime} onChange={handleChange}
-                   className={styles.input} />
-          </div>
-          <textarea name="description" placeholder="Beschreibung" value={newWorkshop.description}
-                    onChange={handleChange} className={styles.textarea} />
-          <button onClick={handleSubmit} disabled={!isFormValidWithZod()} className={styles.submitButton}>
-            Workshop erstellen
-          </button>
-          <button
-            onClick={() => {
-              setFormVisible(false);
-              setNewWorkshop({ title: '', date: '', startTime: '', endTime: '', description: '' });
-            }}
-            type="button"
-            className={styles.cancelButton}
-          >
-            Abbrechen
-          </button>
-        </div>
+        <WorkshopForm
+          onSave={async (payload) => {
+            try {
+              await createWorkshop(payload as WorkshopInput);
+            } catch (e) {
+              alert(String(e) || 'Fehler beim Erstellen');
+            }
+          }}
+          onCancel={() => setFormVisible(false)}
+        />
       )}
 
-      <div className={styles.workshopList}>
-        {workshops.map(w => (
-          <div key={w.id} className={styles.workshopCard}>
-            <div className={styles.workshopHeader}>
-              <h2 className={styles.workshopTitle}>{w.title}</h2>
-              <div className={styles.workshopActions}>
-                <span className={styles.workshopStatus}>{getWorkshopStatus(w)}</span>
-                <button
-                  className={styles.editButton}
-                  onClick={() => router.push(`/workshops/${w.id}`)}
-                >
-                  Bearbeiten
-                </button>
-              </div>
-            </div>
-            <p className={styles.workshopDate}>
-              📅 {w.date} 🕒 {w.startTime} - {w.endTime}
-            </p>
-            <p className={styles.workshopDescription}>{w.description}</p>
-          </div>
-        ))}
+      <div className={styles.workshopTableWrapper}>
+        <table className={styles.workshopTable}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Datum</th>
+              <th>Zeit</th>
+              <th>Status</th>
+              <th>Beschreibung</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {workshops.map(w => (
+              <tr key={w.id}>
+                <td>{w.title}</td>
+                <td>{w.date}</td>
+                <td>{w.startTime} - {w.endTime}</td>
+                <td><span className={styles.workshopStatus}>{getWorkshopStatus(w)}</span></td>
+                <td>{w.description}</td>
+                <td>
+                  <button className={styles.editButton} onClick={() => router.push(`/workshops/${w.id}`)}>
+                    Bearbeiten
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {workshops.length === 0 && (
+              <tr>
+                <td colSpan={6} style={{ textAlign: 'center' }}>Keine Workshops vorhanden</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </main>
   );

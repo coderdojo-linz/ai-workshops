@@ -45,6 +45,7 @@
     font-size: 0.875rem;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .editButton {
@@ -55,6 +56,7 @@
     cursor: pointer;
     text-decoration: underline;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 .editButton:hover {
@@ -65,11 +67,13 @@
     font-size: 0.875rem;
     color: #6b7280;
     margin-top: 0.5rem;
+    font-family: 'Poppins', sans-serif;
 }
 
 .workshopDescription {
     margin-top: 0.5rem;
     color: #374151;
+    font-family: 'Poppins', sans-serif;
 }
 
 .pageWrapper {
@@ -145,6 +149,7 @@
     margin-bottom: 0.5rem;
     border-radius: 4px;
     font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
 }
 
 .textarea {
@@ -177,4 +182,80 @@
 .submitButton:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+/* new styles for the workshop list */
+.workshopTableWrapper {
+    overflow-x: auto;
+}
+
+.workshopTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.workshopTable th {
+    background-color: #2563eb; /* Blau */
+    color: white;
+    text-align: left;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.workshopTable td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+}
+
+.workshopTable tr:hover {
+    background-color: #eff6ff; /* sehr helles Blau beim Hover */
+}
+
+.workshopStatus {
+    background-color: #dbeafe; /* Hellblau */
+    color: #1e40af; /* Dunkelblau */
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.editButton {
+    background: none;
+    border: none;
+    color: #2563eb;
+    font-size: 0.875rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.editButton:hover {
+    text-decoration: none;
+    color: #1e40af;
+}
+
+/* Buttons Blau statt Pink */
+.newWorkshopButton {
+    background-color: #2563eb;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.submitButton {
+    background-color: #2563eb;
+    color: white;
+}
+
+.saveButton {
+    background-color: #16a34a;
+    color: white;
+}
+
+.cancelButton {
+    background-color: #8f98a1;
+    color: white;
 }

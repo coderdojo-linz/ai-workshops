@@ -9,13 +9,15 @@ export async function GET() {
   const workshops = readWorkshops();
 
   workshops.sort((a: { date: string; startTime: string }, b: { date: string; startTime: string }) => {
-    const aDate = new Date(`${a.date}T${a.startTime}`);
-    const bDate = new Date(`${b.date}T${b.startTime}`);
-    return aDate.getTime() - bDate.getTime();
+    if (a.date !== b.date) {
+      return b.date.localeCompare(a.date); // descending date
+    }
+    return b.startTime.localeCompare(a.startTime); // descending time
   });
 
   return NextResponse.json(workshops);
 }
+
 
 // POST: neuen Workshop anlegen
 export async function POST(req: Request) {
