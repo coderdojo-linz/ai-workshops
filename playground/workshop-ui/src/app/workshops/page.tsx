@@ -48,14 +48,15 @@ export default function WorkshopsPage() {
     setFormVisible(false);
   }
 
-  function getWorkshopStatus(w: Workshop) {
-    const now = new Date();
-    const start = new Date(`${w.date}T${w.startTime}`);
-    const end = new Date(`${w.date}T${w.endTime}`);
-    if (now < start) return 'geplant';
-    if (now >= start && now <= end) return 'läuft gerade';
-    return 'beendet';
-  }
+ function getWorkshopStatus(w: Workshop): { text: string; className: string } {
+  const now = new Date();
+  const start = new Date(`${w.date}T${w.startTime}`);
+  const end = new Date(`${w.date}T${w.endTime}`);
+
+  if (now < start) return { text: 'geplant', className: styles.statusPlanned };
+  if (now >= start && now <= end) return { text: 'läuft gerade', className: styles.statusOngoing };
+  return { text: 'beendet', className: styles.statusFinished };
+}
 
   if (loading) return <main className={styles.pageWrapper}><p className={styles.pageTitle}>Lade...</p></main>;
   if (error) return <main className={styles.pageWrapper}><p className={styles.pageTitle}>Fehler: {error}</p></main>;
@@ -64,9 +65,12 @@ export default function WorkshopsPage() {
     <main className={styles.pageWrapper}>
       <h1 className={styles.pageTitle}>Workshops</h1>
 
-      <button onClick={() => setFormVisible(v => !v)} className={styles.newWorkshopButton}>
-        {formVisible ? 'Formular schließen' : '+ Neuer Workshop'}
-      </button>
+    {!formVisible && (
+  <button onClick={() => setFormVisible(true)} className={styles.newWorkshopButton}>
+    + Neuer Workshop
+  </button>
+)}
+
 
       {formVisible && (
         <WorkshopForm
@@ -94,12 +98,14 @@ export default function WorkshopsPage() {
             </tr>
           </thead>
           <tbody>
-            {workshops.map(w => (
-              <tr key={w.id}>
-                <td>{w.title}</td>
-                <td>{w.date}</td>
-                <td>{w.startTime} - {w.endTime}</td>
-                <td><span className={styles.workshopStatus}>{getWorkshopStatus(w)}</span></td>
+            {workshops.map(w => {
+              const status = getWorkshopStatus(w);
+              return (
+                <tr key={w.id}>
+                  <td className={styles.workshopTitle}>{w.title}</td>
+                  <td>{w.date}</td>
+                  <td>{w.startTime} - {w.endTime}</td>
+                  <td><span className={status.className}>{status.text}</span></td>
                 <td>{w.description}</td>
                 <td>
                   <button className={styles.editButton} onClick={() => router.push(`/workshops/${w.id}`)}>
@@ -107,7 +113,8 @@ export default function WorkshopsPage() {
                   </button>
                 </td>
               </tr>
-            ))}
+              );
+})}
             {workshops.length === 0 && (
               <tr>
                 <td colSpan={6} style={{ textAlign: 'center' }}>Keine Workshops vorhanden</td>
