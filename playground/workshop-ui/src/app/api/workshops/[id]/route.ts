@@ -11,7 +11,7 @@ export async function GET(_: NextRequest, { params }: { params: { id: string } }
     return NextResponse.json({ error: 'Workshop not found' }, { status: StatusCodes.NOT_FOUND });
   }
 
-  return NextResponse.json(workshop);
+  return NextResponse.json(workshop, { status: StatusCodes.OK });
 }
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {

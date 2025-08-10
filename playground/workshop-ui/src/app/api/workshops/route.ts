@@ -15,7 +15,7 @@ export async function GET() {
     return b.startTime.localeCompare(a.startTime); // descending time
   });
 
-  return NextResponse.json(workshops);
+  return NextResponse.json(workshops, { status: StatusCodes.OK });
 }
 
 
