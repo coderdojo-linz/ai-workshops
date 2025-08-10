@@ -5,9 +5,9 @@ import path from 'path';
 import { getSession } from '@/lib/session';
 import { randomUUID } from 'crypto';
 import '@/lib/files';
-import { ExercisesFile, validateExercisesFile } from '@/lib/exercise-schema';
 import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 import { trace, Span } from '@opentelemetry/api';
+import { getExerciseByName } from '@/lib/exercise-file-manager';
 
 const sharedKeyCredential = new StorageSharedKeyCredential(process.env.STORAGE_ACCOUNT!, process.env.STORAGE_ACCOUNT_KEY!);
 const blobServiceClient = new BlobServiceClient(`https://${process.env.STORAGE_ACCOUNT!}.blob.core.windows.net`, sharedKeyCredential);
@@ -22,35 +22,36 @@ const tracer = trace.getTracer('ai-workshop-chat');
 // TODO: Persist this to a database later
 const sessionResponseMap = new Map<string, string>();
 let dataFileIds: Map<string, string> = new Map();
-let exercises: ExercisesFile | undefined;
 
 export async function POST(request: NextRequest) {
   try {
+    // Get body payload and query string parameters
     const { message, resetConversation } = await request.json();
+    
+    if (!message || typeof message !== 'string') {
+      return NextResponse.json({ error: 'Message is required' }, { status: 400 });
+    }
 
-    // Get the exercise query parameter
     const exercise = request.nextUrl.searchParams.get('exercise');
     if (!exercise) {
       return NextResponse.json({ error: 'Exercise parameter is required' }, { status: 400 });
     }
 
-    if (!exercises) {
-      const exercisesFile = await fs.promises.readFile(path.join(process.cwd(), 'prompts', 'exercises.json'), { encoding: 'utf-8' });
-      try {
-        exercises = validateExercisesFile(JSON.parse(exercisesFile));
-      } catch (error) {
-        return NextResponse.json({ error: 'Error parsing exercises file' }, { status: 500 });
+    // Get request-scoped span
+    const span = trace.getActiveSpan();
+
+    const exerciseResult = await getExerciseByName(exercise);
+    if (!exerciseResult.success) {
+      switch (exerciseResult.error.type) {
+        case 'not_found':
+          return NextResponse.json({ error: 'Exercise not found' }, { status: 404 });
+        case 'parsing_error':
+          span?.addEvent('exercises_file_validation_error', { error: exerciseResult.error.error });
+          return NextResponse.json({ error: 'Error parsing exercises file' }, { status: 500 });
       }
     }
 
-    const exerciseData = exercises.exercises[exercise];
-    if (!exerciseData) {
-      return NextResponse.json({ error: 'Exercise not found' }, { status: 404 });
-    }
-
-    if (!message || typeof message !== 'string') {
-      return NextResponse.json({ error: 'Message is required' }, { status: 400 });
-    }
+    const exerciseData = exerciseResult.exercise;
 
     // Process all data files for this exercise
     const exerciseFileIds: string[] = [];
@@ -119,7 +120,6 @@ export async function POST(request: NextRequest) {
       // Stream immediately as chunks arrive
       const stream = new ReadableStream({
         async start(controller) {
-          
           try {
             for await (const event of openaiResponse) {
               if (process.env.LOG_EVENTS === 'true') {
