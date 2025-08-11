@@ -12,6 +12,7 @@ interface Workshop {
   startTime: string;
   endTime: string;
   description: string;
+  code: string;
 }
 
 export default function EditWorkshopPage() {

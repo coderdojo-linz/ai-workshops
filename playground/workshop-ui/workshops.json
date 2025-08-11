@@ -5,7 +5,8 @@
     "startTime": "12:00",
     "endTime": "18:50",
     "description": "streams, javafx,...",
-    "id": 1754406109507
+    "id": 1754406109507,
+    "code": "A7B3K9M2"
   },
   {
     "title": "SQL <3",
@@ -13,7 +14,8 @@
     "startTime": "11:07",
     "endTime": "23:00",
     "description": "SQL Basics halt you know",
-    "id": 1754406388987
+    "id": 1754406388987,
+    "code": "PQ8R5T6Y"
   },
   {
     "title": "Informatik",
@@ -21,7 +23,8 @@
     "startTime": "21:33",
     "endTime": "23:00",
     "description": "Microsoft 365",
-    "id": 1754508883163
+    "id": 1754508883163,
+    "code": "XZ4N7H3G"
   },
   {
     "title": "Data Science",
@@ -29,6 +32,88 @@
     "startTime": "04:07",
     "endTime": "08:00",
     "description": "ahh ich liebs",
-    "id": 1754511110290
+    "id": 1754511110290,
+    "code": "M5B8D2K9"
+  },
+  {
+    "title": "React Grundlagen",
+    "date": "2025-08-15",
+    "startTime": "09:00",
+    "endTime": "17:00",
+    "description": "Einführung in React Hooks, Components und State Management",
+    "id": 1754600000001,
+    "code": "F3J6L9P4"
+  },
+  {
+    "title": "Python für Anfänger",
+    "date": "2025-08-20",
+    "startTime": "10:00",
+    "endTime": "16:00",
+    "description": "Grundlagen der Python-Programmierung mit praktischen Übungen",
+    "id": 1754600000002,
+    "code": "R7S5V8W3"
+  },
+  {
+    "title": "Machine Learning Workshop",
+    "date": "2025-08-25",
+    "startTime": "13:00",
+    "endTime": "18:00",
+    "description": "Einführung in scikit-learn und TensorFlow",
+    "id": 1754600000003,
+    "code": "T2U9X4Y6"
+  },
+  {
+    "title": "Docker & Kubernetes",
+    "date": "2025-09-02",
+    "startTime": "09:30",
+    "endTime": "16:30",
+    "description": "Container-Technologien und Orchestrierung in der Praxis",
+    "id": 1754600000004,
+    "code": "Z8A3C7E5"
+  },
+  {
+    "title": "Vue.js Workshop",
+    "date": "2025-09-05",
+    "startTime": "14:00",
+    "endTime": "19:00",
+    "description": "Progressive Web Apps mit Vue.js entwickeln",
+    "id": 1754600000005,
+    "code": "G4H6J9K2"
+  },
+  {
+    "title": "Git & GitHub Mastery",
+    "date": "2025-09-08",
+    "startTime": "10:30",
+    "endTime": "15:30",
+    "description": "Versionskontrolle und Collaboration-Workflows",
+    "id": 1754600000006,
+    "code": "L7M3N8P5"
+  },
+  {
+    "title": "TypeScript Deep Dive",
+    "date": "2025-09-12",
+    "startTime": "11:00",
+    "endTime": "18:00",
+    "description": "Fortgeschrittene TypeScript-Konzepte und Best Practices",
+    "id": 1754600000007,
+    "code": "Q6R9S2T4"
+  },
+  {
+    "title": "API Design mit Node.js",
+    "date": "2025-09-15",
+    "startTime": "09:00",
+    "endTime": "16:00",
+    "description": "RESTful APIs und GraphQL mit Express.js",
+    "id": 1754600000008,
+    "code": "U8V3W7X5"
+  },
+  {
+    "title": "Benjamin ist böse",
+    "date": "2025-08-11",
+    "startTime": "13:00",
+    "endTime": "19:00",
+    "description": "Spaß, er ist ein Engel <3333",
+    "id": 1754910371363,
+    "code": "JCTRFCLE"
   }
 ]

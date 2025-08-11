@@ -6,7 +6,7 @@ import { WorkshopSchema, type WorkshopInput } from '@/lib/workshop-schema';
 import type { ZodFormattedError } from 'zod';
 
 interface WorkshopFormProps {
-  initialWorkshop?: WorkshopInput & { id?: number };
+  initialWorkshop?: WorkshopInput & { id?: number; code?: string };
   onSave: (workshop: WorkshopInput & { id?: number }) => Promise<void>;
   onCancel: () => void;
   onDelete?: () => Promise<void>;
@@ -48,29 +48,34 @@ export default function WorkshopForm({ initialWorkshop, onSave, onCancel, onDele
       />
       {errors?.title?._errors?.[0] && <p className={styles.error}>{errors.title._errors[0]}</p>}
 
-      <input
-        type="date"
-        name="date"
-        value={workshop.date}
-        onChange={e => setWorkshop({ ...workshop, date: e.target.value })}
-        className={styles.input}
-      />
-
-      <div className={styles.timeRow}>
+      <div className={styles.dateTimeRow}>
         <input
-          type="time"
-          name="startTime"
-          value={workshop.startTime}
-          onChange={e => setWorkshop({ ...workshop, startTime: e.target.value })}
+          type="date"
+          name="date"
+          value={workshop.date}
+          onChange={e => setWorkshop({ ...workshop, date: e.target.value })}
           className={styles.input}
         />
-        <input
-          type="time"
-          name="endTime"
-          value={workshop.endTime}
-          onChange={e => setWorkshop({ ...workshop, endTime: e.target.value })}
-          className={styles.input}
-        />
+        <div className={styles.timeInputGroup}>
+          <label className={styles.timeLabel}>Von:</label>
+          <input
+            type="time"
+            name="startTime"
+            value={workshop.startTime}
+            onChange={e => setWorkshop({ ...workshop, startTime: e.target.value })}
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.timeInputGroup}>
+          <label className={styles.timeLabel}>Bis:</label>
+          <input
+            type="time"
+            name="endTime"
+            value={workshop.endTime}
+            onChange={e => setWorkshop({ ...workshop, endTime: e.target.value })}
+            className={styles.input}
+          />
+        </div>
       </div>
 
       <textarea

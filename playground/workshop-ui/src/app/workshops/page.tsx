@@ -4,7 +4,10 @@ import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import WorkshopForm from '@/components/WorkshopForm';
 import type { WorkshopInput } from '@/lib/workshop-schema';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboard } from '@fortawesome/free-regular-svg-icons';
+import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
+import { Clipboard, ClipboardCheck } from 'lucide-react';
 interface Workshop {
   id: number;
   title: string;
@@ -12,6 +15,7 @@ interface Workshop {
   startTime: string;
   endTime: string;
   description: string;
+  code: string;
 }
 
 export default function WorkshopsPage() {
@@ -19,7 +23,27 @@ export default function WorkshopsPage() {
   const [formVisible, setFormVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState({
+    geplant: true,
+    'läuft gerade': true,
+    beendet: false
+  });
   const router = useRouter();
+
+  const workshopsPerPage = 10;
+  
+  // Filtere Workshops basierend auf Status
+  const filteredWorkshops = workshops.filter(w => {
+    const status = getWorkshopStatus(w);
+    return statusFilter[status.text as keyof typeof statusFilter];
+  });
+  
+  const totalPages = Math.ceil(filteredWorkshops.length / workshopsPerPage);
+  const startIndex = (currentPage - 1) * workshopsPerPage;
+  const endIndex = startIndex + workshopsPerPage;
+  const currentWorkshops = filteredWorkshops.slice(startIndex, endIndex);
 
   useEffect(() => {
     setLoading(true);
@@ -46,6 +70,17 @@ export default function WorkshopsPage() {
     const created: Workshop = await res.json();
     setWorkshops(prev => [...prev, created]);
     setFormVisible(false);
+    setCurrentPage(1); // Zurück zur ersten Seite nach dem Erstellen
+  }
+
+  async function copyCodeToClipboard(code: string) {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopiedCode(code);
+      setTimeout(() => setCopiedCode(null), 2000); // Reset nach 2 Sekunden
+    } catch (err) {
+      console.error('Fehler beim Kopieren:', err);
+    }
   }
 
  function getWorkshopStatus(w: Workshop): { text: string; className: string } {
@@ -65,11 +100,37 @@ export default function WorkshopsPage() {
     <main className={styles.pageWrapper}>
       <h1 className={styles.pageTitle}>Workshops</h1>
 
-    {!formVisible && (
-  <button onClick={() => setFormVisible(true)} className={styles.newWorkshopButton}>
-    + Neuer Workshop
-  </button>
-)}
+      {/* Button und Filter nebeneinander, nur wenn Formular nicht sichtbar */}
+      {!formVisible && (
+        <div className={styles.topControls}>
+          <button onClick={() => setFormVisible(true)} className={styles.newWorkshopButton}>
+            + Neuer Workshop
+          </button>
+          
+          <div className={styles.filterSection}>
+            <h3 className={styles.filterTitle}>Filter nach Status:</h3>
+            <div className={styles.filterCheckboxes}>
+              {Object.entries(statusFilter).map(([status, isChecked]) => (
+                <label key={status} className={styles.checkboxLabel}>
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={(e) => {
+                      setStatusFilter(prev => ({
+                        ...prev,
+                        [status]: e.target.checked
+                      }));
+                      setCurrentPage(1); // Zurück zur ersten Seite beim Filtern
+                    }}
+                    className={styles.checkbox}
+                  />
+                  <span className={styles.checkboxText}>{status}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
 
       {formVisible && (
@@ -90,6 +151,7 @@ export default function WorkshopsPage() {
           <thead>
             <tr>
               <th>Name</th>
+              <th>Code</th>
               <th>Datum</th>
               <th>Zeit</th>
               <th>Status</th>
@@ -98,11 +160,23 @@ export default function WorkshopsPage() {
             </tr>
           </thead>
           <tbody>
-            {workshops.map(w => {
+            {currentWorkshops.map(w => {
               const status = getWorkshopStatus(w);
               return (
                 <tr key={w.id}>
                   <td className={styles.workshopTitle}>{w.title}</td>
+                  <td className={styles.codeCell}>
+                    <div className={styles.codeContent}>
+                      <span className={styles.codeText}>{w.code}</span>
+                      <button 
+                        className={styles.copyButton}
+                        onClick={() => copyCodeToClipboard(w.code)}
+                        title="Code kopieren"
+                      >
+                        {copiedCode === w.code ? <ClipboardCheck /> : <Clipboard/>}
+                      </button>
+                    </div>
+                  </td>
                   <td>{w.date}</td>
                   <td>{w.startTime} - {w.endTime}</td>
                   <td><span className={status.className}>{status.text}</span></td>
@@ -115,14 +189,39 @@ export default function WorkshopsPage() {
               </tr>
               );
 })}
-            {workshops.length === 0 && (
+            {currentWorkshops.length === 0 && (
               <tr>
-                <td colSpan={6} style={{ textAlign: 'center' }}>Keine Workshops vorhanden</td>
+                <td colSpan={7} style={{ textAlign: 'center' }}>Keine Workshops vorhanden</td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className={styles.pagination}>
+          <button 
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className={styles.paginationButton}
+          >
+            ← Zurück
+          </button>
+          
+          <span className={styles.paginationInfo}>
+            Seite {currentPage} von {totalPages} ({filteredWorkshops.length} von {workshops.length} Workshops)
+          </span>
+          
+          <button 
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className={styles.paginationButton}
+          >
+            Vor →
+          </button>
+        </div>
+      )}
     </main>
   );
 }

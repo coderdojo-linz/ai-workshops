@@ -24,7 +24,10 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     return NextResponse.json({ error: 'Workshop not found' }, { status: StatusCodes.NOT_FOUND });
   }
 
-  workshops[index] = { ...workshops[index], ...updateFields };
+  // Code sollte nicht überschrieben werden - entferne es aus den Update-Feldern
+  const { code, ...fieldsToUpdate } = updateFields;
+
+  workshops[index] = { ...workshops[index], ...fieldsToUpdate };
   writeWorkshops(workshops);
 
   return NextResponse.json(workshops[index]);
