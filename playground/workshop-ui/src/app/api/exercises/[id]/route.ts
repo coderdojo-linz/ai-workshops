@@ -37,7 +37,7 @@ export async function GET(
       }
     }
     
-    const exercise = exerciseResult.exercise;
+    const exercise = exerciseResult.value;
     
     // Build response object
     const response: ExerciseResponse = {

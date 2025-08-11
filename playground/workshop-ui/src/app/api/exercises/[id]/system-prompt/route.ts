@@ -25,7 +25,7 @@ export async function GET(
       }
     }
     
-    const exercise = exerciseResult.exercise;
+    const exercise = exerciseResult.value;
     
     // Read the system prompt file
     const systemPromptPath = path.join(process.cwd(), 'prompts', exercise.folder, exercise.system_prompt_file);

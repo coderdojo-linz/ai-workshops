@@ -1,10 +1,12 @@
 import { describe, it, expect, beforeAll, jest } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
-import type { GetExerciseByNameResult } from './exercise-file-manager';
+import { Result } from './result';
+import { Exercise, ExercisesFile } from './exercise-schema';
+import { GetExerciseByNameError, ParsingError } from './exercise-file-manager';
 
 describe('getExercises with real prompts/exercises.json', () => {
-  let getExercises: () => Promise<any>;
+  let getExercises: () => Promise<Result<ExercisesFile, ParsingError>>;
   let rawExercises: any;
 
   beforeAll(async () => {
@@ -21,9 +23,8 @@ describe('getExercises with real prompts/exercises.json', () => {
     const result = await getExercises();
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.exercises).toBeDefined();
-      expect(result.exercises.exercises).toBeDefined();
-      expect(typeof result.exercises.exercises).toBe('object');
+      expect(result.value.exercises).toBeDefined();
+      expect(typeof result.value.exercises).toBe('object');
     }
   });
 
@@ -46,7 +47,7 @@ describe('getExercises with real prompts/exercises.json', () => {
     const result = await getExercises();
     expect(result.success).toBe(true);
     if (result.success) {
-      const df = result.exercises.exercises[key].data_files;
+      const df = result.value.exercises[key].data_files;
       expect(Array.isArray(df)).toBe(true);
       expect(df).toEqual(expected);
       expect(df.length).toBe(1);
@@ -70,7 +71,7 @@ describe('getExercises with real prompts/exercises.json', () => {
     const result = await getExercises();
     expect(result.success).toBe(true);
     if (result.success) {
-      const df = result.exercises.exercises[key].data_files;
+      const df = result.value.exercises[key].data_files;
       expect(Array.isArray(df)).toBe(true);
       expect(df).toEqual(expected);
       expect(df.length).toBeGreaterThan(1);
@@ -79,7 +80,7 @@ describe('getExercises with real prompts/exercises.json', () => {
 });
 
 describe('getExerciseByName with real prompts/exercises.json', () => {
-  let getExerciseByName: (name: string) => Promise<GetExerciseByNameResult>;
+  let getExerciseByName: (name: string) => Promise<Result<Exercise, GetExerciseByNameError>>;
   let rawExercises: any;
 
   beforeAll(async () => {
@@ -111,9 +112,9 @@ describe('getExerciseByName with real prompts/exercises.json', () => {
     const result = await getExerciseByName(key);
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(Array.isArray(result.exercise.data_files)).toBe(true);
-      expect(result.exercise.data_files).toEqual(expected);
-      expect(result.exercise.data_files.length).toBe(1);
+      expect(Array.isArray(result.value.data_files)).toBe(true);
+      expect(result.value.data_files).toEqual(expected);
+      expect(result.value.data_files.length).toBe(1);
     }
   });
 
@@ -134,9 +135,9 @@ describe('getExerciseByName with real prompts/exercises.json', () => {
     const result = await getExerciseByName(key);
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(Array.isArray(result.exercise.data_files)).toBe(true);
-      expect(result.exercise.data_files).toEqual(expected);
-      expect(result.exercise.data_files.length).toBeGreaterThan(1);
+      expect(Array.isArray(result.value.data_files)).toBe(true);
+      expect(result.value.data_files).toEqual(expected);
+      expect(result.value.data_files.length).toBeGreaterThan(1);
     }
   });
 

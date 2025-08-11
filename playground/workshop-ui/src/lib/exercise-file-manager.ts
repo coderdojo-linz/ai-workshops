@@ -1,39 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 import { Exercise, ExercisesFile, safeValidateExercisesFile } from './exercise-schema';
+import { err, ok, Result } from './result';
 
-export type GetExerciseByNameResult = GetExerciseByNameOk | GetExerciseByNameError;
-
-type GetExerciseByNameOk = {
-  success: true;
-  exercise: Exercise;
+export type ExerciseNotFoundError = {
+  type: 'not_found';
 };
 
-type GetExerciseByNameError = {
-  success: false;
-  error: ParsingError | ExerciseNotFoundError;
+export type ParsingError = {
+  type: 'parsing_error';
+  error: string;
 };
 
-type ExerciseNotFoundError = {
-    type: 'not_found';
-}
-
-type ParsingError = {
-    type: 'parsing_error';
-    error: string;
-}
-
-type GetExercisesResult = GetExercisesOk | GetExercisesError;
-
-type GetExercisesOk = {
-  success: true;
-  exercises: ExercisesFile;
-}
-
-type GetExercisesError = {
-  success: false;
-  error: ParsingError;
-}
+export type GetExerciseByNameError = ExerciseNotFoundError | ParsingError;
 
 // Exercise cache
 let exercises: ExercisesFile | undefined;
@@ -42,7 +21,7 @@ async function readExercisesFile(): Promise<string> {
   return await fs.promises.readFile(path.join(process.cwd(), 'prompts', 'exercises.json'), { encoding: 'utf-8' });
 }
 
-export async function getExercises(fileReader?: () => Promise<string>): Promise<GetExercisesResult> {
+export async function getExercises(fileReader?: () => Promise<string>): Promise<Result<ExercisesFile, ParsingError>> {
   if (!exercises) {
     let exercisesFile: string;
     if (fileReader) {
@@ -55,14 +34,14 @@ export async function getExercises(fileReader?: () => Promise<string>): Promise<
     if (validationResult.success) {
       exercises = validationResult.data;
     } else {
-      return { success: false, error: { type: 'parsing_error', error: validationResult.error.message } };
+      return err({ type: 'parsing_error', error: validationResult.error.message });
     }
   }
 
-  return { success: true, exercises };
+  return ok(exercises);
 }
 
-export async function getExerciseByName(exerciseName: string, fileReader?: () => Promise<string>): Promise<GetExerciseByNameResult> {
+export async function getExerciseByName(exerciseName: string, fileReader?: () => Promise<string>): Promise<Result<Exercise, GetExerciseByNameError>> {
   if (!exercises) {
     let exercisesFile: string;
     if (fileReader) {
@@ -70,19 +49,19 @@ export async function getExerciseByName(exerciseName: string, fileReader?: () =>
     } else {
       exercisesFile = await readExercisesFile();
     }
-    
+
     const validationResult = safeValidateExercisesFile(JSON.parse(exercisesFile));
     if (validationResult.success) {
       exercises = validationResult.data;
     } else {
-      return { success: false, error: { type: 'parsing_error', error: validationResult.error.message } };
+      return err({ type: 'parsing_error', error: validationResult.error.message });
     }
   }
 
   const exerciseData = exercises.exercises[exerciseName];
   if (!exerciseData) {
-    return { success: false, error: { type: 'not_found' } };
+    return err({ type: 'not_found' });
   }
 
-  return { success: true, exercise: exerciseData };
+  return ok(exerciseData);
 }

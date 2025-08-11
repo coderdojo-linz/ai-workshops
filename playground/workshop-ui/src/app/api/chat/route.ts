@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const exerciseData = exerciseResult.exercise;
+    const exerciseData = exerciseResult.value;
 
     // Process all data files for this exercise
     const exerciseFileIds: string[] = [];

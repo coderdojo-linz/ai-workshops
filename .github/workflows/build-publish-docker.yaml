@@ -72,6 +72,8 @@ jobs:
           echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" >> .env
           echo "STORAGE_ACCOUNT=${{ secrets.STORAGE_ACCOUNT }}" >> .env
           echo "STORAGE_ACCOUNT_KEY=${{ secrets.STORAGE_ACCOUNT_KEY }}" >> .env
+          echo "APP_INSIGHTS_CONNECTION_STRING=${{ secrets.APP_INSIGHTS_CONNECTION_STRING }}" >> .env
+          echo "LOG_EVENTS=false" >> .env
 
       - name: Build and push Docker image
         id: push
