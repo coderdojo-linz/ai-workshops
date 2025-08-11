@@ -45,7 +45,7 @@ jobs:
         with:
           artifact: Jest Test Report
           name: Jest Tests
-          path: *.xml
+          path: "*.xml"
           reporter: jest-junit
           fail-on-error: false
 
