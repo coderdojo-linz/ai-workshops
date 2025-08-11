@@ -3,32 +3,42 @@
     "data-cave": {
         "title": "Ausbruch aus der Daten-Höhle",
         "folder": "data-cave",
+        "difficulty": "easy",
+        "summery": "summery_data_cave.md",
+        "reference": "data_cave_Anleitung.md",
         "system_prompt_file": "system-prompt.md",
         "data_files": "data-cave.csv"
     },
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",
       "folder": "detective-beginners",
+      "difficulty": "medium",
+      "summery": "summery_detectiv.md",
+      "reference": "detectiv_Anleitung.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": "detective-beginners.csv"
     },
     "gps-art": {
       "title": "Wer bin ich?",
       "folder": "gps-art",
+      "difficulty": "hard",
+      "summery": "summery_gps_art.md",
+      "reference": "Kinder_Anleitung_GPS-art.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": "gps-art-wer-bin-ich.csv"
     },
     "das-taegliche-dilemma": {
       "title": "Das tägliche Dilemma",
       "folder": "das-taegliche-dilemma",
+      "difficulty": "hard",
+      "summery": "summery_das_taegliche_dilemma.md",
+      "reference": "das_taegliche_dilemma.md",
       "system_prompt_file": "system-prompt.md",
-      "data_files": ["Klasse.csv","raum.csv","verbrauch.csv"]
-    },
-    "multi-csv-test": {
-      "title": "Multi CSV Test",
-      "folder": "multi-csv-test",
-      "system_prompt_file": "system-prompt.md",
-      "data_files": ["multi-csv-test1.csv", "multi-csv-test2.csv"]
+      "data_files": [
+        "Klasse.csv",
+        "raum.csv",
+        "verbrauch.csv"
+      ]
     }
   }
 }

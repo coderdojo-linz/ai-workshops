@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
 
     // Create the OpenAI stream
     const openaiResponse = await client.responses.create({
-      model: 'gpt-5',
+      model: 'gpt-4.1', //Benjamin's change, because @Leonie's openai org isn't verified
       instructions: systemPrompt,
       input: message,
       stream: true,
