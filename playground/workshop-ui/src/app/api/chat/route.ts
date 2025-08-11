@@ -86,14 +86,14 @@ export async function POST(request: NextRequest) {
     return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create the OpenAI stream
       const openaiResponse = await client.responses.create({
-        model: process.env.OPENAI_MODEL || 'gpt-5',
+        model: process.env.OPENAI_MODEL || 'gpt-4.1',
         instructions: systemPrompt,
         input: message,
         stream: true,
         store: true,
-        reasoning: {
-          effort: 'low'
-        },
+        // reasoning: {
+        //   effort: 'low'
+        // },
         previous_response_id: previousResponseId,
         tools: [
           {
