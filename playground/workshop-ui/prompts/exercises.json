@@ -34,8 +34,8 @@
       "title": "Das tägliche Dilemma",
       "folder": "das-taegliche-dilemma",
       "difficulty": "hard",
-      "summary": "summary_das_taegliche_dilemma.md",
-      "reference": "Finde, mithilfe von Verbrauchsdaten smarter Steckdosen, Raum- und Stundenplänen heraus,warum in der Schule jeden Tag um 12:40 Uhr der Strom ausfällt.",
+      "summary": "Finde, mithilfe von Verbrauchsdaten smarter Steckdosen, Raum- und Stundenplänen heraus,warum in der Schule jeden Tag um 12:40 Uhr der Strom ausfällt.",
+      "reference": "das_taegliche_dilemma.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": [
         "Klasse.csv",
