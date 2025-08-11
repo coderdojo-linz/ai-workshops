@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { validateExercisesFile, type ExercisesFile } from '@/lib/exercise-schema';
+import { getExerciseByName } from '@/lib/exercise-file-manager';
+import { trace } from '@opentelemetry/api';
 
 export async function GET(
   request: NextRequest,
@@ -10,17 +11,21 @@ export async function GET(
   try {
     const { id: exerciseId } = await params;
     
-    // Read exercises.json
-    const exercisesPath = path.join(process.cwd(), 'prompts', 'exercises.json');
-    const exercisesContent = await fs.promises.readFile(exercisesPath, 'utf8');
-    const exercisesData: ExercisesFile = validateExercisesFile(JSON.parse(exercisesContent));
-    
-    // Find the exercise
-    const exercise = exercisesData.exercises[exerciseId];
-    
-    if (!exercise) {
-      return NextResponse.json({ error: 'Exercise not found' }, { status: 404 });
+    // Get request-scoped span
+    const span = trace.getActiveSpan();
+
+    const exerciseResult = await getExerciseByName(exerciseId);
+    if (!exerciseResult.success) {
+      switch (exerciseResult.error.type) {
+        case 'not_found':
+          return NextResponse.json({ error: 'Exercise not found' }, { status: 404 });
+        case 'parsing_error':
+          span?.addEvent('exercises_file_validation_error', { error: exerciseResult.error.error });
+          return NextResponse.json({ error: 'Error parsing exercises file' }, { status: 500 });
+      }
     }
+    
+    const exercise = exerciseResult.exercise;
     
     // Read the system prompt file
     const systemPromptPath = path.join(process.cwd(), 'prompts', exercise.folder, exercise.system_prompt_file);

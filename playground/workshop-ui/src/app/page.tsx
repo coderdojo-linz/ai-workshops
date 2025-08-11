@@ -1,14 +1,13 @@
 import Link from 'next/link';
-import fs from 'fs';
-import path from 'path';
-import { validateExercisesFile, type ExercisesFile } from '@/lib/exercise-schema';
 import styles from './page.module.css';
+import { getExercises } from '@/lib/exercise-file-manager';
 
-export default function Home() {
-  // Read exercises.json from the prompts directory
-  const exercisesPath = path.join(process.cwd(), 'prompts', 'exercises.json');
-  const exercisesContent = fs.readFileSync(exercisesPath, 'utf8');
-  const exercisesData: ExercisesFile = validateExercisesFile(JSON.parse(exercisesContent));
+export default async function Home() {
+  const exercisesResult = await getExercises();
+  if (!exercisesResult.success) {
+    return <div>Error loading exercises</div>;
+  }
+  const exercisesData = exercisesResult.exercises;
 
   return (
     <div className={styles.container}>
