@@ -8,7 +8,7 @@
         "reference": "data_cave_Anleitung.md",
         "system_prompt_file": "system-prompt.md",
         "data_files": "data-cave.csv",
-        "image": "public/image/data-cave.png"
+        "image": "image/data-cave.png"
     },
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",
@@ -18,7 +18,7 @@
       "reference": "detectiv_Anleitung.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": "detective-beginners.csv",
-      "image": "public/images/detective.png"
+      "image": "images/detective.png"
     },
     "gps-art": {
       "title": "Wer bin ich?",
@@ -28,7 +28,7 @@
       "reference": "Kinder_Anleitung_GPS-art.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": "gps-art-wer-bin-ich.csv",
-      "image": "public/images/gps-art.png"
+      "image": "images/gps-art.png"
     },
     "das-taegliche-dilemma": {
       "title": "Das tägliche Dilemma",
@@ -42,7 +42,7 @@
         "raum.csv",
         "verbrauch.csv"
       ],
-      "image": "public/images/das-taegliche-dilemma.png"
+      "image": "images/das-taegliche-dilemma.png"
     }
   }
 }
