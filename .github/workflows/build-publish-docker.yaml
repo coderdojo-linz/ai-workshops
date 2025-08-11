@@ -14,19 +14,17 @@ jobs:
     permissions:
       contents: read
       checks: write
-    defaults:
-      run:
-        working-directory: playground/workshop-ui
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
-
+      
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-
+          
       - name: Run Jest
+        working-directory: playground/workshop-ui
         run: |
           npm ci
           npm test -- --ci --coverage --reporters=default --reporters=jest-junit
@@ -37,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Jest Test Report
-          path: ./reports/junit.xml
+          path: playground/workshop-ui/reports/junit.xml
 
       - name: Test Report
         if: always()
