@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
     return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create the OpenAI stream
       const openaiResponse = await client.responses.create({
-        model: 'gpt-5',
+        model: process.env.OPENAI_MODEL || 'gpt-4.1',
         instructions: systemPrompt,
         input: message,
         stream: true,
@@ -165,8 +165,6 @@ export async function POST(request: NextRequest) {
             }
 
             controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
-            controller.close();
-            span.end();
           } catch (error) {
             console.error('Error in chat stream:', error);
             const errorData = JSON.stringify({
@@ -174,7 +172,9 @@ export async function POST(request: NextRequest) {
             });
             controller.enqueue(encoder.encode(`data: ${errorData}\n\n`));
             controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
+          } finally {
             controller.close();
+            span.end();
           }
         },
       });
