@@ -30,6 +30,8 @@ jobs:
         run: |
           npm ci
           npm test -- --ci --coverage --reporters=default --reporters=jest-junit
+          ls
+          ls ./reports
         env:
           JEST_JUNIT_OUTPUT_DIR: "./reports/junit.xml"
 
