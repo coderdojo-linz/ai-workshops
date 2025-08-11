@@ -91,6 +91,9 @@ export async function POST(request: NextRequest) {
         input: message,
         stream: true,
         store: true,
+        reasoning: {
+          effort: 'low'
+        },
         previous_response_id: previousResponseId,
         tools: [
           {
