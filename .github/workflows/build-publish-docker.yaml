@@ -40,7 +40,7 @@ jobs:
         uses: dorny/test-reporter@v2
         with:
           name: Jest Tests
-          path: ./reports/junit.xml
+          path: playground/workshop-ui/reports/junit.xml
           reporter: jest-junit
           fail-on-error: false
 
