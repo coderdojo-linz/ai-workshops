@@ -1,22 +1,48 @@
 {
   "exercises": {
     "data-cave": {
-        "title": "Ausbruch aus der Daten-Höhle",
+        "title": "Die Daten-Höhle",
         "folder": "data-cave",
+        "difficulty": "easy",
+        "summary": "Du bist in einer Höhle gefangen und musst mithilfe der KI „Nova“ in einem Datensatz herausfinden, welches Tier darin versteckt ist, um die Tür zu öffnen und aus der Höhle zu entkommen.",
+        "reference": "data_cave_Anleitung.md",
         "system_prompt_file": "system-prompt.md",
-        "data_file": "data-cave.csv"
+        "data_files": "data-cave.csv",
+        "image": "/images/data-cave.png"
     },
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",
       "folder": "detective-beginners",
+      "difficulty": "medium",
+      "summary": "Ein Hacker will bei der Cyberwerk AG den Lichtkristall stehlen, indem er sich mit gestohlenen Passwörtern als Mitarbeiter ausgibt. Mit IT-Forensik durchsucht ihr Logdateien nach verdächtigen Spuren wie zum Beispiel viele falsche Login-Versuched, ungewöhnlichen Zeiten oder fremden Geräten, um den Täter zu entlarven.",
+      "reference": "detectiv_Anleitung.md",
       "system_prompt_file": "system-prompt.md",
-      "data_file": "detective-beginners.csv"
+      "data_files": "detective-beginners.csv",
+      "image": "/images/detective-beginners.png"
     },
     "gps-art": {
       "title": "Wer bin ich?",
       "folder": "gps-art",
+      "difficulty": "hard",
+      "summary": "Die Comic-Gruppe BKCW will per GPS-Daten ein Bild zweier berühmter Zeichentrickfiguren „malen“, um den Standort ihres nächsten Ladens zu verraten. Deine Aufgabe ist, mithilfe von KI aus den Daten herauszufinden, in welchem Land sie ihren neuen Laden eröffnen und welche beiden Figuren sie gezeichnet haben.",
+      "reference": "Kinder_Anleitung_GPS-art.md",
       "system_prompt_file": "system-prompt.md",
-      "data_file": "gps-art-wer-bin-ich.csv"
+      "data_files": "gps-art-wer-bin-ich.csv",
+      "image": "/images/gps-art.png"
+    },
+    "das-taegliche-dilemma": {
+      "title": "Das tägliche Dilemma",
+      "folder": "das-taegliche-dilemma",
+      "difficulty": "hard",
+      "summary": "Finde mithilfe von Verbrauchsdaten smarter Steckdosen, Raum- und Stundenplänen heraus,warum in der Schule jeden Tag um 12:40 Uhr der Strom ausfällt.",
+      "reference": "das_taegliche_dilemma.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [
+        "Klasse.csv",
+        "raum.csv",
+        "verbrauch.csv"
+      ],
+      "image": "/images/das-taegliche-dilemma.png"
     }
   }
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { validateExercisesFile, type ExercisesFile } from '@/lib/exercise-schema';
+import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
 
 export async function GET(
   request: NextRequest,
@@ -10,17 +10,13 @@ export async function GET(
   try {
     const { id: exerciseId } = await params;
     
-    // Read exercises.json
-    const exercisesPath = path.join(process.cwd(), 'prompts', 'exercises.json');
-    const exercisesContent = await fs.promises.readFile(exercisesPath, 'utf8');
-    const exercisesData: ExercisesFile = validateExercisesFile(JSON.parse(exercisesContent));
-    
-    // Find the exercise
-    const exercise = exercisesData.exercises[exerciseId];
-    
-    if (!exercise) {
-      return NextResponse.json({ error: 'Exercise not found' }, { status: 404 });
+    const exerciseResult = await getExerciseByNameWithResponse(exerciseId);
+    if (!exerciseResult.success) {
+      return exerciseResult.error;
     }
+    
+    const exercise = exerciseResult.value;
+
     
     // Read the system prompt file
     const systemPromptPath = path.join(process.cwd(), 'prompts', exercise.folder, exercise.system_prompt_file);

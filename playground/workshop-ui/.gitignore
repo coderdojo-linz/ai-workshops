@@ -4,6 +4,8 @@ public/images/cfile_*.png
 .idea
 2025-*.json
 
+reports
+
 # dependencies
 /node_modules
 /.pnp

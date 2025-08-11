@@ -54,23 +54,32 @@ function hashDataFiles(promptsPath) {
     // Process each exercise
     for (const [exerciseKey, exercise] of Object.entries(exercisesData.exercises)) {
         const exerciseFolder = path.join(promptsPath, exercise.folder);
-        const dataFilePath = path.join(exerciseFolder, exercise.data_file);
         
-        // Check if data file exists
-        if (!fs.existsSync(dataFilePath)) {
-            console.warn(`Warning: Data file not found: ${dataFilePath}`);
-            continue;
+        // Process each data file
+        const newDataFiles = [];
+        // Handle both string and array formats for data_files
+        const dataFiles = Array.isArray(exercise.data_files) ? exercise.data_files : [exercise.data_files];
+        for (const dataFile of dataFiles) {
+            const dataFilePath = path.join(exerciseFolder, dataFile);
+            
+            // Check if data file exists
+            if (!fs.existsSync(dataFilePath)) {
+                console.warn(`Warning: Data file not found: ${dataFilePath}`);
+                continue;
+            }
+            
+            // Calculate MD5 hash
+            const hash = calculateMD5Hash(dataFilePath);
+            console.log(`Calculated hash for ${dataFile}: ${hash}`);
+            
+            // Rename file with hash
+            const newFileName = renameFileWithHash(dataFilePath, hash);
+            newDataFiles.push(newFileName);
         }
         
-        // Calculate MD5 hash
-        const hash = calculateMD5Hash(dataFilePath);
-        console.log(`Calculated hash for ${exercise.data_file}: ${hash}`);
-        
-        // Rename file with hash
-        const newFileName = renameFileWithHash(dataFilePath, hash);
-        
-        // Update exercises.json with new filename
-        exercise.data_file = newFileName;
+        // Update exercises.json with new filenames
+        // Maintain original format: string for single file, array for multiple files
+        exercise.data_files = newDataFiles.length === 1 ? newDataFiles[0] : newDataFiles;
     }
     
     // Write updated exercises.json

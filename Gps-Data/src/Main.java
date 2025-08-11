@@ -5,8 +5,6 @@ import java.util.Random;
 
 public class Main {
 
-
-
         static class VideoRecord {
             String videoId;
             String gpsCoordinates;

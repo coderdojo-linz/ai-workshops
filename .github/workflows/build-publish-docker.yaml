@@ -8,6 +8,45 @@ on:
   workflow_dispatch:
 
 jobs:
+  tests:
+    name: Run unit tests and publish reports
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          
+      - name: Run Jest
+        working-directory: playground/workshop-ui
+        run: |
+          npm ci
+          npm test -- --ci --coverage --reporters=default --reporters=jest-junit
+        env:
+          JEST_JUNIT_OUTPUT_DIR: "./reports/junit.xml"
+
+      - name: Upload Jest Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Jest Test Report
+          path: playground/workshop-ui/reports/junit.xml
+
+      - name: Test Report
+        if: always()
+        uses: dorny/test-reporter@v2
+        with:
+          artifact: Jest Test Report
+          name: Jest Tests
+          path: "*.xml"
+          reporter: jest-junit
+          fail-on-error: false
+
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
@@ -33,6 +72,8 @@ jobs:
           echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" >> .env
           echo "STORAGE_ACCOUNT=${{ secrets.STORAGE_ACCOUNT }}" >> .env
           echo "STORAGE_ACCOUNT_KEY=${{ secrets.STORAGE_ACCOUNT_KEY }}" >> .env
+          echo "APP_INSIGHTS_CONNECTION_STRING=${{ secrets.APP_INSIGHTS_CONNECTION_STRING }}" >> .env
+          echo "LOG_EVENTS=false" >> .env
 
       - name: Build and push Docker image
         id: push

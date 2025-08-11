@@ -1,20 +1,22 @@
 import Link from 'next/link';
-import fs from 'fs';
-import path from 'path';
-import { validateExercisesFile, type ExercisesFile } from '@/lib/exercise-schema';
 import styles from './page.module.css';
+import { getExercises } from '@/lib/exercise-file-manager';
+import { trace } from '@opentelemetry/api';
 
-export default function Home() {
-  // Read exercises.json from the prompts directory
-  const exercisesPath = path.join(process.cwd(), 'prompts', 'exercises.json');
-  const exercisesContent = fs.readFileSync(exercisesPath, 'utf8');
-  const exercisesData: ExercisesFile = validateExercisesFile(JSON.parse(exercisesContent));
+export default async function Home() {
+  const exercisesResult = await getExercises();
+  if (!exercisesResult.success) {
+    const span = trace.getActiveSpan();
+    span?.addEvent('exercises_file_validation_error', { error: exercisesResult.error.error });
+    throw new Error('Failed to load exercises');
+  }
+  const exercisesData = exercisesResult.value.exercises;
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>AI Workshop Exercises</h1>
       <div className={styles.exerciseGrid}>
-        {Object.entries(exercisesData.exercises).map(([key, exercise]) => (
+        {Object.entries(exercisesData).map(([key, exercise]) => (
           <div key={key} className={styles.exerciseCard}>
             <Link href={`/chat/${key}`} className={styles.exerciseLink}>
               <h2 className={styles.exerciseTitle}>{exercise.title}</h2>
