@@ -38,7 +38,7 @@
       "reference": "das_taegliche_dilemma.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": [
-        "Klasse.csv",
+        "klasse.csv",
         "raum.csv",
         "verbrauch.csv"
       ],
