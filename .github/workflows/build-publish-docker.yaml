@@ -14,33 +14,36 @@ jobs:
     permissions:
       contents: read
       checks: write
-    defaults:
-      run:
-        working-directory: playground/workshop-ui
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
-
+      
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-
+          
       - name: Run Jest
+        working-directory: playground/workshop-ui
         run: |
           npm ci
           npm test -- --ci --coverage --reporters=default --reporters=jest-junit
-          ls
-          ls ./reports
         env:
           JEST_JUNIT_OUTPUT_DIR: "./reports/junit.xml"
+
+      - name: Upload Jest Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Jest Test Report
+          path: playground/workshop-ui/reports/junit.xml
 
       - name: Test Report
         if: always()
         uses: dorny/test-reporter@v2
         with:
+          artifact: Jest Test Report
           name: Jest Tests
-          path: playground/workshop-ui/reports/junit.xml
+          path: "*.xml"
           reporter: jest-junit
           fail-on-error: false
 
