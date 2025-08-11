@@ -15,7 +15,6 @@ const ExerciseSchema = z.object({
   image: z.string().optional(), // Bild als URL oder Pfad, optional
 });
 
-
 // Schema for the entire exercises file
 const ExercisesFileSchema = z.object({
   exercises: z.record(z.string(), ExerciseSchema)

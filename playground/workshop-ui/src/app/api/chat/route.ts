@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI, { AzureOpenAI } from 'openai';
+import OpenAI from 'openai';
 import fs from 'fs';
 import path from 'path';
 import { getSession } from '@/lib/session';
@@ -7,7 +7,7 @@ import { randomUUID } from 'crypto';
 import '@/lib/files';
 import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 import { trace, Span } from '@opentelemetry/api';
-import { getExerciseByName } from '@/lib/exercise-file-manager';
+import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
 
 const sharedKeyCredential = new StorageSharedKeyCredential(process.env.STORAGE_ACCOUNT!, process.env.STORAGE_ACCOUNT_KEY!);
 const blobServiceClient = new BlobServiceClient(`https://${process.env.STORAGE_ACCOUNT!}.blob.core.windows.net`, sharedKeyCredential);
@@ -27,28 +27,17 @@ export async function POST(request: NextRequest) {
   try {
     // Get body payload and query string parameters
     const { message, resetConversation } = await request.json();
-    
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
-
     const exercise = request.nextUrl.searchParams.get('exercise');
     if (!exercise) {
       return NextResponse.json({ error: 'Exercise parameter is required' }, { status: 400 });
     }
 
-    // Get request-scoped span
-    const span = trace.getActiveSpan();
-
-    const exerciseResult = await getExerciseByName(exercise);
+    const exerciseResult = await getExerciseByNameWithResponse(exercise);
     if (!exerciseResult.success) {
-      switch (exerciseResult.error.type) {
-        case 'not_found':
-          return NextResponse.json({ error: 'Exercise not found' }, { status: 404 });
-        case 'parsing_error':
-          span?.addEvent('exercises_file_validation_error', { error: exerciseResult.error.error });
-          return NextResponse.json({ error: 'Error parsing exercises file' }, { status: 500 });
-      }
+      return exerciseResult.error;
     }
 
     const exerciseData = exerciseResult.value;
@@ -94,7 +83,7 @@ export async function POST(request: NextRequest) {
     const systemPromptPath = path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.system_prompt_file);
     const systemPrompt = await fs.promises.readFile(systemPromptPath, { encoding: 'utf-8' });
 
-    return await tracer.startActiveSpan('query', async (span: Span) => {
+    return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create the OpenAI stream
       const openaiResponse = await client.responses.create({
         model: 'gpt-5',

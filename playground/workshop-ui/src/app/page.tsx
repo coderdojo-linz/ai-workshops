@@ -8,7 +8,7 @@ export default async function Home() {
   if (!exercisesResult.success) {
     const span = trace.getActiveSpan();
     span?.addEvent('exercises_file_validation_error', { error: exercisesResult.error.error });
-    return <div>Error loading exercises</div>;
+    throw new Error('Failed to load exercises');
   }
   const exercisesData = exercisesResult.value.exercises;
 

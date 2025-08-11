@@ -1,7 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import { Exercise, ExercisesFile, safeValidateExercisesFile } from './exercise-schema';
-import { err, ok, Result } from './result';
+import { err, isErr, ok, Result } from './result';
+import { NextResponse } from 'next/server';
+import { trace } from '@opentelemetry/api';
 
 export type ExerciseNotFoundError = {
   type: 'not_found';
@@ -30,7 +32,14 @@ export async function getExercises(fileReader?: () => Promise<string>): Promise<
       exercisesFile = await readExercisesFile();
     }
 
-    const validationResult = safeValidateExercisesFile(JSON.parse(exercisesFile));
+    let parsedExercisesFile: ExercisesFile;
+    try {
+      parsedExercisesFile = JSON.parse(exercisesFile);
+    } catch (error) {
+      return err({ type: 'parsing_error', error: error instanceof Error ? error.message : 'Unknown error' });
+    }
+
+    const validationResult = safeValidateExercisesFile(parsedExercisesFile);
     if (validationResult.success) {
       exercises = validationResult.data;
     } else {
@@ -43,19 +52,12 @@ export async function getExercises(fileReader?: () => Promise<string>): Promise<
 
 export async function getExerciseByName(exerciseName: string, fileReader?: () => Promise<string>): Promise<Result<Exercise, GetExerciseByNameError>> {
   if (!exercises) {
-    let exercisesFile: string;
-    if (fileReader) {
-      exercisesFile = await fileReader();
-    } else {
-      exercisesFile = await readExercisesFile();
+    const exerciseFileResult = await getExercises(fileReader);
+    if (isErr(exerciseFileResult)) {
+      return exerciseFileResult;
     }
 
-    const validationResult = safeValidateExercisesFile(JSON.parse(exercisesFile));
-    if (validationResult.success) {
-      exercises = validationResult.data;
-    } else {
-      return err({ type: 'parsing_error', error: validationResult.error.message });
-    }
+    exercises = exerciseFileResult.value;
   }
 
   const exerciseData = exercises.exercises[exerciseName];
@@ -64,4 +66,31 @@ export async function getExerciseByName(exerciseName: string, fileReader?: () =>
   }
 
   return ok(exerciseData);
+}
+
+export async function getExercisesWithResponse(fileReader?: () => Promise<string>): Promise<Result<ExercisesFile, NextResponse<unknown>>> {
+  const exerciseResult = await getExercises(fileReader);
+  if (isErr(exerciseResult)) {
+    const span = trace.getActiveSpan();
+    span?.addEvent('exercises_file_validation_error', { error: exerciseResult.error.error });
+    return err(NextResponse.json({ error: 'Error parsing exercises file' }, { status: 500 }));
+  }
+
+  return exerciseResult;
+}
+
+export async function getExerciseByNameWithResponse(exerciseName: string, fileReader?: () => Promise<string>): Promise<Result<Exercise, NextResponse<unknown>>> {
+  const exerciseResult = await getExerciseByName(exerciseName, fileReader);
+  if (isErr(exerciseResult)) {
+    const span = trace.getActiveSpan();
+    switch (exerciseResult.error.type) {
+      case 'not_found':
+        return err(NextResponse.json({ error: 'Exercise not found' }, { status: 404 }));
+      case 'parsing_error':
+        span?.addEvent('exercises_file_validation_error', { error: exerciseResult.error.error });
+        return err(NextResponse.json({ error: 'Error parsing exercises file' }, { status: 500 }));
+    }
+  }
+
+  return exerciseResult;
 }

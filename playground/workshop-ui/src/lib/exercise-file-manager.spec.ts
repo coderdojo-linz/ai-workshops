@@ -12,10 +12,7 @@ describe('getExercises with real prompts/exercises.json', () => {
   beforeAll(async () => {
     const mod = await import('./exercise-file-manager');
     getExercises = mod.getExercises;
-    const file = fs.readFileSync(
-      path.join(process.cwd(), 'prompts', 'exercises.json'),
-      { encoding: 'utf-8' }
-    );
+    const file = fs.readFileSync(path.join(process.cwd(), 'prompts', 'exercises.json'), { encoding: 'utf-8' });
     rawExercises = JSON.parse(file).exercises;
   });
 
@@ -31,7 +28,7 @@ describe('getExercises with real prompts/exercises.json', () => {
   it('normalizes single data_files to array (or passes if none exist)', async () => {
     const singleKeys = Object.keys(rawExercises).filter((k) => {
       const df = rawExercises[k].data_files;
-      return (typeof df === 'string') || (Array.isArray(df) && df.length === 1);
+      return typeof df === 'string' || (Array.isArray(df) && df.length === 1);
     });
 
     if (singleKeys.length === 0) {
@@ -40,9 +37,7 @@ describe('getExercises with real prompts/exercises.json', () => {
     }
 
     const key = singleKeys[0];
-    const expected = Array.isArray(rawExercises[key].data_files)
-      ? rawExercises[key].data_files
-      : [rawExercises[key].data_files];
+    const expected = Array.isArray(rawExercises[key].data_files) ? rawExercises[key].data_files : [rawExercises[key].data_files];
 
     const result = await getExercises();
     expect(result.success).toBe(true);
@@ -86,17 +81,14 @@ describe('getExerciseByName with real prompts/exercises.json', () => {
   beforeAll(async () => {
     const mod = await import('./exercise-file-manager');
     getExerciseByName = mod.getExerciseByName;
-    const file = fs.readFileSync(
-      path.join(process.cwd(), 'prompts', 'exercises.json'),
-      { encoding: 'utf-8' }
-    );
+    const file = fs.readFileSync(path.join(process.cwd(), 'prompts', 'exercises.json'), { encoding: 'utf-8' });
     rawExercises = JSON.parse(file).exercises;
   });
 
   it('returns success for any exercise with a single data file (or passes if none exist)', async () => {
     const singleKeys = Object.keys(rawExercises).filter((k) => {
       const df = rawExercises[k].data_files;
-      return (typeof df === 'string') || (Array.isArray(df) && df.length === 1);
+      return typeof df === 'string' || (Array.isArray(df) && df.length === 1);
     });
 
     if (singleKeys.length === 0) {
@@ -105,9 +97,7 @@ describe('getExerciseByName with real prompts/exercises.json', () => {
     }
 
     const key = singleKeys[0];
-    const expected = Array.isArray(rawExercises[key].data_files)
-      ? rawExercises[key].data_files
-      : [rawExercises[key].data_files];
+    const expected = Array.isArray(rawExercises[key].data_files) ? rawExercises[key].data_files : [rawExercises[key].data_files];
 
     const result = await getExerciseByName(key);
     expect(result.success).toBe(true);
@@ -159,11 +149,22 @@ describe('getExercises with invalid prompts/exercises.json (parsing error)', () 
         broken: { title: 123 },
       },
     };
-    const result = await mod.getExercises(
-      async () => JSON.stringify(invalidContent)
-    );
+    const result = await mod.getExercises(async () => JSON.stringify(invalidContent));
     expect(result.success).toBe(false);
     if (!result.success && result.error.type === 'parsing_error') {
+      expect(typeof result.error.error).toBe('string');
+      expect(result.error.error.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('returns parsing_error when JSON is syntactically invalid via fileReader', async () => {
+    jest.resetModules();
+    const mod = await import('./exercise-file-manager');
+    const invalidJson = '{ "exercises": { "broken": '; // intentionally malformed JSON
+    const result = await mod.getExercises(async () => invalidJson);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.type).toBe('parsing_error');
       expect(typeof result.error.error).toBe('string');
       expect(result.error.error.length).toBeGreaterThan(0);
     }
@@ -180,14 +181,82 @@ describe('getExerciseByName with invalid prompts/exercises.json (parsing error)'
         broken: { title: 123 },
       },
     };
-    const result = await mod.getExerciseByName(
-      'anything',
-      async () => JSON.stringify(invalidContent)
-    );
+    const result = await mod.getExerciseByName('anything', async () => JSON.stringify(invalidContent));
     expect(result.success).toBe(false);
     if (!result.success && result.error.type === 'parsing_error') {
       expect(typeof result.error.error).toBe('string');
       expect(result.error.error.length).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe('getExercisesWithResponse error handling', () => {
+  it('returns 500 NextResponse on parsing error', async () => {
+    jest.resetModules();
+    const mod = await import('./exercise-file-manager');
+
+    const invalidJson = '{ "exercises": { "broken": ';
+    const result = await mod.getExercisesWithResponse(async () => invalidJson);
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.status).toBe(500);
+      await expect(result.error.json()).resolves.toEqual({ error: 'Error parsing exercises file' });
+    }
+  });
+});
+
+describe('getExerciseByNameWithResponse behavior', () => {
+  it('returns 404 NextResponse when exercise is not found', async () => {
+    jest.resetModules();
+    const mod = await import('./exercise-file-manager');
+
+    const validEmpty = JSON.stringify({ exercises: {} });
+    const result = await mod.getExerciseByNameWithResponse('missing', async () => validEmpty);
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.status).toBe(404);
+    }
+  });
+
+  it('returns 500 NextResponse on parsing error', async () => {
+    jest.resetModules();
+    const mod = await import('./exercise-file-manager');
+
+    const invalidJson = '{ "exercises": { "broken": ';
+    const result = await mod.getExerciseByNameWithResponse('anything', async () => invalidJson);
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.status).toBe(500);
+      await expect(result.error.json()).resolves.toEqual({ error: 'Error parsing exercises file' });
+    }
+  });
+
+  it('returns ok result when exercise exists (and normalizes data_files)', async () => {
+    jest.resetModules();
+    const mod = await import('./exercise-file-manager');
+
+    const valid = JSON.stringify({
+      exercises: {
+        sample: {
+          title: 't',
+          folder: 'f',
+          difficulty: 'easy',
+          summary: 's',
+          reference: 'r',
+          system_prompt_file: 'sp',
+          data_files: 'x.txt'
+        }
+      }
+    });
+
+    const result = await mod.getExerciseByNameWithResponse('sample', async () => valid);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.value.title).toBe('t');
+      expect(result.value.data_files).toEqual(['x.txt']);
     }
   });
 });
