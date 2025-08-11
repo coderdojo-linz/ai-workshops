@@ -1,0 +1,9 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="25%" style="stop-color:rgba(5, 173, 254, 1); stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(2, 83, 255, 1); stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path d="M 0 0 V 200 c 50 -50, 150 -50, 200 0 c 50 50, 150 50, 200 0 V -200 H -400" stroke="none" fill="url(#waveGradient)" />
+</svg>

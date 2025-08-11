@@ -19,7 +19,15 @@ export default async function Home() {
         {Object.entries(exercisesData).map(([key, exercise]) => (
           <div key={key} className={styles.exerciseCard}>
             <Link href={`/chat/${key}`} className={styles.exerciseLink}>
-              <h2 className={styles.exerciseTitle}>{exercise.title}</h2>
+              <span className={`${styles.exerciseDifficulty} ${exercise.difficulty === 'easy' ? styles.easy :
+                  exercise.difficulty === 'medium' ? styles.medium :
+                    exercise.difficulty === 'hard' ? styles.hard : ''
+                }`}>{exercise.difficulty === 'easy' ? 'Beginner' : exercise.difficulty === 'medium' ? 'Advanced' : 'Expert'}</span>
+                <img src={exercise.image || '/images/elementor-placeholder-image.png'} alt={`${exercise.title}'s descriptive image`} />
+              <div className={styles.exerciseContent}>
+                <h2 className={styles.exerciseTitle}>{exercise.title}</h2>
+                <p className={styles.exerciseDescription}>{exercise.summary}</p>
+              </div>
             </Link>
           </div>
         ))}

@@ -1,39 +1,98 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* temporary - later a wave is needed */
+body {
+  /* background: #05ADFE; */
+  background: url('/images/wave.svg') no-repeat center center fixed;
+  background-size: cover;
+  /* background: linear-gradient(309deg, rgba(5, 173, 254, 1) 25%, rgba(2, 83, 255, 1) 100%); */
+  height: 100vh
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  font-family: "Roboto", sans-serif;
 }
 
 .title {
   text-align: center;
   margin-bottom: 3rem;
+  font-family: "Saira", sans-serif;
 }
 
 .exerciseGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   margin: 0;
   padding: 0;
-  justify-items: center;
 }
 
 .exerciseCard {
   background: white;
   border-radius: 12px;
-  padding: 1.5rem;
+  width: 350px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  border: 1px solid #e5e7eb;
-}
+  overflow: hidden;
+  position: relative;
 
-.exerciseCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  .exerciseDifficulty {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: black;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    /* border: 1px solid transparent; */
+    z-index: 1;
+
+    &.easy {
+      background-color: green;
+      border-color: darkgreen;
+    }
+
+    &.medium {
+      background-color: darkorange;
+      border-color: orange;
+    }
+
+    &.hard {
+      background-color: darkred;
+      border-color: red;
+    }
+  }
+
+  & img {
+    border-radius: 12px 12px 0 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .exerciseContent {
+    padding: 1rem;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+    & img {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .exerciseLink {
   text-decoration: none;
+  color: black;
   display: block;
   width: 100%;
   height: 100%;
@@ -50,22 +109,16 @@
   .container {
     padding: 1rem;
   }
-  
-  .exerciseGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .exerciseCard {
-    padding: 1rem;
-  }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 0.5rem;
+    padding: 0.2rem;
   }
-  
+  .exerciseGrid {
+    padding: 0;
+  }
+
   .title {
     margin-bottom: 2rem;
   }
