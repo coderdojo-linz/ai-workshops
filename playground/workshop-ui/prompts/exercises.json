@@ -1,7 +1,7 @@
 {
   "exercises": {
     "data-cave": {
-        "title": "Ausbruch aus der Daten-Höhle",
+        "title": "Die Daten-Höhle",
         "folder": "data-cave",
         "difficulty": "easy",
         "summary": "Du bist in einer Höhle gefangen und musst mithilfe der KI „Nova“ in einem Datensatz herausfinden, welches Tier darin versteckt ist, um die Tür zu öffnen und aus der Höhle zu entkommen.",
