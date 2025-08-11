@@ -12,7 +12,9 @@ const ExerciseSchema = z.object({
     z.string(),           // Einzelne Datei
     z.array(z.string())   // Mehrere Dateien
   ]).transform((val) => Array.isArray(val) ? val : [val]), // Immer Array intern
+  image: z.string().optional(), // Bild als URL oder Pfad, optional
 });
+
 
 // Schema for the entire exercises file
 const ExercisesFileSchema = z.object({
