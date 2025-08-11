@@ -5,7 +5,7 @@ import styles from './page.module.css';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, FileText } from 'lucide-react';
+import { ArrowLeft, FileText, Send } from 'lucide-react';
 import Modal from '@/components/Modal';
 import SystemPrompt from '@/components/SystemPrompt';
 
@@ -28,9 +28,9 @@ export default function Home() {
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
   const [isModalOpen, setIsModalOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const [isFirstCall, setIsFirstCall] = useState(true);
-  
+
   // Cache for data file content - only fetch once per component session
   const dataFileContentCache = useRef<string | null>(null);
   const dataFileContentFetched = useRef<boolean>(false);
@@ -40,7 +40,7 @@ export default function Home() {
     const lines = content.split('\n');
     let inHtmlBlock = false;
     let currentHtmlBlock = '';
-    
+
     for (const line of lines) {
       if (line.trim() === '```html' && !inHtmlBlock) {
         inHtmlBlock = true;
@@ -48,7 +48,7 @@ export default function Home() {
       } else if (line.trim() === '```' && inHtmlBlock) {
         if (currentHtmlBlock.trim()) {
           let htmlContent = currentHtmlBlock.trim();
-          
+
           // Check if HTML island contains <|DATA|> placeholder
           if (htmlContent.includes('<|DATA|>')) {
             // Check cache first
@@ -58,7 +58,7 @@ export default function Home() {
                 const exerciseResponse = await fetch(`/api/exercises/${exercise}?includeDataFileContent=true`);
                 if (exerciseResponse.ok) {
                   const exerciseData = await exerciseResponse.json();
-                  
+
                   // Only process <|DATA|> if there's exactly one data file
                   if (exerciseData.data_files && exerciseData.data_files.length === 1) {
                     const singleFileName = exerciseData.data_files[0];
@@ -75,13 +75,13 @@ export default function Home() {
                 dataFileContentFetched.current = true;
               }
             }
-            
+
             // Replace <|DATA|> with the cached data file content (only for single file exercises)
             if (dataFileContentCache.current) {
               htmlContent = htmlContent.replace(/<\|DATA\|>/g, dataFileContentCache.current);
             }
           }
-          
+
           return htmlContent;
         }
         return null;
@@ -89,23 +89,23 @@ export default function Home() {
         currentHtmlBlock += line + '\n';
       }
     }
-    
-       return null;
- };
- 
- const scrollToBottom = () => {
-   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
- };
 
- // const renderer = {
- //   image(image: any) {
- //     console.log('rendering', JSON.stringify(image));
- //     return `<pre>${JSON.stringify(image)}</pre>`;
- //   },
- // };
- // marked.use({ renderer });
+    return null;
+  };
 
- useEffect(() => {
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // const renderer = {
+  //   image(image: any) {
+  //     console.log('rendering', JSON.stringify(image));
+  //     return `<pre>${JSON.stringify(image)}</pre>`;
+  //   },
+  // };
+  // marked.use({ renderer });
+
+  useEffect(() => {
     scrollToBottom();
   }, [messages, currentBotMessage]);
 
@@ -169,9 +169,9 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           message: userMessage,
-          resetConversation: isFirstCall 
+          resetConversation: isFirstCall
         }),
       });
 
@@ -209,11 +209,11 @@ export default function Home() {
                 html: DOMPurify.sanitize(marked.parse(assistantMessage) as string),
                 type: 'text',
               };
-              
+
               // Extract first HTML island and create additional HTML message if found
               const firstHtmlIsland = await extractFirstHtmlIsland(assistantMessage);
               const messagesToAdd = [assistantMsg];
-              
+
               if (firstHtmlIsland) {
                 messagesToAdd.push({
                   role: 'assistant',
@@ -222,7 +222,7 @@ export default function Home() {
                   type: 'html',
                 });
               }
-              
+
               setMessages((prev) => [
                 ...prev,
                 ...messagesToAdd,
@@ -258,7 +258,7 @@ export default function Home() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     if (value.length <= 1000) {
       setInput(value);
@@ -291,9 +291,9 @@ export default function Home() {
       </div>
 
       {/* System Prompt Modal */}
-      <Modal 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
         title="System Prompt"
       >
         <SystemPrompt exerciseId={exercise} />
@@ -302,7 +302,7 @@ export default function Home() {
       {/* Conversation History */}
       <div className={styles.messagesContainer}>
         {messages.map((message, index) => (
-          <div key={index} className={styles.message}>
+          <div key={index} className={[styles.message, message.role === 'user' ? styles.userMessageContainer : styles.botMessageContainer].join(' ')}>
             <strong>{message.role === 'user' ? 'You' : 'Bot'}:</strong>{' '}
             {message.type === 'html' ? (
               <iframe
@@ -332,16 +332,24 @@ export default function Home() {
 
       {/* Input Form */}
       <form onSubmit={handleSubmit} className={styles.inputForm}>
-        <input 
+        <textarea
           ref={inputRef}
-          type="text" 
-          value={input} 
-          onChange={handleInputChange} 
-          placeholder="Type your message..." 
-          disabled={isLoading} 
-          className={styles.textInput} 
+          value={input}
+          onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleSubmit(e as any);
+            }
+          }}
+          placeholder="Type your message..."
+          disabled={isLoading}
+          className={styles.textInput}
+          rows={1}
+          style={{ resize: 'none' }}
         />
         <button type="submit" disabled={!input.trim() || isLoading || messages.length >= 100} className={styles.sendButton}>
+          <Send />
           {isLoading ? 'Sending...' : 'Send'}
         </button>
       </form>
