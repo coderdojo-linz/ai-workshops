@@ -31,7 +31,7 @@ jobs:
           npm ci
           npm test -- --ci --coverage --reporters=default --reporters=jest-junit
         env:
-          JEST_JUNIT_OUTPUT: "./reports/junit.xml"
+          JEST_JUNIT_OUTPUT_DIR: "./reports/junit.xml"
 
       - name: Test Report
         if: always()

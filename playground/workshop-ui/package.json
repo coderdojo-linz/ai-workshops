@@ -30,6 +30,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "jest": "^30.0.5",
+    "jest-junit": "^16.0.0",
     "ts-jest": "^29.4.1",
     "typescript": "^5"
   }
