@@ -1,15 +1,6 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* temporary - later a wave is needed */
-body {
-  /* background: #05ADFE; */
-  background: url('/images/wave.svg') no-repeat center center fixed;
-  background-size: cover;
-  /* background: linear-gradient(309deg, rgba(5, 173, 254, 1) 25%, rgba(2, 83, 255, 1) 100%); */
-  height: 100vh
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
