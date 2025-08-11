@@ -18,7 +18,7 @@
       "reference": "detectiv_Anleitung.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": "detective-beginners.csv",
-      "image": "/images/detective.png"
+      "image": "/images/detective-beginners.png"
     },
     "gps-art": {
       "title": "Wer bin ich?",
