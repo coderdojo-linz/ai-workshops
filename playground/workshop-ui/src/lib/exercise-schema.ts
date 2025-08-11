@@ -5,7 +5,7 @@ const ExerciseSchema = z.object({
   title: z.string(),
   folder: z.string(),
   difficulty: z.enum(["easy", "medium", "hard"]), // fester Wertebereich
-  summery: z.string(),
+  summary: z.string(),
   reference: z.string(),
   system_prompt_file: z.string(),
   data_files: z.union([
