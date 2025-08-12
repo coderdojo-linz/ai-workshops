@@ -1,4 +1,3 @@
-
 # 🕵️‍♀️🔍 **Cyber-Spürnasen: Rettet den Lichtkristall!**
 
 Willkommen bei der **Cyberwerk AG** – hier tüfteln schlaue Köpfe an fantastischen Erfindungen!
@@ -34,4 +33,3 @@ So finden wir heraus, wenn jemand Fremdes versucht, sich als ein echter Mitarbei
 | 🌙 **Ungewöhnliche Zeiten**  | Ein Einbruch mitten in der Nacht oder am Wochenende, wenn alle schlafen.                                                                |
 | 📱 **Fremde Geräte**         | Plötzlich meldet sich ein unbekanntes Tablet oder Handy an und versucht, mit einem echten Konto hineinzukommen.                         |
 | 🕵️ **Gefälschte Identität** | Der Bösewicht nutzt gestohlene Namen und Passwörter, um sich als echter Mitarbeiter auszugeben – das ist Identitätsdiebstahl in Aktion! |
-
