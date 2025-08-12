@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'playground/workshop-ui/**'
+      - 'workshop-ui/**'
   workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           node-version: lts/*
           
       - name: Run Jest
-        working-directory: playground/workshop-ui
+        working-directory: workshop-ui
         run: |
           npm ci
           npm test -- --ci --coverage --reporters=default --reporters=jest-junit
@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Jest Test Report
-          path: playground/workshop-ui/reports/junit.xml
+          path: workshop-ui/reports/junit.xml
 
       - name: Test Report
         if: always()
@@ -66,7 +66,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Create .env file
-        working-directory: playground/workshop-ui
+        working-directory: workshop-ui
         run: |
           echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
           echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" >> .env
@@ -79,7 +79,7 @@ jobs:
         id: push
         uses: docker/build-push-action@v6
         with:
-          context: playground/workshop-ui
+          context: workshop-ui
           push: true
           tags: rstropek/coderdojo-ai-workshop:latest
 
