@@ -13,6 +13,9 @@ export default async function Home() {
   const exercisesData = exercisesResult.value.exercises;
 
   return (
+    <>
+    <img src="/images/background1.svg" alt="Decorative image" className={styles.vectorBg1} />
+    <img src="/images/background2.svg" alt="Decorative image" className={styles.vectorBg2} />
     <div className={styles.container}>
       <h1 className={styles.title}>AI Workshop Exercises</h1>
       <div className={styles.exerciseGrid}>
@@ -33,5 +36,6 @@ export default async function Home() {
         ))}
       </div>
     </div>
+    </>
   );
 }

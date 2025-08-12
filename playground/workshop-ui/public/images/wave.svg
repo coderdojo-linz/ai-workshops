@@ -1,9 +1,9 @@
-<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="25%" style="stop-color:rgba(5, 173, 254, 1); stop-opacity:1" />
-      <stop offset="100%" style="stop-color:rgba(2, 83, 255, 1); stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  <path d="M 0 0 V 200 c 50 -50, 150 -50, 200 0 c 50 50, 150 50, 200 0 V -200 H -400" stroke="none" fill="url(#waveGradient)" />
+<svg width="1920" height="800" viewBox="0 0 1920 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M-2 0H1943.5V579C1796 615.833 1392.1 667.4 956.5 579C520.9 490.6 136 580.833 -2 637V0Z" fill="url(#paint0_linear_12_1342)"/>
+<defs>
+<linearGradient id="paint0_linear_12_1342" x1="-2" y1="18" x2="1895" y2="599" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0A1C40"/>
+<stop offset="1" stop-color="#083C9E"/>
+</linearGradient>
+</defs>
 </svg>

@@ -1,6 +1,22 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 
+.vectorBg1 {
+  position: absolute;
+  top: 344px;
+  left: 0;
+  width:  640px;
+  height: 368px;
+}
+
+.vectorBg2 {
+  position: absolute;
+  top: 483px;
+  right: 0;
+  width: 491px;
+  height: 448px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
