@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { AccessToken, DefaultAzureCredential } from '@azure/identity';
+import path from 'path';
 
 type PagedSessionResourceFile = {
   nextLink?: string;
@@ -38,7 +39,9 @@ export class DynamicSession {
   }
 
   public async executeScript(script: string, filePaths: string[]): Promise<SessionCodeExecutionResult> {
-    await this.uploadFiles(filePaths);
+    if (filePaths.length > 0) {
+      await this.uploadFiles(filePaths);
+    }
 
     const accessToken = await this.getAccessToken();
 
@@ -78,7 +81,8 @@ export class DynamicSession {
     for (const filePath of filePaths) {
       const fileBuffer = fs.readFileSync(filePath);
       const blob = new Blob([fileBuffer], { type: 'text/csv' });
-      formData.append('file', blob, filePath);
+      const fileName = path.basename(filePath);
+      formData.append('file', blob, fileName);
     }
 
     const url = this.buildUrl('files');
