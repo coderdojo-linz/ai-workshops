@@ -141,6 +141,17 @@ plt.show()
     }
   }, 45000); // Longer timeout for matplotlib operations
 
+  it('should return a number', async () => {
+    const script = '42';
+
+    const result = await session.executeScript(script, []);
+
+    expect(result.status).toBe('Succeeded');
+
+    // Check that we have execution result with the plot
+    expect(result.result.executionResult).toBe(42);
+  }, 30000);
+
   it('should handle script execution errors gracefully', async () => {
     const script = `
 # This script will intentionally cause an error

@@ -15,6 +15,12 @@ type SessionResourceFile = {
   type: string;
 };
 
+export type ImageExecutionResult = {
+  type: string;
+  format: string;
+  base64_data: string;
+};
+
 type SessionCodeExecutionResult = {
   id: string;
   status: 'NotStarted' | 'Running' | 'Succeeded' | 'Failed' | 'Cancelled';
@@ -22,11 +28,7 @@ type SessionCodeExecutionResult = {
     stdout: string;
     stderr: string;
     executionTimeInMilliseconds: number;
-    executionResult?: {
-      type: string;
-      format: string;
-      base64_data: string;
-    };
+    executionResult?: any;
   };
 };
 

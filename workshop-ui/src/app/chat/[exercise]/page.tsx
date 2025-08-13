@@ -206,7 +206,7 @@ export default function Home() {
               const assistantMsg: Message = {
                 role: 'assistant',
                 content: assistantMessage,
-                html: DOMPurify.sanitize(marked.parse(assistantMessage) as string),
+                html: DOMPurify.sanitize(marked.parse(assistantMessage.replaceAll('\\n', '\n')) as string),
                 type: 'text',
               };
 
@@ -322,7 +322,7 @@ export default function Home() {
             <span
               className={styles.botMessage}
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(marked.parse(currentBotMessage) as string),
+                __html: DOMPurify.sanitize(marked.parse(currentBotMessage.replaceAll('\\n', '\n')) as string),
               }}
             />
           </div>
