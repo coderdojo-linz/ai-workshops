@@ -3,15 +3,15 @@
 
 .vectorBg1 {
   position: absolute;
-  top: 344px;
-  left: 0;
+  top: 680px;
+  left: -200px;
   width:  640px;
   height: 368px;
 }
 
 .vectorBg2 {
   position: absolute;
-  top: 483px;
+  top: 640px;
   right: 0;
   width: 491px;
   height: 448px;
