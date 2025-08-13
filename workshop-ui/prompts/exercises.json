@@ -30,7 +30,7 @@
       "data_files": "gps-art.csv",
       "image": "/images/covers/03-gps-art.svg"
     },
-    "das-taegliche-dilemma": {
+    "time-line": {
       "title": "Das tägliche Dilemma",
       "folder": "04-time-line",
       "difficulty": "hard",
@@ -42,6 +42,16 @@
         "raum.csv",
         "verbrauch.csv"
       ],
+      "image": "/images/covers/04-time-line.svg"
+    },
+    "prompt-engineering": {
+      "title": "Dein eigener KI-Assistent",
+      "folder": "05-prompt-engineering",
+      "difficulty": "hard",
+      "summary": "/* TODO */",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [],
       "image": "/images/covers/04-time-line.svg"
     }
   }
