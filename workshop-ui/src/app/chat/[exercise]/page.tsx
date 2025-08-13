@@ -310,6 +310,7 @@ export default function Home() {
                 className={styles.htmlFrame}
                 sandbox="allow-scripts allow-same-origin"
                 style={{ width: '100%', minHeight: '200px', border: '1px solid #ccc', borderRadius: '4px' }}
+                title='HTML Content'
               />
             ) : (
               <span className={message.role === 'user' ? styles.userMessage : styles.botMessage} dangerouslySetInnerHTML={{ __html: message.html }} />
