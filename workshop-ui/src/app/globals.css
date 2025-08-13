@@ -23,7 +23,7 @@ body {
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
   /* 5.5 Background */
-  background: url('/images/wave.svg') no-repeat center center scroll;
+  background: url('/images/wave.svg') no-repeat center center scroll, #ddd;
   background-size: cover;
   height: 100vh
 }
