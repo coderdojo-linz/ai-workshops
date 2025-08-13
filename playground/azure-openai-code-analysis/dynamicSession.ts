@@ -1,0 +1,161 @@
+import fs from "fs";
+import { z } from "zod/v4";
+import { FunctionTool } from "openai/resources/responses/responses.mjs";
+import { AccessToken, DefaultAzureCredential } from "@azure/identity";
+
+type PagedSessionResourceFile = {
+  nextLink?: string;
+  value: SessionResourceFile[];
+};
+
+type SessionResourceFile = {
+  contentType: string;
+  lastModifiedAt: string;
+  name: string;
+  sizeInBytes: number;
+  type: string;
+};
+
+type SessionCodeExecutionResult = {
+  id: string;
+  status: "NotStarted" | "Running" | "Succeeded" | "Failed" | "Cancelled";
+  result: {
+    stdout: string;
+    stderr: string;
+    executionTimeInMilliseconds: number;
+  };
+};
+
+export class DynamicSession {
+  private sessionId: string;
+  private accessToken?: AccessToken;
+
+  constructor(sessionId?: string) {
+    this.sessionId = sessionId ?? crypto.randomUUID();
+  }
+
+  public async executeScript(script: string, filePaths: string[]): Promise<SessionCodeExecutionResult> {
+    await this.uploadFiles(filePaths);
+
+    const accessToken = await this.getAccessToken();
+
+    const execResult = await fetch(
+      `${process.env
+        .AZURE_SESSION_POOL_ENDPOINT!}/executions?api-version=2025-02-02-preview&identifier=${
+        this.sessionId
+      }`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          code: script,
+          executionType: "Synchronous",
+          codeInputType: "Inline",
+          timeoutInSeconds: 60,
+        }),
+      }
+    );
+
+    if (execResult.status !== 200) {
+      throw new Error(`Failed to execute script: ${execResult.statusText}`, {
+        cause: await execResult.json(),
+      });
+    }
+
+    return execResult.json();
+  }
+
+  private async uploadFiles(filePaths: string[]) {
+    const existingFiles = await this.getExistingFiles();
+    const filesToUpload = filePaths.filter(
+      (filePath) => !existingFiles.includes(filePath)
+    );
+    if (filesToUpload.length === 0) {
+      return;
+    }
+
+    const accessToken = await this.getAccessToken();
+
+    const formData = new FormData();
+    for (const filePath of filePaths) {
+      const fileBuffer = fs.readFileSync(filePath);
+      const blob = new Blob([fileBuffer], { type: "text/csv" });
+      formData.append("file", blob, filePath);
+    }
+
+    const fileUploadResult = await fetch(this.buildUrl("files"), {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken.token}`,
+      },
+      body: formData,
+    });
+
+    if (fileUploadResult.status !== 200) {
+      throw new Error(
+        `Failed to upload files: ${fileUploadResult.statusText}`,
+        { cause: await fileUploadResult.json() }
+      );
+    }
+  }
+
+  private async getExistingFiles() {
+    const accessToken = await this.getAccessToken();
+    async function fetchFiles(url: string): Promise<PagedSessionResourceFile> {
+      let fileListResult = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken.token}`,
+        },
+      });
+
+      if (fileListResult.status !== 200) {
+        throw new Error(
+          `Failed to get file list: ${fileListResult.statusText}`,
+          {
+            cause: await fileListResult.text(),
+          }
+        );
+      }
+
+      return fileListResult.json();
+    }
+
+    const existingFiles: string[] = [];
+    let fileListResponse = await fetchFiles(this.buildUrl("files"));
+    while (true) {
+      existingFiles.push(...fileListResponse.value.map((file) => file.name));
+
+      if (fileListResponse.nextLink) {
+        fileListResponse = await fetchFiles(fileListResponse.nextLink);
+      } else {
+        break;
+      }
+    }
+
+    return existingFiles;
+  }
+
+  private buildUrl(path: string) {
+    return `${process.env
+      .AZURE_SESSION_POOL_ENDPOINT!}/${path}?api-version=2025-02-02-preview&identifier=${
+      this.sessionId
+    }`;
+  }
+
+  private async getAccessToken() {
+    if (this.accessToken) {
+      // Check if token will be valid for another 5 seconds
+      if (this.accessToken.expiresOnTimestamp - Date.now() > 5000) {
+        return this.accessToken;
+      }
+    }
+
+    const credential = new DefaultAzureCredential();
+    this.accessToken = await credential.getToken("https://dynamicsessions.io");
+    return this.accessToken;
+  }
+}

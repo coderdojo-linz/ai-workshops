@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import OpenAI, { AzureOpenAI } from 'openai';
 import fs from 'fs';
 import path from 'path';
 import { getSession } from '@/lib/session';
@@ -12,8 +12,14 @@ import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
 const sharedKeyCredential = new StorageSharedKeyCredential(process.env.STORAGE_ACCOUNT!, process.env.STORAGE_ACCOUNT_KEY!);
 const blobServiceClient = new BlobServiceClient(`https://${process.env.STORAGE_ACCOUNT!}.blob.core.windows.net`, sharedKeyCredential);
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+// const client = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
+const client = new AzureOpenAI({
+  endpoint: process.env.AZURE_ENDPOINT,
+  apiKey: process.env.AZURE_OPENAI_API_KEY,
+  apiVersion: '2025-04-01-preview',
+  deployment: 'gpt-4.1',
 });
 
 const tracer = trace.getTracer('ai-workshop-chat');
@@ -46,12 +52,12 @@ export async function POST(request: NextRequest) {
     const exerciseFileIds: string[] = [];
     for (const dataFile of exerciseData.data_files) {
       if (!dataFileIds.has(dataFile)) {
-        let dataFileId = await client.files.getFileId(dataFile);
+        let dataFileId = await client.files.getFileId(dataFile, 'assistants');
         if (!dataFileId) {
           const inputStream = fs.createReadStream(path.join(process.cwd(), 'prompts', exerciseData.folder, dataFile));
           const file = await client.files.create({
             file: inputStream,
-            purpose: 'user_data',
+            purpose: 'assistants', // 'user_data',
           });
           dataFileId = file.id;
         }
@@ -109,6 +115,10 @@ export async function POST(request: NextRequest) {
       // Create encoder outside the stream
       const encoder = new TextEncoder();
 
+      let containerId = '';
+      let fileId = '';
+      let filename = '';
+
       // Stream immediately as chunks arrive
       const stream = new ReadableStream({
         async start(controller) {
@@ -143,22 +153,35 @@ export async function POST(request: NextRequest) {
                   break;
                 }
                 case 'response.output_text.annotation.added': {
-                  const file = await client.containers.files.content.retrieve((event.annotation as any).file_id, {
-                    container_id: (event.annotation as any).container_id,
-                  });
+                  containerId = (event.annotation as any).container_id;
+                  fileId = (event.annotation as any).file_id;
+                  filename = (event.annotation as any).filename;
 
-                  // Upload the file to the Azure Blob Storage
-                  const containerClient = blobServiceClient.getContainerClient('ai-workshop');
-                  const blockBlobClient = containerClient.getBlockBlobClient((event.annotation as any).filename);
-                  const uploadBuffer = Buffer.from(await file.arrayBuffer());
-                  await blockBlobClient.upload(uploadBuffer, uploadBuffer.length);
+                  // const file = await client.containers.files.content.retrieve((event.annotation as any).file_id, {
+                  //   container_id: (event.annotation as any).container_id,
+                  // });
 
-                  // Create markdown image with data URI
-                  const markdownImage = `![Generated Image](${blockBlobClient.url})`;
+                  // // Upload the file to the Azure Blob Storage
+                  // const containerClient = blobServiceClient.getContainerClient('ai-workshop');
+                  // const blockBlobClient = containerClient.getBlockBlobClient((event.annotation as any).filename);
+                  // const uploadBuffer = Buffer.from(await file.arrayBuffer());
+                  // await blockBlobClient.upload(uploadBuffer, uploadBuffer.length);
 
-                  // Send as a text delta (like other content)
-                  const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
-                  controller.enqueue(encoder.encode(`data: ${data}\n\n`));
+                  // // Create markdown image with data URI
+                  // const markdownImage = `![Generated Image](${blockBlobClient.url})`;
+
+                  // // Send as a text delta (like other content)
+                  // const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
+                  // controller.enqueue(encoder.encode(`data: ${data}\n\n`));
+
+                  break;
+                }
+                case 'response.completed': {
+                  if (containerId && fileId) {
+                    const file = await client.containers.files.content.retrieve(filename, {
+                      container_id: containerId,
+                    });
+                  }
 
                   break;
                 }

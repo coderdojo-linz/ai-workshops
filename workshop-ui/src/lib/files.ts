@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 declare module "openai" {
     export namespace OpenAI {
         export interface Files {
-            getFileId(fileName: string): Promise<string>;
+            getFileId(fileName: string, purpose?: string): Promise<string>;
         }
     }
 }
