@@ -30,17 +30,20 @@ colors = ['red', 'blue', 'green', 'orange', 'purple'][:len(categories)]
 # Plot each category with a different color
 for i, category in enumerate(categories):
     category_data = df[df['figur'] == category]
-    plt.scatter(category_data['x'], category_data['y'], 
-               label=category, color=colors[i], alpha=0.7, s=50)
+    #plt.scatter(category_data['x'], category_data['y'], 
+    #           label=category, color=colors[i], alpha=0.7, s=50)
 
 # Customize the plot
-plt.xlabel('X Coordinate', fontsize=12)
-plt.ylabel('Y Coordinate', fontsize=12)
-plt.title('Scatter Plot of Data Cave Categories', fontsize=14)
-plt.legend()
-plt.grid(True, alpha=0.3)
+#plt.xlabel('X Coordinate', fontsize=12)
+#plt.ylabel('Y Coordinate', fontsize=12)
+#plt.title('Scatter Plot of Data Cave Categories', fontsize=14)
+#plt.legend()
+#plt.grid(True, alpha=0.3)
 
-plt.show()
+#plt.show()
+#out_path = '/mnt/data/plot_plinki.png'
+#x = plt.savefig(out_path, dpi=150, bbox_inches='tight')
+
 `, ["data-cave.csv"]);
 console.log(result);
 /*

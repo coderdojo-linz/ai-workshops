@@ -21,7 +21,7 @@ type SessionCodeExecutionResult = {
     stdout: string;
     stderr: string;
     executionTimeInMilliseconds: number;
-    executionResult?: {
+    executionResult?: string | {
       type: string;
       format: string;
       base64_data: string;
