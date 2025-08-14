@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import WorkshopForm from '@/components/WorkshopForm';
 import type { WorkshopInput } from '@/lib/workshop-schema';
-import { Clipboard, ClipboardCheck } from 'lucide-react';
+import { Clipboard, ClipboardCheck, Pencil } from 'lucide-react';
 interface Workshop {
   id: number;
   title: string;
@@ -180,7 +180,7 @@ export default function WorkshopsPage() {
                 <td>{w.description}</td>
                 <td>
                   <button className={styles.editButton} onClick={() => router.push(`/workshops/${w.id}`)}>
-                    Bearbeiten
+                    <Pencil />
                   </button>
                 </td>
               </tr>
