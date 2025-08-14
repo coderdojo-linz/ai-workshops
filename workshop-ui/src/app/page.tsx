@@ -37,7 +37,7 @@ export default async function Home() {
           <div className={styles.exerciseCard}>
             <Link href={`/prompt-engineering`} className={styles.exerciseLink}>
               <span className={`${styles.exerciseDifficulty} ${styles.hard}`}>Expert</span>
-              <img src='/images/elementor-placeholder-image.png' alt={`Dein eigener KI-Assistent's descriptive image`} />
+              <img src='/images/covers/05-prompt-engineering.svg' alt={`Dein eigener KI-Assistent's descriptive image`} />
               <div className={styles.exerciseContent}>
                 <h2 className={styles.exerciseTitle}>Dein eigener KI-Assistent</h2>
                 <p className={styles.exerciseDescription}>{/* TODO */}</p>
