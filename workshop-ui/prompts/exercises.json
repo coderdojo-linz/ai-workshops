@@ -1,14 +1,15 @@
 {
   "exercises": {
     "data-cave": {
-        "title": "Die Daten-Höhle",
-        "folder": "01-data-cave",
-        "difficulty": "easy",
-        "summary": "Du bist in einer Höhle gefangen und musst mithilfe der KI „Nova“ in einem Datensatz herausfinden, welches Tier darin versteckt ist, um die Tür zu öffnen und aus der Höhle zu entkommen.",
-        "reference": "tasksheet.md",
-        "system_prompt_file": "system-prompt.md",
-        "data_files": "data-cave.csv",
-        "image": "/images/covers/01-data-cave.svg"
+      "title": "Die Daten-Höhle",
+      "folder": "01-data-cave",
+      "difficulty": "easy",
+      "summary": "Du bist in einer Höhle gefangen und musst mithilfe der KI „Nova“ in einem Datensatz herausfinden, welches Tier darin versteckt ist, um die Tür zu öffnen und aus der Höhle zu entkommen.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
+      "data_files": "data-cave.csv",
+      "image": "/images/covers/01-data-cave.svg"
     },
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",
@@ -17,6 +18,7 @@
       "summary": "Ein Hacker will bei der Cyberwerk AG den Lichtkristall stehlen, indem er sich mit gestohlenen Passwörtern als Mitarbeiter ausgibt. Mit IT-Forensik durchsucht ihr Logdateien nach verdächtigen Spuren wie zum Beispiel viele falsche Login-Versuched, ungewöhnlichen Zeiten oder fremden Geräten, um den Täter zu entlarven.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
       "data_files": "detective-beginners.csv",
       "image": "/images/covers/02-detective-beginners.svg"
     },
@@ -27,6 +29,7 @@
       "summary": "Die Comic-Gruppe BKCW will per GPS-Daten ein Bild zweier berühmter Zeichentrickfiguren „malen“, um den Standort ihres nächsten Ladens zu verraten. Deine Aufgabe ist, mithilfe von KI aus den Daten herauszufinden, in welchem Land sie ihren neuen Laden eröffnen und welche beiden Figuren sie gezeichnet haben.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
       "data_files": "gps-art.csv",
       "image": "/images/covers/03-gps-art.svg"
     },
@@ -37,6 +40,7 @@
       "summary": "Finde mithilfe von Verbrauchsdaten smarter Steckdosen, Raum- und Stundenplänen heraus,warum in der Schule jeden Tag um 12:40 Uhr der Strom ausfällt.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
       "data_files": [
         "klasse.csv",
         "raum.csv",

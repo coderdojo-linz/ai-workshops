@@ -8,6 +8,7 @@ const ExerciseSchema = z.object({
   summary: z.string(),
   reference: z.string(),
   system_prompt_file: z.string(),
+  welcome_message_file: z.string(),
   data_files: z.union([
     z.string(),           // Einzelne Datei
     z.array(z.string())   // Mehrere Dateien
