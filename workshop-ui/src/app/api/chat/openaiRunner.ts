@@ -37,11 +37,10 @@ export async function runOpenAI(message: string, instructions: string,
     let currentScript = '';
     
     for await (const event of openaiResponse) {
+      if ((<any>event).response?.id) {
+        previousResponseId = (<any>event).response.id;
+      }
       switch (event.type) {
-        case 'response.created': {
-          previousResponseId = event.response.id;
-          break;
-        }
         case 'response.output_text.delta': {
           messageDeltaCallback(event.delta);
           break;

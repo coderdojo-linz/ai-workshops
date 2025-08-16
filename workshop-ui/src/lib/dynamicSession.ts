@@ -102,7 +102,7 @@ export class DynamicSession {
     }
   }
 
-  private async getExistingFiles() {
+  public async getExistingFiles() {
     const accessToken = await this.getAccessToken();
     async function fetchFiles(url: string): Promise<PagedSessionResourceFile> {
       let fileListResult = await fetch(url, {
@@ -134,6 +134,24 @@ export class DynamicSession {
     }
 
     return existingFiles;
+  }
+
+  public async getFileContent(fileName: string): Promise<ArrayBuffer> {
+    const accessToken = await this.getAccessToken();
+    const fileContentResponse = await fetch(this.buildUrl(`files/${fileName}/content`), {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken.token}`,
+      },
+    });
+
+    if (fileContentResponse.status !== 200) {
+      throw new Error(`Failed to get file content: ${fileContentResponse.statusText}`, {
+        cause: await fileContentResponse.text(),
+      });
+    }
+
+    return await fileContentResponse.arrayBuffer();
   }
 
   private buildUrl(path: string) {

@@ -8,7 +8,7 @@ loadEnvConfig(projectDir);
 
 describe('DynamicSession.executeScript', () => {
   let session: DynamicSession;
-  const csvPath = path.join(process.cwd(), 'prompts', '01-data.cave', 'data-cave.csv');
+  const csvPath = path.join(process.cwd(), 'prompts', '01-data-cave', 'data-cave.csv');
 
   beforeAll(() => {
     // Create a new session for all tests
@@ -119,26 +119,16 @@ plt.title('Scatter Plot of Data Cave Categories', fontsize=14)
 plt.legend()
 plt.grid(True, alpha=0.3)
 
-plt.show()
+plt.savefig('/mnt/data/output.png', dpi=300, bbox_inches='tight')
+print("Plot saved to /mnt/data/output.png")
 `;
 
     const result = await session.executeScript(script, []);
 
     expect(result.status).toBe('Succeeded');
 
-    // Check that we have execution result with the plot
-    expect(result.result.executionResult).toBeDefined();
-    if (result.result.executionResult) {
-      expect(result.result.executionResult.type).toBe('image');
-      expect(result.result.executionResult.format).toBe('png');
-      expect(result.result.executionResult.base64_data).toBeDefined();
-      expect(result.result.executionResult.base64_data.length).toBeGreaterThan(1000); // Should be a substantial base64 string
-
-      // Verify it's valid base64
-      expect(() => {
-        Buffer.from(result.result.executionResult!.base64_data, 'base64');
-      }).not.toThrow();
-    }
+    const existingFiles = await session.getExistingFiles();
+    expect(existingFiles).toContain('output.png');
   }, 45000); // Longer timeout for matplotlib operations
 
   it('should return a number', async () => {
@@ -167,5 +157,37 @@ print("After error - this won't be reached")
     expect(result.result.stderr).toContain('NameError');
     expect(result.result.stderr).toContain('undefined_variable_that_will_cause_error');
     expect(result.result.executionTimeInMilliseconds).toBeGreaterThan(0);
+  }, 30000);
+
+  it('should retrieve file content as ArrayBuffer', async () => {
+    // First, ensure we have a file uploaded by running a script that uses it
+    const script = `
+with open('/mnt/data/data-cave.csv', 'r') as file:
+    content = file.read()
+    lines = content.split('\\n')
+    print(f"File processed with {len(lines)} lines")
+`;
+
+    const scriptResult = await session.executeScript(script, [csvPath]);
+    expect(scriptResult.status).toBe('Succeeded');
+
+    // Now test getFileContent
+    const fileContent = await session.getFileContent('data-cave.csv');
+
+    // Verify it returns an ArrayBuffer
+    expect(fileContent).toBeInstanceOf(ArrayBuffer);
+    expect(fileContent.byteLength).toBeGreaterThan(0);
+
+    // Convert to text and verify it contains CSV-like content
+    const decoder = new TextDecoder();
+    const textContent = decoder.decode(fileContent);
+    
+    // Basic validation that it looks like CSV content
+    expect(textContent.length).toBeGreaterThan(0);
+    expect(typeof textContent).toBe('string');
+    
+    // Since we know it's a CSV file, it should contain some basic CSV characteristics
+    // (This is a basic check - adjust based on the actual CSV structure)
+    expect(textContent.includes('\n')).toBe(true);
   }, 30000);
 });

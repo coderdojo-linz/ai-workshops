@@ -8,12 +8,10 @@ import '@/lib/files';
 import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 import { trace, Span } from '@opentelemetry/api';
 import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
-import { executePythonTool } from './codeExecutionTool';
+import { executePython, executePythonTool } from './codeExecutionTool';
 import { runOpenAI } from './openaiRunner';
 import { DynamicSession } from '@/lib/dynamicSession';
-
-const sharedKeyCredential = new StorageSharedKeyCredential(process.env.STORAGE_ACCOUNT!, process.env.STORAGE_ACCOUNT_KEY!);
-const blobServiceClient = new BlobServiceClient(`https://${process.env.STORAGE_ACCOUNT!}.blob.core.windows.net`, sharedKeyCredential);
+import { DefaultAzureCredential } from '@azure/identity';
 
 // const client = new OpenAI({
 //   apiKey: process.env.OPENAI_API_KEY,
@@ -94,41 +92,12 @@ export async function POST(request: NextRequest) {
                 controller.enqueue(encoder.encode(`data: ${data}\n\n`));
               },
               async (script) => {
-                const dynamicSession = new DynamicSession(sessionInstanceId);
-                const result = await dynamicSession.executeScript(
+                const result = await executePython(
                   script,
-                  exerciseData.data_files.map((f) => path.join(process.cwd(), 'prompts', exerciseData.folder, f))
+                  exerciseData.data_files.map(f => path.join(process.cwd(), 'prompts', exerciseData.folder, f)),
+                  sessionInstanceId
                 );
-
-                if (result.result.executionResult && result.result.executionResult.type === 'image') {
-                  // Upload the file to the Azure Blob Storage
-                  const containerClient = blobServiceClient.getContainerClient('ai-workshop');
-                  const resultFile = `${crypto.randomUUID()}.${result.result.executionResult.format}`;
-                  const blockBlobClient = containerClient.getBlockBlobClient(resultFile);
-                  const uploadBuffer = Buffer.from(result.result.executionResult.base64_data, 'base64');
-                  await blockBlobClient.upload(uploadBuffer, uploadBuffer.length);
-
-                  // Create markdown image with data URI
-                  const markdownImage = `![Generated Image](${blockBlobClient.url})`;
-
-                  // Send as a text delta (like other content)
-                  const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
-                  controller.enqueue(encoder.encode(`data: ${data}\n\n`));
-
-                  return JSON.stringify({
-                    generatedImage: blockBlobClient.url,
-                  });
-                } else {
-                  if (result.result.executionResult && typeof result.result.executionResult !== 'object') {
-                    controller.enqueue(encoder.encode(`data: ${result.result.executionResult}\n\n`));
-                  }
-
-                  return JSON.stringify({
-                    stdout: result.result.stdout,
-                    stderr: result.result.stderr,
-                    executionResult: result.result.executionResult,
-                  });
-                }
+                return JSON.stringify(result);
               }
             );
 
