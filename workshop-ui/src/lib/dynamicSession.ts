@@ -41,6 +41,8 @@ export class DynamicSession {
   }
 
   public async executeScript(script: string, filePaths: string[]): Promise<SessionCodeExecutionResult> {
+    await this.deleteAllFiles();
+
     if (filePaths.length > 0) {
       await this.uploadFiles(filePaths);
     }
@@ -134,6 +136,25 @@ export class DynamicSession {
     }
 
     return existingFiles;
+  }
+
+  private async deleteAllFiles() {
+    const existingFiles = await this.getExistingFiles();
+    for (const fileName of existingFiles) {
+      await this.deleteFile(fileName);
+    }
+  }
+
+  private async deleteFile(fileName: string) {
+    const accessToken = await this.getAccessToken();
+    await fetch(this.buildUrl(`files/${fileName}`), {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${accessToken.token}`,
+      },
+    });
+
+    // We ignore the response because it's not important
   }
 
   public async getFileContent(fileName: string): Promise<ArrayBuffer> {

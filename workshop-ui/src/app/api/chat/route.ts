@@ -69,11 +69,13 @@ export async function POST(request: NextRequest) {
     // Read system prompt
     const systemPromptPath = path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.system_prompt_file);
     let systemPrompt = await fs.promises.readFile(systemPromptPath, { encoding: 'utf-8' });
-    systemPrompt += `\n\n# Available CSV Files\n\n<|DATA_FILES|>\n\n`;
+    systemPrompt += `\n\n# Available CSV Files\n\nHere is a list of available CSV files including the FIRST 5 LINES of each file.
+Note that the files have MORE LINES than shown here.\n\n`;
     for (const dataFile of exerciseData.data_files) {
-      systemPrompt += `\n\n/mnt/data/${dataFile}\n\n`;
+      systemPrompt += `## /mnt/data/${dataFile}\n\n\`\`\`csv\n`;
+      const dataFileContent = await fs.promises.readFile(path.join(process.cwd(), 'prompts', exerciseData.folder, dataFile), { encoding: 'utf-8' });
+      systemPrompt += `${dataFileContent.split('\n').slice(0, 5).join('\n')}\n\n`;
     }
-    systemPrompt += `\n\n</DATA_FILES>\n\n`;
 
     return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create encoder outside the stream
@@ -97,6 +99,13 @@ export async function POST(request: NextRequest) {
                   exerciseData.data_files.map(f => path.join(process.cwd(), 'prompts', exerciseData.folder, f)),
                   sessionInstanceId
                 );
+                if (result.resultFiles) {
+                  for (const resultFile of result.resultFiles) {
+                    const markdownImage = `![Generated Image](${resultFile.url})`;
+                    const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
+                    controller.enqueue(encoder.encode(`data: ${data}\n\n`));
+                  }
+                }
                 return JSON.stringify(result);
               }
             );
