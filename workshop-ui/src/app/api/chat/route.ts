@@ -69,14 +69,16 @@ export async function POST(request: NextRequest) {
     // Read system prompt
     const systemPromptPath = path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.system_prompt_file);
     let systemPrompt = await fs.promises.readFile(systemPromptPath, { encoding: 'utf-8' });
-    systemPrompt += `\n\n# Available CSV Files\n\nHere is a list of available CSV files including the FIRST 5 LINES of each file.
-Note that the files have MORE LINES than shown here.\n\n`;
+    systemPrompt += `\n\n# Verfügbare CSV-Dateien\n\nHier ist eine Liste der verfügbaren CSV-Dateien mit den jeweils ersten 5 Zeilen jeder Datei.
+Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Ordner /mnt/data abgelegt.\n\n<data-files>`;
     for (const dataFile of exerciseData.data_files) {
-      systemPrompt += `## /mnt/data/${dataFile}\n\n\`\`\`csv\n`;
+      systemPrompt += `<data-file fileName="/mnt/data/${dataFile}">\n`;
       const dataFileContent = await fs.promises.readFile(path.join(process.cwd(), 'prompts', exerciseData.folder, dataFile), { encoding: 'utf-8' });
-      systemPrompt += `${dataFileContent.split('\n').slice(0, 5).join('\n')}\n\n`;
+      systemPrompt += `${dataFileContent.split('\n').slice(0, 5).join('\n')}\n`;
+      systemPrompt += `</data-file>\n\n`;
     }
-
+    systemPrompt += `</data-files>\n\n`;
+    
     return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create encoder outside the stream
       const encoder = new TextEncoder();
