@@ -32,6 +32,7 @@ jobs:
         with:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
 
       - name: Run Jest
         working-directory: workshop-ui
