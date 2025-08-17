@@ -31,6 +31,21 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
 
+      - &create_env
+        name: Create .env file
+        working-directory: workshop-ui
+        run: |
+          echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" >> .env
+          echo "STORAGE_ACCOUNT=${{ secrets.STORAGE_ACCOUNT }}" >> .env
+          echo "APP_INSIGHTS_CONNECTION_STRING=${{ secrets.APP_INSIGHTS_CONNECTION_STRING }}" >> .env
+          echo "LOG_EVENTS=${{ secrets.LOG_EVENTS }}" >> .env
+          echo "OPENAI_MODEL=${{ secrets.OPENAI_MODEL }}" >> .env
+          echo "AZURE_ENDPOINT=${{ secrets.AZURE_ENDPOINT }}" >> .env
+          echo "AZURE_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}" >> .env
+          echo "AZURE_RESOURCE_GROUP=${{ secrets.AZURE_RESOURCE_GROUP }}" >> .env
+          echo "AZURE_SESSION_POOL=${{ secrets.AZURE_SESSION_POOL }}" >> .env
+          echo "AZURE_SESSION_POOL_ENDPOINT=${{ secrets.AZURE_SESSION_POOL_ENDPOINT }}" >> .env
+
       - name: Run Jest
         working-directory: workshop-ui
         run: |
@@ -73,15 +88,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Create .env file
-        working-directory: workshop-ui
-        run: |
-          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
-          echo "SESSION_SECRET=${{ secrets.SESSION_SECRET }}" >> .env
-          echo "STORAGE_ACCOUNT=${{ secrets.STORAGE_ACCOUNT }}" >> .env
-          echo "STORAGE_ACCOUNT_KEY=${{ secrets.STORAGE_ACCOUNT_KEY }}" >> .env
-          echo "APP_INSIGHTS_CONNECTION_STRING=${{ secrets.APP_INSIGHTS_CONNECTION_STRING }}" >> .env
-          echo "LOG_EVENTS=false" >> .env
+      - *create_env
 
       - name: Build and push Docker image
         id: push
