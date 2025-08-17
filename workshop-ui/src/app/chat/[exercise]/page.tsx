@@ -329,6 +329,7 @@ export default function Home() {
           </div>
         )}
         <div ref={messagesEndRef} />
+        {isLoading && <div className={styles.loader}></div>}
       </div>
 
       {/* Input Form */}
