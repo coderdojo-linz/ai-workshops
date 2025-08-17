@@ -7,6 +7,10 @@ on:
       - 'workshop-ui/**'
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   tests:
     name: Run unit tests and publish reports
@@ -22,7 +26,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Run Jest
         working-directory: workshop-ui
         run: |
