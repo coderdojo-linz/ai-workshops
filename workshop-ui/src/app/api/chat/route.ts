@@ -5,23 +5,10 @@ import path from 'path';
 import { getSession } from '@/lib/session';
 import { randomUUID } from 'crypto';
 import '@/lib/files';
-import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 import { trace, Span } from '@opentelemetry/api';
 import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
-import { executePython, executePythonTool } from './codeExecutionTool';
+import { executePython } from './codeExecutionTool';
 import { runOpenAI } from './openaiRunner';
-import { DynamicSession } from '@/lib/dynamicSession';
-import { DefaultAzureCredential } from '@azure/identity';
-
-// const client = new OpenAI({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
-const client = new AzureOpenAI({
-  endpoint: process.env.AZURE_ENDPOINT,
-  apiKey: process.env.AZURE_OPENAI_API_KEY,
-  apiVersion: '2025-04-01-preview',
-  deployment: 'gpt-4.1',
-});
 
 const tracer = trace.getTracer('ai-workshop-chat');
 

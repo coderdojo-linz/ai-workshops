@@ -1,12 +1,17 @@
 import OpenAI, { AzureOpenAI } from 'openai';
 import { trace, Span } from '@opentelemetry/api';
 import { ExecutePythonParameters, executePythonTool } from './codeExecutionTool';
+import { DefaultAzureCredential, getBearerTokenProvider } from '@azure/identity';
+
+const credential = new DefaultAzureCredential();
+const scope = 'https://cognitiveservices.azure.com/.default';
+const azureADTokenProvider = getBearerTokenProvider(credential, scope);
 
 const client = new AzureOpenAI({
   endpoint: process.env.AZURE_ENDPOINT,
-  apiKey: process.env.AZURE_OPENAI_API_KEY,
+  azureADTokenProvider: azureADTokenProvider,
   apiVersion: '2025-04-01-preview',
-  deployment: 'gpt-4.1',
+  deployment: 'gpt-5',
 });
 
 const tracer = trace.getTracer('ai-workshop-chat');
