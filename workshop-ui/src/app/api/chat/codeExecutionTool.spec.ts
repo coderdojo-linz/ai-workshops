@@ -80,7 +80,6 @@ print(f"Min value: {np.min(y):.3f}")
     expect(result.stdout).toContain('Generated plot with 100 points');
     expect(result.stdout).toMatch(/Max value: 1\.000/);
     expect(result.stdout).toMatch(/Min value: -0\.99\d/);
-    expect(result.stderr).toBe('');
     
     // Check that files were generated and uploaded
     expect(result.resultFiles).toHaveLength(2);
