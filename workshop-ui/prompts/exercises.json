@@ -43,6 +43,16 @@
         "verbrauch.csv"
       ],
       "image": "/images/covers/04-time-line.svg"
+    },
+    "test": {
+      "title": "Test Exercise",
+      "folder": "99-test",
+      "difficulty": "hard",
+      "summary": "You should not see this exercise in the UI.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [],
+      "image": "/images/covers/04-time-line.svg"
     }
   }
 }
