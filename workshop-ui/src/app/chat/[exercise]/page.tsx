@@ -8,6 +8,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, FileText, Send } from 'lucide-react';
 import Modal from '@/components/Modal';
 import SystemPrompt from '@/components/SystemPrompt';
+import { extractFirstHtmlIsland } from './htmlDataReplacer';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -35,63 +36,37 @@ export default function Home() {
   const dataFileContentCache = useRef<string | null>(null);
   const dataFileContentFetched = useRef<boolean>(false);
 
-  // Function to extract the first HTML code island from markdown content and process <|DATA|> placeholders
-  const extractFirstHtmlIsland = async (content: string): Promise<string | null> => {
-    const lines = content.split('\n');
-    let inHtmlBlock = false;
-    let currentHtmlBlock = '';
+  async function loadDataFileContent(): Promise<string | undefined> {
+    // Check cache first
+    if (!dataFileContentFetched.current) {
+      try {
+        // Fetch exercise data with data file content only once
+        const exerciseResponse = await fetch(`/api/exercises/${exercise}?includeDataFileContent=true`);
+        if (exerciseResponse.ok) {
+          const exerciseData = await exerciseResponse.json();
 
-    for (const line of lines) {
-      if (line.trim() === '```html' && !inHtmlBlock) {
-        inHtmlBlock = true;
-        currentHtmlBlock = '';
-      } else if (line.trim() === '```' && inHtmlBlock) {
-        if (currentHtmlBlock.trim()) {
-          let htmlContent = currentHtmlBlock.trim();
-
-          // Check if HTML island contains <|DATA|> placeholder
-          if (htmlContent.includes('<|DATA|>')) {
-            // Check cache first
-            if (!dataFileContentFetched.current) {
-              try {
-                // Fetch exercise data with data file content only once
-                const exerciseResponse = await fetch(`/api/exercises/${exercise}?includeDataFileContent=true`);
-                if (exerciseResponse.ok) {
-                  const exerciseData = await exerciseResponse.json();
-
-                  // Only process <|DATA|> if there's exactly one data file
-                  if (exerciseData.data_files && exerciseData.data_files.length === 1) {
-                    const singleFileName = exerciseData.data_files[0];
-                    dataFileContentCache.current = exerciseData.data_files_content?.[singleFileName] || null;
-                  } else {
-                    // Multiple files - don't process <|DATA|> placeholders
-                    dataFileContentCache.current = null;
-                  }
-                }
-              } catch (error) {
-                console.error('Error fetching exercise data:', error);
-                dataFileContentCache.current = null;
-              } finally {
-                dataFileContentFetched.current = true;
-              }
-            }
-
-            // Replace <|DATA|> with the cached data file content (only for single file exercises)
-            if (dataFileContentCache.current) {
-              htmlContent = htmlContent.replace(/<\|DATA\|>/g, dataFileContentCache.current);
-            }
+          // Only process <|DATA|> if there's exactly one data file
+          if (exerciseData.data_files && exerciseData.data_files.length === 1) {
+            const singleFileName = exerciseData.data_files[0];
+            dataFileContentCache.current = exerciseData.data_files_content?.[singleFileName] || null;
+          } else {
+            // Multiple files - don't process <|DATA|> placeholders
+            dataFileContentCache.current = null;
           }
-
-          return htmlContent;
         }
-        return null;
-      } else if (inHtmlBlock) {
-        currentHtmlBlock += line + '\n';
+      } catch (error) {
+        console.error('Error fetching exercise data:', error);
+        dataFileContentCache.current = null;
+      } finally {
+        dataFileContentFetched.current = true;
       }
     }
 
-    return null;
-  };
+    // Replace <|DATA|> with the cached data file content (only for single file exercises)
+    if (dataFileContentCache.current) {
+      return dataFileContentCache.current;
+    }
+  }
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -171,7 +146,7 @@ export default function Home() {
         },
         body: JSON.stringify({
           message: userMessage,
-          resetConversation: isFirstCall
+          resetConversation: isFirstCall,
         }),
       });
 
@@ -211,7 +186,7 @@ export default function Home() {
               };
 
               // Extract first HTML island and create additional HTML message if found
-              const firstHtmlIsland = await extractFirstHtmlIsland(assistantMessage);
+              const firstHtmlIsland = await extractFirstHtmlIsland(assistantMessage, loadDataFileContent);
               const messagesToAdd = [assistantMsg];
 
               if (firstHtmlIsland) {
@@ -223,10 +198,7 @@ export default function Home() {
                 });
               }
 
-              setMessages((prev) => [
-                ...prev,
-                ...messagesToAdd,
-              ]);
+              setMessages((prev) => [...prev, ...messagesToAdd]);
               setCurrentBotMessage('');
             } else {
               try {
@@ -291,11 +263,7 @@ export default function Home() {
       </div>
 
       {/* System Prompt Modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title="System Prompt"
-      >
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="System Prompt">
         <SystemPrompt exerciseId={exercise} />
       </Modal>
 
@@ -310,7 +278,7 @@ export default function Home() {
                 className={styles.htmlFrame}
                 sandbox="allow-scripts allow-same-origin"
                 style={{ width: '100%', minHeight: '200px', border: '1px solid #ccc', borderRadius: '4px' }}
-                title='HTML Content'
+                title="HTML Content"
               />
             ) : (
               <span className={message.role === 'user' ? styles.userMessage : styles.botMessage} dangerouslySetInnerHTML={{ __html: message.html }} />
@@ -362,4 +330,4 @@ export default function Home() {
       </div>
     </div>
   );
-} 
+}
