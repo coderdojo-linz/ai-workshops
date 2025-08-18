@@ -40,7 +40,6 @@
       "summary": "Finde mithilfe von Verbrauchsdaten smarter Steckdosen, Raum- und Stundenplänen heraus,warum in der Schule jeden Tag um 12:40 Uhr der Strom ausfällt.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
-      "welcome_message_file": "welcome-message.md",
       "data_files": [
         "klasse.csv",
         "raum.csv",
