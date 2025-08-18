@@ -294,10 +294,10 @@ export default function Home() {
                 __html: DOMPurify.sanitize(marked.parse(currentBotMessage.replaceAll('\\n', '\n')) as string),
               }}
             />
+            <div className={styles.loader}></div>
           </div>
         )}
         <div ref={messagesEndRef} />
-        {isLoading && <div className={styles.loader}></div>}
       </div>
 
       {/* Input Form */}
