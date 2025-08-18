@@ -5,25 +5,10 @@ import path from 'path';
 import { getSession } from '@/lib/session';
 import { randomUUID } from 'crypto';
 import '@/lib/files';
-import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 import { trace, Span } from '@opentelemetry/api';
 import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
-import { executePythonTool } from './codeExecutionTool';
+import { executePython } from './codeExecutionTool';
 import { runOpenAI } from './openaiRunner';
-import { DynamicSession } from '@/lib/dynamicSession';
-
-const sharedKeyCredential = new StorageSharedKeyCredential(process.env.STORAGE_ACCOUNT!, process.env.STORAGE_ACCOUNT_KEY!);
-const blobServiceClient = new BlobServiceClient(`https://${process.env.STORAGE_ACCOUNT!}.blob.core.windows.net`, sharedKeyCredential);
-
-// const client = new OpenAI({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
-const client = new AzureOpenAI({
-  endpoint: process.env.AZURE_ENDPOINT,
-  apiKey: process.env.AZURE_OPENAI_API_KEY,
-  apiVersion: '2025-04-01-preview',
-  deployment: 'gpt-4.1',
-});
 
 const tracer = trace.getTracer('ai-workshop-chat');
 
@@ -71,12 +56,16 @@ export async function POST(request: NextRequest) {
     // Read system prompt
     const systemPromptPath = path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.system_prompt_file);
     let systemPrompt = await fs.promises.readFile(systemPromptPath, { encoding: 'utf-8' });
-    systemPrompt += `\n\n# Available CSV Files\n\n<|DATA_FILES|>\n\n`;
+    systemPrompt += `\n\n# Verfügbare CSV-Dateien\n\nHier ist eine Liste der verfügbaren CSV-Dateien mit den jeweils ersten 5 Zeilen jeder Datei.
+Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Ordner /mnt/data abgelegt.\n\n<data-files>`;
     for (const dataFile of exerciseData.data_files) {
-      systemPrompt += `\n\n/mnt/data/${dataFile}\n\n`;
+      systemPrompt += `<data-file fileName="/mnt/data/${dataFile}">\n`;
+      const dataFileContent = await fs.promises.readFile(path.join(process.cwd(), 'prompts', exerciseData.folder, dataFile), { encoding: 'utf-8' });
+      systemPrompt += `${dataFileContent.split('\n').slice(0, 5).join('\n')}\n`;
+      systemPrompt += `</data-file>\n\n`;
     }
-    systemPrompt += `\n\n</DATA_FILES>\n\n`;
-
+    systemPrompt += `</data-files>\n\n`;
+    
     return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create encoder outside the stream
       const encoder = new TextEncoder();
@@ -94,41 +83,19 @@ export async function POST(request: NextRequest) {
                 controller.enqueue(encoder.encode(`data: ${data}\n\n`));
               },
               async (script) => {
-                const dynamicSession = new DynamicSession(sessionInstanceId);
-                const result = await dynamicSession.executeScript(
+                const result = await executePython(
                   script,
-                  exerciseData.data_files.map((f) => path.join(process.cwd(), 'prompts', exerciseData.folder, f))
+                  exerciseData.data_files.map(f => path.join(process.cwd(), 'prompts', exerciseData.folder, f)),
+                  sessionInstanceId
                 );
-
-                if (result.result.executionResult && result.result.executionResult.type === 'image') {
-                  // Upload the file to the Azure Blob Storage
-                  const containerClient = blobServiceClient.getContainerClient('ai-workshop');
-                  const resultFile = `${crypto.randomUUID()}.${result.result.executionResult.format}`;
-                  const blockBlobClient = containerClient.getBlockBlobClient(resultFile);
-                  const uploadBuffer = Buffer.from(result.result.executionResult.base64_data, 'base64');
-                  await blockBlobClient.upload(uploadBuffer, uploadBuffer.length);
-
-                  // Create markdown image with data URI
-                  const markdownImage = `![Generated Image](${blockBlobClient.url})`;
-
-                  // Send as a text delta (like other content)
-                  const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
-                  controller.enqueue(encoder.encode(`data: ${data}\n\n`));
-
-                  return JSON.stringify({
-                    generatedImage: blockBlobClient.url,
-                  });
-                } else {
-                  if (result.result.executionResult && typeof result.result.executionResult !== 'object') {
-                    controller.enqueue(encoder.encode(`data: ${result.result.executionResult}\n\n`));
+                if (result.resultFiles) {
+                  for (const resultFile of result.resultFiles) {
+                    const markdownImage = `![Generated Image](${resultFile.url})`;
+                    const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
+                    controller.enqueue(encoder.encode(`data: ${data}\n\n`));
                   }
-
-                  return JSON.stringify({
-                    stdout: result.result.stdout,
-                    stderr: result.result.stderr,
-                    executionResult: result.result.executionResult,
-                  });
                 }
+                return JSON.stringify(result);
               }
             );
 

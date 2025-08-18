@@ -41,6 +41,8 @@ export class DynamicSession {
   }
 
   public async executeScript(script: string, filePaths: string[]): Promise<SessionCodeExecutionResult> {
+    await this.deleteAllFiles();
+
     if (filePaths.length > 0) {
       await this.uploadFiles(filePaths);
     }
@@ -77,15 +79,20 @@ export class DynamicSession {
       return;
     }
 
+    // Upload files sequentially - one file per request
+    for (const filePath of filesToUpload) {
+      await this.uploadSingleFile(filePath);
+    }
+  }
+
+  private async uploadSingleFile(filePath: string) {
     const accessToken = await this.getAccessToken();
+    const fileBuffer = fs.readFileSync(filePath);
+    const blob = new Blob([fileBuffer], { type: 'text/csv' });
+    const fileName = path.basename(filePath);
 
     const formData = new FormData();
-    for (const filePath of filePaths) {
-      const fileBuffer = fs.readFileSync(filePath);
-      const blob = new Blob([fileBuffer], { type: 'text/csv' });
-      const fileName = path.basename(filePath);
-      formData.append('file', blob, fileName);
-    }
+    formData.append('file', blob, fileName);
 
     const url = this.buildUrl('files');
     const fileUploadResult = await fetch(url, {
@@ -98,11 +105,11 @@ export class DynamicSession {
 
     if (fileUploadResult.status !== 200) {
       const errorInfo = await fileUploadResult.text();
-      throw new Error(`Failed to upload files: ${fileUploadResult.statusText}`, { cause: errorInfo });
+      throw new Error(`Failed to upload file ${fileName}: ${fileUploadResult.statusText}`, { cause: errorInfo });
     }
   }
 
-  private async getExistingFiles() {
+  public async getExistingFiles() {
     const accessToken = await this.getAccessToken();
     async function fetchFiles(url: string): Promise<PagedSessionResourceFile> {
       let fileListResult = await fetch(url, {
@@ -134,6 +141,43 @@ export class DynamicSession {
     }
 
     return existingFiles;
+  }
+
+  private async deleteAllFiles() {
+    const existingFiles = await this.getExistingFiles();
+    for (const fileName of existingFiles) {
+      await this.deleteFile(fileName);
+    }
+  }
+
+  private async deleteFile(fileName: string) {
+    const accessToken = await this.getAccessToken();
+    await fetch(this.buildUrl(`files/${fileName}`), {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${accessToken.token}`,
+      },
+    });
+
+    // We ignore the response because it's not important
+  }
+
+  public async getFileContent(fileName: string): Promise<ArrayBuffer> {
+    const accessToken = await this.getAccessToken();
+    const fileContentResponse = await fetch(this.buildUrl(`files/${fileName}/content`), {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken.token}`,
+      },
+    });
+
+    if (fileContentResponse.status !== 200) {
+      throw new Error(`Failed to get file content: ${fileContentResponse.statusText}`, {
+        cause: await fileContentResponse.text(),
+      });
+    }
+
+    return await fileContentResponse.arrayBuffer();
   }
 
   private buildUrl(path: string) {

@@ -47,6 +47,26 @@
         "verbrauch.csv"
       ],
       "image": "/images/covers/04-time-line.svg"
+    },
+    "improve-p5js-code": {
+      "title": "Verbessere deinen p5.js Code",
+      "folder": "06-improve-p5js-code",
+      "difficulty": "medium",
+      "summary": "In diesem Workshop lernen Kinder, wie sie mithilfe von KI ihren p5.js Code verbessern können. Sie werden dabei von der KI Nova unterstützt, die ihnen hilft, ihre Programme zu optimieren und zu erweitern.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [],
+      "image": "/images/covers/04-time-line.svg"
+    },
+    "test": {
+      "title": "Test Exercise",
+      "folder": "99-test",
+      "difficulty": "hard",
+      "summary": "You should not see this exercise in the UI.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [],
+      "image": "/images/covers/04-time-line.svg"
     }
   }
 }

@@ -16,15 +16,10 @@ Daneben befinden sich vier Knöpfe aus Kristallen. Sie zeigen:
 * eine Maus
 
 Plötzlich beginnt ein Bildschirm an der Höhlenwand zu leuchten.
-Eine freundliche Stimme spricht:
+Du bist neugierig und tippst "Hallo" ein.
+Eine freundliche Stimme antwortet dir:
 
-> „Willkommen, Entdeckerin oder Entdecker.
-> Ich bin Nova, deine KI-Helferin.
-> Um die Tür zu öffnen, musst du ein Rätsel lösen.
-> In geheimen Daten ist ein Tier versteckt.
-> Dieses Tier ist dasselbe wie eines auf den Knöpfen.
-> Dann weißt du, welchen Knopf du drücken musst, um wieder herauszukommen.
-> Aber du hast nur **einen Versuch** – also ist Raten riskant.“
+> Willkommen, Entdeckerin oder Entdecker. Ich bin Nova, deine KI-Helferin. Um die Tür zu öffnen, musst du ein Rätsel lösen. In geheimen Daten ist ein Tier versteckt. Dieses Tier ist dasselbe wie eines auf den Knöpfen. Dann weißt du, welchen Knopf du drücken musst, um wieder herauszukommen. Aber du hast nur **einen Versuch** – also ist Raten riskant.
 
 Du hast jetzt einen riesigen Datenhaufen vor dir.
 Keine Sorge – du musst nicht programmieren können, um dein Rätsel zu lösen.
@@ -34,8 +29,7 @@ Sie kann programmieren, Daten verstehen und analysieren – genau das, was du je
 Manchmal muss sie programmieren, um Aufgaben zu lösen.
 
 **Deine Aufgabe:**
-Du musst Nova nur führen und ihr Anweisungen geben.
-Zum Beispiel: *„Was stellen diese Daten dar?“*
+Du musst Nova führen und ihr Anweisungen geben. Zum Beispiel: *Zeig mir einen Ausschnitt der Daten*
 
 Der offizielle Begriff für Fragen oder Anweisungen, die du Nova gibst, heißt **Prompt**.
 
@@ -52,6 +46,6 @@ Jetzt weißt du, wie **Prompten** funktioniert.
 
 * „Zeige mir mal ein paar Daten.“
 * „Wie soll ich jetzt anfangen?“
-* „Sage mir mal, was die Daten bedeuten.“
+* „Was sind Koordinaten?“
 
-Wenn du nicht weiterweißt oder dich nicht auskennst, kannst du Nova alles fragen – und immer um Hilfe bitten.
+Wenn du nicht weiterweißt oder dich nicht auskennst, kannst du Nova fragen und um Hilfe bitten.

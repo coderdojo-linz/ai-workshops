@@ -43,7 +43,8 @@
 }
 
 .headerSpacer {
-  width: 36px; /* Same width as back button to center the title */
+  width: 36px;
+  /* Same width as back button to center the title */
 }
 
 .messagesContainer {
@@ -63,11 +64,13 @@
   padding: 10px;
   border-radius: 6px;
   width: 90%;
+
   &.botMessageContainer {
-    background-color: #007bffaa;
+    background-color: #a7d2ffaa;
   }
+
   &.userMessageContainer {
-    background-color: #009999aa;
+    background-color: #9adadaaa;
     /* Align user messages to the right */
     align-self: flex-end;
   }
@@ -138,8 +141,8 @@
   background-color: transparent;
   padding: 0;
   font-family: 'Courier New', Consolas, Monaco, monospace;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: smaller;
+  line-height: 1.2;
 }
 
 .message code:not(pre code) {
@@ -154,4 +157,116 @@
   margin-top: 8px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
+  min-height: 400px;
+  resize: vertical;
+}
+
+.message table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.message table th,
+.message table td {
+  text-align: left;
+  border: 1px solid darkgray;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: x-small;
+}
+
+.message table th {
+  background-color: darkgray;
+  color: black;
+}
+
+.message table tr:nth-child(even) td {
+  background-color: #f0f0f0;
+}
+
+.message table tr:nth-child(odd) td {
+  background-color: #ffffff;
+}
+
+.message ul {
+  margin-top: 8px;
+  padding-left: 20px;
+  /* Reduced indentation from default 40px */
+}
+
+/* Remove margins for nested ul elements */
+.message ul ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.message p {
+  margin-top: 8px;
+}
+
+/* HTML: <div class="loader"></div> */
+/* .loader {
+  --s: 64px;
+  width: var(--s);
+  aspect-ratio: 2;
+  --_g: #000 90%,#0000;
+  background: 
+    radial-gradient(farthest-side,var(--_g)) 0   50%/25% 50%,
+    radial-gradient(farthest-side at bottom,var(--_g)) 50%  calc(50% - var(--s)/16)/25% 25%,
+    radial-gradient(farthest-side at top   ,var(--_g)) 50%  calc(50% + var(--s)/16)/25% 25%,
+    radial-gradient(farthest-side at bottom,var(--_g)) 100% calc(50% - var(--s)/16)/25% 25%,
+    radial-gradient(farthest-side at top   ,var(--_g)) 100% calc(50% + var(--s)/16)/25% 25%;
+  background-repeat: no-repeat;
+  animation: l14 1s infinite;
+}
+@keyframes l14 {
+    25%  {background-position:0    50%,50% 0,50% 100%,100% 0,100% 100%}
+    50%  {background-position:100% 50%,0   0,0   100%,50%  0,50%  100%}
+    75%,
+    100% {background-position:100% 50%,0 calc(50% - var(--s)/16),0 calc(50% + var(--s)/16),50% calc(50% - var(--s)/16),50% calc(50% + var(--s)/16)}
+} */
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  height: 30px;
+  width: calc(30px * 2.5);
+  --_g: no-repeat radial-gradient(farthest-side, #000 90%, #0000);
+  background: var(--_g), var(--_g), var(--_g), var(--_g);
+  background-size: 20% 50%;
+  animation: l43 1s infinite linear;
+}
+
+@keyframes l43 {
+  0% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 50%, calc(2*100%/3) 50%, calc(3*100%/3) 50%
+  }
+
+  16.67% {
+    background-position: calc(0*100%/3) 0, calc(1*100%/3) 50%, calc(2*100%/3) 50%, calc(3*100%/3) 50%
+  }
+
+  33.33% {
+    background-position: calc(0*100%/3) 100%, calc(1*100%/3) 0, calc(2*100%/3) 50%, calc(3*100%/3) 50%
+  }
+
+  50% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 100%, calc(2*100%/3) 0, calc(3*100%/3) 50%
+  }
+
+  66.67% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 50%, calc(2*100%/3) 100%, calc(3*100%/3) 0
+  }
+
+  83.33% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 50%, calc(2*100%/3) 50%, calc(3*100%/3) 100%
+  }
+
+  100% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 50%, calc(2*100%/3) 50%, calc(3*100%/3) 50%
+  }
 }
