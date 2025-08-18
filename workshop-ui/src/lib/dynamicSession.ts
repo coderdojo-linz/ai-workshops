@@ -79,15 +79,20 @@ export class DynamicSession {
       return;
     }
 
+    // Upload files sequentially - one file per request
+    for (const filePath of filesToUpload) {
+      await this.uploadSingleFile(filePath);
+    }
+  }
+
+  private async uploadSingleFile(filePath: string) {
     const accessToken = await this.getAccessToken();
+    const fileBuffer = fs.readFileSync(filePath);
+    const blob = new Blob([fileBuffer], { type: 'text/csv' });
+    const fileName = path.basename(filePath);
 
     const formData = new FormData();
-    for (const filePath of filePaths) {
-      const fileBuffer = fs.readFileSync(filePath);
-      const blob = new Blob([fileBuffer], { type: 'text/csv' });
-      const fileName = path.basename(filePath);
-      formData.append('file', blob, fileName);
-    }
+    formData.append('file', blob, fileName);
 
     const url = this.buildUrl('files');
     const fileUploadResult = await fetch(url, {
@@ -100,7 +105,7 @@ export class DynamicSession {
 
     if (fileUploadResult.status !== 200) {
       const errorInfo = await fileUploadResult.text();
-      throw new Error(`Failed to upload files: ${fileUploadResult.statusText}`, { cause: errorInfo });
+      throw new Error(`Failed to upload file ${fileName}: ${fileUploadResult.statusText}`, { cause: errorInfo });
     }
   }
 

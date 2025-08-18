@@ -8,6 +8,7 @@ loadEnvConfig(projectDir);
 
 describe('executePython integration tests', () => {
   const csvPath = path.join(process.cwd(), 'prompts', '01-data-cave', 'data-cave.csv');
+  const detectiveCsvPath = path.join(process.cwd(), 'prompts', '02-detective-beginners', 'detective-beginners.csv');
 
   beforeAll(() => {
     // Verify required environment variables are set
@@ -255,5 +256,28 @@ else:
     
     expect(result2.resultFiles).toHaveLength(1);
     expect(result2.resultFiles[0].fileName).toBe('session_test_2');
+  }, 60000);
+
+  it('should execute Python script with multiple input files and handle missing files', async () => {
+    const script = `
+import pandas as pd
+import os
+
+# Check if both files exist first
+files_to_check = ['/mnt/data/data-cave.csv', '/mnt/data/detective-beginners.csv']
+missing_files = []
+
+for file_path in files_to_check:
+    if not os.path.exists(file_path):
+        missing_files.append(file_path)
+
+if missing_files:
+    raise FileNotFoundError(f"Missing required files: {missing_files}")
+`;
+
+    const result = await executePython(script, [csvPath, detectiveCsvPath]);
+    expect(result.stdout).toBe('');
+    expect(result.stderr).toBe('');
+    expect(result.resultFiles).toEqual([]);
   }, 60000);
 });
