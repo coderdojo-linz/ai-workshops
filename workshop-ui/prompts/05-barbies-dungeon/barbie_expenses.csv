@@ -1,27 +1,1587 @@
 Datum,Ort,Kategorie,Produkt,Empfänger,Betrag
-2023-07-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.00
-2023-07-01,Berlin,Mode,Proaktive Benutzerschnittstelle,Koch AG,275.40
-2023-07-02,Hamburg,Beauty,Dezentralisierte Kundenbeziehung,Bayer-Ullrich,150.21
-2023-07-03,München,Reisen,Phasen-basierte Software,Schmitt & Co,850.75
-2023-07-04,Köln,Süßigkeiten,Optimierte Infrastruktur,Walter GmbH,35.99
-2023-07-05,Frankfurt,Hobbies,Ergonomische Lösung,Wolf,210.50
-2023-07-06,Stuttgart,Essen,Verbesserte Konnektivität,Schäfer & Co,80.30
-2023-07-07,Düsseldorf,Technik,Universelle Datenverarbeitung,Bauer SE,1300.00
-2023-07-08,Dortmund,Mode,Benutzerfreundliche App,Klein KG,310.00
-2023-07-09,Essen,Beauty,Intuitive Benutzeroberfläche,Schuster OHG,78.50
-2023-07-10,Leipzig,Reisen,Mandatory system engine,Zimmermann,920.00
-2023-07-11,Bremen,Süßigkeiten,Multi-tiered content,Hartmann & Braun,25.00
-2023-07-12,Dresden,Hobbies,Right-sized attitude,Weiss GmbH,180.00
-2023-07-13,Hannover,Essen,Synchronised firmware,Lange KG,120.00
-2023-07-14,Nürnberg,Technik,Stand-alone protocol,Fuchs-Weber,950.00
-2023-07-15,Duisburg,Mode,Total intermediate hub,Peters,155.80
-2023-07-16,Bochum,Beauty,Re-contextualized product,Scholz AG,95.20
-2023-07-17,Wuppertal,Reisen,Customer-focused middleware,Lang,450.00
-2023-07-18,Bielefeld,Süßigkeiten,Object-based algorithm,Mai,42.50
-2023-07-19,Bonn,Hobbies,Implemented neural-net,Horn & Co,250.00
-2023-07-20,Münster,Essen,Progressive context-sensitive alliance,Günther,65.70
-2023-07-21,Karlsruhe,Technik,Open-architected solution,Vogel,1100.00
-2023-07-22,Mannheim,Mode,Sharable didactic application,Franke,220.00
-2023-07-23,Augsburg,Beauty,Operative tangible capacity,Lorenz & Co,115.00
-2023-07-24,Wiesbaden,Reisen,Future-proofed algorithm,Huber,680.00
-2023-07-25,Gelsenkirchen,Süßigkeiten,User-centric knowledge base,Keller,15.99
+2023-01-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-02-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-03-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-04-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-05-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-06-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-07-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-08-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-09-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-10-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-11-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-12-05,Malibu,Wohnen,Monatsmiete,Miete für Traumvilla,1200.0
+2023-06-04,Bayreuth,Hobbies,Golf,Hesse Wirth OHG mbH Studio,240.22
+2023-07-20,Stadtroda,Technik,Smartphone,Media Markt,139.05
+2023-02-06,Wiedenbrück,Süßigkeiten,Gummibärchen,Confiserie,19.7
+2023-08-10,Lichtenfels,Essen & Trinken,Food Delivery,Uber Eats,26.12
+2023-11-21,Grimmen,Beauty,Tom Ford Black Orchid,Douglas,275.53
+2023-03-14,Brand,Reisen,Flugticket,Lufthansa,1812.43
+2023-09-11,Vohenstrauß,Mode,Blazer,Zara,248.28
+2023-09-14,Eberswalde,Technik,Laptop,Apple Store,985.05
+2023-02-28,Halberstadt,Hobbies,Tennis,Trapp GmbH Studio,209.34
+2023-04-04,Saarbrücken,Mode,Rock,Zara,163.13
+2023-06-24,Belzig,Hobbies,Fitness Studio,Henk Hörle AG Studio,94.13
+2023-04-01,Kassel,Technik,Smartphone,Apple Store,1902.71
+2023-06-24,Lüdenscheid,Süßigkeiten,Cupcakes,Ferrero,33.16
+2023-12-03,Germersheim,Essen & Trinken,Getränke in Champagner Lounge,Rosemarie's Champagner Lounge,55.83
+2023-06-14,Potsdam,Technik,Kopfhörer,Cyberport,1645.76
+2023-03-10,Weimar,Hobbies,Massage,Bender Studio,207.29
+2023-09-08,Sangerhausen,Süßigkeiten,Cupcakes,Bäckerei,13.54
+2023-04-04,Fürstenwalde,Essen & Trinken,Dinner im Bistro,Kruschwitz Bistro,93.66
+2023-06-08,Zeulenroda,Süßigkeiten,Pralinen,Ferrero,24.31
+2023-11-25,Lemgo,Essen & Trinken,Getränke in Weinprobe,Ulrike's Weinprobe,71.44
+2023-07-01,Neustrelitz,Technik,Smartphone,Saturn,2239.6
+2023-10-12,Stadtsteinach,Technik,Lautsprecher,Saturn,1093.92
+2023-02-04,Apolda,Technik,Smartwatch,Apple Store,2366.81
+2023-08-03,Neu-Ulm,Essen & Trinken,Food Delivery,Lieferando,26.24
+2023-04-09,Klötze,Beauty,Serum,Rossmann,76.21
+2023-04-07,Moers,Essen & Trinken,Dinner im Restaurant,Ortmann KG Restaurant,121.17
+2023-05-30,Fallingbostel,Technik,Tablet,Cyberport,2410.53
+2023-06-14,Kleve,Hobbies,Fitness Studio,Scheuermann Studio,294.32
+2023-01-03,Artern,Hobbies,Spa Tag,Girschner Studio,373.25
+2023-04-24,Amberg,Technik,Smartphone,Conrad,322.44
+2023-10-07,Werdau,Essen & Trinken,Dinner im Sushi Bar,Rust Sushi Bar,98.73
+2023-07-28,Eisenberg,Mode,Seidenbluse,Breuninger,608.82
+2023-12-03,Neustadt am Rübenberge,Essen & Trinken,Dinner im Italiener,Jopich Italiener,148.04
+2023-10-22,Seelow,Beauty,Peeling,dm,17.89
+2023-08-19,Mellrichstadt,Essen & Trinken,Dinner im Sushi Bar,Hartmann AG & Co. OHG Sushi Bar,94.55
+2023-12-21,Riesa,Technik,Lautsprecher,Saturn,296.45
+2023-12-27,Leipziger Land,Beauty,Peeling,Apotheke,73.25
+2023-10-07,Hannoversch Münden,Reisen,Hotel,Travel Agency,1097.88
+2023-11-12,Dessau,Essen & Trinken,Dinner im Sushi Bar,Schuster Sushi Bar,191.86
+2023-12-08,Ilmenau,Süßigkeiten,Schokolade,Bäckerei,6.07
+2023-05-13,Passau,Technik,Smartwatch,Apple Store,1828.93
+2023-03-21,Jessen,Essen & Trinken,Dinner im Steakhouse,Beier AG & Co. OHG Steakhouse,91.34
+2023-01-22,Schwandorf,Hobbies,Schwimmen,Heß Kostolzin GmbH & Co. OHG Studio,258.75
+2023-07-30,Gadebusch,Beauty,Catrice Eyeshadow,Rossmann,36.47
+2023-05-09,Hannoversch Münden,Technik,Tablet,Media Markt,1890.52
+2023-09-08,Malchin,Mode,Designer Handtasche,Galeria Kaufhof,372.04
+2023-01-25,Waren,Hobbies,Spa Tag,Tintzmann e.G. Studio,62.26
+2023-07-15,Hagenow,Reisen,Wellness Wochenende,Travel Agency,1746.58
+2023-08-17,Sulzbach-Rosenberg,Beauty,Feuchtigkeitscreme,Apotheke,140.71
+2023-04-18,Göppingen,Essen & Trinken,Dinner im Italiener,Löffler Kitzmann AG Italiener,109.34
+2023-07-19,Greifswald,Technik,Kamera,Apple Store,1440.82
+2023-08-05,Auerbach,Hobbies,Spa Tag,Dowerg Kostolzin GmbH Studio,334.66
+2023-05-11,Donaueschingen,Hobbies,Pilates,Aumann GmbH Studio,110.28
+2023-09-24,Zeulenroda,Essen & Trinken,Dinner im Bistro,Schaaf Hartmann AG & Co. OHG Bistro,121.49
+2023-02-27,Wolfratshausen,Beauty,Tom Ford Black Orchid,Beauty Store,163.15
+2023-08-13,Guben,Reisen,Flugticket,Lufthansa,816.61
+2023-04-16,Bad Liebenwerda,Süßigkeiten,Macarons,Lindt,24.3
+2023-02-13,Hainichen,Süßigkeiten,Gummibärchen,Süßwarengeschäft,25.27
+2023-12-05,Vilsbiburg,Technik,Lautsprecher,Media Markt,2268.44
+2023-04-09,Germersheim,Beauty,Dior J'adore,Douglas,255.45
+2023-04-09,Osterburg,Hobbies,Spa Tag,Kruschwitz KG Studio,296.42
+2023-12-27,Vechta,Essen & Trinken,Dinner im Sushi Bar,Margraf Sushi Bar,188.68
+2023-08-31,Schwarzenberg,Mode,Designer Handtasche,Galeria Kaufhof,534.9
+2023-12-28,Kleve,Hobbies,Spa Tag,Pergande GbR Studio,66.52
+2023-06-26,Sankt Goar,Reisen,Hotel,Expedia,1732.27
+2023-09-15,Soest,Reisen,City Trip,Expedia,245.53
+2023-10-09,Donaueschingen,Süßigkeiten,Pralinen,Confiserie,15.44
+2023-02-26,Magdeburg,Hobbies,Fitness Studio,Hertrampf Studio,368.31
+2023-08-12,Göttingen,Mode,Sneaker,Zara,85.07
+2023-01-10,Neustrelitz,Technik,Kopfhörer,Media Markt,2083.75
+2023-05-15,Kemnath,Essen & Trinken,Dinner im Café,Gertz Junken AG Café,155.94
+2023-07-26,Herzberg,Hobbies,Spa Tag,Rohleder AG & Co. KGaA Studio,132.87
+2023-06-18,Oranienburg,Hobbies,Schwimmen,Lindner Studio,69.46
+2023-12-21,Regensburg,Essen & Trinken,Dinner im Bistro,Vollbrecht GmbH Bistro,114.65
+2023-09-12,Northeim,Reisen,Hotel,Expedia,1033.82
+2023-01-06,Recklinghausen,Beauty,Dior Rouge Lipstick,Parfümerie Pieper,155.31
+2023-04-07,Uelzen,Mode,Kleid,H&M,84.32
+2023-07-17,Eichstätt,Reisen,Spa Resort,Travel Agency,873.73
+2023-08-20,Schwerin,Essen & Trinken,Dinner im Sushi Bar,Scholz GmbH & Co. KGaA Sushi Bar,188.01
+2023-01-23,Eggenfelden,Reisen,Flugticket,Booking.com,1584.32
+2023-08-15,Kehl,Beauty,YSL Mascara,Douglas,171.42
+2023-04-05,Dessau,Reisen,City Trip,Booking.com,639.25
+2023-07-12,Stade,Technik,Smartphone,Cyberport,2358.69
+2023-06-21,Regensburg,Süßigkeiten,Schokolade,Lindt,21.02
+2023-11-24,Calw,Süßigkeiten,Cookies,Süßwarengeschäft,21.07
+2023-08-14,Griesbach Rottal,Süßigkeiten,Macarons,Lindt,35.16
+2023-02-24,Zossen,Essen & Trinken,Dinner im Steakhouse,Reichmann Zirme Stiftung & Co. KG Steakhouse,194.25
+2023-01-11,Oberviechtach,Mode,Designer Handtasche,Luxury Fashion,655.29
+2023-05-31,Berlin,Reisen,Spa Resort,Lufthansa,1845.15
+2023-10-25,Altötting,Technik,Smartphone,Saturn,1122.59
+2023-12-10,Griesbach Rottal,Reisen,Flugticket,Expedia,1747.48
+2023-07-10,Bruchsal,Mode,Kaschmir Pullover,Designer Boutique,327.59
+2023-05-05,Griesbach Rottal,Süßigkeiten,Schokolade,Süßwarengeschäft,28.06
+2023-06-26,Weimar,Reisen,Wellness Wochenende,Booking.com,1709.23
+2023-04-18,Wanzleben,Reisen,Flugticket,Travel Agency,1445.03
+2023-04-24,Bad Kissingen,Essen & Trinken,Food Delivery,Pizza Service,32.8
+2023-10-24,Gadebusch,Süßigkeiten,Gummibärchen,Süßwarengeschäft,22.65
+2023-03-21,Gera,Mode,Rock,C&A,39.89
+2023-01-04,Sonneberg,Technik,Gaming Equipment,Cyberport,1422.01
+2023-03-30,Feuchtwangen,Essen & Trinken,Dinner im Restaurant,Binner Restaurant,157.17
+2023-09-22,Meiningen,Reisen,Flugticket,Lufthansa,166.97
+2023-08-25,Naila,Süßigkeiten,Pralinen,Lindt,20.22
+2023-09-26,Grimmen,Technik,Gaming Equipment,Saturn,1757.9
+2023-02-24,Diepholz,Essen & Trinken,Dinner im Restaurant,Karz Restaurant,173.93
+2023-03-09,Magdeburg,Technik,Kamera,Media Markt,1578.08
+2023-08-07,Sömmerda,Technik,Smartwatch,Apple Store,2146.23
+2023-08-18,Pritzwalk,Beauty,Catrice Eyeshadow,Müller,74.32
+2023-12-31,Norden,Mode,Stiefel,C&A,55.67
+2023-08-09,Neuruppin,Süßigkeiten,Cupcakes,Ferrero,10.26
+2023-09-29,Zossen,Technik,Tablet,Apple Store,666.48
+2023-10-26,Grevesmühlen,Beauty,Viktor & Rolf Flowerbomb,Sephora,293.65
+2023-02-04,Oberviechtach,Mode,T-Shirt,C&A,202.59
+2023-09-03,Wittenberg,Süßigkeiten,Cupcakes,Bäckerei,19.34
+2023-05-10,Ochsenfurt,Süßigkeiten,Pralinen,Ferrero,13.22
+2023-08-09,Vilsbiburg,Mode,Seidenbluse,Designer Boutique,606.59
+2023-05-14,Burg,Beauty,Tom Ford Black Orchid,Beauty Store,250.78
+2023-08-09,Amberg,Reisen,City Trip,Expedia,1949.47
+2023-01-30,Bad Kreuznach,Technik,Kopfhörer,Apple Store,1660.65
+2023-04-14,Wetzlar,Essen & Trinken,Dinner im Bistro,Kreusel GbR Bistro,171.14
+2023-06-30,Miltenberg,Essen & Trinken,Dinner im Brasserie,Scholtz Brasserie,113.08
+2023-09-03,Lemgo,Essen & Trinken,Dinner im Restaurant,Reichmann Holzapfel KG Restaurant,140.73
+2023-08-15,Aue,Süßigkeiten,Cupcakes,Ferrero,16.28
+2023-11-19,Schwarzenberg,Technik,Kopfhörer,Apple Store,2240.73
+2023-01-09,Crailsheim,Beauty,Catrice Eyeshadow,Müller,101.42
+2023-07-14,Großenhain,Hobbies,Golf,Finke Studio,318.41
+2023-08-19,Griesbach Rottal,Mode,Kaschmir Pullover,Luxury Fashion,629.53
+2023-06-20,Freising,Hobbies,Schwimmen,Radisch GmbH Studio,40.27
+2023-06-28,Neubrandenburg,Essen & Trinken,Dinner im Bistro,Vollbrecht GmbH Bistro,140.92
+2023-05-17,Soltau,Essen & Trinken,Dinner im Weinbar,Gorlitz GmbH Weinbar,125.13
+2023-04-16,Biedenkopf,Reisen,Mietwagen,Spa Resort,469.54
+2023-01-13,Fallingbostel,Beauty,NYX Eyeliner,Rossmann,68.82
+2023-07-02,Teterow,Mode,Rock,Mango,65.76
+2023-10-05,Gera,Hobbies,Fitness Studio,Krebs GmbH Studio,164.69
+2023-05-20,Eutin,Hobbies,Schwimmen,Karge Studio,26.39
+2023-07-25,Artern,Essen & Trinken,Dinner im Steakhouse,Kusch GmbH Steakhouse,180.27
+2023-03-23,Klötze,Essen & Trinken,Dinner im Italiener,Weimer GmbH Italiener,169.39
+2023-04-22,Rottweil,Mode,Designer Handtasche,Galeria Kaufhof,461.4
+2023-07-30,Nauen,Reisen,Mietwagen,Lufthansa,649.65
+2023-09-30,Gunzenhausen,Mode,Kleid,C&A,197.45
+2023-01-31,Leipziger Land,Reisen,Mietwagen,Spa Resort,804.06
+2023-10-04,Kelheim,Süßigkeiten,Gummibärchen,Bäckerei,14.02
+2023-02-18,Leipziger Land,Technik,Kamera,Cyberport,1175.54
+2023-03-25,Mainburg,Mode,Pullover,Mango,225.29
+2023-04-23,Rochlitz,Essen & Trinken,Dinner im Steakhouse,Langern Fiebig OHG mbH Steakhouse,160.56
+2023-04-04,Wanzleben,Mode,Designer Schuhe,Galeria Kaufhof,681.05
+2023-10-22,Schongau,Mode,Rock,Mango,207.31
+2023-02-25,Haldensleben,Süßigkeiten,Schokolade,Ferrero,37.58
+2023-11-16,Bersenbrück,Süßigkeiten,Cupcakes,Bäckerei,27.85
+2023-07-08,Sebnitz,Beauty,NYX Eyeliner,Müller,33.88
+2023-01-08,Uffenheim,Essen & Trinken,Food Delivery,Food Delivery,39.63
+2023-01-09,Schlüchtern,Hobbies,Spa Tag,Köster Studio,285.06
+2023-07-27,Schlüchtern,Mode,Luxus Sonnenbrille,Designer Boutique,503.1
+2023-01-17,Wolfach,Beauty,Hermès Twilly,Parfümerie,239.87
+2023-03-13,Bergzabern,Mode,Designer Handtasche,Luxury Fashion,684.96
+2023-02-09,Delitzsch,Essen & Trinken,Dinner im Café,Gnatz Café,114.65
+2023-10-14,Neu-Ulm,Technik,Gaming Equipment,Saturn,234.24
+2023-11-21,Füssen,Beauty,Viktor & Rolf Flowerbomb,Sephora,184.79
+2023-03-10,Crailsheim,Hobbies,Pilates,Mülichen GmbH Studio,336.57
+2023-08-28,Stollberg,Hobbies,Golf,Steinberg Studio,126.03
+2023-03-17,Jessen,Mode,T-Shirt,Peek & Cloppenburg,76.08
+2023-02-21,Anklam,Hobbies,Massage,Lehmann Studio,60.0
+2023-11-02,Kassel,Reisen,Flugticket,Travel Agency,925.28
+2023-11-10,Dinslaken,Reisen,Flugticket,Booking.com,1745.85
+2023-03-24,Rastatt,Beauty,Tom Ford Eyeshadow,Beauty Boutique,283.42
+2023-05-23,Paderborn,Reisen,Flugticket,Lufthansa,521.96
+2023-03-07,Belzig,Mode,Luxus Sonnenbrille,Designer Boutique,746.6
+2023-03-07,Bad Liebenwerda,Reisen,City Trip,Lufthansa,810.64
+2023-12-25,Ebern,Essen & Trinken,Dinner im Café,Bender Café,80.44
+2023-07-07,Ansbach,Technik,Lautsprecher,Saturn,807.72
+2023-11-27,Celle,Mode,Luxus Sonnenbrille,Breuninger,360.27
+2023-12-08,Döbeln,Essen & Trinken,Dinner im Weinbar,Eckbauer Anders AG Weinbar,170.17
+2023-06-13,Schwarzenberg,Mode,Seidenbluse,Luxury Fashion,409.1
+2023-12-24,Parchim,Technik,Kamera,Saturn,1861.41
+2023-10-15,Konstanz,Essen & Trinken,Getränke in Weinprobe,Eva-Maria's Weinprobe,65.99
+2023-05-07,Teterow,Technik,Kopfhörer,Alternate,416.62
+2023-08-04,Celle,Mode,T-Shirt,C&A,100.54
+2023-07-28,Iserlohn,Hobbies,Schwimmen,Riehl Studio,190.47
+2023-04-28,Saarlouis,Reisen,Flugticket,Expedia,1179.34
+2023-02-14,Berlin,Süßigkeiten,Cupcakes,Confiserie,14.12
+2023-06-30,Weißwasser,Technik,Smartwatch,Media Markt,1232.18
+2023-04-27,Döbeln,Technik,Kopfhörer,Media Markt,1674.2
+2023-07-23,Bad Liebenwerda,Beauty,Gesichtsmaske,dm,113.53
+2023-02-07,Grevesmühlen,Essen & Trinken,Food Delivery,Lieferando,37.13
+2023-07-15,Saarbrücken,Technik,Lautsprecher,Alternate,126.6
+2023-05-17,Burgdorf,Süßigkeiten,Cupcakes,Bäckerei,25.57
+2023-01-12,Osterode am Harz,Technik,Laptop,Media Markt,2230.8
+2023-06-07,Stadtroda,Reisen,City Trip,Expedia,1753.55
+2023-07-21,Lemgo,Hobbies,Yoga Kurs,Boucsein Studio,256.1
+2023-08-18,Belzig,Essen & Trinken,Dinner im Italiener,Flantz Italiener,157.07
+2023-03-21,Delitzsch,Technik,Gaming Equipment,Media Markt,1647.33
+2023-03-14,Greiz,Hobbies,Spa Tag,Wesack GbR Studio,81.86
+2023-07-05,Sternberg,Reisen,Wellness Wochenende,Spa Resort,442.78
+2023-06-19,Hainichen,Technik,Laptop,Saturn,467.49
+2023-03-11,Wolfratshausen,Süßigkeiten,Macarons,Ferrero,10.15
+2023-05-18,Schwäbisch Hall,Beauty,Tom Ford Black Orchid,Beauty Store,182.98
+2023-12-06,Parchim,Beauty,YSL Mascara,Beauty Boutique,190.43
+2023-01-27,Anklam,Süßigkeiten,Schokolade,Süßwarengeschäft,15.02
+2023-10-08,Seelow,Hobbies,Schwimmen,Briemer KG Studio,136.99
+2023-10-25,Göttingen,Hobbies,Schwimmen,Kruschwitz Weiß e.V. Studio,196.8
+2023-02-07,Zossen,Essen & Trinken,Dinner im Weinbar,Junken Weinbar,107.16
+2023-06-16,Angermünde,Reisen,Mietwagen,Travel Agency,1083.4
+2023-11-16,Wolfratshausen,Hobbies,Golf,Patberg Studio,142.18
+2023-09-26,Wetzlar,Mode,Designer Handtasche,Breuninger,459.58
+2023-10-28,Osterburg,Essen & Trinken,Dinner im Sushi Bar,Oderwald KG Sushi Bar,115.76
+2023-01-26,Lüdenscheid,Süßigkeiten,Schokolade,Ferrero,15.65
+2023-01-12,Schlüchtern,Mode,Sneaker,C&A,246.5
+2023-03-13,Heiligenstadt,Essen & Trinken,Dinner im Weinbar,Kranz KG Weinbar,102.37
+2023-05-12,Schongau,Süßigkeiten,Macarons,Süßwarengeschäft,28.01
+2023-10-30,Eichstätt,Essen & Trinken,Getränke in Coffee Shop,Danica's Coffee Shop,72.89
+2023-10-21,Saarbrücken,Mode,Luxus Sonnenbrille,Breuninger,739.95
+2023-11-26,Gadebusch,Beauty,Catrice Eyeshadow,dm,33.27
+2023-09-26,Lichtenfels,Mode,Seidenbluse,Breuninger,306.88
+2023-07-16,Dresden,Hobbies,Tennis,Koch II Studio,279.56
+2023-10-29,Lübz,Mode,Designer Handtasche,Galeria Kaufhof,642.17
+2023-09-23,Wesel,Reisen,Wellness Wochenende,Expedia,909.45
+2023-02-13,Greiz,Essen & Trinken,Getränke in Coffee Shop,Isabelle's Coffee Shop,74.67
+2023-12-06,Chemnitz,Essen & Trinken,Dinner im Sushi Bar,Heuser Lindner Stiftung & Co. KGaA Sushi Bar,159.94
+2023-10-17,Suhl,Essen & Trinken,Dinner im Café,Henk GmbH Café,130.87
+2023-06-23,Fallingbostel,Mode,Kaschmir Pullover,Luxury Fashion,401.81
+2023-05-09,Gera,Süßigkeiten,Macarons,Confiserie,10.65
+2023-04-11,Iserlohn,Hobbies,Tennis,Lange Speer AG Studio,315.67
+2023-03-17,Ravensburg,Hobbies,Yoga Kurs,Wilmsen KG Studio,242.63
+2023-06-15,Finsterwalde,Reisen,City Trip,Travel Agency,1165.06
+2023-12-23,Kyritz,Mode,Sneaker,C&A,163.08
+2023-01-15,Güstrow,Mode,Pullover,C&A,273.83
+2023-06-02,Cloppenburg,Reisen,Flugticket,Booking.com,482.05
+2023-04-12,Seelow,Süßigkeiten,Cookies,Ferrero,35.37
+2023-05-16,Mühlhausen,Technik,Lautsprecher,Apple Store,1780.96
+2023-03-11,Niesky,Süßigkeiten,Cupcakes,Ferrero,33.52
+2023-10-09,Grafenau,Mode,Stiefel,H&M,294.28
+2023-04-23,Calw,Süßigkeiten,Cupcakes,Confiserie,11.29
+2023-04-04,Eggenfelden,Süßigkeiten,Macarons,Ferrero,28.78
+2023-10-09,Görlitz,Beauty,Viktor & Rolf Flowerbomb,Douglas,252.86
+2023-01-12,Berlin,Süßigkeiten,Macarons,Ferrero,39.29
+2023-05-03,Parsberg,Technik,Kamera,Media Markt,51.29
+2023-12-30,Helmstedt,Beauty,Sonnencreme,Müller,40.27
+2023-12-01,Wittenberg,Süßigkeiten,Schokolade,Confiserie,25.57
+2023-10-31,Säckingen,Essen & Trinken,Dinner im Italiener,Häring Lachmann e.V. Italiener,153.85
+2023-11-03,Mettmann,Essen & Trinken,Dinner im Restaurant,Austermühle Nette KGaA Restaurant,106.6
+2023-02-13,Neustadt am Rübenberge,Reisen,Wellness Wochenende,Travel Agency,845.46
+2023-04-08,Regen,Beauty,Sonnencreme,Apotheke,54.14
+2023-09-18,Kulmbach,Technik,Gaming Equipment,Saturn,902.31
+2023-03-27,Oberviechtach,Essen & Trinken,Dinner im Sushi Bar,Siering Schäfer GmbH & Co. OHG Sushi Bar,98.08
+2023-05-08,Rottweil,Hobbies,Tennis,Mohaupt GmbH Studio,124.4
+2023-09-05,Wolfenbüttel,Beauty,NYX Eyeliner,Rossmann,77.2
+2023-07-15,Freising,Beauty,Dior J'adore,Parfümerie,265.38
+2023-10-28,Grimma,Reisen,Mietwagen,Booking.com,1266.82
+2023-07-18,Neustrelitz,Essen & Trinken,Essen im Bistro,Siering Bistro,77.48
+2023-09-30,Lüneburg,Reisen,City Trip,Expedia,1521.55
+2023-06-02,Schwabmünchen,Süßigkeiten,Macarons,Ferrero,34.84
+2023-02-04,Gelnhausen,Essen & Trinken,Dinner im Restaurant,Gute Restaurant,161.69
+2023-03-24,Bad Kreuznach,Essen & Trinken,Dinner im Brasserie,Kraus Brasserie,175.42
+2023-04-13,Zossen,Mode,Blazer,C&A,73.88
+2023-06-07,Iserlohn,Hobbies,Pilates,Schlosser van der Dussen Stiftung & Co. KGaA Studio,326.69
+2023-03-11,Günzburg,Beauty,Viktor & Rolf Flowerbomb,Parfümerie,260.02
+2023-09-11,Olpe,Reisen,Hotel,Lufthansa,1354.02
+2023-06-25,Mettmann,Süßigkeiten,Schokolade,Lindt,21.4
+2023-08-10,Mellrichstadt,Mode,Jeans,Mango,228.07
+2023-05-18,Halberstadt,Süßigkeiten,Macarons,Lindt,16.72
+2023-08-14,Bruchsal,Beauty,Peeling,Müller,84.6
+2023-02-14,Sankt Goar,Hobbies,Spa Tag,Rudolph Lindner GmbH & Co. OHG Studio,83.07
+2023-08-04,Starnberg,Essen & Trinken,Getränke in Weinprobe,Marie-Therese's Weinprobe,66.45
+2023-09-13,Füssen,Mode,Rock,H&M,292.96
+2023-10-27,Miesbach,Mode,Seidenbluse,Galeria Kaufhof,749.93
+2023-04-16,Genthin,Süßigkeiten,Pralinen,Confiserie,19.82
+2023-06-11,Pirmasens,Essen & Trinken,Dinner im Italiener,Mude Italiener,141.24
+2023-07-08,Cottbus,Reisen,Spa Resort,Spa Resort,105.92
+2023-11-06,Pasewalk,Mode,Kleid,Peek & Cloppenburg,280.24
+2023-11-07,Pfaffenhofen an der Ilm,Reisen,City Trip,Booking.com,1039.39
+2023-01-24,Lörrach,Mode,Luxus Sonnenbrille,Galeria Kaufhof,757.37
+2023-01-21,Wunsiedel,Essen & Trinken,Dinner im Italiener,Oestrovsky GmbH Italiener,198.38
+2023-02-19,Tecklenburg,Süßigkeiten,Schokolade,Süßwarengeschäft,5.15
+2023-02-05,Mainburg,Hobbies,Schwimmen,Sontag AG Studio,396.27
+2023-07-07,Herford,Mode,Designer Handtasche,Galeria Kaufhof,470.64
+2023-05-11,Kelheim,Mode,Luxus Sonnenbrille,Luxury Fashion,559.44
+2023-02-02,Crailsheim,Hobbies,Golf,Drubin Hermann GmbH Studio,271.74
+2023-05-06,Parchim,Technik,Lautsprecher,Cyberport,2121.11
+2023-05-24,Malchin,Süßigkeiten,Gummibärchen,Süßwarengeschäft,10.21
+2023-08-31,Grimmen,Technik,Smartwatch,Saturn,642.77
+2023-03-30,Stuttgart,Mode,Designer Handtasche,Galeria Kaufhof,718.22
+2023-10-10,Eisenberg,Essen & Trinken,Essen im Steakhouse,Matthäi e.V. Steakhouse,50.1
+2023-11-20,Suhl,Reisen,Hotel,Lufthansa,1948.66
+2023-05-20,Prenzlau,Reisen,City Trip,Travel Agency,997.36
+2023-06-30,Staffelstein,Beauty,Feuchtigkeitscreme,Rossmann,20.68
+2023-06-06,Weißwasser,Süßigkeiten,Schokolade,Confiserie,18.4
+2023-02-26,Ebermannstadt,Beauty,Chanel No. 5,Sephora,194.29
+2023-11-11,Cottbus,Technik,Smartwatch,Apple Store,2461.97
+2023-08-30,Naila,Technik,Tablet,Apple Store,1165.1
+2023-03-29,Gütersloh,Hobbies,Massage,Sager Studio,322.72
+2023-10-11,Osterode am Harz,Technik,Tablet,Apple Store,1735.39
+2023-09-03,Gadebusch,Essen & Trinken,Essen im Weinbar,Bolzmann Striebitz GmbH Weinbar,49.16
+2023-11-25,Arnstadt,Hobbies,Golf,Speer KG Studio,64.42
+2023-11-14,Griesbach Rottal,Essen & Trinken,Getränke in Champagner Lounge,Lorenzo's Champagner Lounge,73.59
+2023-10-08,Burgdorf,Hobbies,Tennis,Eberth Ladeck KG Studio,276.31
+2023-10-30,Badibling,Hobbies,Spa Tag,Häring Studio,384.69
+2023-10-17,Gera,Beauty,Feuchtigkeitscreme,Apotheke,25.95
+2023-04-23,Eisleben,Beauty,Gesichtsreiniger,Rossmann,85.91
+2023-03-28,Ebersberg,Hobbies,Pilates,Mälzer Paffrath KGaA Studio,130.05
+2023-03-08,Jülich,Beauty,Tom Ford Eyeshadow,Sephora,190.11
+2023-02-08,Zschopau,Süßigkeiten,Schokolade,Süßwarengeschäft,33.03
+2023-01-30,Böblingen,Technik,Kamera,Media Markt,2089.32
+2023-07-09,Guben,Reisen,Mietwagen,Spa Resort,1173.05
+2023-11-27,Bad Kissingen,Hobbies,Massage,Stiffel AG Studio,315.33
+2023-06-25,Pasewalk,Technik,Laptop,Cyberport,2289.04
+2023-06-14,Melsungen,Beauty,L'Oréal Foundation,Douglas,39.03
+2023-08-29,Senftenberg,Technik,Kopfhörer,Cyberport,1033.64
+2023-12-31,Finsterwalde,Süßigkeiten,Cookies,Bäckerei,36.2
+2023-06-17,Bad Kreuznach,Beauty,Dior J'adore,Sephora,171.38
+2023-12-24,Sömmerda,Essen & Trinken,Dinner im Steakhouse,Eimer Vollbrecht GbR Steakhouse,170.25
+2023-03-01,Burglengenfeld,Essen & Trinken,Getränke in Rooftop Bar,Jasmin's Rooftop Bar,40.12
+2023-08-27,Paderborn,Süßigkeiten,Schokolade,Confiserie,31.38
+2023-05-31,Hofgeismar,Beauty,Dior J'adore,Beauty Store,283.71
+2023-06-20,Soltau,Hobbies,Schwimmen,Harloff KGaA Studio,229.96
+2023-12-27,Augsburg,Mode,T-Shirt,Zara,102.57
+2023-10-18,Pasewalk,Reisen,Flugticket,Booking.com,788.37
+2023-07-23,Mettmann,Mode,Kaschmir Pullover,Luxury Fashion,706.05
+2023-05-04,Waldmünchen,Essen & Trinken,Dinner im Brasserie,Trupp Kruschwitz GbR Brasserie,193.72
+2023-03-29,Badibling,Beauty,Sonnencreme,Apotheke,146.12
+2023-02-03,Günzburg,Technik,Kamera,Media Markt,1211.12
+2023-10-12,Aurich,Mode,Designer Schuhe,Designer Boutique,750.7
+2023-09-09,Tecklenburg,Technik,Tablet,Cyberport,601.51
+2023-11-04,Gadebusch,Reisen,Flugticket,Travel Agency,702.24
+2023-10-22,Lobenstein,Mode,Jeans,Zara,260.36
+2023-10-21,Borna,Technik,Smartwatch,Saturn,1302.35
+2023-10-14,Soltau,Technik,Gaming Equipment,Cyberport,1771.67
+2023-06-13,Fürstenfeldbruck,Reisen,Spa Resort,Booking.com,800.75
+2023-08-16,Geldern,Beauty,Tom Ford Eyeshadow,Parfümerie Pieper,248.97
+2023-12-30,Lemgo,Essen & Trinken,Dinner im Weinbar,Bolnbach Atzler GmbH Weinbar,156.29
+2023-09-04,Roding,Technik,Kamera,Cyberport,1384.66
+2023-12-27,Seelow,Reisen,Wellness Wochenende,Booking.com,154.04
+2023-12-12,Göppingen,Beauty,Hermès Twilly,Beauty Store,213.04
+2023-05-25,Miesbach,Essen & Trinken,Dinner im Restaurant,Etzler GbR Restaurant,125.17
+2023-07-06,Moers,Beauty,Tom Ford Eyeshadow,Douglas,216.06
+2023-06-21,Pritzwalk,Beauty,Maybelline Mascara,Müller,88.86
+2023-02-09,Zeulenroda,Mode,T-Shirt,H&M,31.47
+2023-02-25,Hohenstein-Ernstthal,Technik,Tablet,Cyberport,2222.23
+2023-09-21,Oranienburg,Süßigkeiten,Macarons,Bäckerei,35.33
+2023-11-05,Grevenbroich,Hobbies,Golf,Heydrich GmbH & Co. KGaA Studio,155.74
+2023-10-25,Hildesheim,Hobbies,Massage,Geisel GmbH & Co. KG Studio,68.71
+2023-04-08,Königs Wusterhausen,Essen & Trinken,Dinner im Italiener,Fiebig Trupp KG Italiener,99.32
+2023-12-03,Calau,Mode,Designer Handtasche,Breuninger,747.35
+2023-01-08,Potsdam,Süßigkeiten,Cupcakes,Confiserie,8.62
+2023-08-12,Viechtach,Reisen,Spa Resort,Spa Resort,950.13
+2023-12-23,Vilsbiburg,Mode,Rock,Zara,138.2
+2023-01-08,Haldensleben,Reisen,Wellness Wochenende,Booking.com,393.19
+2023-08-08,Emmendingen,Hobbies,Schwimmen,Martin Stiftung & Co. KG Studio,256.5
+2023-02-22,Strausberg,Technik,Gaming Equipment,Media Markt,2119.93
+2023-10-08,Altötting,Hobbies,Pilates,Metz Studio,338.87
+2023-07-23,Amberg,Hobbies,Tennis,Juncken Studio,228.74
+2023-09-11,Geithain,Essen & Trinken,Food Delivery,Pizza Service,26.32
+2023-01-13,Meppen,Beauty,Feuchtigkeitscreme,Apotheke,27.4
+2023-02-22,Bad Mergentheim,Technik,Smartphone,Apple Store,655.61
+2023-03-13,Neuss,Essen & Trinken,Dinner im Restaurant,Weinhage Junk AG & Co. KGaA Restaurant,129.24
+2023-07-04,Witzenhausen,Reisen,City Trip,Booking.com,1712.77
+2023-05-23,Hildesheim,Reisen,Mietwagen,Booking.com,1907.02
+2023-03-03,Cottbus,Hobbies,Yoga Kurs,Segebahn Studio,269.05
+2023-03-16,Dieburg,Mode,Designer Schuhe,Galeria Kaufhof,775.89
+2023-03-09,Rostock,Reisen,City Trip,Spa Resort,1807.96
+2023-09-14,Bad Langensalza,Mode,Kaschmir Pullover,Luxury Fashion,377.42
+2023-10-13,Hainichen,Reisen,Flugticket,Expedia,284.44
+2023-01-18,Steinfurt,Technik,Lautsprecher,Apple Store,1715.89
+2023-08-12,Eisleben,Technik,Tablet,Cyberport,1020.22
+2023-01-03,Fürstenwalde,Mode,Seidenbluse,Luxury Fashion,565.21
+2023-07-22,Tecklenburg,Beauty,Feuchtigkeitscreme,Apotheke,118.85
+2023-07-26,Pirmasens,Süßigkeiten,Pralinen,Süßwarengeschäft,6.69
+2023-05-05,Staßfurt,Technik,Lautsprecher,Conrad,292.18
+2023-08-15,Hohenmölsen,Essen & Trinken,Getränke in Weinprobe,Elvira's Weinprobe,62.05
+2023-06-09,Lippstadt,Süßigkeiten,Gummibärchen,Lindt,10.89
+2023-03-21,Diepholz,Essen & Trinken,Dinner im Weinbar,Christoph Weinbar,135.05
+2023-10-04,Dinslaken,Süßigkeiten,Cupcakes,Bäckerei,23.97
+2023-06-22,Parsberg,Mode,Seidenbluse,Galeria Kaufhof,551.67
+2023-11-27,Tirschenreuth,Süßigkeiten,Schokolade,Ferrero,37.11
+2023-11-10,Bad Kissingen,Essen & Trinken,Dinner im Bistro,Fliegner Boucsein GbR Bistro,174.58
+2023-10-01,Herzberg,Technik,Gaming Equipment,Saturn,621.04
+2023-10-19,Ilmenau,Reisen,Wellness Wochenende,Expedia,1066.64
+2023-10-03,Dieburg,Essen & Trinken,Dinner im Weinbar,Ullrich GmbH & Co. KG Weinbar,114.42
+2023-12-27,Augsburg,Beauty,Peeling,Rossmann,91.5
+2023-04-29,Celle,Technik,Kamera,Apple Store,2405.43
+2023-08-09,Hettstedt,Hobbies,Spa Tag,Bender OHG mbH Studio,197.54
+2023-02-09,Erding,Mode,Seidenbluse,Luxury Fashion,770.52
+2023-05-27,Hohenstein-Ernstthal,Süßigkeiten,Pralinen,Süßwarengeschäft,27.05
+2023-11-02,Zschopau,Süßigkeiten,Gummibärchen,Confiserie,33.35
+2023-03-22,Oberviechtach,Essen & Trinken,Food Delivery,Pizza Service,15.07
+2023-08-26,Eilenburg,Mode,Designer Handtasche,Breuninger,469.6
+2023-05-05,Halberstadt,Süßigkeiten,Gummibärchen,Bäckerei,18.6
+2023-05-15,Artern,Mode,Sneaker,Zara,184.82
+2023-07-01,Pegnitz,Süßigkeiten,Cookies,Bäckerei,24.83
+2023-10-14,Burg,Mode,Stiefel,C&A,81.54
+2023-07-20,Badoberan,Technik,Laptop,Saturn,1602.03
+2023-03-15,Wolfach,Hobbies,Golf,Plath Birnbaum GmbH Studio,114.61
+2023-06-25,Bersenbrück,Beauty,Serum,Rossmann,29.23
+2023-03-17,Greifswald,Technik,Smartphone,Media Markt,2337.82
+2023-06-30,Meppen,Süßigkeiten,Gummibärchen,Ferrero,21.16
+2023-07-30,Oberviechtach,Mode,T-Shirt,Mango,266.52
+2023-03-20,Königs Wusterhausen,Technik,Lautsprecher,Saturn,2298.04
+2023-04-08,Wanzleben,Essen & Trinken,Essen im Café,Seip GmbH & Co. OHG Café,72.65
+2023-11-16,Hagenow,Beauty,NYX Eyeliner,dm,93.21
+2023-06-15,Stollberg,Technik,Kopfhörer,Media Markt,716.27
+2023-06-26,Schwäbisch Hall,Technik,Kopfhörer,Apple Store,513.7
+2023-03-03,Olpe,Essen & Trinken,Dinner im Brasserie,Weinhage Brasserie,104.08
+2023-08-24,Amberg,Beauty,Essence Lipstick,Rossmann,59.19
+2023-09-12,Regensburg,Süßigkeiten,Gummibärchen,Ferrero,32.68
+2023-01-22,Meppen,Reisen,Mietwagen,Lufthansa,1057.21
+2023-12-25,Düren,Hobbies,Schwimmen,Hornich Weller Stiftung & Co. KG Studio,198.97
+2023-07-19,Bützow,Hobbies,Golf,Ritter GmbH & Co. KGaA Studio,235.79
+2023-02-06,Halberstadt,Reisen,Spa Resort,Booking.com,398.69
+2023-11-25,Schlüchtern,Süßigkeiten,Macarons,Bäckerei,38.73
+2023-10-11,Hohenmölsen,Reisen,Mietwagen,Lufthansa,1786.2
+2023-01-22,Freital,Reisen,Flugticket,Booking.com,1479.81
+2023-03-29,Warendorf,Hobbies,Golf,Nerger Bender GmbH Studio,59.29
+2023-03-05,Bad Freienwalde,Süßigkeiten,Macarons,Lindt,20.31
+2023-10-26,Sankt Goarshausen,Süßigkeiten,Macarons,Confiserie,29.92
+2023-12-04,Quedlinburg,Hobbies,Fitness Studio,Margraf Studio,395.86
+2023-10-01,Celle,Technik,Smartphone,Saturn,977.29
+2023-05-17,Lüdenscheid,Beauty,Hermès Twilly,Parfümerie,261.71
+2023-07-21,Rudolstadt,Essen & Trinken,Food Delivery,Lieferando,20.14
+2023-02-08,Saarbrücken,Mode,Pullover,Zara,184.54
+2023-04-21,Pirmasens,Beauty,YSL Mascara,Parfümerie Pieper,271.51
+2023-06-27,Neunburg vorm Wald,Beauty,Tom Ford Eyeshadow,Beauty Boutique,245.18
+2023-06-30,Querfurt,Reisen,Mietwagen,Lufthansa,1629.6
+2023-07-30,Augsburg,Mode,Designer Handtasche,Designer Boutique,338.9
+2023-05-12,Aue,Hobbies,Tennis,Niemeier GmbH & Co. KGaA Studio,147.72
+2023-10-18,Wanzleben,Reisen,Flugticket,Booking.com,1888.31
+2023-01-17,Meißen,Mode,Luxus Sonnenbrille,Designer Boutique,507.61
+2023-06-05,Bruchsal,Reisen,City Trip,Booking.com,412.05
+2023-12-16,Geldern,Technik,Gaming Equipment,Cyberport,738.12
+2023-01-13,Delitzsch,Mode,Luxus Sonnenbrille,Designer Boutique,356.41
+2023-08-17,Haldensleben,Technik,Smartphone,Apple Store,773.17
+2023-05-30,Rathenow,Technik,Tablet,Saturn,2248.03
+2023-05-09,Halberstadt,Mode,Seidenbluse,Luxury Fashion,664.5
+2023-09-25,Mallersdorf,Hobbies,Yoga Kurs,Paffrath Stiftung & Co. KG Studio,342.02
+2023-08-04,Merseburg,Mode,Luxus Sonnenbrille,Luxury Fashion,432.99
+2023-01-26,Demmin,Reisen,Flugticket,Travel Agency,891.97
+2023-11-03,Euskirchen,Beauty,Maybelline Mascara,dm,140.88
+2023-08-01,Bad Freienwalde,Beauty,Serum,Apotheke,23.01
+2023-07-07,Cloppenburg,Reisen,Mietwagen,Travel Agency,1660.08
+2023-07-03,Aurich,Süßigkeiten,Schokolade,Bäckerei,25.29
+2023-08-26,Görlitz,Reisen,Spa Resort,Travel Agency,1239.49
+2023-08-23,Sternberg,Süßigkeiten,Macarons,Confiserie,18.18
+2023-04-11,Artern,Süßigkeiten,Cupcakes,Confiserie,25.53
+2023-03-30,Hagenow,Beauty,Dior J'adore,Sephora,199.79
+2023-11-25,Augsburg,Beauty,Gesichtsreiniger,Rossmann,140.38
+2023-06-27,Hechingen,Mode,Kaschmir Pullover,Luxury Fashion,794.25
+2023-04-22,Scheinfeld,Beauty,YSL Mascara,Parfümerie Pieper,290.69
+2023-05-07,Höxter,Süßigkeiten,Cookies,Lindt,13.38
+2023-07-21,Bogen,Reisen,Spa Resort,Booking.com,347.72
+2023-12-05,Merseburg,Mode,Seidenbluse,Breuninger,441.67
+2023-03-23,Büsingen am Hochrhein,Süßigkeiten,Schokolade,Ferrero,24.29
+2023-03-29,Brandenburg,Reisen,Spa Resort,Booking.com,1696.68
+2023-03-05,Geithain,Beauty,La Mer Concealer,Douglas,252.21
+2023-07-31,Halberstadt,Technik,Laptop,Saturn,1899.68
+2023-07-20,Freudenstadt,Technik,Kamera,Alternate,99.62
+2023-01-17,Jüterbog,Mode,Designer Schuhe,Luxury Fashion,592.97
+2023-10-01,Main-Höchst,Reisen,Mietwagen,Booking.com,275.19
+2023-09-14,Saarbrücken,Technik,Smartwatch,Cyberport,761.15
+2023-02-08,Ueckermünde,Essen & Trinken,Dinner im Steakhouse,Hecker Wagenknecht KGaA Steakhouse,164.88
+2023-01-17,Grafenau,Süßigkeiten,Macarons,Ferrero,14.36
+2023-12-03,Melle,Beauty,Chanel Foundation,Parfümerie Pieper,229.29
+2023-02-16,Burglengenfeld,Mode,Kleid,C&A,140.7
+2023-10-17,Main-Höchst,Technik,Kopfhörer,Saturn,1241.92
+2023-01-14,Goslar,Hobbies,Massage,Kuhl Studio,300.76
+2023-01-02,Hünfeld,Mode,Jeans,C&A,217.04
+2023-12-02,Osterode am Harz,Beauty,Chanel Foundation,Sephora,169.28
+2023-07-28,Soltau,Reisen,Mietwagen,Spa Resort,1825.93
+2023-06-19,Fallingbostel,Mode,Seidenbluse,Designer Boutique,714.72
+2023-06-19,Rehau,Hobbies,Schwimmen,Heydrich AG & Co. OHG Studio,154.23
+2023-01-18,Bitterfeld,Essen & Trinken,Dinner im Italiener,Seifert Italiener,161.16
+2023-01-09,Kemnath,Essen & Trinken,Dinner im Bistro,Heinz GmbH & Co. KG Bistro,190.28
+2023-07-27,Illertissen,Technik,Kopfhörer,Saturn,457.43
+2023-08-12,Erfurt,Hobbies,Spa Tag,Rogner Holsten GmbH Studio,318.29
+2023-10-24,Uelzen,Reisen,Flugticket,Booking.com,1795.95
+2023-09-03,Eilenburg,Süßigkeiten,Cookies,Ferrero,9.8
+2023-02-20,Beeskow,Hobbies,Pilates,Nette Börner GbR Studio,219.6
+2023-06-03,Lübeck,Technik,Kamera,Media Markt,2469.7
+2023-02-11,Marktheidenfeld,Hobbies,Tennis,Renner Mangold AG & Co. KG Studio,348.55
+2023-05-13,Wolfenbüttel,Technik,Smartphone,Cyberport,1650.99
+2023-10-06,Tecklenburg,Hobbies,Tennis,Pieper KGaA Studio,278.34
+2023-03-08,Burgdorf,Reisen,City Trip,Expedia,589.47
+2023-06-21,Marktheidenfeld,Beauty,Essence Lipstick,dm,117.27
+2023-06-20,Badoberan,Mode,Designer Schuhe,Designer Boutique,716.26
+2023-08-06,Vilsbiburg,Reisen,Mietwagen,Lufthansa,682.16
+2023-09-13,Bergzabern,Reisen,Spa Resort,Spa Resort,1178.44
+2023-08-30,Kelheim,Technik,Gaming Equipment,Saturn,853.71
+2023-11-09,Uelzen,Essen & Trinken,Dinner im Sushi Bar,Tlustek GmbH & Co. KG Sushi Bar,88.14
+2023-03-26,Potsdam,Beauty,Serum,Apotheke,136.62
+2023-08-11,Aurich,Beauty,Serum,Apotheke,63.53
+2023-09-22,Wurzen,Hobbies,Pilates,Heydrich Studio,306.21
+2023-06-03,Wanzleben,Essen & Trinken,Dinner im Café,Metz Freudenberger AG Café,195.8
+2023-09-13,Ahaus,Reisen,Mietwagen,Expedia,274.85
+2023-05-17,Schweinfurt,Hobbies,Tennis,Wulf Scholtz GmbH & Co. KG Studio,186.42
+2023-04-27,Neustadtner Waldnaab,Essen & Trinken,Dinner im Weinbar,Drub AG & Co. OHG Weinbar,119.39
+2023-09-14,Luckenwalde,Süßigkeiten,Cupcakes,Confiserie,34.66
+2023-02-20,Wolgast,Hobbies,Spa Tag,Beier Studio,89.74
+2023-07-20,Eutin,Technik,Smartwatch,Saturn,1898.06
+2023-04-13,Hagenow,Reisen,Hotel,Lufthansa,1116.76
+2023-03-03,Kronach,Mode,Luxus Sonnenbrille,Designer Boutique,780.8
+2023-01-05,Beeskow,Technik,Smartphone,Conrad,459.69
+2023-06-15,Lippstadt,Beauty,Gesichtsmaske,Rossmann,112.3
+2023-05-11,Pößneck,Beauty,Peeling,Müller,16.52
+2023-02-02,Wittenberg,Mode,Designer Schuhe,Designer Boutique,389.8
+2023-05-27,Kronach,Süßigkeiten,Macarons,Ferrero,17.25
+2023-11-14,Heinsberg,Technik,Smartphone,Cyberport,728.06
+2023-03-28,Cottbus,Technik,Laptop,Cyberport,1614.3
+2023-05-08,Lemgo,Beauty,Chanel No. 5,Beauty Store,256.45
+2023-03-20,Pfaffenhofen an der Ilm,Reisen,Hotel,Expedia,246.52
+2023-02-20,Rehau,Süßigkeiten,Schokolade,Ferrero,20.59
+2023-10-28,Heiligenstadt,Reisen,Wellness Wochenende,Expedia,843.24
+2023-12-30,Wittenberg,Hobbies,Pilates,Weiß Studio,238.33
+2023-10-31,Neustadt am Rübenberge,Hobbies,Tennis,Reichmann AG Studio,126.5
+2023-09-30,Stadtroda,Süßigkeiten,Macarons,Bäckerei,7.02
+2023-06-02,Dinkelsbühl,Essen & Trinken,Essen im Bistro,Stey GmbH & Co. OHG Bistro,73.0
+2023-12-05,Göttingen,Technik,Gaming Equipment,Apple Store,524.82
+2023-03-23,Rathenow,Hobbies,Yoga Kurs,Gumprich GmbH & Co. KG Studio,303.12
+2023-11-26,Hainichen,Hobbies,Golf,Metz Heinz AG Studio,336.39
+2023-07-05,Karlsruhe,Hobbies,Tennis,Reichmann Studio,203.62
+2023-05-11,Büsingen am Hochrhein,Technik,Tablet,Apple Store,655.71
+2023-10-14,Wolfratshausen,Technik,Laptop,Saturn,598.33
+2023-03-31,Sonneberg,Technik,Smartwatch,Cyberport,2444.57
+2023-12-22,Artern,Reisen,Flugticket,Spa Resort,1103.58
+2023-06-28,Günzburg,Reisen,Wellness Wochenende,Booking.com,164.28
+2023-12-15,Aue,Reisen,City Trip,Lufthansa,1316.83
+2023-04-06,Gadebusch,Reisen,Spa Resort,Spa Resort,401.46
+2023-01-22,Hammelburg,Hobbies,Yoga Kurs,Weinhold e.V. Studio,362.51
+2023-07-30,Hettstedt,Beauty,YSL Mascara,Parfümerie Pieper,275.11
+2023-12-17,Halberstadt,Beauty,Dior Rouge Lipstick,Douglas,167.23
+2023-06-02,Düren,Mode,Blazer,H&M,62.35
+2023-06-29,Jena,Technik,Laptop,Cyberport,2204.51
+2023-07-05,Uffenheim,Hobbies,Massage,Putz e.V. Studio,268.24
+2023-04-26,Fürstenfeldbruck,Essen & Trinken,Dinner im Steakhouse,Scheuermann Steakhouse,110.21
+2023-04-21,Kronach,Essen & Trinken,Dinner im Bistro,Hahn Häring KGaA Bistro,152.7
+2023-05-29,Ingolstadt,Essen & Trinken,Dinner im Brasserie,Klemm e.V. Brasserie,89.8
+2023-02-02,Delitzsch,Mode,Pullover,H&M,270.25
+2023-05-12,Calau,Beauty,YSL Mascara,Sephora,209.15
+2023-01-30,Roth,Essen & Trinken,Dinner im Steakhouse,Ullrich Klapp AG Steakhouse,88.96
+2023-09-15,Bischofswerda,Reisen,Hotel,Expedia,310.15
+2023-05-03,Wismar,Essen & Trinken,Essen im Restaurant,Spieß AG & Co. OHG Restaurant,50.29
+2023-08-17,Bogen,Hobbies,Massage,Dobes Studio,92.23
+2023-01-29,Sonneberg,Essen & Trinken,Getränke in Weinprobe,Mara's Weinprobe,75.09
+2023-04-04,Wismar,Reisen,Flugticket,Lufthansa,1390.99
+2023-07-22,Mettmann,Essen & Trinken,Food Delivery,Lieferando,23.4
+2023-06-09,Sulzbach-Rosenberg,Essen & Trinken,Dinner im Bistro,Hörle Nerger Stiftung & Co. KG Bistro,181.98
+2023-05-19,Hannover,Reisen,Flugticket,Booking.com,1728.02
+2023-03-04,Marienberg,Beauty,Peeling,Rossmann,98.05
+2023-03-06,Herford,Süßigkeiten,Cupcakes,Bäckerei,8.39
+2023-11-24,Hildburghausen,Beauty,NYX Eyeliner,dm,108.42
+2023-01-18,Prenzlau,Hobbies,Spa Tag,Mohaupt Liebelt GbR Studio,43.49
+2023-05-23,Gotha,Hobbies,Tennis,Wilms Studio,291.77
+2023-07-21,Kehl,Mode,Designer Schuhe,Galeria Kaufhof,427.36
+2023-11-28,Jessen,Reisen,City Trip,Expedia,1403.24
+2023-01-13,Lübz,Essen & Trinken,Dinner im Steakhouse,Süßebier Steakhouse,89.31
+2023-05-31,Teterow,Hobbies,Pilates,Förster Dobes GmbH & Co. KG Studio,332.33
+2023-04-23,Husum,Beauty,Essence Lipstick,Douglas,130.15
+2023-09-10,Hechingen,Reisen,Spa Resort,Travel Agency,1913.55
+2023-01-26,Saarlouis,Beauty,Peeling,Müller,27.65
+2023-04-17,Strausberg,Süßigkeiten,Cookies,Ferrero,9.06
+2023-05-28,Büsingen am Hochrhein,Essen & Trinken,Dinner im Brasserie,Heintze Brasserie,197.07
+2023-04-14,Stollberg,Mode,Designer Handtasche,Luxury Fashion,724.91
+2023-11-12,Gera,Süßigkeiten,Cookies,Ferrero,23.29
+2023-07-16,Auerbach,Beauty,Sonnencreme,Rossmann,143.13
+2023-08-15,Erding,Mode,Seidenbluse,Luxury Fashion,341.59
+2023-02-13,Pegnitz,Süßigkeiten,Pralinen,Lindt,16.53
+2023-11-18,Rothenburg ob der Tauber,Reisen,Mietwagen,Spa Resort,571.77
+2023-01-24,Calau,Essen & Trinken,Essen im Brasserie,Boucsein e.V. Brasserie,51.02
+2023-11-02,Bischofswerda,Technik,Laptop,Alternate,364.25
+2023-01-27,Jessen,Technik,Smartphone,Saturn,1996.59
+2023-08-09,Karlsruhe,Reisen,City Trip,Booking.com,301.18
+2023-04-18,Dachau,Süßigkeiten,Gummibärchen,Bäckerei,10.41
+2023-10-20,Schwarzenberg,Reisen,Spa Resort,Booking.com,1093.97
+2023-08-08,Schwerin,Süßigkeiten,Cupcakes,Bäckerei,17.12
+2023-11-13,Meppen,Technik,Tablet,Saturn,171.68
+2023-10-18,Grafenau,Süßigkeiten,Cookies,Lindt,12.24
+2023-12-15,Grimmen,Beauty,Viktor & Rolf Flowerbomb,Beauty Store,237.07
+2023-01-27,Rothenburg ob der Tauber,Süßigkeiten,Schokolade,Confiserie,36.83
+2023-09-08,Havelberg,Mode,Blazer,C&A,120.38
+2023-08-03,Hechingen,Mode,T-Shirt,Peek & Cloppenburg,114.07
+2023-03-29,Eisenhüttenstadt,Süßigkeiten,Pralinen,Ferrero,23.28
+2023-01-24,Sangerhausen,Essen & Trinken,Dinner im Restaurant,Salz Restaurant,89.27
+2023-05-08,Lobenstein,Technik,Lautsprecher,Saturn,1169.07
+2023-08-10,Rastatt,Essen & Trinken,Dinner im Bistro,Köster AG & Co. KGaA Bistro,157.74
+2023-08-09,Ingolstadt,Beauty,Chanel Foundation,Beauty Boutique,178.85
+2023-02-02,Sömmerda,Hobbies,Pilates,Heß GbR Studio,348.08
+2023-01-19,Rothenburg ob der Tauber,Süßigkeiten,Schokolade,Confiserie,19.17
+2023-03-09,Freudenstadt,Reisen,Mietwagen,Booking.com,132.28
+2023-02-08,Lichtenfels,Hobbies,Pilates,Haase Studio,137.2
+2023-08-19,Belzig,Technik,Smartwatch,Apple Store,1848.23
+2023-12-21,Oschatz,Beauty,NYX Eyeliner,Rossmann,56.11
+2023-05-28,Wolfach,Hobbies,Yoga Kurs,van der Dussen Stiebitz AG Studio,54.65
+2023-05-31,Hagenow,Hobbies,Tennis,Adler AG Studio,377.45
+2023-06-26,Delitzsch,Süßigkeiten,Cupcakes,Lindt,37.55
+2023-12-30,Herzberg,Reisen,Hotel,Lufthansa,1493.54
+2023-04-09,Vohenstrauß,Hobbies,Spa Tag,Gunpf Studio,323.56
+2023-07-15,Schwäbisch Gmünd,Technik,Gaming Equipment,Cyberport,847.13
+2023-09-28,Göttingen,Süßigkeiten,Cupcakes,Lindt,26.1
+2023-03-27,Hildesheim,Essen & Trinken,Dinner im Brasserie,Sölzer Sager GmbH Brasserie,107.3
+2023-02-25,Scheinfeld,Hobbies,Tennis,Kusch Werner KG Studio,179.85
+2023-11-22,Herzberg,Technik,Gaming Equipment,Media Markt,1179.47
+2023-07-17,Querfurt,Reisen,City Trip,Lufthansa,396.3
+2023-02-06,Eutin,Beauty,Gesichtsmaske,Müller,123.13
+2023-03-06,Aurich,Reisen,Spa Resort,Spa Resort,549.97
+2023-02-09,Hünfeld,Reisen,Hotel,Booking.com,880.4
+2023-07-13,Fürstenwalde,Technik,Smartwatch,Conrad,342.26
+2023-07-08,Stendal,Mode,Seidenbluse,Galeria Kaufhof,496.81
+2023-11-06,Klötze,Hobbies,Spa Tag,Anders GmbH Studio,111.22
+2023-06-22,Spremberg,Süßigkeiten,Cookies,Bäckerei,18.59
+2023-02-02,Eisenhüttenstadt,Reisen,Spa Resort,Travel Agency,1490.34
+2023-01-26,Amberg,Hobbies,Fitness Studio,Käster Studio,250.49
+2023-07-05,Düren,Beauty,Catrice Eyeshadow,Douglas,22.25
+2023-06-04,Bayreuth,Mode,Seidenbluse,Luxury Fashion,768.19
+2023-06-08,Rochlitz,Beauty,Dior Rouge Lipstick,Beauty Boutique,254.5
+2023-03-15,Ebern,Mode,Blazer,Mango,183.95
+2023-11-19,Kyritz,Technik,Smartwatch,Saturn,1098.8
+2023-12-13,Forchheim,Süßigkeiten,Cookies,Confiserie,36.48
+2023-07-26,Ansbach,Hobbies,Schwimmen,Hartung AG Studio,227.18
+2023-12-12,Norden,Reisen,City Trip,Travel Agency,1230.98
+2023-02-09,Anklam,Hobbies,Golf,Drub Studio,128.44
+2023-09-21,Helmstedt,Essen & Trinken,Food Delivery,Food Delivery,19.69
+2023-10-30,Hagenow,Süßigkeiten,Pralinen,Lindt,10.91
+2023-06-30,Mayen,Reisen,Wellness Wochenende,Lufthansa,1297.68
+2023-11-02,Halberstadt,Technik,Smartwatch,Cyberport,659.45
+2023-10-11,Gifhorn,Beauty,Peeling,dm,32.67
+2023-09-10,Northeim,Süßigkeiten,Cookies,Confiserie,24.37
+2023-05-06,Belzig,Technik,Gaming Equipment,Media Markt,1166.15
+2023-08-02,Gunzenhausen,Technik,Kopfhörer,Media Markt,1300.86
+2023-04-15,Miesbach,Mode,Blazer,Peek & Cloppenburg,91.96
+2023-09-08,Günzburg,Süßigkeiten,Macarons,Süßwarengeschäft,32.89
+2023-03-10,Bremervörde,Essen & Trinken,Food Delivery,Lieferando,34.25
+2023-02-24,Ludwigslust,Mode,Designer Handtasche,Galeria Kaufhof,469.42
+2023-12-01,Garmisch-Partenkirchen,Süßigkeiten,Schokolade,Bäckerei,10.99
+2023-12-22,Recklinghausen,Technik,Kopfhörer,Cyberport,697.81
+2023-11-28,Plauen,Mode,Designer Schuhe,Luxury Fashion,697.54
+2023-02-01,Bremen,Technik,Lautsprecher,Conrad,145.84
+2023-05-18,Neustadt am Rübenberge,Mode,Pullover,Peek & Cloppenburg,195.75
+2023-10-13,Schongau,Süßigkeiten,Gummibärchen,Bäckerei,38.6
+2023-10-16,Wolfach,Süßigkeiten,Gummibärchen,Ferrero,6.73
+2023-10-05,Uelzen,Mode,Designer Handtasche,Galeria Kaufhof,308.06
+2023-04-15,Kyritz,Technik,Smartwatch,Conrad,465.01
+2023-07-24,Güstrow,Reisen,City Trip,Expedia,359.49
+2023-11-04,Iserlohn,Essen & Trinken,Dinner im Restaurant,Hethur Restaurant,138.04
+2023-09-24,Lüdinghausen,Hobbies,Fitness Studio,Zahn KGaA Studio,108.22
+2023-06-07,Freising,Technik,Laptop,Saturn,1823.26
+2023-11-19,Gifhorn,Technik,Tablet,Conrad,154.49
+2023-06-04,Saulgau,Technik,Gaming Equipment,Cyberport,2281.22
+2023-02-24,Roth,Essen & Trinken,Dinner im Weinbar,Thies Hellwig GmbH & Co. OHG Weinbar,171.14
+2023-01-23,Kemnath,Hobbies,Fitness Studio,Schulz Studio,383.2
+2023-08-26,Jessen,Essen & Trinken,Food Delivery,Pizza Service,36.57
+2023-02-27,Pritzwalk,Technik,Kopfhörer,Apple Store,966.34
+2023-07-23,Augsburg,Mode,T-Shirt,Mango,208.59
+2023-08-05,Potsdam,Mode,Designer Handtasche,Luxury Fashion,384.78
+2023-04-20,Ingolstadt,Technik,Tablet,Media Markt,1458.58
+2023-05-16,Tirschenreuth,Beauty,Peeling,Müller,138.09
+2023-04-11,Niesky,Hobbies,Yoga Kurs,Gunpf Studio,83.02
+2023-08-01,Forst,Süßigkeiten,Cupcakes,Confiserie,9.96
+2023-08-01,Ludwigslust,Beauty,L'Oréal Foundation,Müller,92.25
+2023-11-11,Wesel,Süßigkeiten,Schokolade,Süßwarengeschäft,32.02
+2023-07-17,Brandenburg,Reisen,Spa Resort,Booking.com,1325.48
+2023-06-13,Jena,Hobbies,Schwimmen,Heinz Studio,250.73
+2023-12-19,Nordhausen,Mode,Kaschmir Pullover,Luxury Fashion,363.38
+2023-09-18,Aschaffenburg,Beauty,Gesichtsmaske,Rossmann,30.5
+2023-04-19,Merseburg,Essen & Trinken,Dinner im Weinbar,Lindau Weinbar,192.74
+2023-07-14,Zossen,Essen & Trinken,Dinner im Bistro,Schulz Bistro,85.24
+2023-03-18,Burglengenfeld,Essen & Trinken,Dinner im Italiener,Meister Anders KG Italiener,125.45
+2023-08-16,Beeskow,Essen & Trinken,Dinner im Restaurant,Holsten Restaurant,97.44
+2023-06-12,Goslar,Beauty,Serum,Apotheke,35.68
+2023-12-03,Lüneburg,Beauty,Chanel Foundation,Douglas,262.43
+2023-03-27,Stadtsteinach,Beauty,Gesichtsreiniger,Rossmann,75.71
+2023-05-30,Forchheim,Hobbies,Golf,Reinhardt Studio,95.8
+2023-06-16,Potsdam,Reisen,Spa Resort,Booking.com,1151.7
+2023-04-08,Strasburg,Hobbies,Pilates,Riehl AG Studio,106.23
+2023-05-23,Hoyerswerda,Süßigkeiten,Cookies,Lindt,36.46
+2023-08-20,Wunsiedel,Reisen,Hotel,Lufthansa,1065.39
+2023-12-05,Greifswald,Beauty,NYX Eyeliner,Rossmann,93.41
+2023-12-27,Quedlinburg,Süßigkeiten,Cookies,Süßwarengeschäft,5.52
+2023-05-26,Eberswalde,Mode,Kaschmir Pullover,Designer Boutique,555.41
+2023-05-09,Saarlouis,Mode,Seidenbluse,Galeria Kaufhof,712.65
+2023-08-14,Ludwigslust,Hobbies,Schwimmen,Hethur Dobes GmbH Studio,154.74
+2023-02-12,Amberg,Süßigkeiten,Cupcakes,Ferrero,34.99
+2023-05-10,Böblingen,Technik,Tablet,Saturn,637.32
+2023-03-09,Marktheidenfeld,Reisen,City Trip,Spa Resort,1753.52
+2023-09-24,Schwerin,Hobbies,Massage,Schaaf GmbH Studio,354.13
+2023-08-29,Görlitz,Hobbies,Yoga Kurs,Liebelt OHG mbH Studio,48.32
+2023-08-28,Bruchsal,Süßigkeiten,Cupcakes,Confiserie,37.73
+2023-10-26,Goslar,Reisen,Wellness Wochenende,Travel Agency,1569.75
+2023-01-28,Mühldorf am Inn,Mode,Seidenbluse,Designer Boutique,308.43
+2023-05-04,Greifswald,Essen & Trinken,Food Delivery,Food Delivery,36.87
+2023-10-08,Hettstedt,Beauty,Tom Ford Black Orchid,Parfümerie,241.18
+2023-09-18,Lobenstein,Süßigkeiten,Pralinen,Confiserie,14.23
+2023-02-03,Burg,Mode,Designer Schuhe,Luxury Fashion,668.35
+2023-11-12,Schongau,Essen & Trinken,Essen im Brasserie,Jacobi Jäckel Brasserie,54.93
+2023-02-03,Naila,Beauty,YSL Mascara,Parfümerie Pieper,288.43
+2023-09-08,Büsingen am Hochrhein,Mode,Blazer,Peek & Cloppenburg,30.7
+2023-02-26,Peine,Süßigkeiten,Gummibärchen,Confiserie,8.28
+2023-04-05,Bayreuth,Beauty,Chanel Foundation,Douglas,167.84
+2023-04-24,Bützow,Mode,Seidenbluse,Luxury Fashion,655.61
+2023-08-20,Grevenbroich,Reisen,Hotel,Lufthansa,1444.9
+2023-07-20,Borken,Süßigkeiten,Gummibärchen,Bäckerei,37.29
+2023-02-03,Borken,Technik,Kopfhörer,Media Markt,1882.26
+2023-09-23,Güstrow,Beauty,La Mer Concealer,Sephora,289.73
+2023-06-23,Ueckermünde,Hobbies,Golf,Wende Sölzer KG Studio,332.67
+2023-11-04,Herford,Mode,Jeans,Mango,90.25
+2023-10-12,Freudenstadt,Beauty,L'Oréal Foundation,Douglas,119.74
+2023-05-18,Coburg,Mode,Designer Schuhe,Designer Boutique,484.33
+2023-07-06,Höxter,Beauty,Serum,Apotheke,52.85
+2023-05-03,Saulgau,Beauty,Tom Ford Eyeshadow,Beauty Boutique,182.82
+2023-06-20,Stade,Mode,Luxus Sonnenbrille,Breuninger,488.49
+2023-02-10,Wismar,Reisen,Flugticket,Booking.com,1589.22
+2023-07-30,Diepholz,Beauty,Serum,Rossmann,23.99
+2023-08-21,Bernburg,Essen & Trinken,Dinner im Brasserie,Schenk Brasserie,155.97
+2023-04-15,Ansbach,Süßigkeiten,Pralinen,Lindt,7.98
+2023-07-06,Auerbach,Essen & Trinken,Food Delivery,Food Delivery,25.2
+2023-09-26,Eckernförde,Beauty,Viktor & Rolf Flowerbomb,Sephora,175.67
+2023-01-22,Lörrach,Essen & Trinken,Dinner im Brasserie,Christoph Pärtzelt GmbH Brasserie,107.95
+2023-12-04,Feuchtwangen,Beauty,Gesichtsreiniger,Apotheke,139.74
+2023-03-20,Mayen,Technik,Gaming Equipment,Apple Store,742.42
+2023-08-19,Sangerhausen,Essen & Trinken,Getränke in Coffee Shop,Paul's Coffee Shop,79.39
+2023-01-08,Rostock,Mode,Designer Handtasche,Breuninger,481.64
+2023-04-12,Ueckermünde,Hobbies,Fitness Studio,Förster Junck e.V. Studio,128.33
+2023-11-19,Beilngries,Reisen,Hotel,Booking.com,373.49
+2023-08-12,Beilngries,Süßigkeiten,Schokolade,Ferrero,31.14
+2023-11-09,Passau,Reisen,Spa Resort,Lufthansa,1712.84
+2023-12-26,Gadebusch,Mode,Seidenbluse,Galeria Kaufhof,673.83
+2023-11-26,Hettstedt,Essen & Trinken,Food Delivery,Pizza Service,33.23
+2023-06-15,Pasewalk,Beauty,YSL Mascara,Parfümerie Pieper,182.08
+2023-11-01,Kötzting,Hobbies,Fitness Studio,Albers Martin GmbH & Co. KG Studio,79.13
+2023-01-24,Naila,Essen & Trinken,Food Delivery,Lieferando,28.7
+2023-10-10,Germersheim,Mode,Jeans,Zara,174.94
+2023-01-01,Wittenberg,Süßigkeiten,Macarons,Confiserie,13.31
+2023-06-10,Hohenstein-Ernstthal,Süßigkeiten,Schokolade,Lindt,17.77
+2023-05-05,Haldensleben,Mode,Designer Schuhe,Luxury Fashion,551.5
+2023-07-11,Erbisdorf,Reisen,Mietwagen,Expedia,460.71
+2023-12-01,Cloppenburg,Reisen,Mietwagen,Lufthansa,1041.92
+2023-10-19,Eisenach,Reisen,Hotel,Booking.com,1862.2
+2023-08-25,Ebersberg,Hobbies,Spa Tag,Vogt Studio,351.77
+2023-07-15,Eisenach,Mode,T-Shirt,Peek & Cloppenburg,87.47
+2023-02-13,Kötzting,Technik,Smartwatch,Apple Store,1404.92
+2023-12-24,Brand,Mode,Kaschmir Pullover,Luxury Fashion,536.83
+2023-06-23,Rothenburg ob der Tauber,Essen & Trinken,Dinner im Steakhouse,Kroker GbR Steakhouse,195.07
+2023-04-22,Badalzungen,Beauty,Hermès Twilly,Parfümerie,288.16
+2023-12-21,Apolda,Süßigkeiten,Schokolade,Confiserie,8.81
+2023-10-03,Geldern,Hobbies,Massage,Förster Keudel GmbH Studio,373.47
+2023-07-30,Magdeburg,Beauty,Chanel No. 5,Douglas,194.24
+2023-07-16,Tecklenburg,Essen & Trinken,Food Delivery,Lieferando,28.23
+2023-10-20,Apolda,Süßigkeiten,Cookies,Bäckerei,8.15
+2023-05-12,Zossen,Hobbies,Massage,Weihmann Studio,53.98
+2023-08-24,Leipziger Land,Hobbies,Golf,Hertrampf Studio,178.82
+2023-03-28,Melle,Reisen,Spa Resort,Lufthansa,224.57
+2023-12-25,Bad Langensalza,Reisen,City Trip,Travel Agency,944.53
+2023-10-20,Helmstedt,Hobbies,Pilates,Bender GbR Studio,300.84
+2023-12-19,Hildburghausen,Hobbies,Fitness Studio,Schottin Langern Stiftung & Co. KGaA Studio,80.61
+2023-09-09,Diepholz,Hobbies,Schwimmen,Ruppersberger KG Studio,376.26
+2023-08-25,Tirschenreuth,Mode,Luxus Sonnenbrille,Breuninger,693.36
+2023-01-13,Werdau,Mode,Jeans,Mango,217.26
+2023-03-15,Moers,Mode,T-Shirt,H&M,293.02
+2023-04-19,Burgdorf,Beauty,Chanel No. 5,Douglas,267.29
+2023-07-02,Celle,Beauty,NYX Eyeliner,dm,135.59
+2023-08-27,Meiningen,Essen & Trinken,Dinner im Café,Drub GmbH & Co. KG Café,193.44
+2023-08-08,Vilsbiburg,Reisen,Hotel,Lufthansa,867.27
+2023-11-08,Recklinghausen,Süßigkeiten,Schokolade,Bäckerei,12.13
+2023-06-06,Hamburg,Hobbies,Tennis,Vogt Studio,325.01
+2023-12-13,Ebermannstadt,Essen & Trinken,Dinner im Bistro,Trupp Dehmel e.G. Bistro,126.23
+2023-09-29,Altötting,Mode,Luxus Sonnenbrille,Designer Boutique,640.09
+2023-01-15,Reutlingen,Beauty,NYX Eyeliner,Rossmann,21.76
+2023-11-13,Greifswald,Hobbies,Fitness Studio,Förster KG Studio,210.21
+2023-09-21,Hammelburg,Technik,Lautsprecher,Media Markt,2012.72
+2023-02-22,Wertingen,Essen & Trinken,Dinner im Steakhouse,Kreusel Franke AG & Co. KGaA Steakhouse,118.36
+2023-10-17,Bremen,Reisen,Hotel,Travel Agency,1747.49
+2023-12-07,Stollberg,Essen & Trinken,Dinner im Sushi Bar,Sontag Wesack e.G. Sushi Bar,108.47
+2023-05-15,Eberswalde,Technik,Tablet,Saturn,1909.02
+2023-08-13,Jessen,Beauty,Dior J'adore,Douglas,231.85
+2023-12-12,Hannover,Hobbies,Spa Tag,Budig Schüler GmbH & Co. KGaA Studio,299.43
+2023-05-11,Merseburg,Reisen,Mietwagen,Travel Agency,1407.87
+2023-01-31,Helmstedt,Mode,Designer Schuhe,Luxury Fashion,569.98
+2023-12-31,Schwarzenberg,Hobbies,Pilates,Pärtzelt Studio,131.45
+2023-04-24,Zossen,Beauty,Gesichtsreiniger,Rossmann,55.56
+2023-05-16,Roding,Hobbies,Golf,Benthin Säuberlich GmbH & Co. KG Studio,210.68
+2023-03-12,Lübz,Reisen,Flugticket,Lufthansa,1693.13
+2023-11-03,Hoyerswerda,Reisen,Flugticket,Lufthansa,490.9
+2023-06-24,Lemgo,Süßigkeiten,Macarons,Confiserie,29.23
+2023-10-29,Fulda,Mode,Designer Handtasche,Designer Boutique,442.13
+2023-11-29,Stade,Reisen,Flugticket,Spa Resort,690.12
+2023-07-18,Klötze,Süßigkeiten,Schokolade,Ferrero,31.03
+2023-02-01,Olpe,Essen & Trinken,Food Delivery,Uber Eats,37.03
+2023-05-22,Kötzting,Essen & Trinken,Dinner im Weinbar,Schmidtke e.G. Weinbar,145.14
+2023-08-29,Hofgeismar,Technik,Laptop,Conrad,72.25
+2023-12-07,Deggendorf,Technik,Gaming Equipment,Alternate,256.63
+2023-06-05,Kassel,Süßigkeiten,Pralinen,Süßwarengeschäft,11.89
+2023-04-29,Grafenau,Hobbies,Spa Tag,Mälzer Studio,132.62
+2023-09-03,Badoberan,Mode,Luxus Sonnenbrille,Designer Boutique,513.29
+2023-01-26,Miltenberg,Hobbies,Golf,Jopich e.G. Studio,105.98
+2023-10-29,Wolfenbüttel,Essen & Trinken,Dinner im Weinbar,Kusch Schmiedt Stiftung & Co. KG Weinbar,131.86
+2023-09-19,Bogen,Technik,Smartwatch,Cyberport,2087.63
+2023-09-15,Arnstadt,Hobbies,Fitness Studio,Reinhardt Steinberg GmbH Studio,355.09
+2023-07-30,Amberg,Beauty,Tom Ford Eyeshadow,Beauty Boutique,229.92
+2023-12-30,Ludwigsburg,Mode,Sneaker,H&M,93.51
+2023-09-19,Sangerhausen,Hobbies,Pilates,Trub Studio,244.32
+2023-01-28,Hagenow,Beauty,Viktor & Rolf Flowerbomb,Parfümerie,291.12
+2023-02-07,Mühldorf am Inn,Beauty,Tom Ford Eyeshadow,Parfümerie Pieper,190.02
+2023-09-21,Ebermannstadt,Süßigkeiten,Macarons,Süßwarengeschäft,27.99
+2023-03-09,Starnberg,Hobbies,Yoga Kurs,Matthäi Holzapfel AG & Co. OHG Studio,298.21
+2023-11-06,Halberstadt,Beauty,Hermès Twilly,Parfümerie,207.55
+2023-11-30,Bad Brückenau,Reisen,Wellness Wochenende,Lufthansa,1105.03
+2023-03-24,Spremberg,Süßigkeiten,Schokolade,Süßwarengeschäft,23.04
+2023-07-19,Badibling,Reisen,Hotel,Lufthansa,177.48
+2023-05-24,Borna,Süßigkeiten,Macarons,Confiserie,27.63
+2023-10-29,Magdeburg,Hobbies,Fitness Studio,Zänker Stiftung & Co. KG Studio,364.1
+2023-04-26,Wesel,Reisen,Wellness Wochenende,Travel Agency,313.15
+2023-05-06,Nördlingen,Essen & Trinken,Food Delivery,Uber Eats,17.2
+2023-06-10,Hammelburg,Hobbies,Fitness Studio,Seifert Plath GmbH Studio,314.73
+2023-07-25,Einbeck,Beauty,Essence Lipstick,Müller,134.74
+2023-01-04,Geithain,Beauty,Sonnencreme,Rossmann,107.89
+2023-06-25,Bogen,Essen & Trinken,Getränke in Champagner Lounge,Editha's Champagner Lounge,40.64
+2023-09-01,Aurich,Essen & Trinken,Dinner im Restaurant,Tschentscher Pruschke e.G. Restaurant,81.88
+2023-01-28,Tirschenreuth,Süßigkeiten,Schokolade,Ferrero,29.38
+2023-11-18,Gunzenhausen,Mode,Kaschmir Pullover,Luxury Fashion,605.0
+2023-11-24,Aschaffenburg,Essen & Trinken,Food Delivery,Food Delivery,35.62
+2023-07-14,Koblenz,Beauty,Chanel Foundation,Sephora,261.97
+2023-05-22,Rothenburg ob der Tauber,Essen & Trinken,Food Delivery,Food Delivery,34.82
+2023-03-14,Beilngries,Technik,Smartphone,Apple Store,1770.83
+2023-11-21,Emmendingen,Mode,Seidenbluse,Breuninger,602.06
+2023-07-06,Oranienburg,Mode,Luxus Sonnenbrille,Breuninger,772.38
+2023-08-16,Torgau,Süßigkeiten,Gummibärchen,Lindt,14.18
+2023-10-15,Neubrandenburg,Beauty,Tom Ford Black Orchid,Beauty Store,180.17
+2023-06-11,Werdau,Mode,Designer Schuhe,Luxury Fashion,318.95
+2023-06-19,Germersheim,Süßigkeiten,Cupcakes,Süßwarengeschäft,25.0
+2023-12-25,Staffelstein,Reisen,Flugticket,Booking.com,382.95
+2023-01-25,Erfurt,Süßigkeiten,Schokolade,Ferrero,25.18
+2023-03-06,Bogen,Süßigkeiten,Gummibärchen,Confiserie,20.89
+2023-08-07,Oschatz,Technik,Smartwatch,Alternate,367.14
+2023-04-04,Aue,Essen & Trinken,Dinner im Weinbar,Schwital KGaA Weinbar,191.7
+2023-02-07,Rottweil,Mode,Luxus Sonnenbrille,Galeria Kaufhof,595.56
+2023-10-16,Büsingen am Hochrhein,Reisen,Mietwagen,Travel Agency,934.95
+2023-07-16,Meiningen,Beauty,Chanel Foundation,Douglas,227.4
+2023-11-30,Deggendorf,Mode,Rock,Peek & Cloppenburg,78.89
+2023-04-08,Querfurt,Reisen,Spa Resort,Booking.com,692.63
+2023-08-17,Malchin,Mode,Luxus Sonnenbrille,Luxury Fashion,618.62
+2023-05-12,Mainburg,Hobbies,Golf,Müller Studio,149.99
+2023-06-01,Bad Brückenau,Reisen,Flugticket,Lufthansa,1506.38
+2023-03-27,Reutlingen,Beauty,Sonnencreme,Müller,85.0
+2023-07-18,Schweinfurt,Mode,Kaschmir Pullover,Designer Boutique,650.68
+2023-01-03,Beeskow,Beauty,Gesichtsreiniger,Rossmann,143.96
+2023-01-06,Freudenstadt,Süßigkeiten,Cupcakes,Süßwarengeschäft,24.0
+2023-02-03,Wunsiedel,Mode,Designer Handtasche,Breuninger,638.57
+2023-11-22,Waldmünchen,Technik,Smartwatch,Saturn,1058.89
+2023-07-13,Luckau,Essen & Trinken,Dinner im Weinbar,Nerger GmbH Weinbar,116.03
+2023-07-06,Meiningen,Beauty,Gesichtsreiniger,Rossmann,77.79
+2023-10-28,Oschatz,Essen & Trinken,Dinner im Steakhouse,Niemeier Steakhouse,82.49
+2023-02-10,Schwäbisch Gmünd,Essen & Trinken,Dinner im Sushi Bar,Röhricht GmbH Sushi Bar,131.8
+2023-07-29,Kitzingen,Technik,Smartphone,Media Markt,800.49
+2023-09-19,Monschau,Süßigkeiten,Gummibärchen,Lindt,5.5
+2023-05-27,Böblingen,Hobbies,Tennis,Scholtz Studio,343.53
+2023-03-10,Rudolstadt,Mode,Luxus Sonnenbrille,Luxury Fashion,614.49
+2023-10-19,Warendorf,Hobbies,Massage,Steckel Studio,66.92
+2023-07-30,Sankt Goarshausen,Hobbies,Pilates,Albers GbR Studio,183.4
+2023-06-14,Sebnitz,Reisen,Spa Resort,Lufthansa,146.28
+2023-10-15,Greifswald,Beauty,Chanel No. 5,Parfümerie,235.71
+2023-04-12,Stendal,Technik,Kopfhörer,Cyberport,562.02
+2023-07-31,Bad Freienwalde,Essen & Trinken,Dinner im Sushi Bar,Stroh Schlosser e.V. Sushi Bar,123.03
+2023-06-25,Bernburg,Beauty,Essence Lipstick,Douglas,111.76
+2023-01-14,Teterow,Süßigkeiten,Pralinen,Confiserie,14.23
+2023-09-23,Suhl,Mode,Luxus Sonnenbrille,Luxury Fashion,609.97
+2023-12-14,Schweinfurt,Reisen,Mietwagen,Lufthansa,1980.02
+2023-09-20,Stendal,Beauty,Dior J'adore,Douglas,208.43
+2023-12-01,Spremberg,Technik,Kopfhörer,Apple Store,1022.06
+2023-12-09,Donaueschingen,Mode,Designer Schuhe,Designer Boutique,624.69
+2023-05-02,Forst,Beauty,Tom Ford Black Orchid,Parfümerie,291.39
+2023-02-08,Merseburg,Mode,Seidenbluse,Galeria Kaufhof,653.74
+2023-02-27,Saarlouis,Beauty,Dior Rouge Lipstick,Sephora,242.46
+2023-05-05,Magdeburg,Technik,Lautsprecher,Cyberport,1063.43
+2023-05-29,Ueckermünde,Essen & Trinken,Dinner im Café,Ladeck Café,147.74
+2023-04-16,Bad Brückenau,Mode,Seidenbluse,Galeria Kaufhof,351.88
+2023-11-01,Pirmasens,Beauty,Dior J'adore,Parfümerie,244.8
+2023-06-21,Neustadt am Rübenberge,Technik,Tablet,Apple Store,1779.22
+2023-03-24,Hamburg,Mode,Designer Schuhe,Designer Boutique,613.28
+2023-01-15,Eberswalde,Süßigkeiten,Schokolade,Ferrero,34.22
+2023-04-23,Tuttlingen,Reisen,Mietwagen,Booking.com,645.34
+2023-04-09,Gera,Hobbies,Schwimmen,Bonbach KG Studio,303.44
+2023-06-06,Hettstedt,Mode,Designer Schuhe,Luxury Fashion,451.41
+2023-02-28,Hagenow,Süßigkeiten,Cupcakes,Lindt,33.73
+2023-10-06,Altötting,Reisen,Wellness Wochenende,Expedia,291.84
+2023-05-07,Calw,Reisen,Hotel,Booking.com,1146.47
+2023-12-09,Potsdam,Reisen,Mietwagen,Expedia,420.99
+2023-11-18,Düren,Reisen,Hotel,Spa Resort,1629.74
+2023-05-06,Brand,Mode,Designer Handtasche,Designer Boutique,432.16
+2023-10-25,Grimmen,Technik,Lautsprecher,Apple Store,839.63
+2023-02-06,Günzburg,Beauty,Dior Rouge Lipstick,Parfümerie Pieper,228.02
+2023-03-26,Recklinghausen,Hobbies,Fitness Studio,Mentzel Hölzenbecher KG Studio,373.58
+2023-06-25,Brand,Hobbies,Tennis,Weiß Etzold GmbH Studio,149.82
+2023-11-08,Säckingen,Essen & Trinken,Food Delivery,Lieferando,29.07
+2023-09-28,Osterode am Harz,Beauty,Tom Ford Black Orchid,Beauty Store,237.8
+2023-12-07,Hannover,Essen & Trinken,Dinner im Steakhouse,Dörr Steakhouse,82.79
+2023-08-06,Sulzbach-Rosenberg,Technik,Kopfhörer,Apple Store,1306.33
+2023-01-24,Gotha,Süßigkeiten,Cupcakes,Lindt,16.96
+2023-11-29,Chemnitz,Hobbies,Yoga Kurs,Tröst Studio,195.83
+2023-07-05,Calau,Technik,Smartwatch,Media Markt,2227.42
+2023-09-24,Marktheidenfeld,Essen & Trinken,Food Delivery,Lieferando,38.73
+2023-07-27,Aschaffenburg,Technik,Tablet,Alternate,231.31
+2023-10-22,Hansestadttralsund,Essen & Trinken,Dinner im Restaurant,Hövel GmbH Restaurant,80.71
+2023-06-24,Weißwasser,Hobbies,Massage,Schweitzer Junken GmbH & Co. OHG Studio,322.77
+2023-03-30,Plauen,Technik,Kopfhörer,Saturn,1062.3
+2023-02-17,Calau,Beauty,Essence Lipstick,Douglas,44.35
+2023-04-28,Hettstedt,Beauty,Viktor & Rolf Flowerbomb,Parfümerie,190.22
+2023-05-15,Hohenstein-Ernstthal,Beauty,Catrice Eyeshadow,Rossmann,128.23
+2023-10-10,Bad Brückenau,Mode,Designer Handtasche,Galeria Kaufhof,712.43
+2023-07-19,Warendorf,Hobbies,Tennis,Liebelt Studio,257.02
+2023-03-02,Nabburg,Reisen,City Trip,Travel Agency,588.27
+2023-07-26,Amberg,Reisen,Spa Resort,Travel Agency,919.71
+2023-03-25,Hohenmölsen,Beauty,YSL Mascara,Douglas,220.34
+2023-04-04,Nauen,Hobbies,Schwimmen,Striebitz Studio,258.21
+2023-02-11,Jessen,Mode,Seidenbluse,Luxury Fashion,502.49
+2023-04-17,Tuttlingen,Hobbies,Pilates,Heinrich Lindner AG & Co. KG Studio,227.06
+2023-08-24,Hamburg,Beauty,Sonnencreme,Rossmann,54.97
+2023-06-16,Soest,Essen & Trinken,Getränke in Weinprobe,Karina's Weinprobe,51.2
+2023-02-04,Lübben,Reisen,Wellness Wochenende,Spa Resort,284.75
+2023-04-21,Pasewalk,Reisen,Spa Resort,Travel Agency,149.8
+2023-02-08,Wunsiedel,Reisen,Spa Resort,Lufthansa,976.96
+2023-10-29,Weißenfels,Technik,Smartwatch,Alternate,60.54
+2023-09-05,Bersenbrück,Reisen,Mietwagen,Lufthansa,1244.48
+2023-01-29,Parsberg,Essen & Trinken,Dinner im Sushi Bar,Herrmann KGaA Sushi Bar,151.22
+2023-01-01,Luckau,Süßigkeiten,Cupcakes,Lindt,25.68
+2023-03-18,Belzig,Hobbies,Tennis,Metz OHG mbH Studio,31.39
+2023-04-23,Sulzbach-Rosenberg,Mode,Seidenbluse,Breuninger,753.14
+2023-03-27,Zossen,Technik,Kamera,Saturn,381.55
+2023-10-31,Saarbrücken,Süßigkeiten,Cookies,Bäckerei,26.34
+2023-03-04,Feuchtwangen,Reisen,Flugticket,Booking.com,1684.75
+2023-12-18,Strasburg,Beauty,Chanel No. 5,Douglas,209.69
+2023-07-05,Biedenkopf,Technik,Smartphone,Saturn,424.51
+2023-05-21,Neuss,Beauty,YSL Mascara,Parfümerie Pieper,233.12
+2023-07-13,Bautzen,Hobbies,Tennis,Trubin Hein GmbH Studio,320.17
+2023-01-31,Olpe,Reisen,Hotel,Travel Agency,294.19
+2023-12-03,Günzburg,Technik,Laptop,Apple Store,656.4
+2023-11-10,Fürstenwalde,Beauty,Feuchtigkeitscreme,Apotheke,134.73
+2023-05-17,Bad Mergentheim,Beauty,Gesichtsmaske,Müller,62.3
+2023-04-10,Lübben,Essen & Trinken,Dinner im Steakhouse,Scheel Steakhouse,139.51
+2023-07-16,Weißenfels,Reisen,Mietwagen,Travel Agency,236.71
+2023-07-26,Belzig,Beauty,Peeling,Müller,92.17
+2023-11-05,Amberg,Hobbies,Massage,Möchlichen Studio,312.8
+2023-05-24,Waren,Essen & Trinken,Dinner im Café,Gierschner Mentzel AG Café,85.01
+2023-09-21,Gera,Essen & Trinken,Dinner im Restaurant,Scholl Restaurant,82.02
+2023-10-18,Ilmenau,Essen & Trinken,Dinner im Café,Gieß Ebert GbR Café,196.42
+2023-10-26,Nabburg,Technik,Tablet,Conrad,255.12
+2023-11-01,Grimmen,Hobbies,Yoga Kurs,Schleich Trub GmbH & Co. KGaA Studio,104.62
+2023-11-01,Stuttgart,Beauty,L'Oréal Foundation,Müller,27.99
+2023-01-04,Günzburg,Reisen,City Trip,Spa Resort,1665.54
+2023-03-17,Magdeburg,Hobbies,Massage,Etzler Otto GmbH Studio,349.63
+2023-12-04,Steinfurt,Beauty,Catrice Eyeshadow,Müller,104.82
+2023-06-13,Goslar,Süßigkeiten,Macarons,Confiserie,7.41
+2023-05-05,Schwandorf,Reisen,Hotel,Booking.com,191.41
+2023-05-02,Erding,Süßigkeiten,Pralinen,Lindt,19.08
+2023-08-25,Güstrow,Technik,Smartphone,Saturn,2300.74
+2023-10-01,Bernburg,Technik,Tablet,Cyberport,1750.25
+2023-03-17,Tuttlingen,Süßigkeiten,Pralinen,Confiserie,21.29
+2023-11-07,Merseburg,Mode,Designer Schuhe,Luxury Fashion,558.65
+2023-08-11,Schwäbisch Hall,Technik,Kamera,Apple Store,1176.61
+2023-06-05,Lörrach,Beauty,Dior J'adore,Sephora,217.24
+2023-12-09,Tübingen,Reisen,Mietwagen,Booking.com,1703.66
+2023-07-11,Altentreptow,Beauty,Catrice Eyeshadow,Müller,20.29
+2023-08-10,Sternberg,Hobbies,Golf,Rörricht Studio,220.56
+2023-12-16,Hersbruck,Reisen,Hotel,Booking.com,298.02
+2023-03-01,Tecklenburg,Süßigkeiten,Cupcakes,Confiserie,17.35
+2023-05-18,Eutin,Technik,Kamera,Media Markt,1739.36
+2023-02-19,Illertissen,Süßigkeiten,Macarons,Ferrero,36.97
+2023-02-05,Hünfeld,Technik,Kopfhörer,Cyberport,2380.35
+2023-01-31,Scheinfeld,Reisen,Wellness Wochenende,Spa Resort,684.87
+2023-10-26,Soltau,Essen & Trinken,Dinner im Café,Buchholz Café,88.24
+2023-07-19,Bergzabern,Süßigkeiten,Cupcakes,Ferrero,38.36
+2023-11-27,Pfaffenhofen an der Ilm,Mode,Kaschmir Pullover,Luxury Fashion,729.09
+2023-05-17,Torgau,Hobbies,Tennis,Heidrich Koch II GmbH Studio,117.16
+2023-03-30,Oranienburg,Beauty,Sonnencreme,dm,135.88
+2023-04-01,Grevenbroich,Technik,Tablet,Apple Store,2437.88
+2023-07-07,Wernigerode,Mode,Kaschmir Pullover,Breuninger,397.8
+2023-05-11,Hechingen,Essen & Trinken,Food Delivery,Uber Eats,21.68
+2023-02-07,Gadebusch,Essen & Trinken,Food Delivery,Pizza Service,29.6
+2023-12-22,Tübingen,Technik,Kopfhörer,Saturn,56.8
+2023-10-24,Artern,Reisen,Spa Resort,Spa Resort,477.54
+2023-09-17,Aachen,Technik,Kopfhörer,Saturn,554.29
+2023-05-11,Kehl,Mode,Luxus Sonnenbrille,Designer Boutique,444.17
+2023-09-12,Füssen,Hobbies,Schwimmen,Klemt GmbH Studio,233.77
+2023-08-22,Hansestadttralsund,Hobbies,Yoga Kurs,Ritter Schaaf KGaA Studio,216.91
+2023-07-21,Staffelstein,Mode,Stiefel,C&A,243.62
+2023-06-24,Schlüchtern,Süßigkeiten,Cookies,Lindt,37.16
+2023-08-29,Schwäbisch Hall,Beauty,Sonnencreme,dm,132.27
+2023-09-29,Heiligenstadt,Essen & Trinken,Dinner im Café,Holsten Reuter AG Café,128.69
+2023-05-15,Fulda,Süßigkeiten,Macarons,Lindt,36.1
+2023-09-30,Hammelburg,Technik,Laptop,Media Markt,1103.16
+2023-02-24,Donaueschingen,Mode,Kaschmir Pullover,Designer Boutique,406.24
+2023-03-07,Wiedenbrück,Hobbies,Golf,Budig GbR Studio,223.86
+2023-12-04,Parsberg,Essen & Trinken,Dinner im Italiener,Schomber AG Italiener,159.93
+2023-01-23,Roth,Essen & Trinken,Dinner im Sushi Bar,Bruder AG Sushi Bar,193.69
+2023-01-06,Burg,Reisen,City Trip,Spa Resort,1647.74
+2023-06-12,Rostock,Süßigkeiten,Schokolade,Lindt,21.94
+2023-02-07,Luckenwalde,Technik,Kamera,Saturn,2270.02
+2023-08-08,Bogen,Essen & Trinken,Dinner im Weinbar,Naser AG Weinbar,190.79
+2023-09-27,Peine,Technik,Smartphone,Saturn,1510.45
+2023-11-18,Calau,Mode,Rock,C&A,79.71
+2023-10-14,Jessen,Hobbies,Golf,Wohlgemut Huhn AG Studio,289.43
+2023-08-29,Eisleben,Mode,Luxus Sonnenbrille,Designer Boutique,591.62
+2023-03-05,Borken,Technik,Lautsprecher,Saturn,1756.76
+2023-05-20,Iserlohn,Beauty,Maybelline Mascara,Douglas,21.11
+2023-09-16,Amberg,Süßigkeiten,Cupcakes,Ferrero,14.98
+2023-12-09,Ludwigslust,Hobbies,Golf,Roskoth Hörle OHG mbH Studio,104.21
+2023-10-02,Melle,Reisen,City Trip,Lufthansa,1138.82
+2023-04-04,Neubrandenburg,Reisen,Hotel,Spa Resort,1921.87
+2023-07-06,Peine,Hobbies,Spa Tag,Gumprich Albers AG Studio,265.01
+2023-02-27,Vohenstrauß,Mode,Seidenbluse,Breuninger,443.05
+2023-10-16,Schwerin,Beauty,Essence Lipstick,Rossmann,98.37
+2023-03-20,Lörrach,Hobbies,Pilates,Benthin Studio,115.34
+2023-04-09,Norden,Süßigkeiten,Gummibärchen,Ferrero,31.33
+2023-03-04,Gera,Beauty,Sonnencreme,Rossmann,99.89
+2023-11-01,Neuss,Süßigkeiten,Schokolade,Ferrero,36.43
+2023-03-07,Iserlohn,Beauty,Gesichtsreiniger,Apotheke,88.48
+2023-11-08,Berlin,Hobbies,Massage,Stiebitz Seidel GmbH & Co. KG Studio,140.27
+2023-08-23,Klötze,Hobbies,Golf,Köhler Studio,185.01
+2023-01-05,Eberswalde,Hobbies,Golf,Rust GmbH & Co. KGaA Studio,264.94
+2023-11-26,Kehl,Technik,Smartphone,Saturn,872.61
+2023-07-27,Gifhorn,Beauty,Hermès Twilly,Parfümerie,156.87
+2023-04-15,Seelow,Hobbies,Yoga Kurs,Linke Studio,94.19
+2023-03-30,Beilngries,Reisen,Spa Resort,Spa Resort,402.57
+2023-04-03,Eisenach,Reisen,City Trip,Travel Agency,1750.39
+2023-07-13,Rothenburg ob der Tauber,Süßigkeiten,Macarons,Confiserie,10.91
+2023-10-21,Kemnath,Beauty,L'Oréal Foundation,Douglas,65.63
+2023-02-11,Neubrandenburg,Reisen,Hotel,Lufthansa,1209.07
+2023-07-12,Hildesheim,Süßigkeiten,Schokolade,Lindt,19.12
+2023-12-24,Luckau,Technik,Tablet,Apple Store,1844.61
+2023-03-05,Hildesheim,Reisen,Spa Resort,Lufthansa,420.17
+2023-04-30,Wittstock,Mode,Rock,C&A,45.91
+2023-07-11,Warendorf,Mode,Designer Schuhe,Luxury Fashion,651.34
+2023-09-29,Nördlingen,Hobbies,Pilates,Striebitz Studio,72.79
+2023-09-04,Eggenfelden,Essen & Trinken,Dinner im Italiener,Rörricht AG & Co. OHG Italiener,122.19
+2023-06-12,Sulzbach-Rosenberg,Mode,Luxus Sonnenbrille,Breuninger,432.08
+2023-11-15,Rothenburg ob der Tauber,Hobbies,Fitness Studio,Nette Studio,399.53
+2023-09-04,Angermünde,Mode,Sneaker,Peek & Cloppenburg,105.48
+2023-10-31,Mühlhausen,Hobbies,Yoga Kurs,Köster Studio,180.45
+2023-11-07,Heinsberg,Beauty,Gesichtsmaske,Rossmann,117.81
+2023-09-06,Oberviechtach,Hobbies,Golf,Trub AG Studio,34.77
+2023-02-27,Kassel,Reisen,Wellness Wochenende,Travel Agency,1561.68
+2023-06-17,Lüneburg,Technik,Smartwatch,Apple Store,615.91
+2023-06-26,Mellrichstadt,Hobbies,Yoga Kurs,Seifert Studio,177.11
+2023-02-21,Hechingen,Reisen,City Trip,Spa Resort,748.08
+2023-02-23,Dresden,Beauty,NYX Eyeliner,Douglas,110.66
+2023-11-21,Jena,Beauty,Tom Ford Black Orchid,Sephora,182.76
+2023-11-02,Tecklenburg,Süßigkeiten,Cupcakes,Bäckerei,16.98
+2023-12-16,Emmendingen,Mode,Rock,Peek & Cloppenburg,266.62
+2023-02-13,Biedenkopf,Hobbies,Yoga Kurs,Heß Studio,89.26
+2023-07-13,Iserlohn,Mode,Designer Schuhe,Designer Boutique,362.01
+2023-11-17,Forst,Beauty,Dior Rouge Lipstick,Beauty Boutique,255.69
+2023-05-08,Bad Liebenwerda,Reisen,Hotel,Booking.com,1859.86
+2023-01-01,Burglengenfeld,Hobbies,Fitness Studio,Pieper GmbH Studio,308.59
+2023-02-14,Bautzen,Beauty,YSL Mascara,Parfümerie Pieper,272.67
+2023-04-18,Donaueschingen,Beauty,Dior Rouge Lipstick,Douglas,249.16
+2023-09-05,Hannover,Mode,Kaschmir Pullover,Luxury Fashion,606.23
+2023-08-03,Angermünde,Mode,T-Shirt,Mango,122.42
+2023-07-12,Schleiz,Reisen,City Trip,Expedia,1401.49
+2023-08-05,Apolda,Hobbies,Tennis,Gunpf Klingelhöfer GmbH & Co. KG Studio,308.25
+2023-05-13,Monschau,Beauty,Viktor & Rolf Flowerbomb,Sephora,165.37
+2023-04-10,Schwabmünchen,Technik,Laptop,Apple Store,1739.81
+2023-05-09,Sangerhausen,Technik,Smartwatch,Cyberport,2000.74
+2023-07-17,Schongau,Technik,Kopfhörer,Saturn,1179.33
+2023-01-29,Bad Langensalza,Mode,Kaschmir Pullover,Designer Boutique,683.65
+2023-10-02,Grevenbroich,Mode,Luxus Sonnenbrille,Luxury Fashion,373.37
+2023-12-28,Gelnhausen,Hobbies,Pilates,Ortmann Kuhl GmbH & Co. KG Studio,77.04
+2023-07-31,Sankt Goar,Mode,Designer Schuhe,Breuninger,494.36
+2023-07-26,Crailsheim,Reisen,Mietwagen,Booking.com,711.24
+2023-09-15,Jüterbog,Hobbies,Fitness Studio,Budig Studio,108.95
+2023-07-16,Kusel,Mode,Jeans,C&A,74.44
+2023-03-28,Parsberg,Hobbies,Golf,Kensy AG & Co. OHG Studio,97.72
+2023-06-17,Weimar,Essen & Trinken,Dinner im Italiener,Mude Wieloch KG Italiener,151.97
+2023-10-29,Ochsenfurt,Hobbies,Fitness Studio,Mülichen Studio,165.11
+2023-03-06,Riesa,Hobbies,Schwimmen,Nette GmbH Studio,227.03
+2023-11-29,Bad Liebenwerda,Essen & Trinken,Dinner im Weinbar,Heinrich Weinbar,114.78
+2023-05-22,Bad Mergentheim,Essen & Trinken,Food Delivery,Food Delivery,18.64
+2023-08-30,Sankt Goarshausen,Süßigkeiten,Cupcakes,Süßwarengeschäft,13.86
+2023-09-04,Wittmund,Reisen,City Trip,Booking.com,1294.0
+2023-11-07,Strasburg,Technik,Kopfhörer,Cyberport,1418.78
+2023-03-19,Wolgast,Beauty,Hermès Twilly,Sephora,220.38
+2023-07-30,Bitterfeld,Mode,Designer Schuhe,Designer Boutique,461.4
+2023-09-30,Lobenstein,Mode,Seidenbluse,Galeria Kaufhof,554.01
+2023-03-23,Ansbach,Hobbies,Golf,Schüler AG & Co. KG Studio,227.56
+2023-09-15,Hohenmölsen,Essen & Trinken,Dinner im Italiener,Juncken Italiener,80.04
+2023-06-08,Ebermannstadt,Mode,Seidenbluse,Galeria Kaufhof,383.88
+2023-11-17,Eichstätt,Reisen,Spa Resort,Travel Agency,1733.17
+2023-08-22,Erkelenz,Mode,Sneaker,H&M,141.54
+2023-01-15,Melsungen,Hobbies,Massage,Koch II Dörschner KG Studio,378.68
+2023-06-21,Riesa,Mode,Designer Schuhe,Galeria Kaufhof,726.28
+2023-07-05,Bad Kreuznach,Hobbies,Pilates,Nerger AG Studio,100.69
+2023-04-12,Forst,Essen & Trinken,Getränke in Rooftop Bar,Alfredo's Rooftop Bar,61.61
+2023-06-23,Schwarzenberg,Essen & Trinken,Dinner im Brasserie,Tlustek Brasserie,137.81
+2023-12-17,Großenhain,Hobbies,Yoga Kurs,Zobel AG Studio,293.45
+2023-04-12,Hoyerswerda,Mode,Luxus Sonnenbrille,Luxury Fashion,346.81
+2023-01-13,Bischofswerda,Reisen,City Trip,Lufthansa,835.27
+2023-04-23,Vilsbiburg,Süßigkeiten,Cupcakes,Ferrero,32.69
+2023-09-06,Zeulenroda,Technik,Laptop,Apple Store,2042.63
+2023-02-21,Dieburg,Hobbies,Fitness Studio,Klemm GmbH & Co. KG Studio,339.08
+2023-06-11,Ansbach,Essen & Trinken,Getränke in Coffee Shop,Dominic's Coffee Shop,70.8
+2023-11-12,Ochsenfurt,Hobbies,Golf,Scholz Rosemann KG Studio,86.34
+2023-10-19,Ahaus,Hobbies,Fitness Studio,Löchel Hesse GmbH & Co. KG Studio,321.92
+2023-11-17,Bischofswerda,Süßigkeiten,Cookies,Lindt,5.28
+2023-08-10,Prenzlau,Mode,Designer Schuhe,Designer Boutique,544.83
+2023-09-20,Sondershausen,Reisen,City Trip,Booking.com,926.5
+2023-09-30,Chemnitz,Technik,Gaming Equipment,Media Markt,193.06
+2023-01-28,Olpe,Reisen,Hotel,Booking.com,354.06
+2023-11-12,Viechtach,Mode,Kaschmir Pullover,Breuninger,636.06
+2023-07-11,Hettstedt,Mode,Luxus Sonnenbrille,Galeria Kaufhof,657.64
+2023-10-11,Dessau,Reisen,Mietwagen,Travel Agency,864.13
+2023-07-06,Torgau,Mode,Sneaker,Zara,30.99
+2023-10-12,Döbeln,Essen & Trinken,Getränke in Champagner Lounge,Aline's Champagner Lounge,43.73
+2023-03-02,Passau,Technik,Lautsprecher,Media Markt,1635.66
+2023-11-17,Anklam,Reisen,Wellness Wochenende,Expedia,1700.03
+2023-04-13,Sebnitz,Technik,Laptop,Alternate,235.76
+2023-05-19,Peine,Beauty,Tom Ford Eyeshadow,Douglas,206.61
+2023-02-20,Calw,Technik,Gaming Equipment,Saturn,395.48
+2023-06-22,Aue,Süßigkeiten,Schokolade,Confiserie,29.23
+2023-05-26,Gera,Mode,Stiefel,Mango,41.24
+2023-12-03,Meppen,Essen & Trinken,Dinner im Weinbar,Süßebier Weinbar,151.15
+2023-01-18,Gießen,Mode,T-Shirt,Peek & Cloppenburg,235.87
+2023-10-15,Lippstadt,Süßigkeiten,Pralinen,Süßwarengeschäft,31.93
+2023-02-17,Bützow,Beauty,YSL Mascara,Sephora,267.09
+2023-02-05,Rehau,Reisen,Hotel,Lufthansa,1927.84
+2023-03-22,Seelow,Essen & Trinken,Dinner im Steakhouse,Metz Steakhouse,137.26
+2023-05-04,Lippstadt,Reisen,Mietwagen,Spa Resort,916.81
+2023-07-20,Niesky,Süßigkeiten,Gummibärchen,Confiserie,25.22
+2023-10-03,Pegnitz,Essen & Trinken,Dinner im Café,Linke Café,100.55
+2023-08-02,Königs Wusterhausen,Essen & Trinken,Dinner im Weinbar,Steckel Weinbar,178.57
+2023-09-23,Grimmen,Essen & Trinken,Essen im Brasserie,Carsten Brasserie,54.61
+2023-07-26,Freising,Hobbies,Massage,Sager Wieloch GmbH & Co. OHG Studio,114.32
+2023-02-23,Mellrichstadt,Reisen,Mietwagen,Booking.com,326.68
+2023-08-17,Erfurt,Beauty,Dior J'adore,Douglas,263.6
+2023-09-18,Backnang,Technik,Laptop,Apple Store,883.26
+2023-04-19,Rottweil,Beauty,Viktor & Rolf Flowerbomb,Parfümerie,156.81
+2023-08-07,Duderstadt,Reisen,Wellness Wochenende,Booking.com,1180.77
+2023-11-27,Groß-Gerau,Beauty,Essence Lipstick,Rossmann,79.09
+2023-01-17,Borken,Süßigkeiten,Cookies,Süßwarengeschäft,14.32
+2023-08-14,Magdeburg,Reisen,Spa Resort,Expedia,1392.96
+2023-12-05,Kehl,Süßigkeiten,Gummibärchen,Bäckerei,30.81
+2023-07-13,Eisenach,Technik,Kamera,Saturn,1253.66
+2023-06-06,Forst,Technik,Smartwatch,Media Markt,2137.43
+2023-03-18,Burg,Hobbies,Spa Tag,Matthäi Pohl GbR Studio,105.57
+2023-12-31,Groß-Gerau,Essen & Trinken,Essen im Weinbar,Eckbauer Wernecke GmbH & Co. KGaA Weinbar,76.85
+2023-07-20,Siegen,Technik,Kamera,Conrad,257.84
+2023-02-12,Geithain,Hobbies,Schwimmen,Jäkel Studio,246.78
+2023-07-10,Duderstadt,Mode,Seidenbluse,Designer Boutique,591.53
+2023-06-25,Ochsenfurt,Reisen,Wellness Wochenende,Lufthansa,379.94
+2023-07-28,Neunburg vorm Wald,Reisen,Flugticket,Booking.com,615.06
+2023-08-27,Altötting,Hobbies,Tennis,Spieß Schönland AG & Co. KG Studio,233.13
+2023-11-18,Viechtach,Reisen,Wellness Wochenende,Booking.com,609.72
+2023-06-08,Oschatz,Hobbies,Tennis,Albers Stiftung & Co. KG Studio,147.98
+2023-01-15,Weimar,Reisen,Mietwagen,Expedia,752.76
+2023-12-03,Hünfeld,Mode,T-Shirt,Mango,223.04
+2023-11-13,Prenzlau,Beauty,Serum,Rossmann,35.97
+2023-12-26,Mallersdorf,Reisen,Mietwagen,Booking.com,693.35
+2023-11-30,Rockenhausen,Hobbies,Pilates,Pruschke Studio,238.5
+2023-04-01,Osterburg,Essen & Trinken,Dinner im Steakhouse,Schäfer Steakhouse,123.85
+2023-10-28,Hansestadttralsund,Reisen,Hotel,Spa Resort,712.42
+2023-10-13,Apolda,Essen & Trinken,Dinner im Restaurant,Klingelhöfer AG Restaurant,143.7
+2023-01-13,Meiningen,Reisen,Spa Resort,Spa Resort,824.16
+2023-08-01,Schongau,Reisen,Mietwagen,Lufthansa,690.98
+2023-03-23,Wetzlar,Mode,Kaschmir Pullover,Luxury Fashion,370.25
+2023-01-10,Gräfenhainichen,Mode,Designer Schuhe,Breuninger,645.45
+2023-08-03,Schweinfurt,Technik,Kamera,Media Markt,1548.74
+2023-10-26,Roth,Reisen,Wellness Wochenende,Lufthansa,863.29
+2023-04-22,Aachen,Süßigkeiten,Macarons,Confiserie,32.07
+2023-03-18,Parchim,Technik,Kopfhörer,Media Markt,2256.25
+2023-11-24,Schmölln,Mode,Designer Handtasche,Galeria Kaufhof,364.12
+2023-07-24,Sankt Goar,Reisen,City Trip,Lufthansa,1489.15
+2023-05-06,Fürstenwalde,Reisen,Mietwagen,Spa Resort,1624.66
+2023-09-09,Bad Liebenwerda,Mode,Luxus Sonnenbrille,Galeria Kaufhof,308.0
+2023-07-07,Pirmasens,Hobbies,Fitness Studio,Naser KGaA Studio,356.47
+2023-02-22,Gadebusch,Süßigkeiten,Gummibärchen,Ferrero,33.88
+2023-10-28,Gelnhausen,Beauty,Chanel Foundation,Beauty Boutique,166.32
+2023-04-29,Arnstadt,Mode,Jeans,Zara,232.02
+2023-01-25,Emmendingen,Technik,Lautsprecher,Saturn,1325.62
+2023-07-01,Schwäbisch Hall,Mode,Luxus Sonnenbrille,Breuninger,603.75
+2023-07-21,München,Reisen,Hotel,Travel Agency,1143.96
+2023-02-06,Görlitz,Hobbies,Tennis,Staude AG Studio,45.2
+2023-06-30,Burg,Essen & Trinken,Getränke in Coffee Shop,Anika's Coffee Shop,64.17
+2023-12-30,Belzig,Essen & Trinken,Dinner im Bistro,Kaul AG Bistro,140.5
+2023-08-08,Hildesheim,Mode,Blazer,C&A,98.57
+2023-05-24,Dinslaken,Beauty,Feuchtigkeitscreme,Rossmann,70.76
+2023-08-13,Konstanz,Technik,Kopfhörer,Media Markt,2081.57
+2023-03-18,Kusel,Essen & Trinken,Dinner im Steakhouse,Stolze Heinz GmbH Steakhouse,142.64
+2023-01-29,Bremen,Essen & Trinken,Essen im Restaurant,Sorgatz Restaurant,68.25
+2023-08-26,Nordhausen,Essen & Trinken,Dinner im Café,Schuster Beer GmbH Café,162.2
+2023-08-20,Arnstadt,Essen & Trinken,Dinner im Café,Stiffel Café,121.54
+2023-06-22,Schwerin,Reisen,City Trip,Travel Agency,453.34
+2023-08-20,Lichtenfels,Mode,T-Shirt,C&A,74.72
+2023-07-15,Pfaffenhofen an der Ilm,Essen & Trinken,Dinner im Café,Römer Wiek KGaA Café,80.86
+2023-10-18,Stadtroda,Technik,Lautsprecher,Apple Store,1191.53
+2023-03-08,Husum,Essen & Trinken,Dinner im Steakhouse,Ullmann Steakhouse,142.63
+2023-10-02,Roding,Technik,Smartwatch,Saturn,1692.72
+2023-02-18,Quedlinburg,Beauty,Essence Lipstick,Müller,58.84
+2023-06-22,Cloppenburg,Mode,Designer Handtasche,Galeria Kaufhof,377.7
+2023-03-02,Uffenheim,Technik,Kopfhörer,Saturn,2238.81
+2023-10-28,Burg,Technik,Laptop,Apple Store,2432.72
+2023-09-07,Görlitz,Essen & Trinken,Dinner im Italiener,Hornich Italiener,136.3
+2023-09-21,Gräfenhainichen,Reisen,City Trip,Spa Resort,1209.3
+2023-06-20,Eilenburg,Essen & Trinken,Dinner im Brasserie,Eimer Brasserie,114.43
+2023-04-09,Düren,Süßigkeiten,Pralinen,Süßwarengeschäft,8.86
+2023-09-10,Biedenkopf,Hobbies,Pilates,Ring AG Studio,337.73
+2023-04-19,Schwabmünchen,Essen & Trinken,Dinner im Café,Hering GmbH Café,85.06
+2023-12-05,Dinslaken,Mode,Seidenbluse,Luxury Fashion,536.63
+2023-03-16,Freising,Reisen,Hotel,Booking.com,1490.41
+2023-03-09,Nürtingen,Süßigkeiten,Pralinen,Ferrero,35.66
+2023-06-11,Celle,Mode,Seidenbluse,Designer Boutique,541.1
+2023-10-03,Ochsenfurt,Hobbies,Pilates,Reinhardt Klotz GbR Studio,248.45
+2023-12-27,Hettstedt,Essen & Trinken,Dinner im Steakhouse,Junck GmbH & Co. KG Steakhouse,137.22
+2023-12-06,Wolgast,Technik,Gaming Equipment,Apple Store,1769.67
+2023-08-23,Rostock,Beauty,Essence Lipstick,dm,115.72
+2023-11-26,Heiligenstadt,Essen & Trinken,Dinner im Sushi Bar,Förster Sushi Bar,171.06
+2023-12-14,Suhl,Mode,Designer Handtasche,Galeria Kaufhof,454.56
+2023-10-24,Celle,Hobbies,Golf,Roht Müller Stiftung & Co. KG Studio,208.45
+2023-07-09,Kelheim,Essen & Trinken,Getränke in Weinprobe,Wencke's Weinprobe,52.09
+2023-03-05,Kaiserslautern,Essen & Trinken,Dinner im Sushi Bar,Eimer Christoph GmbH & Co. KGaA Sushi Bar,161.05
+2023-11-19,Stade,Süßigkeiten,Macarons,Bäckerei,6.01
+2023-12-06,Wanzleben,Mode,Designer Schuhe,Breuninger,358.13
+2023-10-09,Böblingen,Essen & Trinken,Dinner im Café,Löwer GmbH Café,140.34
+2023-11-21,Oschatz,Reisen,Hotel,Spa Resort,1255.0
+2023-10-15,Wanzleben,Beauty,Gesichtsmaske,Apotheke,128.61
+2023-05-16,Weißwasser,Technik,Kopfhörer,Cyberport,2407.42
+2023-03-10,Jüterbog,Hobbies,Schwimmen,Jacobi Jäckel Studio,349.43
+2023-03-22,Ludwigsburg,Hobbies,Fitness Studio,Kreusel Studio,247.13
+2023-11-13,Neubrandenburg,Technik,Tablet,Media Markt,1280.55
+2023-02-08,Saarbrücken,Süßigkeiten,Schokolade,Ferrero,24.35
+2023-10-11,Kassel,Süßigkeiten,Gummibärchen,Bäckerei,31.01
+2023-03-13,Lübben,Süßigkeiten,Schokolade,Bäckerei,21.36
+2023-12-02,Angermünde,Reisen,Flugticket,Expedia,1922.06
+2023-07-08,Wolmirstedt,Essen & Trinken,Getränke in Rooftop Bar,Nils's Rooftop Bar,75.53
+2023-09-05,Waren,Reisen,City Trip,Booking.com,148.6
+2023-09-15,Fulda,Mode,Jeans,Zara,30.11
+2023-05-28,Lobenstein,Hobbies,Tennis,Oderwald GmbH & Co. KG Studio,168.73
+2023-03-22,Crailsheim,Beauty,NYX Eyeliner,Rossmann,96.04
+2023-01-10,Norden,Beauty,Gesichtsreiniger,Apotheke,104.72
+2023-12-18,Fürstenfeldbruck,Reisen,Flugticket,Travel Agency,1820.18
+2023-06-20,Gadebusch,Hobbies,Tennis,Rust Studio,168.38
+2023-05-07,Badoberan,Beauty,YSL Mascara,Parfümerie Pieper,284.07
+2023-08-29,Teterow,Essen & Trinken,Dinner im Brasserie,Trupp GbR Brasserie,126.65
+2023-10-28,Fallingbostel,Technik,Kamera,Media Markt,1793.78
+2023-07-12,Kelheim,Beauty,Sonnencreme,dm,75.0
+2023-11-28,Eckernförde,Mode,Seidenbluse,Breuninger,682.73
+2023-02-28,Wertingen,Reisen,Wellness Wochenende,Spa Resort,1156.44
+2023-11-11,Neuruppin,Mode,Seidenbluse,Galeria Kaufhof,480.71
+2023-11-11,Grimma,Reisen,Mietwagen,Lufthansa,1577.88
+2023-11-13,Stollberg,Beauty,Gesichtsmaske,Rossmann,36.3
+2023-09-26,Gießen,Hobbies,Fitness Studio,Kallert Stiftung & Co. KGaA Studio,287.83
+2023-06-23,Stuttgart,Essen & Trinken,Dinner im Café,Hoffmann Zirme GmbH & Co. KG Café,99.74
+2023-01-19,Suhl,Technik,Laptop,Media Markt,496.67
+2023-11-21,Hamburg,Hobbies,Tennis,Junck GbR Studio,57.89
+2023-04-02,Bitterfeld,Technik,Laptop,Saturn,1596.83
+2023-12-31,Günzburg,Essen & Trinken,Dinner im Bistro,Pechel Henck KG Bistro,126.03
+2023-06-27,Bersenbrück,Reisen,Hotel,Travel Agency,309.73
+2023-01-18,Hoyerswerda,Reisen,Wellness Wochenende,Expedia,150.24
+2023-06-02,Bad Kissingen,Hobbies,Schwimmen,Beckmann AG Studio,313.5
+2023-01-10,Freising,Beauty,Gesichtsmaske,dm,15.11
+2023-09-15,Witzenhausen,Reisen,Mietwagen,Spa Resort,1824.26
+2023-06-02,Hainichen,Süßigkeiten,Cookies,Confiserie,15.52
+2023-12-29,Meiningen,Essen & Trinken,Food Delivery,Pizza Service,17.94
+2023-07-31,Hohenstein-Ernstthal,Technik,Gaming Equipment,Media Markt,1887.41
+2023-01-14,Sangerhausen,Süßigkeiten,Pralinen,Bäckerei,38.8
+2023-12-16,Kusel,Mode,Kaschmir Pullover,Galeria Kaufhof,699.0
+2023-12-04,Nordhausen,Hobbies,Massage,Binner GmbH & Co. KG Studio,101.18
+2023-05-24,Guben,Reisen,Spa Resort,Lufthansa,699.76
+2023-10-06,Jessen,Technik,Smartphone,Cyberport,928.68
+2023-08-02,Torgau,Technik,Lautsprecher,Saturn,1657.46
+2023-08-04,Delitzsch,Mode,T-Shirt,Mango,239.51
+2023-05-18,Ludwigsburg,Technik,Kamera,Cyberport,1075.68
+2023-05-01,Beilngries,Mode,Designer Handtasche,Galeria Kaufhof,350.99
+2023-12-08,Wunsiedel,Reisen,Hotel,Expedia,1080.39
+2023-05-17,Melle,Hobbies,Tennis,Vollbrecht Studio,293.9
+2023-09-14,Greifswald,Hobbies,Golf,Döhn Hethur GmbH Studio,397.08
+2023-04-27,Potsdam,Reisen,Hotel,Expedia,440.28
+2023-04-01,Gräfenhainichen,Reisen,Wellness Wochenende,Lufthansa,1992.65
+2023-09-12,Eckernförde,Hobbies,Tennis,Staude Stiftung & Co. KGaA Studio,79.32
+2023-12-12,Borken,Mode,Sneaker,Mango,183.75
+2023-10-30,Wolfenbüttel,Technik,Kopfhörer,Media Markt,716.79
+2023-06-01,Bad Freienwalde,Essen & Trinken,Essen im Brasserie,Hering AG Brasserie,60.91
+2023-04-26,Altentreptow,Hobbies,Massage,Liebelt Stahr GmbH & Co. KG Studio,152.12
+2023-12-05,Wetzlar,Essen & Trinken,Dinner im Restaurant,Schuster Restaurant,168.46
+2023-01-08,Waldmünchen,Mode,Kaschmir Pullover,Galeria Kaufhof,385.26
+2023-09-13,Neu-Ulm,Süßigkeiten,Schokolade,Süßwarengeschäft,12.26
+2023-07-22,Mayen,Mode,Kaschmir Pullover,Breuninger,489.41
+2023-03-03,Quedlinburg,Essen & Trinken,Food Delivery,Lieferando,31.47
+2023-06-03,Sebnitz,Essen & Trinken,Dinner im Sushi Bar,Heinrich Junitz GmbH Sushi Bar,196.9
+2023-12-10,Kulmbach,Süßigkeiten,Schokolade,Ferrero,36.14
+2023-05-13,Rostock,Hobbies,Spa Tag,Bolander Losekann GmbH & Co. KG Studio,128.95
+2023-11-26,Rudolstadt,Süßigkeiten,Cookies,Süßwarengeschäft,11.38
+2023-02-21,Zerbst,Beauty,NYX Eyeliner,Müller,20.45
+2023-08-14,Ochsenfurt,Beauty,Hermès Twilly,Beauty Store,195.9
+2023-07-01,Görlitz,Reisen,City Trip,Lufthansa,470.94
+2023-03-15,Güstrow,Beauty,La Mer Concealer,Parfümerie Pieper,198.05
+2023-09-11,Havelberg,Essen & Trinken,Dinner im Sushi Bar,Faust Hentschel AG Sushi Bar,167.58
+2023-11-01,Freudenstadt,Hobbies,Golf,Bloch GmbH & Co. KG Studio,148.32
+2023-08-08,Angermünde,Essen & Trinken,Dinner im Café,Franke e.V. Café,123.58
+2023-02-09,Wunsiedel,Hobbies,Schwimmen,Killer GmbH Studio,292.38
+2023-07-14,Hannoversch Münden,Technik,Kamera,Media Markt,725.33
+2023-10-14,Groß-Gerau,Süßigkeiten,Pralinen,Lindt,12.43
+2023-04-23,Schlüchtern,Reisen,Spa Resort,Booking.com,1186.46
+2023-07-20,Neunburg vorm Wald,Technik,Lautsprecher,Cyberport,1589.76
+2023-03-12,Hamburg,Mode,Sneaker,H&M,61.95
+2023-01-09,Helmstedt,Reisen,Wellness Wochenende,Travel Agency,844.09
+2023-04-09,Ueckermünde,Beauty,Hermès Twilly,Beauty Store,190.15
+2023-06-28,Wertingen,Hobbies,Spa Tag,Killer Hein GmbH & Co. KGaA Studio,168.44
+2023-04-17,Eisenhüttenstadt,Beauty,Viktor & Rolf Flowerbomb,Sephora,157.54
+2023-09-22,Aurich,Beauty,Catrice Eyeshadow,Douglas,68.24
+2023-05-13,Zschopau,Beauty,YSL Mascara,Parfümerie Pieper,283.58
+2023-09-29,Parsberg,Hobbies,Pilates,Junitz Süßebier GmbH & Co. KGaA Studio,334.51
+2023-03-19,Kusel,Hobbies,Schwimmen,Zobel Studio,212.5
+2023-07-22,Kyritz,Hobbies,Yoga Kurs,Hermighausen Studio,78.02
+2023-10-01,Eisenhüttenstadt,Technik,Kopfhörer,Cyberport,2205.43
+2023-11-11,Heinsberg,Technik,Smartwatch,Cyberport,2347.3
+2023-08-17,Geldern,Hobbies,Pilates,Metz e.V. Studio,386.28
+2023-12-29,Güstrow,Reisen,City Trip,Expedia,384.54
+2023-04-09,Amberg,Mode,Kaschmir Pullover,Luxury Fashion,392.06
+2023-09-17,Scheinfeld,Mode,Luxus Sonnenbrille,Galeria Kaufhof,733.45
+2023-10-18,Schwarzenberg,Reisen,City Trip,Spa Resort,953.1
+2023-01-22,Säckingen,Mode,Designer Schuhe,Designer Boutique,499.92
+2023-09-14,Rosenheim,Technik,Kopfhörer,Saturn,949.96
+2023-03-13,Halberstadt,Technik,Kamera,Media Markt,1757.49
+2023-03-19,Vilsbiburg,Technik,Gaming Equipment,Saturn,893.98
+2023-03-06,Bogen,Beauty,Maybelline Mascara,dm,135.0
+2023-06-02,Schwäbisch Hall,Beauty,Hermès Twilly,Sephora,166.71
+2023-09-29,Grafenau,Mode,Designer Handtasche,Galeria Kaufhof,778.23
+2023-03-23,Kulmbach,Beauty,YSL Mascara,Beauty Boutique,223.09
+2023-12-11,Gransee,Süßigkeiten,Cupcakes,Lindt,35.21
+2023-12-23,Aurich,Süßigkeiten,Cupcakes,Bäckerei,29.12
+2023-11-21,Steinfurt,Beauty,Chanel No. 5,Parfümerie,168.94
+2023-05-29,Rathenow,Essen & Trinken,Dinner im Italiener,Hölzenbecher Wilms GmbH Italiener,169.19
+2023-05-12,Schlüchtern,Hobbies,Pilates,Trubin Cichorius GmbH & Co. KG Studio,181.0
+2023-08-16,Bautzen,Süßigkeiten,Cookies,Bäckerei,20.27
+2023-02-14,Eberswalde,Mode,Designer Handtasche,Designer Boutique,424.93
+2023-12-01,Burglengenfeld,Hobbies,Yoga Kurs,Meyer AG & Co. OHG Studio,202.57
+2023-03-31,Amberg,Reisen,City Trip,Expedia,928.69
+2023-05-10,Beilngries,Reisen,City Trip,Lufthansa,1785.8
+2023-04-03,Flöha,Technik,Gaming Equipment,Media Markt,521.63
+2023-11-29,Burgdorf,Mode,Designer Schuhe,Designer Boutique,752.65
+2023-08-31,Sankt Goarshausen,Essen & Trinken,Dinner im Steakhouse,Seip Kaul AG Steakhouse,88.43
+2023-09-01,Berchtesgaden,Mode,Designer Schuhe,Designer Boutique,677.45
+2023-09-17,Hettstedt,Technik,Kamera,Saturn,857.13
+2023-07-07,Zschopau,Technik,Smartphone,Saturn,2163.39
+2023-06-30,Weimar,Mode,Stiefel,Peek & Cloppenburg,283.05
+2023-08-21,Aschaffenburg,Hobbies,Schwimmen,Säuberlich Studio,173.96
+2023-10-09,Griesbach Rottal,Essen & Trinken,Dinner im Brasserie,Thanel Brasserie,147.07
+2023-06-23,Dieburg,Süßigkeiten,Macarons,Confiserie,29.67
+2023-02-16,Griesbach Rottal,Beauty,Chanel No. 5,Parfümerie,187.23
+2023-04-23,Bischofswerda,Essen & Trinken,Dinner im Café,Schlosser Café,94.19
+2023-01-28,Bruchsal,Mode,Designer Handtasche,Luxury Fashion,757.64
+2023-12-19,Guben,Essen & Trinken,Dinner im Steakhouse,Schleich Langern GmbH & Co. KG Steakhouse,174.55
+2023-02-21,Nordhausen,Technik,Kopfhörer,Saturn,1884.66
+2023-09-27,Wetzlar,Hobbies,Golf,Weiß GmbH Studio,223.88
+2023-04-15,Bützow,Mode,Designer Handtasche,Luxury Fashion,345.53
+2023-05-28,Hainichen,Süßigkeiten,Cookies,Bäckerei,6.69
+2023-09-02,Belzig,Essen & Trinken,Dinner im Weinbar,Vogt GmbH & Co. KG Weinbar,111.86
+2023-11-22,Sonneberg,Technik,Lautsprecher,Saturn,2132.65
+2023-01-14,Schrobenhausen,Technik,Tablet,Media Markt,1962.37
+2023-11-11,Lüdenscheid,Süßigkeiten,Gummibärchen,Lindt,32.35
+2023-01-21,Mühldorf am Inn,Technik,Kamera,Cyberport,1133.42
+2023-04-13,Rottweil,Reisen,Wellness Wochenende,Lufthansa,621.69
+2023-01-27,Jüterbog,Technik,Lautsprecher,Media Markt,1946.37
+2023-10-12,Rothenburg ob der Tauber,Hobbies,Golf,Süßebier GmbH Studio,154.34
+2023-06-08,Bergzabern,Hobbies,Massage,Nette Studio,42.57
+2023-04-24,Ueckermünde,Mode,Seidenbluse,Galeria Kaufhof,504.57
+2023-10-17,Lüdinghausen,Mode,Designer Schuhe,Galeria Kaufhof,677.38
+2023-12-24,Oschatz,Beauty,Hermès Twilly,Douglas,241.54
+2023-11-01,Brilon,Technik,Smartwatch,Apple Store,1234.66
+2023-11-05,Beeskow,Mode,Seidenbluse,Designer Boutique,546.62
+2023-07-14,Eckernförde,Hobbies,Tennis,Röhrdanz GmbH & Co. KG Studio,55.51
+2023-08-22,Eilenburg,Essen & Trinken,Getränke in Weinprobe,Wulf's Weinprobe,79.38
+2023-03-05,Freudenstadt,Süßigkeiten,Pralinen,Süßwarengeschäft,20.44
+2023-08-20,Eckernförde,Mode,Designer Handtasche,Designer Boutique,438.21
+2023-10-31,Altötting,Essen & Trinken,Dinner im Bistro,Bonbach AG Bistro,167.84
+2023-05-26,Eisenach,Reisen,Spa Resort,Lufthansa,1114.54
+2023-08-28,Ahaus,Reisen,Spa Resort,Travel Agency,722.79
+2023-12-16,Meiningen,Reisen,Hotel,Expedia,1714.33
+2023-04-24,Mallersdorf,Süßigkeiten,Macarons,Confiserie,13.39
+2023-12-07,Ravensburg,Technik,Lautsprecher,Cyberport,848.61
+2023-05-20,Bogen,Hobbies,Schwimmen,Schacht GmbH Studio,49.02
+2023-12-12,Mellrichstadt,Mode,Kaschmir Pullover,Breuninger,446.09
+2023-07-18,Saarlouis,Technik,Kopfhörer,Media Markt,1626.67
+2023-02-21,Bad Freienwalde,Mode,Seidenbluse,Galeria Kaufhof,652.92
+2023-05-12,Bad Liebenwerda,Süßigkeiten,Pralinen,Confiserie,28.41
+2023-02-14,Holzminden,Beauty,Dior J'adore,Parfümerie,223.29
+2023-08-09,Marienberg,Essen & Trinken,Dinner im Restaurant,Mitschke Stiftung & Co. KG Restaurant,112.11
+2023-04-24,Kassel,Reisen,City Trip,Booking.com,1539.4
+2023-03-17,Soltau,Beauty,Feuchtigkeitscreme,Apotheke,21.42
+2023-10-12,Meiningen,Hobbies,Spa Tag,Heydrich Studio,315.78
+2023-03-24,Kassel,Reisen,Hotel,Lufthansa,650.06
+2023-04-05,Mallersdorf,Beauty,La Mer Concealer,Beauty Boutique,255.62
+2023-01-23,Dachau,Süßigkeiten,Pralinen,Confiserie,20.44
+2023-04-18,Eisenhüttenstadt,Süßigkeiten,Gummibärchen,Bäckerei,20.59
+2023-02-01,Ilmenau,Hobbies,Spa Tag,Kitzmann Klemm AG Studio,27.44
+2023-04-25,Sigmaringen,Hobbies,Pilates,Schottin Studio,187.07
+2023-04-30,Sternberg,Technik,Smartwatch,Cyberport,1665.22
+2023-10-29,Brand,Reisen,Flugticket,Lufthansa,1561.93
+2023-03-15,Hammelburg,Beauty,La Mer Concealer,Douglas,270.04
+2023-10-26,Schweinfurt,Mode,Luxus Sonnenbrille,Luxury Fashion,662.4
+2023-11-12,Hammelburg,Reisen,Hotel,Travel Agency,867.53
+2023-05-01,Heiligenstadt,Hobbies,Massage,Jähn Hartmann GmbH Studio,211.53
+2023-07-31,Recklinghausen,Reisen,Hotel,Travel Agency,1553.63
+2023-10-01,Göttingen,Beauty,Chanel No. 5,Douglas,158.4
+2023-05-05,Bad Kreuznach,Süßigkeiten,Cookies,Confiserie,37.05
+2023-09-12,Hohenstein-Ernstthal,Essen & Trinken,Dinner im Brasserie,Briemer Hölzenbecher AG & Co. OHG Brasserie,118.54
+2023-11-19,Wolfenbüttel,Hobbies,Schwimmen,Weller GmbH & Co. OHG Studio,242.57
+2023-07-26,Klötze,Beauty,Tom Ford Eyeshadow,Parfümerie Pieper,217.36
+2023-04-27,Bernburg,Hobbies,Massage,Haase Bärer e.V. Studio,42.71
+2023-04-06,Rathenow,Essen & Trinken,Dinner im Bistro,Dietz Bistro,153.44
+2023-05-18,Lübben,Süßigkeiten,Cupcakes,Confiserie,26.05
+2023-03-30,Brilon,Beauty,Sonnencreme,dm,98.9
+2023-11-01,Hamburg,Reisen,Flugticket,Spa Resort,1007.42
+2023-05-02,Vechta,Beauty,Serum,dm,101.89
+2023-07-07,Halberstadt,Süßigkeiten,Schokolade,Confiserie,13.79
+2023-09-05,Ochsenfurt,Süßigkeiten,Cookies,Lindt,19.16
+2023-08-28,Eberswalde,Technik,Lautsprecher,Media Markt,450.04
+2023-11-19,Mellrichstadt,Technik,Lautsprecher,Cyberport,2314.92
+2023-11-27,Teterow,Hobbies,Schwimmen,Söding GmbH Studio,39.61
+2023-05-12,Dresden,Beauty,Essence Lipstick,Rossmann,128.3
+2023-02-07,Recklinghausen,Süßigkeiten,Pralinen,Ferrero,8.09
+2023-10-08,Erbisdorf,Beauty,La Mer Concealer,Sephora,268.48
+2023-04-01,Peine,Essen & Trinken,Food Delivery,Food Delivery,24.24
+2023-02-04,Gütersloh,Hobbies,Massage,Dobes Trubin AG & Co. KGaA Studio,199.39
+2023-11-26,Gadebusch,Technik,Gaming Equipment,Saturn,165.94
+2023-11-17,Eisenhüttenstadt,Technik,Kamera,Apple Store,2299.55
+2023-11-20,Osterode am Harz,Hobbies,Golf,Hoffmann Studio,34.19
+2023-07-28,Bautzen,Reisen,Spa Resort,Expedia,551.49
+2023-05-06,Gütersloh,Hobbies,Fitness Studio,Schmidtke AG Studio,276.42
+2023-04-14,Wunsiedel,Reisen,Spa Resort,Travel Agency,617.17
+2023-04-27,Neustadtner Waldnaab,Reisen,Hotel,Spa Resort,944.54
+2023-10-21,Großenhain,Mode,Designer Handtasche,Breuninger,351.0
+2023-12-10,Viersen,Essen & Trinken,Dinner im Steakhouse,Wernecke Steakhouse,177.56
+2023-10-31,Emmendingen,Technik,Lautsprecher,Cyberport,1230.75
+2023-12-08,Miltenberg,Süßigkeiten,Cupcakes,Confiserie,26.46
+2023-07-31,Hildesheim,Hobbies,Tennis,Kraus Studio,147.55
+2023-12-09,Aachen,Reisen,Mietwagen,Booking.com,152.29
+2023-01-02,Burg,Technik,Kamera,Saturn,2173.15
+2023-05-03,Sangerhausen,Mode,Designer Schuhe,Galeria Kaufhof,773.0
+2023-03-26,Erbisdorf,Süßigkeiten,Macarons,Lindt,9.59
+2023-07-05,Nürtingen,Beauty,Chanel No. 5,Parfümerie,153.67
+2023-12-04,Wetzlar,Technik,Laptop,Apple Store,1670.11
+2023-11-10,Rochlitz,Hobbies,Golf,Briemer Krause KGaA Studio,369.8
+2023-10-23,Neustrelitz,Beauty,Sonnencreme,Rossmann,143.23
+2023-01-17,Cuxhaven,Beauty,Maybelline Mascara,Rossmann,23.26
+2023-05-19,Jena,Mode,T-Shirt,Peek & Cloppenburg,285.2
+2023-01-18,Bersenbrück,Mode,Kaschmir Pullover,Galeria Kaufhof,731.08
+2023-02-06,Delitzsch,Beauty,Maybelline Mascara,dm,116.34
+2023-01-14,Peine,Hobbies,Massage,Schönland Studio,101.7
+2023-09-13,Prenzlau,Beauty,YSL Mascara,Douglas,225.83
+2023-10-22,Höxter,Reisen,Hotel,Spa Resort,1528.36
+2023-01-06,Paderborn,Beauty,Viktor & Rolf Flowerbomb,Beauty Store,160.33
+2023-12-26,Schwäbisch Gmünd,Essen & Trinken,Food Delivery,Food Delivery,27.31
+2023-06-22,Schlüchtern,Reisen,Mietwagen,Lufthansa,1839.54
+2023-10-23,Geithain,Mode,Designer Handtasche,Luxury Fashion,659.73
+2023-09-26,Recklinghausen,Mode,Luxus Sonnenbrille,Breuninger,746.17
+2023-05-26,Güstrow,Süßigkeiten,Schokolade,Ferrero,15.42
+2023-11-14,Neustadtner Waldnaab,Technik,Gaming Equipment,Media Markt,438.6
+2023-03-30,Beilngries,Hobbies,Schwimmen,Junk KG Studio,169.88
+2023-03-27,Burgdorf,Essen & Trinken,Getränke in Champagner Lounge,Lidwina's Champagner Lounge,57.15
+2023-03-15,Donaueschingen,Essen & Trinken,Essen im Sushi Bar,Hesse GmbH Sushi Bar,47.24
+2023-06-13,Tecklenburg,Essen & Trinken,Food Delivery,Pizza Service,16.73
+2023-09-20,Weißwasser,Mode,Blazer,H&M,164.6
+2023-09-26,Stendal,Süßigkeiten,Macarons,Ferrero,37.04
+2023-06-18,Tübingen,Technik,Smartphone,Media Markt,996.15
+2023-07-05,Eichstätt,Technik,Smartphone,Alternate,421.85
+2023-05-02,Hannover,Beauty,Sonnencreme,dm,44.36
+2023-06-18,Cloppenburg,Hobbies,Fitness Studio,Krein Hoffmann AG Studio,132.76
+2023-11-28,Neustadtner Waldnaab,Essen & Trinken,Dinner im Café,Renner Hecker AG & Co. KGaA Café,198.78
+2023-06-12,Schwandorf,Hobbies,Golf,Gehringer Davids AG & Co. OHG Studio,249.81
+2023-07-27,Gransee,Beauty,La Mer Concealer,Parfümerie Pieper,229.48
+2023-03-10,Kaiserslautern,Beauty,Hermès Twilly,Douglas,263.24
+2023-03-06,Bamberg,Essen & Trinken,Food Delivery,Pizza Service,23.22
+2023-05-23,Wolfratshausen,Beauty,La Mer Concealer,Beauty Boutique,272.75
+2023-08-12,Nürtingen,Reisen,Flugticket,Spa Resort,718.35
+2023-06-24,Lemgo,Beauty,Gesichtsreiniger,dm,56.26
+2023-11-16,Wiedenbrück,Hobbies,Pilates,Hein Studio,89.64
+2023-03-18,Illertissen,Hobbies,Spa Tag,Henk Studio,355.04
+2023-10-06,Aachen,Essen & Trinken,Dinner im Bistro,van der Dussen Bistro,132.36
+2023-06-18,Anklam,Hobbies,Massage,Bohlander Schmiedecke KGaA Studio,160.09
+2023-11-29,Weimar,Hobbies,Spa Tag,Adolph GmbH & Co. KG Studio,84.97
+2023-08-05,Kassel,Beauty,Essence Lipstick,Rossmann,31.11
+2023-02-10,Luckau,Essen & Trinken,Dinner im Steakhouse,Wagner Steakhouse,112.77
+2023-04-11,Zossen,Mode,Rock,C&A,54.15
+2023-11-07,Coburg,Süßigkeiten,Macarons,Bäckerei,21.59
+2023-07-19,Ahaus,Süßigkeiten,Cupcakes,Bäckerei,37.32
+2023-08-29,Pegnitz,Essen & Trinken,Dinner im Bistro,Schmiedecke Hänel AG & Co. KGaA Bistro,195.62
+2023-11-24,Mettmann,Reisen,Flugticket,Expedia,1142.73
+2023-08-06,Paderborn,Beauty,Dior J'adore,Douglas,180.36
+2023-08-18,Badoberan,Beauty,Chanel Foundation,Sephora,294.12
+2023-05-29,Hansestadttralsund,Beauty,Tom Ford Eyeshadow,Parfümerie Pieper,168.02
+2023-11-17,Erkelenz,Essen & Trinken,Dinner im Italiener,Mielcarek GmbH Italiener,157.24
+2023-12-19,Parchim,Hobbies,Spa Tag,Schuchhardt GmbH Studio,276.75
+2023-03-12,Bergzabern,Essen & Trinken,Dinner im Restaurant,Tröst Stiftung & Co. KGaA Restaurant,111.72
+2023-09-23,Lüdinghausen,Hobbies,Schwimmen,Heuser Studio,261.59
+2023-09-08,Parchim,Reisen,Mietwagen,Booking.com,697.84
+2023-08-04,Melle,Hobbies,Yoga Kurs,Walter AG & Co. KGaA Studio,363.2
+2023-12-11,Pfaffenhofen an der Ilm,Technik,Kamera,Apple Store,1215.13
+2023-08-29,Lüneburg,Hobbies,Schwimmen,Kramer Studio,291.74
+2023-05-26,Schmölln,Süßigkeiten,Pralinen,Bäckerei,26.51
+2023-11-24,Freital,Süßigkeiten,Cupcakes,Bäckerei,26.59
+2023-09-30,Apolda,Technik,Lautsprecher,Apple Store,788.51
+2023-10-27,Bremervörde,Mode,Pullover,Zara,163.38
+2023-04-11,Kronach,Hobbies,Spa Tag,Grein Groth Studio,269.8
+2023-11-20,Mainburg,Mode,Kaschmir Pullover,Breuninger,702.8
+2023-09-08,Brand,Hobbies,Tennis,Birnbaum Studio,391.76
+2023-08-31,Malchin,Technik,Smartphone,Saturn,717.7
+2023-09-10,Fürstenwalde,Essen & Trinken,Food Delivery,Pizza Service,16.76
+2023-01-29,Northeim,Mode,Stiefel,Mango,273.3
+2023-03-16,Parchim,Technik,Smartwatch,Apple Store,2127.41
+2023-10-21,Hechingen,Technik,Gaming Equipment,Conrad,347.42
+2023-03-15,Gunzenhausen,Süßigkeiten,Gummibärchen,Lindt,17.73
+2023-04-12,Goslar,Süßigkeiten,Macarons,Confiserie,38.59
+2023-01-09,Lüneburg,Technik,Gaming Equipment,Cyberport,1739.58
+2023-04-27,Riesa,Beauty,Feuchtigkeitscreme,Rossmann,79.88
+2023-01-31,Oranienburg,Süßigkeiten,Pralinen,Ferrero,18.39
+2023-12-25,Sternberg,Beauty,Tom Ford Eyeshadow,Beauty Boutique,233.61
+2023-04-22,Brandenburg,Reisen,Hotel,Spa Resort,1882.43
+2023-09-14,Badalzungen,Beauty,Chanel No. 5,Sephora,172.07
+2023-09-01,Böblingen,Technik,Gaming Equipment,Apple Store,2137.23
+2023-09-25,Kötzting,Süßigkeiten,Cookies,Bäckerei,9.56
+2023-06-09,Schongau,Essen & Trinken,Dinner im Weinbar,Becker AG Weinbar,177.3
+2023-07-09,Freudenstadt,Beauty,Chanel No. 5,Parfümerie,183.44
+2023-12-10,Berlin,Süßigkeiten,Cupcakes,Süßwarengeschäft,16.51
+2023-03-25,Stadtroda,Technik,Tablet,Saturn,1155.99
+2023-06-12,Marienberg,Essen & Trinken,Dinner im Steakhouse,Anders Stiftung & Co. KG Steakhouse,126.3
+2023-02-10,Delitzsch,Mode,Seidenbluse,Luxury Fashion,595.31
+2023-08-17,Helmstedt,Beauty,Tom Ford Black Orchid,Parfümerie,169.02
+2023-05-26,Sulzbach-Rosenberg,Süßigkeiten,Macarons,Lindt,29.72
+2023-02-07,Badibling,Hobbies,Spa Tag,Ritter Studio,367.11
+2023-01-24,Neustrelitz,Süßigkeiten,Pralinen,Ferrero,30.73
+2023-10-27,Tübingen,Hobbies,Golf,Klapp Studio,352.02
+2023-12-07,Gerolzhofen,Essen & Trinken,Dinner im Brasserie,Döring Sauer GbR Brasserie,186.23
+2023-09-08,Grimmen,Beauty,Peeling,Apotheke,144.82
+2023-07-31,Wolfach,Reisen,Spa Resort,Booking.com,888.19
+2023-08-17,Iserlohn,Mode,Stiefel,Mango,160.05
+2023-01-25,Emmendingen,Hobbies,Yoga Kurs,Geisler AG Studio,279.21
+2023-06-10,Zeulenroda,Technik,Kamera,Cyberport,1324.67
+2023-03-20,Bautzen,Technik,Smartphone,Media Markt,521.01
+2023-12-02,Eisenberg,Reisen,Hotel,Spa Resort,180.76
+2023-11-15,Pinneberg,Mode,Kaschmir Pullover,Designer Boutique,315.29
+2023-10-04,Nürtingen,Technik,Lautsprecher,Media Markt,1801.15
+2023-02-14,Bad Mergentheim,Essen & Trinken,Essen im Bistro,Haase Bistro,65.39
+2023-01-10,Neuss,Beauty,Chanel No. 5,Parfümerie,245.83
+2023-06-16,Celle,Technik,Smartphone,Cyberport,2309.18
+2023-10-30,Vohenstrauß,Technik,Smartphone,Apple Store,2192.38
+2023-03-14,Bützow,Hobbies,Pilates,Jacobi Jäckel Misicher AG Studio,91.99
+2023-10-25,Strausberg,Essen & Trinken,Getränke in Cocktailbar,Erika's Cocktailbar,70.54
+2023-01-03,Pößneck,Essen & Trinken,Dinner im Sushi Bar,Stahr Pruschke AG Sushi Bar,102.28
+2023-06-07,Gransee,Mode,Designer Schuhe,Galeria Kaufhof,683.66
+2023-04-26,Kelheim,Beauty,Gesichtsreiniger,Apotheke,103.1
+2023-01-22,Günzburg,Beauty,NYX Eyeliner,dm,81.97
+2023-08-02,Sternberg,Hobbies,Pilates,Schottin Studio,351.35
+2023-12-28,Schwäbisch Gmünd,Technik,Gaming Equipment,Apple Store,2350.46
+2023-01-01,Schwandorf,Mode,Sneaker,Peek & Cloppenburg,70.36
+2023-03-01,Saarbrücken,Technik,Smartphone,Media Markt,150.74
+2023-09-10,Mettmann,Reisen,City Trip,Lufthansa,930.91
+2023-04-27,Nabburg,Hobbies,Massage,Jacobi Jäckel GbR Studio,215.93
+2023-11-11,Lobenstein,Beauty,Essence Lipstick,dm,121.35
+2023-04-29,Quedlinburg,Beauty,Peeling,Apotheke,118.53
+2023-09-17,Gifhorn,Essen & Trinken,Dinner im Café,Römer AG Café,183.55
+2023-04-27,Greifswald,Beauty,Peeling,Apotheke,107.78
+2023-09-14,Schwäbisch Gmünd,Mode,Designer Schuhe,Luxury Fashion,596.78
+2023-04-08,Roth,Reisen,Flugticket,Expedia,304.19
+2023-11-05,Oberviechtach,Beauty,Tom Ford Black Orchid,Sephora,204.97
+2023-06-25,Finsterwalde,Essen & Trinken,Dinner im Sushi Bar,Schmidt Ruppersberger AG & Co. OHG Sushi Bar,189.91
+2023-08-29,Ebersberg,Essen & Trinken,Dinner im Weinbar,Preiß KG Weinbar,183.72
+2023-01-24,Kitzingen,Mode,Seidenbluse,Luxury Fashion,509.0
+2023-06-26,Saarlouis,Beauty,L'Oréal Foundation,Rossmann,102.63
+2023-03-17,Sankt Goar,Technik,Smartwatch,Media Markt,944.62
+2023-01-11,Recklinghausen,Essen & Trinken,Dinner im Steakhouse,Pechel GmbH & Co. KGaA Steakhouse,129.44
+2023-01-18,Schwäbisch Gmünd,Beauty,Feuchtigkeitscreme,Apotheke,148.16
+2023-09-01,Altötting,Technik,Laptop,Saturn,2311.08
+2023-05-29,Eisenach,Technik,Lautsprecher,Cyberport,2149.59
+2023-11-10,Dresden,Mode,Kaschmir Pullover,Breuninger,569.94
+2023-02-21,Ravensburg,Essen & Trinken,Dinner im Café,Schomber Matthäi GmbH & Co. KG Café,104.68
+2023-07-24,Pfaffenhofen an der Ilm,Hobbies,Golf,Mohaupt Steckel GmbH Studio,174.13
+2023-06-23,Tecklenburg,Mode,Pullover,Zara,285.92
+2023-02-05,Waren,Mode,Luxus Sonnenbrille,Breuninger,572.38
+2023-05-29,Hildburghausen,Hobbies,Pilates,Benthin Studio,315.49
+2023-08-28,Lüneburg,Technik,Laptop,Alternate,171.87
+2023-11-05,Weimar,Essen & Trinken,Getränke in Weinprobe,Mahmoud's Weinprobe,46.58
+2023-06-12,Höxter,Reisen,Flugticket,Expedia,422.98
