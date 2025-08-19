@@ -82,7 +82,7 @@ full_df = pd.concat([normal, attack_df], ignore_index=True)
 full_df = full_df.sample(frac=1, random_state=42).reset_index(drop=True)
 
 # Speichern
-csv_path = "login_with_brute_force_and_impossible_travel.csv"
+csv_path = "../login_with_brute_force_and_impossible_travel.csv"
 full_df.to_csv(csv_path, index=False)
 
 # Vorschau anzeigen
