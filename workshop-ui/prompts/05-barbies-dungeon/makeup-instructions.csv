@@ -1,0 +1,12 @@
+part,color,x,y,shape
+linkes_auge,#8A2BE2,30,40,punkt
+linkes_auge,#8A2BE2,35,38,punkt
+linkes_auge,#8A2BE2,40,40,punkt
+rechtes_auge,#8A2BE2,70,40,punkt
+rechtes_auge,#8A2BE2,75,38,punkt
+rechtes_auge,#8A2BE2,80,40,punkt
+lippen,#FF1493,45,80,linie
+lippen,#FF1493,65,80,linie
+linke_wange,#FFB6C1,25,65,kreis
+rechte_wange,#FFB6C1,85,65,kreis
+stirn,#FFD700,55,20,stern
