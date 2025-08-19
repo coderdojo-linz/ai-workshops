@@ -13,7 +13,7 @@ In Barbies Raum liegt eine Schriftrolle mit einer Zahlenkombination, in Kens Rau
 Wieder vereint, aber noch nicht frei! Die nächste Tür führt in einen prunkvollen Saal. Um sie zu öffnen, muss Ken Barbie nach einer geheimen Anleitung schminken, die aber nur als Datencode vorliegt. Entschlüssle den Code, damit Ken Barbie schminken kann!
 
 **Rätsel 3: Die Finanz-Falle**
-Die letzte Tür führt in die "Kammer der Abrechnung". Hier wird Barbie mit einer riesigen Liste ihrer Ausgaben der letzten zwei Jahre konfrontiert. Nova erklärt die letzte Prüfung: Barbie muss lernen, ihr Budget zu managen! Ihre Ausgaben sind viel zu hoch.
+Die letzte Tür führt in die "Kammer der Abrechnung". Hier wird Barbie mit einer riesigen Liste ihrer Ausgaben der letzten zweieinhalb Jahre konfrontiert. Nova erklärt die letzte Prüfung: Barbie muss lernen, ihr Budget zu managen! Ihre Ausgaben sind viel zu hoch.
 
 **Hier kommst du ins Spiel!** ✨
 

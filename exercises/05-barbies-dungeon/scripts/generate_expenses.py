@@ -1,6 +1,7 @@
 import csv
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
+import calendar
 from faker import Faker
 
 # Initialize Faker for German data
@@ -123,45 +124,64 @@ def generate_product_and_recipient(category, amount):
 # Generate expense data
 expenses = []
 start_date = datetime(2023, 1, 1)
-num_expenses = 3600  # Approx 150 per month for two years
+end_date = datetime(2025, 8, 19)
 
-# Add fixed rent for each month for two years (2023-2024)
-for month_offset in range(24):
-    year = 2023 + (month_offset // 12)
-    month = (month_offset % 12) + 1
+# Loop through each month from start_date to end_date
+current_date = start_date
+while current_date <= end_date:
+    year, month = current_date.year, current_date.month
+
+    # Add fixed rent for the month
     rent_date = datetime(year, month, 5)
-    expenses.append({
-        "Datum": rent_date.strftime("%Y-%m-%d"),
-        "Ort": "Malibu",
-        "Kategorie": "Wohnen",
-        "Produkt": "Monatsmiete",
-        "Empfänger": "Miete für Traumvilla",
-        "Betrag": 1200.00
-    })
+    if rent_date <= end_date:
+        expenses.append({
+            "Datum": rent_date.strftime("%Y-%m-%d"),
+            "Ort": "Malibu",
+            "Kategorie": "Wohnen",
+            "Produkt": "Monatsmiete",
+            "Empfänger": "Miete für Traumvilla",
+            "Betrag": 1200.00
+        })
 
-# Generate other random expenses
-for _ in range(num_expenses):
-    cat = random.choice(list(categories.keys()))
-    if cat == "Wohnen":
-        continue
+    # Generate a random number of other expenses for the month
+    num_expenses_month = random.randint(100, 300)
+    # Correctly get the number of days in the month
+    days_in_month = calendar.monthrange(year, month)[1]
 
-    details = categories[cat]
-    amount = round(random.uniform(details["min"], details["max"]), 2)
+    for _ in range(num_expenses_month):
+        random_day = random.randint(1, days_in_month)
+        date = datetime(year, month, random_day)
 
-    # Generate realistic product and recipient
-    product, recipient = generate_product_and_recipient(cat, amount)
+        if date > end_date:
+            continue
 
-    # Generate dates over a two-year period
-    date = start_date + timedelta(days=random.randint(0, 365 * 2 - 1))
+        cat = random.choice(list(categories.keys()))
+        if cat == "Wohnen":
+            continue
 
-    expenses.append({
-        "Datum": date.strftime("%Y-%m-%d"),
-        "Ort": fake.city(),
-        "Kategorie": cat,
-        "Produkt": product,
-        "Empfänger": recipient,
-        "Betrag": amount
-    })
+        details = categories[cat]
+        amount = round(random.uniform(details["min"], details["max"]), 2)
+        product, recipient = generate_product_and_recipient(cat, amount)
+
+        expenses.append({
+            "Datum": date.strftime("%Y-%m-%d"),
+            "Ort": fake.city(),
+            "Kategorie": cat,
+            "Produkt": product,
+            "Empfänger": recipient,
+            "Betrag": amount
+        })
+
+    # Move to the next month
+    if month == 12:
+        current_date = datetime(year + 1, 1, 1)
+    else:
+        current_date = datetime(year, month + 1, 1)
+
+
+# Sort expenses by date in descending order
+expenses.sort(key=lambda x: datetime.strptime(x['Datum'], '%Y-%m-%d'), reverse=True)
+
 
 # Write to CSV
 # Note: The script is in a subdirectory, so we need to make sure the output path is correct.
