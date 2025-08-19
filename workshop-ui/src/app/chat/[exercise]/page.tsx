@@ -77,33 +77,30 @@ export default function Home() {
 
   // Override code block rendering
   renderer.code = ({ text, lang, escaped }) => {
-    let code;
+    let code: string;
     // We'll store an encoded JSON string for a data attribute if parsing succeeds.
     let parsedScriptEncoded: string | null = null;
     let parsedObj: any = null;
 
+    // test if text has a json with the script tag
+    // (then use the content of the script tag as code)
+
+    // Try to parse the full text as JSON first
     try {
-      // test if text has a json with the script tag
-      // (then use the content of the script tag as code)
-
-      // Try to parse the full text as JSON first
-      try {
-        parsedObj = JSON.parse(text);
-      } catch (e) {
-        console.warn('Failed to parse JSON from code block:', e, { text });
-      }
-
-      if (parsedObj && typeof parsedObj.script === 'string') {
-        code = parsedObj.script;
-        parsedScriptEncoded = encodeURIComponent(JSON.stringify(parsedObj));
-        // console.log('Extracted code from parsed JSON:', code);
-      } else {
-        code = text;
-        // console.log('No script tag found, using original text');
-      }
-    } catch (error) {
-      console.error('Error parsing code block:', text, error);
+      parsedObj = JSON.parse(text);
+    } catch (e) {
+      console.warn('Failed to parse JSON from code block:', e, { text });
     }
+
+    if (parsedObj && typeof parsedObj.script === 'string') {
+      code = parsedObj.script;
+      parsedScriptEncoded = encodeURIComponent(JSON.stringify(parsedObj));
+      // console.log('Extracted code from parsed JSON:', code);
+    } else {
+      code = text;
+      // console.log('No script tag found, using original text');
+    }
+
 
     const codeBlockId = `code-block-${Math.random().toString(36).substr(2, 9)}`;
     const dataAttr = parsedScriptEncoded ? ' data-script="' + parsedScriptEncoded + '"' : '';
