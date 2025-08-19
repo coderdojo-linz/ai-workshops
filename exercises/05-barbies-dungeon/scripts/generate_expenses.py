@@ -123,11 +123,13 @@ def generate_product_and_recipient(category, amount):
 # Generate expense data
 expenses = []
 start_date = datetime(2023, 1, 1)
-num_expenses = 1800 # Approx 150 per month for a year
+num_expenses = 3600  # Approx 150 per month for two years
 
-# Add fixed rent for each month
-for month in range(1, 13):
-    rent_date = datetime(2023, month, 5)
+# Add fixed rent for each month for two years (2023-2024)
+for month_offset in range(24):
+    year = 2023 + (month_offset // 12)
+    month = (month_offset % 12) + 1
+    rent_date = datetime(year, month, 5)
     expenses.append({
         "Datum": rent_date.strftime("%Y-%m-%d"),
         "Ort": "Malibu",
@@ -149,7 +151,8 @@ for _ in range(num_expenses):
     # Generate realistic product and recipient
     product, recipient = generate_product_and_recipient(cat, amount)
 
-    date = start_date + timedelta(days=random.randint(0, 364))
+    # Generate dates over a two-year period
+    date = start_date + timedelta(days=random.randint(0, 365 * 2 - 1))
 
     expenses.append({
         "Datum": date.strftime("%Y-%m-%d"),
