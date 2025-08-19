@@ -2,23 +2,31 @@
 
 **Ein aufregender Ausflug nimmt eine unerwartete Wendung!** 🏰
 
-Barbie und Ken erkunden ein altes, verwunschenes Schloss. Hinter einer geheimen Tür entdecken sie eine Schatzkammer, die voller glitzernder Kleider und funkelnder Juwelen ist. Doch als sie eintreten, schlägt die Tür hinter ihnen zu! **Sie sind gefangen!** 😱
+Barbie und Ken erkunden ein altes, verwunschenes Schloss. Sie entdecken eine geheimnisvolle Doppeltür. Neugierig öffnet Barbie die eine und Ken die andere. Kaum sind sie eingetreten, schlagen die Türen hinter ihnen zu! **Sie sind gefangen, und zwar in getrennten Räumen!** 😱
 
-Plötzlich beginnt ein riesiger, verzierter Spiegel an der Wand zu leuchten und eine freundliche Stimme spricht:
+Zwischen den beiden Räumen befindet sich eine dicke Glaswand. In jedem Raum spricht die magische KI Nova aus einem Spiegel zu ihnen.
 
-> „Willkommen im Glamour-Dungeon! Ich bin Nova, die Hüterin dieses Raumes. Nur wer das Rätsel des ‚Königlichen Glamours‘ löst, darf diesen Ort wieder verlassen. Die Anleitung dafür liegt auf dem Tisch vor euch. Aber es ist keine normale Anleitung – es ist ein Code!“
+**Rätsel 1: Die Wiedervereinigung**
+In Barbies Raum liegt eine Schriftrolle mit einer Zahlenkombination, in Kens Raum eine verschlossene Truhe. Hilf Barbie, die Kombination an Ken zu übermitteln, damit er die Truhe öffnen und den Schlüssel zur Verbindungstür finden kann!
 
-Auf dem Tisch finden Barbie und Ken eine seltsame Schriftrolle mit einer Tabelle voller Zahlen und mysteriöser Worte. Ken schaut ratlos. „Das ist ja gar kein Bild! Wie soll ich Barbie denn damit schminken?“ 🤔
+**Rätsel 2: Der Königliche Glamour**
+Wieder vereint, aber noch nicht frei! Die nächste Tür führt in einen prunkvollen Saal. Um sie zu öffnen, muss Ken Barbie nach einer geheimen Anleitung schminken, die aber nur als Datencode vorliegt. Entschlüssle den Code, damit Ken Barbie schminken kann!
+
+**Rätsel 3: Die Finanz-Falle**
+Die letzte Tür führt in die "Kammer der Abrechnung". Hier wird Barbie mit einer riesigen Liste ihrer Ausgaben des letzten Monats konfrontiert. Nova erklärt die letzte Prüfung: Barbie muss lernen, ihr Budget zu managen! Ihre Ausgaben sind viel zu hoch.
 
 **Hier kommst du ins Spiel!** ✨
 
-Deine Aufgabe ist es nicht, selbst zu schminken, sondern die Daten auf der Schriftrolle zu entschlüsseln. Du musst der KI Nova die richtigen Anweisungen (**Prompts**) geben, damit sie versteht, was zu tun ist. Es ist ein Logik-Rätsel, bei dem es darum geht, Daten richtig zu lesen!
+Deine Aufgabe ist es, Barbie und Ken bei allen drei Rätseln zu helfen. Du bist der Daten-Detektiv und Finanz-Coach!
 
 **Deine Mission:**
-Hilf Ken, die Daten zu verstehen, um das Rätsel zu lösen und die Tür zu öffnen.
+1.  Vereine Barbie und Ken.
+2.  Entschlüssle die Schminkanleitung.
+3.  Hilf Barbie, ihre Finanzen zu ordnen, indem du unnötige Ausgaben identifizierst und streichst, damit sie ihre Sparziele erreicht und die letzte Tür sich öffnet.
 
 **Beispiele für erste Prompts:**
 
-* „Zeig mir die geheime Anleitung.“
-* „Was bedeuten diese Spalten in der Tabelle?“
-* „Kannst du diese Daten als Bild zeichnen?“
+*   „Was steht auf der Schriftrolle in Barbies Raum?“ (Rätsel 1)
+*   „Kannst du die Schmink-Daten als Bild zeichnen?“ (Rätsel 2)
+*   „Zeig mir Barbies Ausgaben.“ (Rätsel 3)
+*   „Was sind Barbies Sparziele?“ (Rätsel 3)
