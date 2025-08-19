@@ -53,8 +53,10 @@ for _ in range(num_expenses):
         "Betrag": amount
     })
 
-# Write to CSV with an absolute path
-file_path = '/barbie_expenses.csv'
+# Write to CSV
+# Note: The script is in a subdirectory, so we need to make sure the output path is correct.
+# This script will be run from the root, so the path should be relative to the root.
+file_path = 'barbie_expenses.csv'
 with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
     fieldnames = ["Datum", "Ort", "Kategorie", "Produkt", "Empfänger", "Betrag"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -62,4 +64,4 @@ with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
     writer.writeheader()
     writer.writerows(expenses)
 
-print("CSV file created successfully.")
+print(f"CSV file '{file_path}' with {len(expenses)} expenses created successfully.")
