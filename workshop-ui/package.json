@@ -25,6 +25,8 @@
     "openai": "^5.12.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-highlight": "^0.15.0",
+    "react-markdown": "^10.1.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "@types/node": "^24.3.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-highlight": "^0.12.8",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
     "ts-jest": "^29.4.1",
