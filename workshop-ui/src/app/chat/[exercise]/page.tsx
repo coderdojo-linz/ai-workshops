@@ -315,8 +315,8 @@ export default function Home() {
           placeholder="Type your message..."
           disabled={isLoading}
           className={styles.textInput}
-          rows={1}
-          style={{ resize: 'none' }}
+          rows={2}
+          style={{ resize: 'vertical' }}
         />
         <button type="submit" disabled={!input.trim() || isLoading || messages.length >= 100} className={styles.sendButton}>
           <Send />
