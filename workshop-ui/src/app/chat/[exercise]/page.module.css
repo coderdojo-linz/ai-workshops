@@ -129,28 +129,10 @@
 }
 
 /* Code snippet styles */
-.message pre {
-  background-color: #f5f5f5;
-  padding: 12px;
-  border-radius: 6px;
-  margin: 8px 0;
-  overflow-x: auto;
-}
-
-.message pre code {
-  background-color: transparent;
-  padding: 0;
-  font-family: 'Courier New', Consolas, Monaco, monospace;
-  font-size: smaller;
-  line-height: 1.2;
-}
-
-.message code:not(pre code) {
-  background-color: #f5f5f5;
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-family: 'Courier New', Consolas, Monaco, monospace;
-  font-size: 14px;
+.message code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  border-radius: 5px;
 }
 
 .htmlFrame {
@@ -209,29 +191,19 @@
   margin-top: 8px;
 }
 
-/* HTML: <div class="loader"></div> */
-/* .loader {
-  --s: 64px;
-  width: var(--s);
-  aspect-ratio: 2;
-  --_g: #000 90%,#0000;
-  background: 
-    radial-gradient(farthest-side,var(--_g)) 0   50%/25% 50%,
-    radial-gradient(farthest-side at bottom,var(--_g)) 50%  calc(50% - var(--s)/16)/25% 25%,
-    radial-gradient(farthest-side at top   ,var(--_g)) 50%  calc(50% + var(--s)/16)/25% 25%,
-    radial-gradient(farthest-side at bottom,var(--_g)) 100% calc(50% - var(--s)/16)/25% 25%,
-    radial-gradient(farthest-side at top   ,var(--_g)) 100% calc(50% + var(--s)/16)/25% 25%;
-  background-repeat: no-repeat;
-  animation: l14 1s infinite;
+.copyButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* Place it on top right corner of the following element */
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
 }
-@keyframes l14 {
-    25%  {background-position:0    50%,50% 0,50% 100%,100% 0,100% 100%}
-    50%  {background-position:100% 50%,0   0,0   100%,50%  0,50%  100%}
-    75%,
-    100% {background-position:100% 50%,0 calc(50% - var(--s)/16),0 calc(50% + var(--s)/16),50% calc(50% - var(--s)/16),50% calc(50% + var(--s)/16)}
-} */
 
-/* HTML: <div class="loader"></div> */
 .loader {
   height: 30px;
   width: calc(30px * 2.5);
