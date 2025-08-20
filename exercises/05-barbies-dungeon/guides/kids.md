@@ -16,17 +16,18 @@ Zum Glück bist du da, um ihnen zu helfen. In den Spiegeln der Räume erscheint 
 
 ---
 
-## Schritt 1: Rätsel 1 – Die Wiedervereinigung
+## Schritt 1: Rätsel 1 – Die binäre Brücke
 
-Barbie und Ken sind durch eine dicke Glaswand getrennt. Barbie hat eine Schriftrolle mit einer geheimen Zahlenkombination, und Ken hat eine verschlossene Truhe. Nur mit der richtigen Kombination kann Ken die Truhe öffnen und den Schlüssel zur Verbindungstür finden.
+Barbie und Ken sind durch eine undurchsichtige Wand getrennt und können sich nicht sehen. An der Wand befindet sich ein Bildschirm und zwei Tasten. In Kens Raum steht eine verschlossene Truhe, die den Schlüssel zur nächsten Tür enthält. Die Truhe lässt sich nur mit einem Passwort öffnen, das Barbie kennt.
 
-**Dein Ziel:** Finde einen kreativen Weg, wie Barbie Ken die Zahlenkombination mitteilen kann, ohne zu sprechen.
+**Dein Ziel:** Finde heraus, wie die Kommunikations-Apparatur an der Wand funktioniert, damit Barbie Ken das Passwort (ein Wort, keine Zahl) übermitteln kann.
 
 ### Nützliche Prompts (zum Kopieren)
 
-- „Was steht auf der Schriftrolle in Barbies Raum?“
-- „Wie können Barbie und Ken miteinander kommunizieren, wenn sie nicht sprechen können?“
-- „Schlage eine Methode vor, wie Barbie die Zahlen zeigen kann.“
+- „Wie können Barbie und Ken miteinander kommunizieren?“
+- „Was machen die beiden Tasten an der Wand?“
+- „Was ist binärer ASCII-Code und wie kann er uns helfen?“
+- „Das Passwort ist 'LOVE'. Wie lautet der Binärcode dafür?“
 
 ---
 
