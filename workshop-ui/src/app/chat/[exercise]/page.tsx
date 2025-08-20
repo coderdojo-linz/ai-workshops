@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, FileText, Send, Clipboard, ClipboardCheck } from 'lucide-react';
 import Markdown from 'react-markdown';
@@ -86,58 +86,6 @@ export default function Home() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // old code block renderer
-  // const renderer = new marked.Renderer();
-
-  // // Override code block rendering
-  // renderer.code = ({ text, lang, escaped }) => {
-  //   let code: string;
-  //   // We'll store an encoded JSON string for a data attribute if parsing succeeds.
-  //   let parsedScriptEncoded: string | null = null;
-  //   let parsedObj: any = null;
-
-  //   // test if text has a json with the script tag
-  //   // (then use the content of the script tag as code)
-
-  //   // Try to parse the full text as JSON first
-  //   try {
-  //     parsedObj = JSON.parse(text);
-  //   } catch (e) {
-  //     console.warn('Failed to parse JSON from code block:', e, { text });
-  //   }
-
-  //   if (parsedObj && typeof parsedObj.script === 'string') {
-  //     code = parsedObj.script;
-  //     parsedScriptEncoded = encodeURIComponent(JSON.stringify(parsedObj));
-  //   } else {
-  //     code = text;
-  //   }
-
-
-  //   const codeBlockId = `code-block-${Math.random().toString(36).substr(2, 9)}`;
-  //   const dataAttr = parsedScriptEncoded ? ' data-script="' + parsedScriptEncoded + '"' : '';
-
-  //   // Add a copy button and classes we can hook into from React (scripts injected via innerHTML don't execute)
-  //   return (`
-  //   <div class="callout foldable" style="--callout-color: 8, 109, 221;" id="${codeBlockId}"${dataAttr}>
-  //     <div class="title">
-  //       <div class="title-left">
-  //       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="code" class="lucide lucide-code"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path></svg> 
-  //       Code
-  //       </div>
-  //       <div class="title-right" style="display:flex;align-items:center;gap:8px;">
-  //         <button class="copy-button" data-target="${codeBlockId}" title="Copy code" style="padding:6px 8px;border-radius:6px;border:1px solid rgba(0,0,0,0.08);background:transparent;cursor:pointer">Copy</button>
-  //         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" class="lucide lucide-chevron-down fold-arrow" style="transition: transform 0.2s ease;"><path d="m6 9 6 6 6-6"></path></svg>
-  //       </div>
-  //     </div>
-  //     <div class="content">
-  //       <pre><code>${code}</code></pre>
-  //     </div>
-  //   </div>
-  //   `);
-  // };
-
-  // marked.use({ renderer });
 
   useEffect(() => {
     scrollToBottom();
@@ -189,8 +137,8 @@ export default function Home() {
       ...messages,
       {
         role: 'user' as const,
-  content: userMessage,
-  type: 'text' as const,
+        content: userMessage,
+        type: 'text' as const,
       },
     ];
     setMessages(newMessages);
@@ -238,8 +186,8 @@ export default function Home() {
               // Finalize the assistant message
               const assistantMsg: Message = {
                 role: 'assistant',
-                  content: assistantMessage,
-                  type: 'text',
+                content: assistantMessage,
+                type: 'text',
               };
 
               // Extract first HTML island and create additional HTML message if found
@@ -249,7 +197,7 @@ export default function Home() {
               if (firstHtmlIsland) {
                 messagesToAdd.push({
                   role: 'assistant',
-                    html: firstHtmlIsland, // Store processed HTML for iframe srcdoc
+                  html: firstHtmlIsland, // Store processed HTML for iframe srcdoc
                   type: 'html',
                 });
               }
@@ -310,6 +258,42 @@ export default function Home() {
     setIsModalOpen(false);
   };
 
+  // Stable code renderer for Markdown so Callout instances keep identity across unrelated re-renders
+  const hashString = (str: string) => {
+    // Simple djb2 hash for stable keys
+    let hash = 5381;
+    for (let i = 0; i < str.length; i++) {
+      hash = (hash * 33) ^ str.charCodeAt(i);
+    }
+    // Convert to positive 32-bit and base36 for compactness
+    return (hash >>> 0).toString(36);
+  };
+
+  const markdownComponents = useMemo(() => ({
+    // eslint-disable-next-line react/no-unstable-nested-components
+    code(props: any) {
+      const { children } = props;
+      const text = getTextFromChildren(children);
+      const key = `code-${hashString(text || '')}`;
+      return (
+        <Callout
+          key={key}
+          title='Code'
+          icon='FileCode2'
+          foldable
+          content={
+            <>
+              <button onClick={() => (text ? handleCopy(text) : true)} className={styles.copyButton}>
+                {isCopied ? <ClipboardCheck size={18} /> : <Clipboard size={18} />}
+              </button>
+              <CodeHighlight className='hljs'>{text}</CodeHighlight>
+            </>
+          }
+        />
+      );
+    }
+  }), [isCopied]);
+
   return (
     <div className={styles.container}>
       {/* Header Bar */}
@@ -330,8 +314,13 @@ export default function Home() {
 
       {/* Conversation History */}
       <div className={styles.messagesContainer} ref={messagesContainerRef}>
-        {messages.map((message, index) => (
-          <div key={index} className={[styles.message, message.role === 'user' ? styles.userMessageContainer : styles.botMessageContainer].join(' ')}>
+        {messages.map((message) => (
+          <div
+            key={hashString(
+              (message.type === 'html' ? message.html : message.content) + '|' + message.role + '|' + message.type
+            )}
+            className={[styles.message, message.role === 'user' ? styles.userMessageContainer : styles.botMessageContainer].join(' ')}
+          >
             <strong>{message.role === 'user' ? 'You' : 'Bot'}:</strong>{' '}
             {message.type === 'html' ? (
               <iframe
@@ -343,22 +332,7 @@ export default function Home() {
               />
             ) : (
               <span className={message.role === 'user' ? styles.userMessage : styles.botMessage}>
-                <Markdown
-                  components={{
-                    code(props) {
-                      const { children } = props;
-                      const text = getTextFromChildren(children);
-                      return (
-                        <Callout title='Code' icon='FileCode2' foldable content={
-                          <>
-                            <button onClick={() => (text ? handleCopy(text) : true)} className={styles.copyButton}>{isCopied ? <ClipboardCheck size={18} /> : <Clipboard size={18} />}</button>
-                            <CodeHighlight className='hljs'>{text}</CodeHighlight>
-                          </>
-                        } />
-                      );
-                    }
-                  }}
-                >{message.content}</Markdown>
+                <Markdown components={markdownComponents}>{message.content}</Markdown>
               </span>
             )}
           </div>
@@ -370,22 +344,7 @@ export default function Home() {
             <span
               className={styles.botMessage}
             >
-              <Markdown
-                components={{
-                  code(props) {
-                    const { children } = props;
-                    const text = getTextFromChildren(children);
-                    return (
-                      <Callout title='Code' icon='FileCode2' foldable content={
-                        <>
-                          <button onClick={() => (text ? handleCopy(text) : true)} className={styles.copyButton}>{isCopied ? <ClipboardCheck size={18} /> : <Clipboard size={18} />}</button>
-                          <CodeHighlight className='hljs'>{text}</CodeHighlight>
-                        </>
-                      } />
-                    );
-                  }
-                }}
-              >{currentBotMessage}</Markdown>
+              <Markdown components={markdownComponents}>{currentBotMessage}</Markdown>
             </span>
             <div className={styles.loader}></div>
           </div>
