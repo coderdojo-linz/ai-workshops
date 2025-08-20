@@ -51,7 +51,7 @@ export default function Callout({
   icon,
   content,
   foldable = false,
-  folded = false
+  folded = false,
 }: CalloutProps) {
   const [collapsed, setCollapsed] = useState<boolean>(folded);
   const style = calloutStyles[type ?? "note"] || calloutStyles.note;
@@ -62,13 +62,10 @@ export default function Callout({
     | React.ComponentType<any>
     | undefined;
 
-  
-
   return (
     <div
-      className={`${styles.callout} ${foldable ? styles.foldable : ""} ${
-        collapsed ? styles.collapsed : ""
-      }`}
+      className={`${styles.callout} ${foldable ? styles.foldable : ""} ${collapsed ? styles.collapsed : ""
+        }`}
       style={{ ["--callout-color" as any]: style.color } as React.CSSProperties}
     >
       {foldable ? (
@@ -82,7 +79,9 @@ export default function Callout({
             {IconComponent ? <IconComponent size={18} /> : null}
             <span>{title || type.charAt(0).toUpperCase() + type.slice(1)}</span>
           </div>
-          <ChevronDown className={styles.foldArrow} size={18} />
+          <div>
+            <ChevronDown className={styles.foldArrow} size={18} />
+          </div>
         </button>
       ) : (
         <div className={styles.title}>
@@ -90,12 +89,12 @@ export default function Callout({
             {IconComponent ? <IconComponent size={18} /> : null}
             <span>{title || type.charAt(0).toUpperCase() + type.slice(1)}</span>
           </div>
-          {foldable && <ChevronDown className={styles.foldArrow} size={18} />}
+          <div></div>
         </div>
       )}
       {content && (
         <div className={styles.content}>
-          <p>{content}</p>
+          {content}
         </div>
       )}
     </div>
