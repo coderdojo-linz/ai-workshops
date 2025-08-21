@@ -211,7 +211,7 @@ export default function Home() {
                   assistantMessage += parsed.delta;
                   setCurrentBotMessage(assistantMessage);
                 }
-              } catch (error) {
+              } catch {
                 // Ignore parsing errors for SSE data
               }
             }
