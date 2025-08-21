@@ -39,7 +39,7 @@ print("This goes to stderr", file=sys.stderr)
     expect(result.stdout).toContain('This is stdout output');
     expect(result.stderr).toContain('This goes to stderr');
     expect(result.resultFiles).toEqual([]);
-  }, 45000); // 45 second timeout for API calls and blob operations
+  }, 60000); // 60 second timeout for API calls and blob operations
 
   it('should execute Python script that generates a file and upload to blob storage', async () => {
     const script = `
@@ -103,7 +103,7 @@ print(f"Min value: {np.min(y):.3f}")
     const jsonResponse = await fetch(jsonFile!.url);
     expect(jsonResponse.status).toBe(200);
     expect(jsonResponse.headers.get('content-type')).toBeTruthy(); // Should have some content type
-  }, 60000); // Longer timeout for matplotlib and blob operations
+  }, 70000); // Longer timeout for matplotlib and blob operations
 
   it('should execute Python script with input files', async () => {
     const script = `
@@ -143,7 +143,7 @@ print("Summary saved to csv_summary.json")
     const summaryFile = result.resultFiles[0];
     expect(summaryFile.fileName).toBe('csv_summary');
     expect(summaryFile.url).toMatch(/https:\/\/.*\.blob\.core\.windows\.net\/ai-workshop\/csv_summary-.*\.json/);
-  }, 60000);
+  }, 70000);
 
   it('should handle Python script execution errors gracefully', async () => {
     const script = `
@@ -159,7 +159,7 @@ print("After error - this won't be reached")
     expect(result.stderr).toContain('NameError');
     expect(result.stderr).toContain('undefined_variable_that_will_cause_error');
     expect(result.resultFiles).toEqual([]);
-  }, 45000);
+  }, 70000);
 
   it('should filter out input files from result files', async () => {
     const script = `
@@ -193,7 +193,7 @@ print("Created two output files")
     // Verify no input file is in results
     const inputFileName = path.basename(csvPath, '.csv');
     expect(result.resultFiles.find(f => f.fileName === inputFileName)).toBeUndefined();
-  }, 60000);
+  }, 70000);
 
   it('should handle scripts with no file output', async () => {
     const script = `
@@ -214,7 +214,7 @@ print(f"Python version: {sys.version_info.major}.{sys.version_info.minor}")
     expect(result.stdout).toMatch(/Python version: \d+\.\d+/);
     expect(result.stderr).toBe('');
     expect(result.resultFiles).toEqual([]);
-  }, 45000);
+  }, 60000);
 
   it('should use different session instances when instanceId is provided', async () => {
     const sessionId1 = `test-session-${Date.now()}-1`;
@@ -278,5 +278,5 @@ if missing_files:
     expect(result.stdout).toBe('');
     expect(result.stderr).toBe('');
     expect(result.resultFiles).toEqual([]);
-  }, 60000);
+  }, 70000);
 });
