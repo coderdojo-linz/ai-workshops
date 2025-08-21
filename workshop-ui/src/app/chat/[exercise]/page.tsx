@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, FileText, Send, Clipboard, ClipboardCheck } from 'lucide-react';
 import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm'
 
 import Modal from '@/components/Modal';
 import SystemPrompt from '@/components/SystemPrompt';
@@ -321,7 +322,7 @@ export default function Home() {
               />
             ) : (
               <span className={message.role === 'user' ? styles.userMessage : styles.botMessage}>
-                <Markdown components={markdownComponents}>{message.content}</Markdown>
+                <Markdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{message.content}</Markdown>
               </span>
             )}
           </div>
@@ -333,7 +334,7 @@ export default function Home() {
             <span
               className={styles.botMessage}
             >
-              <Markdown components={markdownComponents}>{currentBotMessage}</Markdown>
+              <Markdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{currentBotMessage}</Markdown>
             </span>
             <div className={styles.loader}></div>
           </div>
