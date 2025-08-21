@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, FileText } from 'lucide-react';
+import { ArrowLeft, FileText, ChevronDown, Book } from 'lucide-react';
 
 import Modal from '@/components/Modal';
 import SystemPrompt from '@/components/SystemPrompt';
@@ -26,10 +26,13 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentBotMessage, setCurrentBotMessage] = useState('');
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSystemPromptModalOpen, setIsSystemPromptModalOpen] = useState(false);
+  const [isTaskSheetModalOpen, setIsTaskSheetModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isFirstCall, setIsFirstCall] = useState(true);
 
   // Cache for data file content - only fetch once per component session
@@ -223,12 +226,22 @@ export default function Home() {
     router.push('/');
   };
 
-  const handleShowSystemPrompt = () => {
-    setIsModalOpen(true);
+  const handleToggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleDropdownOption = (option: string) => {
+    setIsDropdownOpen(false);
+    switch (option) {
+      case 'system-prompt':
+        setIsSystemPromptModalOpen(true);
+        break;
+      case 'task-sheet':
+        setIsTaskSheetModalOpen(true);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -239,14 +252,36 @@ export default function Home() {
           <ArrowLeft size={20} />
         </button>
         <h1 className={styles.exerciseTitle}>{exerciseTitle}</h1>
-        <button onClick={handleShowSystemPrompt} className={styles.backButton} title="Show System Prompt">
-          <FileText size={20} />
-        </button>
+        <div className={styles.dropdown} ref={dropdownRef} onMouseEnter={handleToggleDropdown} onMouseLeave={handleToggleDropdown}>
+          <button className={styles.dropdownButton} title="Options">
+            <ChevronDown size={20} />
+          </button>
+          {isDropdownOpen && (
+            <>
+              <div className={styles.filler} />
+              <div className={styles.dropdownMenu}>
+                <button onClick={() => handleDropdownOption('system-prompt')} className={styles.dropdownItem}>
+                  <FileText size={16} />
+                  <span>System Prompt</span>
+                </button>
+                <button onClick={() => handleDropdownOption('task-sheet')} className={styles.dropdownItem}>
+                  <Book size={16} />
+                  <span>Task Sheet</span>
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
-      {/* System Prompt Modal */}
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="System Prompt">
-        <SystemPrompt exerciseId={exercise} />
+            {/* System Prompt Modal */}
+      <Modal isOpen={isSystemPromptModalOpen} onClose={() => setIsSystemPromptModalOpen(false)} title="System Prompt">
+        <SystemPrompt exerciseId={exercise} type="system-prompt" />
+      </Modal>
+
+      {/* Task Sheet Modal */}
+      <Modal isOpen={isTaskSheetModalOpen} onClose={() => setIsTaskSheetModalOpen(false)} title="Task Sheet">
+        <SystemPrompt exerciseId={exercise} type="task-sheet" />
       </Modal>
 
       {/* Conversation History */}
