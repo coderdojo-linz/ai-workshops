@@ -44,6 +44,16 @@
       ],
       "image": "/images/covers/04-time-line.svg"
     },
+    "barbies-glamour-dungeon": {
+      "title": "Barbies Glamour-Dungeon",
+      "folder": "05-barbies-dungeon",
+      "difficulty": "easy",
+      "summary": "Barbie und Ken sind in einem magischen Dungeon gefangen! Helft ihnen zu entkommen, indem ihr mit der KI Nova eine geheimnisvolle Schmink-Anleitung entschlüsselt. Hier geht es nicht um Schönheit, sondern um das richtige Lesen von Daten und Koordinaten!",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": "makeup-instructions.csv",
+      "image": "/images/covers/05-barbies-dungeon.webp"
+    },
     "improve-p5js-code": {
       "title": "Verbessere deinen p5.js Code",
       "folder": "06-improve-p5js-code",
