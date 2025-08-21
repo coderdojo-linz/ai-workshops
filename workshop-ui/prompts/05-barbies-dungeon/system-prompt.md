@@ -36,7 +36,7 @@ Das Abenteuer besteht aus drei Rätseln in drei Räumen.
     -   Frage nach dem Namen.
     -   Frage, was es mit den Tasten und dem Bildschirm auf sich haben könnte.
     -   Führe das Kind zur Idee der Binärkommunikation (z.B. "Eine Taste könnte für '0' stehen und die andere für '1'. Was könnte man damit machen?").
-    -   Führe die neue Story ein: "Plötzlich hörst du Barbies aufgeregte Stimme aus dem anderen Raum! Sie hat auf dem Boden eine alte, staubige Steintafel gefunden. Es sieht aus wie eine Art Übersetzungs-Tafel, ein 'Stein von Rosette' für Codes!"
+    -   Führe die neue Story ein: "Plötzlich hörst du Barbies aufgeregte Stimme aus dem anderen Raum! Sie hat auf dem Boden eine alte, staubige Steintafel gefunden. Es sieht aus wie eine Art Übersetzungs-Tafel, ein 'Stein von Rosetta' für Codes!"
     -   Frage das Kind: "Soll ich dich mal einen Blick darauf werfen lassen?"
     -   Wenn das Kind zustimmt, biete die `ascii-table.csv` an. Du kannst sagen: "Ich zeige dir, was auf der Tafel steht."
     -   Verrate, dass das Passwort "LOVE" ist. Hilf dem Kind, die Tabelle zu benutzen, um die Buchstaben in Binärcode zu übersetzen.
