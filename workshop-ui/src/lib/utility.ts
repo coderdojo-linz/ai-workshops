@@ -6,7 +6,7 @@ export function getTextFromChildren(children: React.ReactNode): string {
         text = text.replaceAll('\n', '');
         // 2. Remove single backslash at end of string
         text = text.replace(/\\$/, '');
-        
+
         // if children is a JSON object {"script":"<string>"}, only use the inner string.
         try {
             const json = JSON.parse(text);
@@ -34,3 +34,14 @@ export function getTextFromChildren(children: React.ReactNode): string {
     }
     return '';
 }
+
+// Stable code renderer for Markdown so Callout instances keep identity across unrelated re-renders
+export function hashString(str: string) {
+    // Simple djb2 hash for stable keys
+    let hash = 5381;
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash * 33) ^ str.charCodeAt(i);
+    }
+    // Convert to positive 32-bit and base36 for compactness
+    return (hash >>> 0).toString(36);
+};

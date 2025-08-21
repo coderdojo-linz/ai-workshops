@@ -10,7 +10,7 @@ import SystemPrompt from '@/components/SystemPrompt';
 import { extractFirstHtmlIsland } from './htmlDataReplacer';
 import CodeHighlight from '@/components/CodeHighlight';
 import Callout from '@/components/Callout'
-import { getTextFromChildren } from '@/lib/utility';
+import { getTextFromChildren, hashString } from '@/lib/utility';
 import styles from './page.module.css';
 
 import 'highlight.js/styles/github.css';
@@ -256,17 +256,6 @@ export default function Home() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-  };
-
-  // Stable code renderer for Markdown so Callout instances keep identity across unrelated re-renders
-  const hashString = (str: string) => {
-    // Simple djb2 hash for stable keys
-    let hash = 5381;
-    for (let i = 0; i < str.length; i++) {
-      hash = (hash * 33) ^ str.charCodeAt(i);
-    }
-    // Convert to positive 32-bit and base36 for compactness
-    return (hash >>> 0).toString(36);
   };
 
   const markdownComponents = useMemo(() => ({
