@@ -1,3 +1,5 @@
+import { Message as MessageType } from '@/components/chat/Message'
+
 export function getTextFromChildren(children: React.ReactNode): string {
     if (typeof children === 'string') {
         let text: string = children;
@@ -45,3 +47,7 @@ export function hashString(str: string) {
     // Convert to positive 32-bit and base36 for compactness
     return (hash >>> 0).toString(36);
 };
+
+export function hashMessage(message: MessageType): string {
+    return hashString((message.type === 'html' ? message.html : message.content) + '|' + message.role + '|' + message.type);
+}

@@ -1,41 +1,27 @@
 'use client';
 
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, FileText, Send, Clipboard, ClipboardCheck } from 'lucide-react';
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm'
+import { ArrowLeft, FileText } from 'lucide-react';
 
 import Modal from '@/components/Modal';
 import SystemPrompt from '@/components/SystemPrompt';
+import ChatInputArea from '@/components/chat/ChatInputArea';
+
 import { extractFirstHtmlIsland } from './htmlDataReplacer';
-import CodeHighlight from '@/components/CodeHighlight';
-import Callout from '@/components/Callout'
-import { getTextFromChildren, hashString } from '@/lib/utility';
+
 import styles from './page.module.css';
 
 import 'highlight.js/styles/github.css';
-
-type Message = TextMessage | HtmlMessage;
-
-type TextMessage = {
-  role: 'user' | 'assistant';
-  content: string;
-  type: 'text';
-};
-
-type HtmlMessage = {
-  role: 'user' | 'assistant';
-  html: string;
-  type: 'html';
-};
+import Message, { Message as MessageType } from '@/components/chat/Message';
+import { hashMessage } from '@/lib/utility';
 
 export default function Home() {
   const params = useParams();
   const router = useRouter();
   const exercise = params.exercise as string;
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [currentBotMessage, setCurrentBotMessage] = useState('');
@@ -45,7 +31,6 @@ export default function Home() {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [isFirstCall, setIsFirstCall] = useState(true);
-  const [isCopied, setIsCopied] = useState(false);
 
   // Cache for data file content - only fetch once per component session
   const dataFileContentCache = useRef<string | null>(null);
@@ -185,7 +170,7 @@ export default function Home() {
             const data = line.slice(6);
             if (data === '[DONE]') {
               // Finalize the assistant message
-              const assistantMsg: Message = {
+              const assistantMsg: MessageType = {
                 role: 'assistant',
                 content: assistantMessage,
                 type: 'text',
@@ -193,7 +178,7 @@ export default function Home() {
 
               // Extract first HTML island and create additional HTML message if found
               const firstHtmlIsland = await extractFirstHtmlIsland(assistantMessage, loadDataFileContent);
-              const messagesToAdd: Message[] = [assistantMsg];
+              const messagesToAdd: MessageType[] = [assistantMsg];
 
               if (firstHtmlIsland) {
                 messagesToAdd.push({
@@ -234,19 +219,6 @@ export default function Home() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    if (value.length <= 1000) {
-      setInput(value);
-    }
-  };
-
-  function handleCopy(copyText: string) {
-    navigator.clipboard.writeText(copyText);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
-  }
-
   const handleBack = () => {
     router.push('/');
   };
@@ -258,31 +230,6 @@ export default function Home() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
-  const markdownComponents = useMemo(() => ({
-    // eslint-disable-next-line react/no-unstable-nested-components
-    code(props: any) {
-      const { children } = props;
-      const text = getTextFromChildren(children);
-      const key = `code-${hashString(text || '')}`;
-      return (
-        <Callout
-          key={key}
-          title='Code'
-          icon='FileCode2'
-          foldable
-          content={
-            <>
-              <button onClick={() => (text ? handleCopy(text) : true)} className={styles.copyButton}>
-                {isCopied ? <ClipboardCheck size={18} /> : <Clipboard size={18} />}
-              </button>
-              <CodeHighlight className='hljs'>{text}</CodeHighlight>
-            </>
-          }
-        />
-      );
-    }
-  }), [isCopied]);
 
   return (
     <div className={styles.container}>
@@ -305,73 +252,21 @@ export default function Home() {
       {/* Conversation History */}
       <div className={styles.messagesContainer} ref={messagesContainerRef}>
         {messages.map((message) => (
-          <div
-            key={hashString(
-              (message.type === 'html' ? message.html : message.content) + '|' + message.role + '|' + message.type
-            )}
-            className={[styles.message, message.role === 'user' ? styles.userMessageContainer : styles.botMessageContainer].join(' ')}
-          >
-            <strong>{message.role === 'user' ? 'You' : 'Bot'}:</strong>{' '}
-            {message.type === 'html' ? (
-              <iframe
-                srcDoc={message.html}
-                className={styles.htmlFrame}
-                sandbox="allow-scripts allow-same-origin"
-                style={{ width: '100%', minHeight: '200px', border: '1px solid #ccc', borderRadius: '4px' }}
-                title="HTML Content"
-              />
-            ) : (
-              <span className={message.role === 'user' ? styles.userMessage : styles.botMessage}>
-                <Markdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{message.content}</Markdown>
-              </span>
-            )}
-          </div>
+          <Message message={message} key={hashMessage(message)} />
         ))}
 
-        {currentBotMessage && (
-          <div className={styles.message}>
-            <strong>Bot:</strong>{' '}
-            <span
-              className={styles.botMessage}
-            >
-              <Markdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{currentBotMessage}</Markdown>
-            </span>
-            <div className={styles.loader}></div>
-          </div>
-        )}
+        {currentBotMessage &&
+          <Message message={{
+            role: 'assistant',
+            content: currentBotMessage,
+            type: 'text'
+          }} />
+        }
 
         <div ref={messagesEndRef} />
-
       </div>
 
-      {/* Input Form */}
-      <form onSubmit={handleSubmit} className={styles.inputForm}>
-        <textarea
-          ref={inputRef}
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSubmit(e as any);
-            }
-          }}
-          placeholder="Type your message..."
-          disabled={isLoading}
-          className={styles.textInput}
-          rows={2}
-          style={{ resize: 'vertical' }}
-        />
-        <button type="submit" disabled={!input.trim() || isLoading || messages.length >= 100} className={styles.sendButton}>
-          <Send />
-          {isLoading ? 'Sending...' : 'Send'}
-        </button>
-      </form>
-
-      {/* Message Counter */}
-      <div className={styles.messageCounter}>
-        {messages.length}/100 messages | {input.length}/1000 characters
-      </div>
+      <ChatInputArea inputRef={inputRef} inputValue={input} setInputValue={setInput} onSubmit={handleSubmit} isLoading={isLoading} messageCount={messages.length} />
     </div>
   );
 }
