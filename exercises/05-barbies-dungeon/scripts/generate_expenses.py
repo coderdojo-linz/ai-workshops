@@ -186,7 +186,9 @@ expenses.sort(key=lambda x: datetime.strptime(x['Datum'], '%Y-%m-%d'), reverse=T
 # Write to CSV
 # Note: The script is in a subdirectory, so we need to make sure the output path is correct.
 # This script will be run from the root, so the path should be relative to the root.
-file_path = 'workshop-ui/prompts/05-barbies-dungeon/barbie_expenses.csv'
+# Construct the output path relative to this script's location
+script_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.abspath(os.path.join(script_dir, '..', '..', '..', 'workshop-ui', 'prompts', '05-barbies-dungeon', 'barbie_expenses.csv'))
 with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
     fieldnames = ["Datum", "Ort", "Kategorie", "Produkt", "Empfänger", "Betrag"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
