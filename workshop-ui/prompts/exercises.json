@@ -62,7 +62,7 @@
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": [],
-      "image": "/images/covers/04-time-line.svg"
+      "image": "/images/covers/06-improve-p5js-code.svg"
     },
     "test": {
       "title": "Test Exercise",
@@ -72,7 +72,7 @@
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": [],
-      "image": "/images/covers/04-time-line.svg"
+      "image": "/images/covers/99-test.svg"
     }
   }
 }
