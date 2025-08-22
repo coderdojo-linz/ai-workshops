@@ -100,7 +100,8 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
                   }
                 }
                 return JSON.stringify(result);
-              }
+              },
+              welcomeMessage
             );
 
             sessionResponseMap.set(sessionId, {
@@ -120,8 +121,7 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
             controller.close();
             span.end();
           }
-        },
-        welcomeMessage
+        }
       });
 
       return new NextResponse(stream, {

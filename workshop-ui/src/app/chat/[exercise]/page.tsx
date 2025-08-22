@@ -104,10 +104,9 @@ export default function Home() {
           
           // Add welcome message as first assistant message if it exists
           if (metadata.welcome_message && !welcomeMessageLoaded) {
-            const welcomeMessage: Message = {
+            const welcomeMessage: MessageType = {
               role: 'assistant',
               content: metadata.welcome_message,
-              html: DOMPurify.sanitize(marked.parse(metadata.welcome_message) as string),
               type: 'text',
             };
             setMessages([welcomeMessage]);
