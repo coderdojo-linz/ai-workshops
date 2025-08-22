@@ -1,19 +1,46 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState, useEffect, useRef, use } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import styles from './page.module.css'
 
 export default function LoginPage() {
   const router = useRouter()
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [code, setCode] = useState<string[]>(Array(6).fill(''))
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
   const loginButtonRef = useRef<HTMLButtonElement>(null)
+
+  // Check if user is already authenticated on page load
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const response = await fetch('/api/auth', { method: 'GET' })
+        const data = await response.json()
+        
+        if (data.authenticated) {
+          // User is already authenticated, redirect to home
+          router.push('/')
+          return
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error)
+      }
+      
+      setIsLoading(false)
+      // Focus first input after checking auth
+      setTimeout(() => {
+        inputRefs.current[0]?.focus()
+      }, 100)
+    }
+
+    checkAuthStatus()
+  }, [router])
 
   const setCodeDigit = (index: number, value: string) => {
     if (value.length > 1) return
@@ -38,13 +65,9 @@ export default function LoginPage() {
     }
   }
 
-  // Select first input field on mount
-  useEffect(() => {
-    inputRefs.current[0]?.focus()
-  }, [])
-
   const handleLogin = async () => {
-    setIsLoading(true)
+    setIsSubmitting(true)
+    setErrorMessage(null)
 
     try {
       const response = await fetch('/api/auth', {
@@ -64,12 +87,24 @@ export default function LoginPage() {
           setCode(Array(6).fill(''))
           inputRefs.current[0]?.focus()
         }
-        setIsLoading(false)
+        setIsSubmitting(false)
       }
     } catch (error) {
       console.error('Login failed:', error)
-      setIsLoading(false)
+      setErrorMessage('Login failed')
+      setIsSubmitting(false)
     }
+  }
+
+  // Show loading while checking authentication
+  if (isLoading) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.loginPrompt}>
+          <p>Checking authentication...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -89,10 +124,10 @@ export default function LoginPage() {
         <button
           ref={loginButtonRef}
           onClick={handleLogin}
-          disabled={isLoading}
+          disabled={isSubmitting}
           className={styles.loginButton}
         >
-          {isLoading ? 'Logging in...' : 'Log In'}
+          {isSubmitting ? 'Logging in...' : 'Log In'}
         </button>
       </div>
     </div>

@@ -14,26 +14,25 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Get the ACCESS cookie
-  const accessCookie = request.cookies.get('ACCESS')
+  // Get the workshop session cookie
+  const sessionCookie = request.cookies.get('workshop-session')
 
   // Check if the user is trying to access the login page
   if (pathname === '/login') {
-    // If already authenticated, redirect to home
-    if (accessCookie?.value === process.env.ACCESS_CODE) {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
-    // Let them access the login page if not authenticated
+    // If there's a session cookie, they might be authenticated - let them through to potentially redirect
+    // The actual authentication check will happen on the client side
     return NextResponse.next()
   }
 
-  // For all other routes, check authentication
-  if (!accessCookie || accessCookie.value !== process.env.ACCESS_CODE) {
-    // Redirect to login page if not authenticated
+  // For all other routes, check if session cookie exists
+  // Note: We can't decrypt iron-session in edge middleware, so we rely on the presence of the cookie
+  // and client-side checks for actual authentication validation
+  if (!sessionCookie) {
+    // Redirect to login page if no session cookie
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  // User is authenticated, allow access
+  // Session cookie exists, allow access (actual authentication verified client-side)
   return NextResponse.next()
 }
 

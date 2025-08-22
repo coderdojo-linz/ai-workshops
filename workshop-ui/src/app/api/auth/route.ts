@@ -1,23 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getSessionFromRequest } from '@/lib/session'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { action, code } = body
-
+    const response = NextResponse.json({ success: true })
+    
     if (action === 'login') {
-      if (code == process.env.ACCESS_CODE) {
-        const res = NextResponse.json({ success: true })
-        res.cookies.set({
-          name: 'ACCESS',
-          value: code,
-          httpOnly: false,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'lax',
-          maxAge: 86400, // 24 hours
-          path: '/',
-        })
-        return res;
+      if (code === process.env.ACCESS_CODE) {
+        const session = await getSessionFromRequest(request, response)
+        session.accessCode = code
+        session.isAuthenticated = true
+        await session.save()
+        
+        return response
       } else {
         // report invalid code to client
         return NextResponse.json(
@@ -26,9 +23,10 @@ export async function POST(request: NextRequest) {
         )
       }
     } else if (action === 'logout') {
-      // Clear the ACCESS cookie
-      const response = NextResponse.json({ success: true })
-      response.cookies.delete('ACCESS')
+      // Clear the session
+      const session = await getSessionFromRequest(request, response)
+      session.destroy()
+      
       return response
     }
 
@@ -47,10 +45,21 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   // Check current authentication status
-  const accessCookie = request.cookies.get('ACCESS')
-
-  return NextResponse.json({
-    authenticated: accessCookie?.value === process.env.ACCESS_CODE,
-    cookieValue: accessCookie?.value || null,
-  })
+  const response = NextResponse.json({ authenticated: false })
+  
+  try {
+    const session = await getSessionFromRequest(request, response)
+    const isAuthenticated = session.isAuthenticated === true && session.accessCode === process.env.ACCESS_CODE
+    
+    return NextResponse.json({
+      authenticated: isAuthenticated,
+      accessCode: isAuthenticated ? session.accessCode : null,
+    })
+  } catch (error) {
+    console.error('Session check error:', error)
+    return NextResponse.json({
+      authenticated: false,
+      accessCode: null,
+    })
+  }
 }
