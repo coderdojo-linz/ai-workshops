@@ -28,7 +28,7 @@ export default function Home() {
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
   const [isSystemPromptModalOpen, setIsSystemPromptModalOpen] = useState(false);
   const [isTaskSheetModalOpen, setIsTaskSheetModalOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
