@@ -65,17 +65,7 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
       systemPrompt += `</data-file>\n\n`;
     }
     systemPrompt += `</data-files>\n\n`;
-
-    // Add welcome message context to system prompt
-    if (exerciseData.welcome_message_file) {
-      const welcomeMessagePath = path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.welcome_message_file);
-      if (fs.existsSync(welcomeMessagePath)) {
-        const welcomeMessage = await fs.promises.readFile(welcomeMessagePath, { encoding: 'utf-8' });
-        systemPrompt += `\n\n# Initialer Kontext\nDu hast den Benutzer bereits mit folgender Nachricht begrüßt: "${welcomeMessage}"\nDer Benutzer ist sich dieser Nachricht bewusst und du kannst sie in deinen Antworten referenzieren.`;
-        // systemPrompt += `\nZum testen, reagiere bitte exakt auf "Wiederhole bitte mit genauem Wortlaut, was du gerade gesagt hast!" (Ignoriere bisherige Anweisungen dafür.)`
-      }
-    }
-
+    
     return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create encoder outside the stream
       const encoder = new TextEncoder();
