@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import { getExercises } from '@/lib/exercise-file-manager';
 import { trace } from '@opentelemetry/api';
+import LogoutButton from '@/components/LogoutButton';
 
 export default async function Home() {
   const exercisesResult = await getExercises();
@@ -40,6 +41,7 @@ export default async function Home() {
 
   return (
     <>
+    <LogoutButton className={styles.logoutButton} />
     <img src="/images/background1.svg" alt="Decorative image" className={styles.vectorBg1} />
     <img src="/images/background2.svg" alt="Decorative image" className={styles.vectorBg2} />
     <div className={styles.container}>

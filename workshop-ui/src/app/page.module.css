@@ -1,6 +1,25 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 
+.logoutButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #4d8bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 10;
+  font-family: "Roboto", sans-serif;
+
+  &:hover {
+    background-color: #357ae8;
+  }
+}
+
 .vectorBg1 {
   position: absolute;
   top: 680px;
@@ -79,6 +98,7 @@
     border-radius: 12px 12px 0 0;
     width: 100%;
     height: auto;
+    aspect-ratio: 2 / 1;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
