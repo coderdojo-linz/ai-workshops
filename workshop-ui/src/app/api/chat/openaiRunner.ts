@@ -18,11 +18,19 @@ const client = new AzureOpenAI({
 
 const tracer = trace.getTracer('ai-workshop-chat');
 
-export async function runOpenAI(message: string, instructions: string, 
-    previousResponseId: string | undefined, 
-    messageDeltaCallback: (delta: string) => void,
-    runScriptCallback: (script: string) => Promise<string>): Promise<string> {
-  let input: any[] = [{ role: 'user', content: message }];
+export async function runOpenAI(message: string, instructions: string,
+  previousResponseId: string | undefined,
+  messageDeltaCallback: (delta: string) => void,
+  runScriptCallback: (script: string) => Promise<string>,
+  welcomeMessage: string | undefined
+): Promise<string> {
+
+  let input: any[] = []
+  if (previousResponseId === undefined && welcomeMessage) {
+    input.push({ role: 'assistant', content: welcomeMessage });
+  }
+  input.push({ role: 'user', content: message });
+
   while (input.length > 0) {
     let responseArgument: ResponseCreateParams = {
       model: model,
@@ -49,7 +57,7 @@ export async function runOpenAI(message: string, instructions: string,
     let currentFunctionName: string | undefined;
     let currentFunctionCallId: string | undefined;
     let currentScript = '';
-    
+
     for await (const event of openaiResponse) {
       if ((<any>event).response?.id) {
         previousResponseId = (<any>event).response.id;
@@ -60,31 +68,31 @@ export async function runOpenAI(message: string, instructions: string,
           break;
         }
         case 'response.output_item.added': {
-            if (event.item.type === 'function_call') {
-                currentFunctionName = event.item.name;
-                currentFunctionCallId = event.item.call_id;
-                messageDeltaCallback('\n\n```py\n');
-            }
-            break;
+          if (event.item.type === 'function_call') {
+            currentFunctionName = event.item.name;
+            currentFunctionCallId = event.item.call_id;
+            messageDeltaCallback('\n\n```py\n');
+          }
+          break;
         }
         case 'response.function_call_arguments.delta': {
-            currentScript += event.delta;
-            messageDeltaCallback(event.delta);
-            break;
+          currentScript += event.delta;
+          messageDeltaCallback(event.delta);
+          break;
         }
         case 'response.function_call_arguments.done': {
-            messageDeltaCallback('\n```\n\n');
-            const script: ExecutePythonParameters = JSON.parse(currentScript);
-            const result = await runScriptCallback(script.script);
-            input.push({
-                type: 'function_call_output',
-                call_id: currentFunctionCallId!,
-                output: result,
-            })
-            break;
+          messageDeltaCallback('\n```\n\n');
+          const script: ExecutePythonParameters = JSON.parse(currentScript);
+          const result = await runScriptCallback(script.script);
+          input.push({
+            type: 'function_call_output',
+            call_id: currentFunctionCallId!,
+            output: result,
+          })
+          break;
         }
         default: {
-            break;
+          break;
         }
       }
     }

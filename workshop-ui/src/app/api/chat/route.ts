@@ -65,10 +65,14 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
       systemPrompt += `</data-file>\n\n`;
     }
     systemPrompt += `</data-files>\n\n`;
-    
+
     return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create encoder outside the stream
       const encoder = new TextEncoder();
+
+      // Read Welcome Message
+      const welcomeMessagePath = exerciseData.welcome_message_file ? path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.welcome_message_file) : undefined;
+      const welcomeMessage = welcomeMessagePath && fs.existsSync(welcomeMessagePath) ? await fs.promises.readFile(welcomeMessagePath, { encoding: 'utf-8' }) : undefined;
 
       // Stream immediately as chunks arrive
       const stream = new ReadableStream({
@@ -117,6 +121,7 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
             span.end();
           }
         },
+        welcomeMessage
       });
 
       return new NextResponse(stream, {
