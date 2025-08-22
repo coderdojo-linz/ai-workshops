@@ -26,6 +26,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentBotMessage, setCurrentBotMessage] = useState('');
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
+  const [welcomeMessageLoaded, setWelcomeMessageLoaded] = useState(false);
   const [isSystemPromptModalOpen, setIsSystemPromptModalOpen] = useState(false);
   const [isTaskSheetModalOpen, setIsTaskSheetModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -92,7 +93,7 @@ export default function Home() {
     }
   }, [messages]);
 
-  // Fetch exercise metadata on component mount
+  // Fetch exercise metadata and welcome message on component mount
   useEffect(() => {
     const fetchExerciseMetadata = async () => {
       try {
@@ -100,6 +101,18 @@ export default function Home() {
         if (response.ok) {
           const metadata = await response.json();
           setExerciseTitle(metadata.title);
+          
+          // Add welcome message as first assistant message if it exists
+          if (metadata.welcome_message && !welcomeMessageLoaded) {
+            const welcomeMessage: Message = {
+              role: 'assistant',
+              content: metadata.welcome_message,
+              html: DOMPurify.sanitize(marked.parse(metadata.welcome_message) as string),
+              type: 'text',
+            };
+            setMessages([welcomeMessage]);
+            setWelcomeMessageLoaded(true);
+          }
         }
       } catch (error) {
         console.error('Error fetching exercise metadata:', error);
@@ -108,7 +121,7 @@ export default function Home() {
     };
 
     fetchExerciseMetadata();
-  }, [exercise]);
+  }, [exercise, welcomeMessageLoaded]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
