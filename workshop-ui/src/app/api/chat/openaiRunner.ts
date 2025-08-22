@@ -26,7 +26,7 @@ export async function runOpenAI(message: string, instructions: string,
 ): Promise<string> {
 
   let input: any[] = []
-  if (previousResponseId === undefined && welcomeMessage) {
+  if (!previousResponseId && welcomeMessage) {
     input.push({ role: 'assistant', content: welcomeMessage });
   }
   input.push({ role: 'user', content: message });
