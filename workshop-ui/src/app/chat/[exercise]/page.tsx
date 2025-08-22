@@ -1,36 +1,39 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import styles from './page.module.css';
-import DOMPurify from 'dompurify';
-import { marked } from 'marked';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, FileText, Send } from 'lucide-react';
+import { ArrowLeft, FileText, ChevronDown, Book } from 'lucide-react';
+
 import Modal from '@/components/Modal';
 import SystemPrompt from '@/components/SystemPrompt';
+import ChatInputArea from '@/components/chat/ChatInputArea';
+
 import { extractFirstHtmlIsland } from './htmlDataReplacer';
 
-type Message = {
-  role: 'user' | 'assistant';
-  content: string;
-  html: string;
-  type?: 'text' | 'html';
-};
+import styles from './page.module.css';
+
+import 'highlight.js/styles/github.css';
+import Message, { Message as MessageType } from '@/components/chat/Message';
+import { hashMessage } from '@/lib/utility';
 
 export default function Home() {
   const params = useParams();
   const router = useRouter();
   const exercise = params.exercise as string;
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [currentBotMessage, setCurrentBotMessage] = useState('');
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [welcomeMessageLoaded, setWelcomeMessageLoaded] = useState(false);
+  const [isSystemPromptModalOpen, setIsSystemPromptModalOpen] = useState(false);
+  const [isTaskSheetModalOpen, setIsTaskSheetModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isFirstCall, setIsFirstCall] = useState(true);
 
   // Cache for data file content - only fetch once per component session
@@ -73,13 +76,6 @@ export default function Home() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // const renderer = {
-  //   image(image: any) {
-  //     console.log('rendering', JSON.stringify(image));
-  //     return `<pre>${JSON.stringify(image)}</pre>`;
-  //   },
-  // };
-  // marked.use({ renderer });
 
   useEffect(() => {
     scrollToBottom();
@@ -144,7 +140,6 @@ export default function Home() {
       {
         role: 'user' as const,
         content: userMessage,
-        html: DOMPurify.sanitize(marked.parse(userMessage) as string),
         type: 'text' as const,
       },
     ];
@@ -191,21 +186,19 @@ export default function Home() {
             const data = line.slice(6);
             if (data === '[DONE]') {
               // Finalize the assistant message
-              const assistantMsg: Message = {
+              const assistantMsg: MessageType = {
                 role: 'assistant',
                 content: assistantMessage,
-                html: DOMPurify.sanitize(marked.parse(assistantMessage.replaceAll('\\n', '\n')) as string),
                 type: 'text',
               };
 
               // Extract first HTML island and create additional HTML message if found
               const firstHtmlIsland = await extractFirstHtmlIsland(assistantMessage, loadDataFileContent);
-              const messagesToAdd = [assistantMsg];
+              const messagesToAdd: MessageType[] = [assistantMsg];
 
               if (firstHtmlIsland) {
                 messagesToAdd.push({
                   role: 'assistant',
-                  content: firstHtmlIsland,
                   html: firstHtmlIsland, // Store processed HTML for iframe srcdoc
                   type: 'html',
                 });
@@ -220,7 +213,7 @@ export default function Home() {
                   assistantMessage += parsed.delta;
                   setCurrentBotMessage(assistantMessage);
                 }
-              } catch (error) {
+              } catch {
                 // Ignore parsing errors for SSE data
               }
             }
@@ -234,7 +227,6 @@ export default function Home() {
         {
           role: 'assistant',
           content: 'Sorry, there was an error processing your message.',
-          html: DOMPurify.sanitize(marked.parse('Sorry, there was an error processing your message.') as string),
           type: 'text',
         },
       ]);
@@ -243,23 +235,26 @@ export default function Home() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    if (value.length <= 1000) {
-      setInput(value);
-    }
-  };
-
   const handleBack = () => {
     router.push('/');
   };
 
-  const handleShowSystemPrompt = () => {
-    setIsModalOpen(true);
+  const handleToggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleDropdownOption = (option: string) => {
+    setIsDropdownOpen(false);
+    switch (option) {
+      case 'system-prompt':
+        setIsSystemPromptModalOpen(true);
+        break;
+      case 'task-sheet':
+        setIsTaskSheetModalOpen(true);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -270,77 +265,56 @@ export default function Home() {
           <ArrowLeft size={20} />
         </button>
         <h1 className={styles.exerciseTitle}>{exerciseTitle}</h1>
-        <button onClick={handleShowSystemPrompt} className={styles.backButton} title="Show System Prompt">
-          <FileText size={20} />
-        </button>
+        <div className={styles.dropdown} ref={dropdownRef} onMouseEnter={handleToggleDropdown} onMouseLeave={handleToggleDropdown}>
+          <button className={styles.dropdownButton} title="Options">
+            <ChevronDown size={20} />
+          </button>
+          {isDropdownOpen && (
+            <>
+              <div className={styles.filler} />
+              <div className={styles.dropdownMenu}>
+                <button onClick={() => handleDropdownOption('system-prompt')} className={styles.dropdownItem}>
+                  <FileText size={16} />
+                  <span>System Prompt</span>
+                </button>
+                <button onClick={() => handleDropdownOption('task-sheet')} className={styles.dropdownItem}>
+                  <Book size={16} />
+                  <span>Task Sheet</span>
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
-      {/* System Prompt Modal */}
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="System Prompt">
-        <SystemPrompt exerciseId={exercise} />
+            {/* System Prompt Modal */}
+      <Modal isOpen={isSystemPromptModalOpen} onClose={() => setIsSystemPromptModalOpen(false)} title="System Prompt">
+        <SystemPrompt exerciseId={exercise} type="system-prompt" />
+      </Modal>
+
+      {/* Task Sheet Modal */}
+      <Modal isOpen={isTaskSheetModalOpen} onClose={() => setIsTaskSheetModalOpen(false)} title="Task Sheet">
+        <SystemPrompt exerciseId={exercise} type="task-sheet" />
       </Modal>
 
       {/* Conversation History */}
-      <div className={styles.messagesContainer}>
-        {messages.map((message, index) => (
-          <div key={index} className={[styles.message, message.role === 'user' ? styles.userMessageContainer : styles.botMessageContainer].join(' ')}>
-            <strong>{message.role === 'user' ? 'You' : 'Bot'}:</strong>{' '}
-            {message.type === 'html' ? (
-              <iframe
-                srcDoc={message.html}
-                className={styles.htmlFrame}
-                sandbox="allow-scripts allow-same-origin"
-                style={{ width: '100%', minHeight: '200px', border: '1px solid #ccc', borderRadius: '4px' }}
-                title="HTML Content"
-              />
-            ) : (
-              <span className={message.role === 'user' ? styles.userMessage : styles.botMessage} dangerouslySetInnerHTML={{ __html: message.html }} />
-            )}
-          </div>
+      <div className={styles.messagesContainer} ref={messagesContainerRef}>
+        {messages.map((message) => (
+          <Message message={message} key={hashMessage(message)} />
         ))}
-        {currentBotMessage && (
-          <div className={styles.message}>
-            <strong>Bot:</strong>{' '}
-            <span
-              className={styles.botMessage}
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(marked.parse(currentBotMessage.replaceAll('\\n', '\n')) as string),
-              }}
-            />
-            <div className={styles.loader}></div>
-          </div>
-        )}
+
+        {currentBotMessage &&
+          <Message message={{
+            role: 'assistant',
+            content: currentBotMessage,
+            type: 'text'
+          }} />
+        }
+
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Form */}
-      <form onSubmit={handleSubmit} className={styles.inputForm}>
-        <textarea
-          ref={inputRef}
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSubmit(e as any);
-            }
-          }}
-          placeholder="Type your message..."
-          disabled={isLoading}
-          className={styles.textInput}
-          rows={1}
-          style={{ resize: 'none' }}
-        />
-        <button type="submit" disabled={!input.trim() || isLoading || messages.length >= 100} className={styles.sendButton}>
-          <Send />
-          {isLoading ? 'Sending...' : 'Send'}
-        </button>
-      </form>
-
-      {/* Message Counter */}
-      <div className={styles.messageCounter}>
-        {messages.length}/100 messages | {input.length}/1000 characters
-      </div>
+      <ChatInputArea inputRef={inputRef} inputValue={input} setInputValue={setInput} onSubmit={handleSubmit} isLoading={isLoading} messageCount={messages.length} />
     </div>
   );
 }

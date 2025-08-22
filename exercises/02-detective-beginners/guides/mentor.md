@@ -1,72 +1,85 @@
-# Guide für Mentor:innen: Lösung und Hintergrund
+# Detective Beginners – Mentor Guide
 
-## 1. Überblick
-- **Ziel:** Verdächtige Aktivitäten in den Logdaten aufdecken  
-- **Angriffsform:** Kombination aus Brute Force (viele Fehlversuche) und Blitz‑Reise (Impossible Travel)  
-- **Betroffener Account:** **Eva**
+Willkommen! Dieses Modul trainiert grundlegende Security-Forensik: Log-Dateien lesen, Hypothesen bilden, Muster erkennen und Belege visualisieren. Die Kinder arbeiten fragend mit der KI (Nova) – Erklärungen gibt Nova auf Nachfrage.
 
----
+## Lernziele
 
-## 2. Schritt-für-Schritt-Lösung
+- Datenkompetenz: Spalten verstehen (`time, user, result, city, device, action, download_size`).
+- Sicherheitskonzepte: Brute-Force-Versuch, „Impossible Travel“ erkennen.
+- Explorative Analyse: Fragen formulieren, filtern, zählen, visualisieren.
+- Evidenzbasiertes Argumentieren: Behauptung → Beleg (Tabelle/Grafik).
 
-1. **Log-Analyse**
-   - Der Datensatz enthält 1.000 Login-Vorgänge von fünf Benutzer:innen (Anna, Ben, Clara, David, Eva).
-   - Alle Benutzer:innen haben Logins mit ca. 30 % Fehlversuchen – verteilt über mehrere Tage.
-   - Auffällig: Eva hat mehrere ungewöhnliche Einträge in sehr kurzer Zeit.
+## Story in 1 Minute
 
-2. **Anomalien entdecken**
-   - **18. Juli 2025, 02:58 Uhr:** Eva loggt sich erfolgreich in **Wien** ein.  
-   - Direkt danach folgen **mehrere fehlgeschlagene Login-Versuche aus Moskau** (03:00–03:04 Uhr).  
-   - **03:05 Uhr:** Erfolgreicher Login aus **Moskau**.  
-   - Dieser schnelle Ortswechsel ist **physikalisch unmöglich**.  
-   - Zusätzlich: Viele Fehlversuche vor dem erfolgreichen Zugriff – Hinweis auf **Brute Force**.
+Der Lichtkristall wurde aus dem HQ gestohlen. In den Login-Logs verstecken sich Spuren: viele Fehlversuche vor einem Erfolg (Brute Force) und Logins aus weit entfernten Städten in kurzer Zeit (Impossible Travel). Die Kids sind Cyber-Detektiv:innen und sollen den plausibelsten Verdacht ableiten und belegen.
 
-3. **Verdacht bestätigen**
-   - Die Logins zeigen zwei auffällige Muster:
-     - Ein Login aus Wien – kurz danach einer aus Moskau → Blitz‑Reise
-     - 5 fehlgeschlagene Versuche → dann Erfolg → Brute Force
-   - **Ergebnis:** Evas Account wurde vermutlich von einer anderen Person genutzt.  
-   - Für die Kinder ist **Eva die „Täterin“**, auch wenn sie in Wahrheit ein Opfer von Datenklau ist.
+## Material & Setup
 
----
+- Dateien:
+  - `exercises/02-detective-beginners/dataset/login_with_brute_force_and_impossible_travel.csv`
+  - `exercises/02-detective-beginners/dataset/login_impossible_travel_clean.csv`
+- Guides:
+  - Kids: `exercises/02-detective-beginners/guides/kids.md`
+  - Mentor: dieses Dokument
+- Optional: vorbereitete Bilder (bitte einfügen unter `guides/images/`):
+  - `hq_lightcrystal.png`
+  - `logs_sample.png`
+  - `failed_success_barchart.png`
+  - `impossible_travel_map.png`
 
-## 3. Hintergrundwissen
+## Ablauf (25–35 min)
 
-### a) Brute Force
-- Angreifer probieren automatisiert viele Passwortkombinationen, bis sie Erfolg haben.
-- In Logs sichtbar durch eine Häufung von `fail`-Einträgen in kurzer Zeit.
+1. Einstieg (2–3 min)
+   - Rahmen setzen: Ziel ist nicht „alles wissen“, sondern gute Fragen stellen und Belege sammeln.
+   - Hinweis: Nova erklärt auf Nachfrage. Kinder dürfen jederzeit nachfragen.
+2. Daten sichten (5–7 min)
+   - Erste 5–10 Zeilen zeigen lassen. Spalten benennen. Auffälligkeiten sammeln.
+3. Hypothesen prüfen (8–12 min)
+   - Brute-Force-Muster: viele `fail` vor `success` pro Nutzer.
+   - Impossible Travel: Städte/Zeiten vergleichen; Distanz/Zeit-Plots oder Marker.
+4. Belege erzeugen (5–8 min)
+   - Balkendiagramme (fails vs. success pro Nutzer), Timeline/Map für Reise-Anomalien.
+5. Entscheidung & Kurzpräsentation (5 min)
+   - „Wer ist verdächtig? Warum?“ mit 1–2 Grafiken oder Tabellen begründen.
 
-### b) Blitz‑Reise / „Impossible Travel“
-- Zwei erfolgreiche Logins an sehr weit entfernten Orten in kurzer Zeit.
-- Wird in der IT-Sicherheit genutzt, um **gestohlene Zugangsdaten** zu erkennen.
+## Mentor-Tipps
 
-### c) Warum KI einsetzen?
-- Chatbots können spielerisch helfen, komplexe Begriffe wie „Brute Force“ oder „Impossible Travel“ zu erklären.
-- Die Kinder sollen selbst kombinieren – nicht direkt die Lösung bekommen!
+- Fragen coachen: „Woran würdest du das erkennen? Welche Spalte hilft dir?“
+- Schrittweite klein halten: Eine Frage → kleiner Check → nächste Frage.
+- Visual statt Wust: Lieber eine klare Grafik als fünf halbgare.
+- Sprache offen: Deutsche Prompts sind ok; Nova versteht Kurzsätze.
+- Rollen klären: Kids entscheiden, Nova liefert Werkzeuge.
 
----
+## Häufige Stolpersteine
 
-## 4. Tipps für die Mentor:innen
+- Zu breite Fragen → anregen, konkreter zu werden (Nutzer, Zeitraum, Ereignisfolge).
+- Spalten verwechseln → gemeinsam Kopfzeile lesen lassen.
+- Kausal vs. Korrelation → betonen: Wir sammeln Indizien, nicht Urteile.
 
-- **Sprache kindgerecht halten:** z. B. statt „IP-Adresse“ → „geheimer Pfad“  
-- **Aktivierende Fragen stellen:**  
-  - „Warum ist dieser Login mitten in der Nacht verdächtig?“  
-  - „Wie kann jemand so schnell von Wien nach Moskau reisen?“  
-  - „Was passiert, wenn jemand 5-mal das falsche Passwort eingibt?“  
-- **Spannung aufbauen:** Lasst die Kinder Vermutungen äußern, kombiniert mit dem Chatbot.
+## Erfolgskriterien
 
----
+- Mindestens eine schlüssige Hypothese zu Brute Force oder Impossible Travel.
+- Ein belegendes Artefakt (Tabelle und/oder Grafik) pro Behauptung.
+- Kurze, nachvollziehbare Begründung in eigenen Worten.
 
-## 5. Lernziel
+## Beispiel-Prompts (als Starthilfe)
 
-Kinder verstehen:
-- was ungewöhnliches Verhalten (Anomalien) in Login-Daten bedeutet,  
-- wie man digitale Spuren liest und kombiniert,  
-- wie man mithilfe von Technik und Logik einen Fall löst.
+- „Zeige 10 Zeilen aus der Datei X und liste die Spaltennamen.“
+- „Zähle pro Nutzer die Anzahl `fail` und `success` und sortiere nach `fail` absteigend.“
+- „Finde Nutzer, bei denen mehrere `fail`-Events direkt vor einem `success`-Event lagen (zeitlich).“
+- „Erkenne ‚Impossible Travel‘: Gleicher Nutzer, stark unterschiedliche Städte in kurzer Zeit; zeige Beispiele.“
+- „Erstelle ein Balkendiagramm: `fail` vs. `success` pro Nutzer.“
+- „Visualisiere ‚Impossible Travel‘ auf einer Karte oder Timeline.“
 
----
+## Bildhinweise
 
-**Fazit:**  
-Die verdächtigen Logins aus zwei Städten in kurzer Zeit **plus** viele Fehlversuche führen zur Erkenntnis:  
-**Eva ist scheinbar die Täterin – in Wahrheit wurde ihr Zugang missbraucht.**  
-Das erkennen die Kinder durch die Kombination aus Beobachtung, Detektiv‑Logik und KI-Unterstützung.
+Füge die Beispielbilder bei Bedarf in `guides/images/` ein und referenziere sie im Kids-Guide:
+
+![HQ mit Lichtkristall](./images/hq_lightcrystal.png "HQ mit Lichtkristall")
+
+![Beispiel Log-Zeilen](./images/logs_sample.png "Beispiel Log-Zeilen")
+
+![Fehl-/Erfolg-Logins pro Nutzer](./images/failed_success_barchart.png "Fehl-/Erfolg-Logins pro Nutzer")
+
+![Unmögliche Reise visualisiert](./images/impossible_travel_map.png "Unmögliche Reise visualisiert")
+

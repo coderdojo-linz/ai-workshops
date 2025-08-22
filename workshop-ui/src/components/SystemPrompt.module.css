@@ -47,4 +47,24 @@
 .content ol {
   margin: 1em 0;
   padding-left: 2em;
-} 
+}
+
+.content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #ddd;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #ddd;
+  }
+}

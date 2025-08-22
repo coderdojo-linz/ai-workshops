@@ -1,127 +1,103 @@
-# 👩‍🏫 Mentor:innen-Anleitung – *Projekt * Das verborgene Tier
+# Mentor-Guide: Die Daten-Höhle (Exercise 01 – Data Cave)
 
-## 🧩 Projektidee
+Dieser Leitfaden hilft Mentor:innen, die Übung „Daten-Höhle“ sicher und wirkungsvoll anzuleiten.
 
-Im Projekt **Das verborgene Tier** geht es darum, dass **eine Figur in Daten versteckt** ist. Das Kind ist in einer Höhle aufgewacht und eine eine Ki Nova zur hilfe um wieder raus zu kommen es gibt 4 verschiedene Knöpfe mit Tieren darauf, eine Mau einen Hund eine Katze und einen Dino. Das Tier was sich in den Daten versteckt ist das richtige womit sie wieder raus kommen. 
-Die Kinder sollen mit Hilfe einer **künstlichen Intelligenz (KI)** herausfinden, was diese Daten bedeuten und wie sie mit ihnen die versteckte Figure entdecken können.
+## Ziel der Übung (Learning Goals)
 
+- Erkennen: Visualisierung macht verborgene Muster in Daten sichtbar (Datasaurus-Prinzip).
+- Anleiten statt Programmieren: Kinder steuern eine KI mit klaren Prompts (Prompting-Grundlagen).
+- Daten-Exploration: Von „Ein paar Zeilen zeigen“ bis zur passenden Darstellung (Scatter-Plot, Achsenverhältnis).
+- Kritisches Denken: Nicht raten – Beweise durch Visualisierung, erst dann Entscheidung.
 
-Das Ziel ist, den Kindern **ein Verständnis für Daten, Muster und Visualisierung** zu vermitteln – und dass Daten **nicht einfach „unsichtbar“ oder bedeutungslos** sind.
+## Story in Kürze (für Mentor:innen)
 
----
+Die Kinder wachen in einer „Daten-Höhle“ auf. Eine verschlossene Tür hat vier Kristall-Knöpfe: `Katze`, `Hund`, `Dino`, `Maus`. An der Wand meldet sich die KI-Helferin „Nova“: In einem Datensatz steckt ein Tier verborgen, das zu einem Knopf passt. Nur ein Versuch! Die Kinder sollen mit Hilfe der KI herausfinden, welches Tier in den Daten steckt, und anschließend den richtigen Knopf nennen. Der Datensatz ist in `exercises/01-data-cave/dataset/base-data/datasaurus.csv` enthalten und enthält u. a. die berühmte „Dino“-Form.
 
-## 🌴 Die Geschichte für die Kinder
-Du blinzelst.  
-Alles ist still.  
-Langsam öffnest du deine Augen…  
-**Wo bist du?!**
+Hinweis: In den Daten steckt die Dino-Silhouette (Datasaurus). Ziel ist, dass die Kinder das Muster mit einer passenden Visualisierung entdecken – nicht zu raten.
 
-Es ist kühl und dunkel um dich herum – du sitzt in einer **geheimnisvollen Höhle**! 😮🕳️  
-Vor dir steht eine **riesige steinerne Tür**, fest verschlossen. 🪨🚪
+## Material & Setup
 
-An der Tür befinden sich **vier leuchtende Knöpfe** – auf jedem ist ein Tier abgebildet:  
-🐕 **Hund**  🐈‍⬛ **Katze**  🐁 **Maus**  🦖 **Dino**
+- Dateien:
+  - `exercises/01-data-cave/dataset/base-data/datasaurus.csv` (Rohdaten)
+  - `exercises/01-data-cave/dataset/datasaurus-parsed.csv` (falls vorhanden/generiert)
+- Tool: Ein KI-Chat (z. B. Open WebUI, beliebiger LLM), der Code ausgeben und einfache Plots erzeugen kann.
+- Optional: Browser/Notebook/Online-Editor, in dem der von der KI erzeugte Code ausgeführt werden kann.
 
-Daneben steht geschrieben:  
-> **„Drücke das richtige Tier – und die Tür öffnet sich.“**
+## Ablaufvorschlag (25–40 Minuten)
 
-Doch welches Tier ist das richtige?
+1. Einstieg (5 Min)
 
----
+- Frage: „Was könnte in Zahlen versteckt sein?“ – Sammle Ideen. Erkläre, dass Visualisierung Muster sichtbar macht.
+- Grenze den Auftrag ein: „Wir haben nur einen Versuch – wir brauchen Beweise!“
 
-## 💡 Der Bildschirm erwacht zum Leben…
+1. Daten kennenlernen (5–10 Min)
 
-Plötzlich beginnt ein Bildschirm an der Höhlenwand zu leuchten – 💡💻  
-Eine freundliche Stimme spricht:
+- Kinder geben Nova/der KI Prompts wie:
+  - „Zeige mir 5–10 Zeilen aus der Datei `datasaurus.csv` und erkläre kurz die Spalten.“
+  - „Welche Spalten sind geeignet, um einen Scatter-Plot zu zeichnen?“
+- Erwartung: Spalten `x`, `y` und eine Gruppenspalte `dataset` sind enthalten.
 
-> **„Willkommen, Entdeckerin! Willkommen, Entdecker!  
-> Ich bin Nova – deine KI-Helferin 🤖✨  
->  
-> Um die Tür zu öffnen, müsst ihr gemeinsam das Rätsel lösen.  
-> In einem geheimen Datensatz ist ein Tier versteckt.  
-> Doch Achtung: Nur eines der vier Tiere auf den Knöpfen ist das richtige.  
->  
-> Die Daten sind voll von seltsamen Wörtern und Zahlen –  
-> aber irgendwo darin liegt der Schlüssel!  
->  
-> Wenn du herausfindest, welches Tier sich in den Daten verbirgt,  
-> dann weißt du auch, welchen Knopf du drücken musst!“**
+1. Visualisieren (10–15 Min)
 
+- Ziel: Scatter-Plot `x` gegen `y` mit Aspektverhältnis 1:1, Punkte klein, Achsen sichtbar.
+- Beispiel-Prompts:
+  - „Lies die Datei `exercises/01-data-cave/dataset/base-data/datasaurus.csv` ein und zeichne einen Scatter-Plot von `x` vs. `y`. Nutze ein Achsenverhältnis von 1:1 und kleine Punkte.“
+  - „Falls es mehrere Gruppen in der Spalte `dataset` gibt: Filtere zunächst auf `dataset == \"dino\"` und zeige den Plot.“
+  - „Drehe keine Achsen und verwende keine Linien – nur Punkte. Erkläre, was du siehst.“
+- Erwartung: Die Silhouette eines Dinos wird sichtbar.
 
----
+1. Entscheidung & Reflexion (5–10 Min)
 
----
+- Frage: „Welchen Knopf drückt ihr – und warum?“
+- Besprecht: Warum hätte eine andere Darstellung (z. B. nur Mittelwerte) das Muster verschleiert? Was lernen wir über Datenrepräsentation?
 
-## Die Rolle der KI
+## Beispiel-Übersicht der Plots
 
- **Nova** ist ein freundliche und schlaue Helferin.  
-Sie kann **Fragen beantworten**, **Hinweise geben** und **beim Denken helfen**,  
-aber:  
-> ❗️**Sie verrät nie sofort die ganze Lösung!**  
+Die folgende Übersicht zeigt alle Daten in vier unterschiedlichen Diagrammen – hilfreich, um die Bedeutung der richtigen Darstellung zu veranschaulichen:
 
-In der Anleitung für die Kinder gibt es viele **Beispielfragen** und **Tipps**, die ihnen helfen, mit der KI richtig zu kommunizieren.  
-Ziel ist es, dass die Kinder **selbstständig lernen**, wie man mit einer KI arbeitet und mit ihr gemeinsam Probleme löst.
+![All data plotted in 4 different diagrams](./images/diagrams.png "All data plotted in 4 different diagrams")
 
----
+## Tipps für Mentor:innen (Didaktik & Coaching)
 
-## 🌟 Die Figuren
+- Fokus auf Denken, nicht auf Tooling: Kinder geben der KI klare, kurze Anweisungen. Ermutige zum iterativen Prompten.
+- Sicherheit geben: Es ist okay, wenn der erste Plot „falsch“ aussieht. Leite zum Verbessern an (Achsenverhältnis, Punktgröße, Filter nach `dataset`).
+- Nicht raten lassen: „Nur ein Versuch“ ist ein Story-Element, um Begründungen statt Bauchgefühl zu fördern.
+- Sichtbarkeit des Musters:
+  - Aspektverhältnis 1:1, Achsen nicht automatisch strecken.
+  - Punkte klein, ggf. `alpha` leicht erhöhen, keine Linien oder Regressionen.
+  - Falls viele Gruppen vorhanden sind: erst Gruppe „dino“ filtern, dann plotten.
+- Prompt-Hygiene:
+  - Konkrete Datei-Pfade nennen.
+  - Erwähne gewünschtes Ergebnisformat (z. B. PNG/SVG) und Plot-Parameter.
+  - Um Erklärung bitten: „Erkläre kurz, was im Plot zu sehen ist.“
+- Rollenklärung: Die KI darf programmieren – die Kinder steuern mit Prompts. Fehlt eine Laufumgebung, kann die KI den Plot auch als SVG-Code erzeugen.
 
-Es gibt insgesamt **vier versteckte Figuren**:
+## Häufige Stolpersteine & schnelle Lösungen
 
-1. ⭐ **Der Stern** 
-2. 🦖 **Der Datasaurus die richtige Figur**  
-3. 👁️ **Das magische Auge**  
-4. 🛡️ **Der Kreis (Schutzblase)**
+- Plot sieht „gestaucht“ aus: „Bitte setze das Achsenverhältnis auf 1:1 und gleiche Skalen für x und y.“
+- Zu große Punkte, Muster unklar: „Verwende kleine Punkte (z. B. Größe 5) und kein Verbinden der Punkte.“
+- Zu viele Gruppen gleichzeitig: „Filtere auf `dataset == \"dino\"` und zeichne nur diese Punkte.“
+- Datei nicht gefunden: Pfad exakt angeben (siehe oben); ggf. Datei in den Arbeitsordner kopieren.
+- KI erklärt, aber plottet nicht: Nach Plot ausdrücklich fragen, gewünschtes Format nennen.
 
----
+## Erweiterungen (wenn Zeit bleibt)
 
-## 🧠 Pädagogische Struktur
+- Weitere Formen entdecken: Andere Werte in `dataset` (z. B. `star`, `circle`, `x_shape`, `bullseye`) filtern und visualisieren – Überraschung: Gleiche Grundstatistiken, sehr unterschiedliche Bilder.
+- Vergleich: Zeige Mittelwert/Varianz vs. Plot – warum Zahlen allein nicht genügen.
+- Prompting-Vertiefung: Kinder formulieren „gute“ vs. „vage“ Prompts und vergleichen Ergebnisse.
 
-Das Projekt ist so aufgebaut, dass Kinder zunächst **geführt** werden, um die erste Figur (den Stern) zu finden.  
-Danach sollen sie **eine zweite Figur eigenständig** entdecken.
+## Erfolgskriterien (Abhaken)
 
-Ziel ist:
-- **unterstützt lernen** (mit Anleitung) um einen ANsatz du haben aber auch selber zu überlegen
+- Kinder können beschreiben, warum Visualisierung wichtig ist („Representation matters“).
+- Es wurde ein korrekter Scatter-Plot (1:1) erstellt und das Dino-Muster erkannt.
+- Entscheidung für den Knopf ist begründet (nicht geraten): „Dino“.
 
+## Mini-Spickzettel (Prompts zum Kopieren)
 
-So fördern wir:
-- Datenverständnis,
-- visuelles Denken,
-- den Umgang mit KI als Werkzeug,
-- Problemlösefähigkeit und Geduld.
-
----
-
-## 🆘 Hilfe für Mentor:innen
-
-Falls Kinder nicht weiterkommen und auch nach mehreren Anläufen keine Fortschritte machen,  
-können **Mentor:innen direkt mit der KI kommunizieren** – mit einem speziellen Kommando:
-
-### 👉 Einfach ein `#` am Anfang des Prompts setzen!
-
-**Beispiel:**
-
-```
-Was wäre der nächste schritt zur Lösung für das richtige tier 
-```
-
-> Dadurch erkennt die KI, dass es sich **nicht um ein Kind**, sondern um eine betreuende Person handelt.
-
-Die KI wird dann gezieltere oder vollständigere Hinweise geben,  
-damit Mentor:innen:
-- erkennen können, ob das Problem **bei der KI oder beim Kind** liegt,
-- das Kind gezielt weiterleiten können,
-- ggf. die Lösung selbst kennen, ohne sie direkt auszugeben.
+- „Zeige mir 10 Zeilen aus `exercises/01-data-cave/dataset/base-data/datasaurus.csv` und erkläre kurz die Spalten.“
+- „Erzeuge einen Scatter-Plot von `x` gegen `y` mit Achsenverhältnis 1:1, kleinen Punkten, ohne Linien.“
+- „Filtere auf `dataset == \"dino\"` und zeichne nur diese Punkte.“
+- „Beschreibe, welches Muster im Plot sichtbar ist.“
 
 ---
-
-## 🧰 Tipps für Mentor:innen
-
-- Beobachte, **ob das Kind aktiv denkt** oder nur rät.
-- **Lobe kleine Erkenntnisse**, nicht nur Endlösungen.
-- **Ermutige das Kind**, eigene Fragen zu stellen.
-- Nutze die Beispiel-Fragen als Einstieg, aber unterstütze eigene Ideen.
-- Lass das Kind **den Fuchs (die KI) führen**, nicht umgekehrt.
-
----
-
+Kurzfazit für Mentor:innen: Die Kinder sollen entdecken, dass man Muster in Daten oft erst durch die richtige Darstellung erkennt. Das motiviert zu guten Prompts, sorgfältiger Datenexploration und begründetem Entscheiden – statt Raten.

@@ -69,3 +69,51 @@ h5,
 h6 {
   text-wrap: balance;
 }
+
+/* Callout styles */
+
+.callout {
+  border-left: 4px solid rgb(var(--callout-color));
+  background-color: rgba(var(--callout-color), 0.1);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+
+  .title {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+
+  &.foldable .title {
+    cursor: pointer;
+  }
+
+  .title-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .fold-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  &.collapsed .fold-arrow {
+    transform: rotate(-90deg);
+  }
+
+  .content {
+    margin-top: 0.5rem;
+
+  }
+
+  &.collapsed .content {
+    display: none;
+  }
+
+}
