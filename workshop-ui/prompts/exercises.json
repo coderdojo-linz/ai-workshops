@@ -52,7 +52,7 @@
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": "makeup-instructions.csv",
-      "image": "/images/covers/05-barbies-dungeon.webp"
+      "image": "/images/covers/05-barbies-dungeon.png"
     },
     "improve-p5js-code": {
       "title": "Verbessere deinen p5.js Code",
