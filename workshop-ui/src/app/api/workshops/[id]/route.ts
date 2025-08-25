@@ -3,6 +3,12 @@ import type { NextRequest } from 'next/server';
 import { StatusCodes } from 'http-status-codes';
 import { readWorkshops,writeWorkshops } from '@/app/api/workshops/workshopService';
 
+/** 
+ * @route   GET /api/workshops/:id
+ * @desc    Get a single workshop by ID
+ * @response 200 { workshop: Workshop } or 404 { error: string }
+ * @access  Admin only // TODO
+ */
 export async function GET(_: NextRequest, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
   const workshops = readWorkshops();
@@ -15,6 +21,13 @@ export async function GET(_: NextRequest, context: { params: Promise<{ id: strin
   return NextResponse.json(workshop, { status: StatusCodes.OK });
 }
 
+/**
+ * @route   PUT /api/workshops/:id
+ * @desc    Update a workshop by ID
+ * @body    { any fields from WorkshopProps (see schema) }
+ * @response 200 { workshop: Workshop } or 400/404 { error: string }
+ * @access  Admin only // TODO
+ */
 export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
   const updateFields = await req.json();
@@ -34,6 +47,12 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ id: str
   return NextResponse.json(workshops[index]);
 }
 
+/**
+ * @route   DELETE /api/workshops/:id
+ * @desc    Delete a workshop by ID
+ * @response 200 { success: boolean } or 404 { error: string }
+ * @access  Admin only // TODO
+ */
 export async function DELETE(_: NextRequest, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
   const workshops = readWorkshops();

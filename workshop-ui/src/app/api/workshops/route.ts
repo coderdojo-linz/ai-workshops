@@ -41,8 +41,12 @@ function generateUniqueCode(workshops: any[]): string {
   return code;
 }
 
-
-// GET: alle Workshops auslesen und sortieren
+/**
+ * @route   GET /api/workshops
+ * @desc    Get all workshops (sorted by date and time descending)
+ * @response 200 { workshops: Workshop[] }
+ * @access  Admin only // TODO
+ */
 export async function GET() {
   const workshops = readWorkshops();
 
@@ -56,8 +60,13 @@ export async function GET() {
   return NextResponse.json(workshops, { status: StatusCodes.OK });
 }
 
-
-// POST: neuen Workshop anlegen
+/**
+ * @route   POST /api/workshops
+ * @desc    Create a new workshop
+ * @body    { WorkshopProps (see schema) without id and code }
+ * @response 201 { workshop: Workshop } or 400 { error: string }
+ * @access  Admin only // TODO
+ */
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -87,7 +96,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(newWorkshop, { status: StatusCodes.CREATED });
 
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: StatusCodes.BAD_REQUEST });
   }
 }

@@ -2,15 +2,43 @@ import { getIronSession, IronSession, SessionOptions } from 'iron-session';
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-export interface SessionData {
-  sessionId?: string;
-  accessCode?: string;
-  isAuthenticated?: boolean;
+// --- Chat session for unique chats ---
+export interface ChatSessionData {
+  sessionId: string;
+}
+const chatSessionOptions: SessionOptions = {
+  password: process.env.SESSION_SECRET!,
+  cookieName: 'chat-session',
+  cookieOptions: {
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
+    maxAge: 60 * 60 * 24, // 24 hours
+    sameSite: 'lax' as const,
+  },
+};
+
+export async function getChatSession(): Promise<IronSession<ChatSessionData>> {
+  const cookieStore = await cookies();
+  return getIronSession<ChatSessionData>(cookieStore, chatSessionOptions);
 }
 
-const sessionOptions: SessionOptions = {
+// Helper function for API routes that need NextRequest/NextResponse
+export async function getChatSessionFromRequest(req: NextRequest, res: NextResponse): Promise<IronSession<ChatSessionData>> {
+  return getIronSession<ChatSessionData>(req, res, chatSessionOptions);
+}
+
+// --- App session for authentication ---
+export interface AppSessionData {
+  sessionId: string;
+  accessCode: string;
+  isAuthenticated: boolean;
+  workshopId: string;
+  workshopName: string;
+}
+
+const appSessionOptions: SessionOptions = {
   password: process.env.SESSION_SECRET!,
-  cookieName: 'workshop-session',
+  cookieName: 'app-session',
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
@@ -20,12 +48,16 @@ const sessionOptions: SessionOptions = {
   },
 };
 
-export async function getSession(): Promise<IronSession<SessionData>> {
+export async function getAppSession(): Promise<IronSession<AppSessionData>> {
   const cookieStore = await cookies();
-  return getIronSession<SessionData>(cookieStore, sessionOptions);
+  return getIronSession<AppSessionData>(cookieStore, appSessionOptions);
 }
 
 // Helper function for API routes that need NextRequest/NextResponse
-export async function getSessionFromRequest(req: NextRequest, res: NextResponse): Promise<IronSession<SessionData>> {
-  return getIronSession<SessionData>(req, res, sessionOptions);
+export async function getAppSessionFromRequest(req: NextRequest, res: NextResponse): Promise<IronSession<AppSessionData>> {
+  return getIronSession<AppSessionData>(req, res, appSessionOptions);
 } 
+
+export function validateAppSession(session: IronSession<AppSessionData>): boolean {
+  return session.isAuthenticated === true && session.accessCode === process.env.ACCESS_CODE;
+}

@@ -14,8 +14,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Get the workshop session cookie
-  const sessionCookie = request.cookies.get('workshop-session')
+  // Get the app session cookie
+  const sessionCookie = request.cookies.get('app-session')
 
   // Check if the user is trying to access the login page
   if (pathname === '/login') {

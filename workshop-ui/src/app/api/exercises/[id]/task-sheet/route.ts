@@ -2,11 +2,26 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
+import { getAppSessionFromRequest, validateAppSession } from '@/lib/session';
 
+/** 
+ * @route   GET /api/exercises/:id/task-sheet
+ * @desc    Get the task sheet content for a specific exercise by ID (folder name)
+ * @query   id
+ * @response 200 text/plain or 500/404 { error: string }
+ * @access  Protected (any authenticated user/workshop)
+ */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Validate authentication
+  const nextResponse = NextResponse.next();
+  const appSession = await getAppSessionFromRequest(request, nextResponse);
+  if (!validateAppSession(appSession)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { id: exerciseId } = await params;
     
