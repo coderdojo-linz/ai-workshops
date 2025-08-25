@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     try {
         const session = await getAppSessionFromRequest(request, response)
 
-        if (validateAppSession(session)) {
+        if (await validateAppSession(session)) {
             return NextResponse.json({
                 authenticated: true,
                 workshopName: session.workshopName,

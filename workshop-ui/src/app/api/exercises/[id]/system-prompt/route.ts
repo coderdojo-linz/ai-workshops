@@ -19,7 +19,7 @@ export async function GET(
     // Validate authentication
     const response = NextResponse.next();
     const appSession = await getAppSessionFromRequest(request, response);
-    if (!validateAppSession(appSession)) {
+    if (!await validateAppSession(appSession)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

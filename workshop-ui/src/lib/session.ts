@@ -34,8 +34,8 @@ export interface AppSessionData {
   sessionId: string;
   accessCode: string;
   isAuthenticated: boolean;
-  workshopId: string;
   workshopName: string;
+  recheckCode: Date;
 }
 
 const appSessionOptions: SessionOptions = {
@@ -60,16 +60,25 @@ export async function getAppSessionFromRequest(req: NextRequest, res: NextRespon
   return getIronSession<AppSessionData>(req, res, appSessionOptions);
 } 
 
-export function validateAppSession(session: IronSession<AppSessionData>): boolean {
-  return session.isAuthenticated === true && validateAccessCode(session.accessCode);
+export async function validateAppSession(session: IronSession<AppSessionData>): Promise<boolean> {
+  if (!session || !session.isAuthenticated || !session.accessCode) {
+    return false;
+  }
+
+  // Recheck access code validity every 30 minutes, assume still valid in between
+  if (session.recheckCode && new Date(session.recheckCode).getTime() > Date.now()) {
+    return true;
+  }
+
+  return session.isAuthenticated === true && await validateAccessCode(session.accessCode);
 }
 
-export function validateAccessCode(accessCode: string): boolean {
+export async function validateAccessCode(accessCode: string): Promise<boolean> {
   if (!accessCode) {
     return false;
   }
 
-  const workshops = readWorkshops();
+  const workshops = await readWorkshops();
   const workshop = workshops.find((w: Workshop) => w.code === accessCode);
   if (!workshop) {
     return false;

@@ -48,7 +48,7 @@ function generateUniqueCode(workshops: any[]): string {
  * @access  Admin only // TODO
  */
 export async function GET() {
-  const workshops = readWorkshops();
+  const workshops = await readWorkshops();
 
   workshops.sort((a: { date: string; startTime: string }, b: { date: string; startTime: string }) => {
     if (a.date !== b.date) {
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
     }
 
     const data = parseResult.data;
-    const workshops = readWorkshops();
+    const workshops = await readWorkshops();
     
     // Generiere einen eindeutigen Code für den Workshop
     const code = generateUniqueCode(workshops);
@@ -92,9 +92,12 @@ export async function POST(req: Request) {
     };
 
     workshops.push(newWorkshop);
-    writeWorkshops(workshops);
+    if (await writeWorkshops(workshops)) {
+      return NextResponse.json(newWorkshop, { status: StatusCodes.CREATED });
+    } else {
+      return NextResponse.json({ error: 'Failed to save workshop' }, { status: StatusCodes.INTERNAL_SERVER_ERROR });
+    }
 
-    return NextResponse.json(newWorkshop, { status: StatusCodes.CREATED });
 
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: StatusCodes.BAD_REQUEST });

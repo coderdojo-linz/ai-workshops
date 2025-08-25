@@ -17,22 +17,22 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({ success: true })
 
     if (action === 'login') {
-      if (validateAccessCode(code)) {
+      if (await validateAccessCode(code)) {
         // Set session variables
         const session = await getAppSessionFromRequest(request, response)
         session.accessCode = code
         session.isAuthenticated = true
+        session.recheckCode = new Date(Date.now() + 1000 * 60 * 30) // recheck code in 30 minutes
 
         // Find a workshop associated with this access code
-        const workshops = readWorkshops()
+        const workshops = await readWorkshops()
         const workshop = workshops.find((w: Workshop) => w.code === code)
         if (workshop) {
-          session.workshopId = workshop.id.toString()
           session.workshopName = workshop.title
         } else {
-          session.workshopId = ''
           session.workshopName = 'Unknown Workshop'
         }
+        console.log(`User logged in to workshop: ${JSON.stringify(session)}`)
         await session.save()
 
         return response
@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const session = await getAppSessionFromRequest(request, response)
-    const isAuthenticated = validateAppSession(session)
+    const isAuthenticated = await validateAppSession(session)
 
     return NextResponse.json({
       authenticated: isAuthenticated
