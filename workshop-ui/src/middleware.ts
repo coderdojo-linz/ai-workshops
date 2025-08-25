@@ -1,40 +1,46 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
   // Skip middleware for static assets and API routes
   if (
-    pathname.startsWith('/images/') ||
-    pathname.startsWith('/api/') ||
-    pathname.startsWith('/_next/') ||
-    pathname.startsWith('/workshops') ||
+    pathname.startsWith('/images/') || // Static images
+    pathname.startsWith('/api/') || // API routes (handled separately)
+    pathname.startsWith('/_next/') || // Next.js internals
+    pathname.startsWith('/workshops') || // TODO: Add proper auth for workshops
+    pathname === '/login' || // Allow access to login page
     pathname === '/favicon.ico'
   ) {
     return NextResponse.next()
   }
 
-  // Get the app session cookie
-  const sessionCookie = request.cookies.get('app-session')
+  // Check authentication status by calling the auth API
+  let isAuthenticated = false // Default to false
+  try {
+    const response = await fetch(new URL('/api/auth', request.url), {
+      method: 'GET',
+      headers: request.headers,
+      credentials: 'include',
+    })
+    const data = await response.json()
+    if (data.authenticated) {
+      isAuthenticated = true
+    }
+  } catch (error) {
+    console.error('Error checking authentication:', error)
+    isAuthenticated = false
+  }
 
-  // Check if the user is trying to access the login page
-  if (pathname === '/login') {
-    // If there's a session cookie, they might be authenticated - let them through to potentially redirect
-    // The actual authentication check will happen on the client side
+  // If not authenticated, redirect to login page with "from" parameter
+  if (!isAuthenticated) {
+    const loginUrl = new URL('/login', request.url)
+    loginUrl.searchParams.set('from', request.nextUrl.pathname)
+    return NextResponse.redirect(loginUrl)
+  } else {
     return NextResponse.next()
   }
-
-  // For all other routes, check if session cookie exists
-  // Note: We can't decrypt iron-session in edge middleware, so we rely on the presence of the cookie
-  // and client-side checks for actual authentication validation
-  if (!sessionCookie) {
-    // Redirect to login page if no session cookie
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-
-  // Session cookie exists, allow access (actual authentication verified client-side)
-  return NextResponse.next()
 }
 
 // Configure which routes the middleware should run on

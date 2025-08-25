@@ -25,7 +25,15 @@ export default function LoginPage() {
         
         if (data.authenticated) {
           // User is already authenticated, redirect to home
-          router.push('/')
+          console.log('User already authenticated, redirecting to home.')
+          
+          // Get the "from" parameter if it exists
+          const urlParams = new URLSearchParams(window.location.search)
+          const fromPath = urlParams.get('from')
+          
+          // Redirect to the original destination or home
+          const destination = fromPath && fromPath !== '/login' ? fromPath : '/'
+          router.replace(destination)
           return
         }
       } catch (error) {
@@ -79,8 +87,13 @@ export default function LoginPage() {
       })
 
       if (response.ok) {
-        // Redirect to home page
-        router.push('/')
+        // Get the "from" parameter if it exists
+        const urlParams = new URLSearchParams(window.location.search)
+        const fromPath = urlParams.get('from')
+        
+        // Redirect to the original destination or home
+        const destination = fromPath && fromPath !== '/login' ? fromPath : '/'
+        router.replace(destination)
       } else {
         setErrorMessage(response.status === 401 ? 'Invalid access code' : 'Login failed')
         if (response.status === 401) {
