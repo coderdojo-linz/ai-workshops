@@ -1,4 +1,5 @@
 import {z} from "zod";
+import { id } from "zod/v4/locales";
 
 export const WorkshopSchema = z.object({
   title: z.string().min(1),
@@ -14,5 +15,10 @@ export const WorkshopSchema = z.object({
   message: "Endzeit darf nicht vor oder gleich der Startzeit sein.",
   path: ['endTime'],
 });
+
+export interface Workshop extends z.infer<typeof WorkshopSchema> {
+  id: number;
+  code: string;
+}
 
 export type WorkshopInput = z.infer<typeof WorkshopSchema>;

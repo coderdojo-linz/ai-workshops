@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { StatusCodes } from 'http-status-codes';
-import { readWorkshops,writeWorkshops } from '@/app/api/workshops/workshopService';
+import { readWorkshops,writeWorkshops } from '@/lib/workshopService';
 
 /** 
  * @route   GET /api/workshops/:id

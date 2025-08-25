@@ -41,7 +41,7 @@ export default async function Home() {
 
   return (
     <>
-    <LogoutButton className={styles.logoutButton} />
+    <LogoutButton className={styles.logoutContainer} />
     <img src="/images/background1.svg" alt="Decorative image" className={styles.vectorBg1} />
     <img src="/images/background2.svg" alt="Decorative image" className={styles.vectorBg2} />
     <div className={styles.container}>

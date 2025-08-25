@@ -1,6 +1,8 @@
 import { getIronSession, IronSession, SessionOptions } from 'iron-session';
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { readWorkshops } from '@/lib/workshopService'
+import { Workshop } from './workshop-schema';
 
 // --- Chat session for unique chats ---
 export interface ChatSessionData {
@@ -59,5 +61,32 @@ export async function getAppSessionFromRequest(req: NextRequest, res: NextRespon
 } 
 
 export function validateAppSession(session: IronSession<AppSessionData>): boolean {
-  return session.isAuthenticated === true && session.accessCode === process.env.ACCESS_CODE;
+  return session.isAuthenticated === true && validateAccessCode(session.accessCode);
+}
+
+export function validateAccessCode(accessCode: string): boolean {
+  if (!accessCode) {
+    return false;
+  }
+
+  const workshops = readWorkshops();
+  const workshop = workshops.find((w: Workshop) => w.code === accessCode);
+  if (!workshop) {
+    return false;
+  }
+
+  // Check if we are in between start and end time
+  const now = new Date();
+  const startTime = new Date(`${workshop.date}T${workshop.startTime}`);
+  const endTime = new Date(`${workshop.date}T${workshop.endTime}`);
+
+  // Allow 30 minutes before start and 30 minutes after end
+  startTime.setMinutes(startTime.getMinutes() - 30);
+  endTime.setMinutes(endTime.getMinutes() + 30);
+
+  if (now < startTime || now > endTime) {
+    return false;
+  }
+
+  return true;
 }

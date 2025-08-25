@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { StatusCodes } from 'http-status-codes';
-import { readWorkshops,writeWorkshops } from '@/app/api/workshops/workshopService';
+import { readWorkshops,writeWorkshops } from '@/lib/workshopService';
 import { WorkshopSchema } from '@/lib/workshop-schema';
 
 // Funktion zur Generierung eines eindeutigen Workshop-Codes

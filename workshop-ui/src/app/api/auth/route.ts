@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAppSessionFromRequest, validateAppSession } from '@/lib/session'
+import { getAppSessionFromRequest, validateAccessCode, validateAppSession } from '@/lib/session'
+import { readWorkshops } from '@/lib/workshopService'
+import { Workshop } from '@/lib/workshop-schema'
 
 /**
  * @route   POST /api/auth
@@ -15,12 +17,22 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({ success: true })
 
     if (action === 'login') {
-      if (code === process.env.ACCESS_CODE) {
+      if (validateAccessCode(code)) {
+        // Set session variables
         const session = await getAppSessionFromRequest(request, response)
         session.accessCode = code
         session.isAuthenticated = true
-        session.workshopId = process.env.WORKSHOP_ID || '-1'
-        session.workshopName = process.env.WORKSHOP_NAME || 'Default Workshop'
+
+        // Find a workshop associated with this access code
+        const workshops = readWorkshops()
+        const workshop = workshops.find((w: Workshop) => w.code === code)
+        if (workshop) {
+          session.workshopId = workshop.id.toString()
+          session.workshopName = workshop.title
+        } else {
+          session.workshopId = ''
+          session.workshopName = 'Unknown Workshop'
+        }
         await session.save()
 
         return response
@@ -55,7 +67,7 @@ export async function POST(request: NextRequest) {
 /**
  * @route   GET /api/auth
  * @desc    Get current authentication status
- * @response { authenticated: boolean, accessCode: string | null }
+ * @response { authenticated: boolean }
  * @access  Public
  */
 export async function GET(request: NextRequest) {
@@ -67,14 +79,12 @@ export async function GET(request: NextRequest) {
     const isAuthenticated = validateAppSession(session)
 
     return NextResponse.json({
-      authenticated: isAuthenticated,
-      accessCode: isAuthenticated ? session.accessCode : null,
+      authenticated: isAuthenticated
     })
   } catch (error) {
     console.error('Session check error:', error)
     return NextResponse.json({
-      authenticated: false,
-      accessCode: null,
+      authenticated: false
     })
   }
 }
