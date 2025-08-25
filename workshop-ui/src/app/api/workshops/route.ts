@@ -9,8 +9,8 @@ function generateWorkshopCode(): string {
   const allowedChars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = '';
   
-  // Generiere einen 8-stelligen Code
-  for (let i = 0; i < 8; i++) {
+  // Generiere einen 6-stelligen Code
+  for (let i = 0; i < 6; i++) {
     const randomIndex = Math.floor(Math.random() * allowedChars.length);
     code += allowedChars[randomIndex];
   }
