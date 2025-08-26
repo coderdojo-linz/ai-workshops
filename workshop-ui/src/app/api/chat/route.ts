@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import OpenAI, { AzureOpenAI } from 'openai';
 import fs from 'fs';
 import path from 'path';
-import { getSession } from '@/lib/session';
+import { getAppSessionFromRequest, getChatSession, validateAppSession } from '@/lib/session';
 import { randomUUID } from 'crypto';
 import '@/lib/files';
 import { trace, Span } from '@opentelemetry/api';
@@ -16,8 +16,23 @@ const tracer = trace.getTracer('ai-workshop-chat');
 // TODO: Persist this to a database later
 const sessionResponseMap = new Map<string, { previousResponseId: string; sessionInstanceId: string }>();
 
+/**
+ * @route   POST /api/chat
+ * @desc    Send a chat message
+ * @body    { message: string, resetConversation: boolean }
+ * @urlParam exercise: string
+ * @response 200 { response: string } or 400 { error: string }
+ * @access  Protected (any authenticated user/workshop)
+ */
 export async function POST(request: NextRequest) {
   try {
+    // Validate authentication
+    const response = NextResponse.next();
+    const appSession = await getAppSessionFromRequest(request, response);
+    if (!await validateAppSession(appSession)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     // Get body payload and query string parameters
     const { message, resetConversation } = await request.json();
     if (!message || typeof message !== 'string') {
@@ -36,7 +51,7 @@ export async function POST(request: NextRequest) {
     const exerciseData = exerciseResult.value;
 
     // Get or create session ID
-    const session = await getSession();
+    const session = await getChatSession();
     let sessionId = session.sessionId;
 
     if (!sessionId) {

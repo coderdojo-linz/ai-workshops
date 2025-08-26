@@ -1,11 +1,22 @@
-import { AzureMonitorTraceExporter } from '@azure/monitor-opentelemetry-exporter';
-import { registerOTel } from '@vercel/otel';
+// TODO: re-enable OpenTelemetry
+// export async function register() {
+//   // Only register OpenTelemetry in Node.js runtime, not in edge runtime (middleware)
+//   // Skip initialization if we're in edge runtime
+//   if (process.env.NEXT_RUNTIME === 'edge') {
+//     return;
+//   }
 
-export async function register() {
-  registerOTel({
-    serviceName: 'ai-workshop-chat',
-    traceExporter: <any>new AzureMonitorTraceExporter({
-      connectionString: process.env.APP_INSIGHTS_CONNECTION_STRING,
-    }),
-  });
-}
+//   try {
+//     const { AzureMonitorTraceExporter } = await import('@azure/monitor-opentelemetry-exporter');
+//     const { registerOTel } = await import('@vercel/otel');
+
+//     registerOTel({
+//       serviceName: 'ai-workshop-chat',
+//       traceExporter: <any>new AzureMonitorTraceExporter({
+//         connectionString: process.env.APP_INSIGHTS_CONNECTION_STRING,
+//       }),
+//     });
+//   } catch (error) {
+//     console.warn('Failed to initialize OpenTelemetry:', error);
+//   }
+// }

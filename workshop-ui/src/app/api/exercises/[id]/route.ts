@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
+import { getAppSessionFromRequest, validateAppSession } from '@/lib/session';
 
 type ExerciseResponse = {
   title: string;
@@ -12,11 +13,25 @@ type ExerciseResponse = {
   data_files_content?: { [filename: string]: string };
 };
 
+/** 
+ * @route   GET /api/exercises/:id
+ * @desc    Get exercise metadata by ID (folder name)
+ * @query   includeDataFileContent: boolean (optional, default false) - whether to include the content of data files
+ * @response 200 { title, folder, system_prompt_file, welcome_message (if exists), data_files, data_files_content (if requested) } or 404 { error: string }
+ * @access  Protected (any authenticated user/workshop)
+ */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Validate authentication
+    const nextResponse = NextResponse.next();
+    const appSession = await getAppSessionFromRequest(request, nextResponse);
+    if (!await validateAppSession(appSession)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { id: exerciseId } = await params;
     
     // Extract query parameter
