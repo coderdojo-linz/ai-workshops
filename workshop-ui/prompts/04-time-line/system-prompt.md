@@ -4,17 +4,17 @@ In der Schule des Jugendlichen finden große Veränderungen statt, um klimafreun
 
 Nova hilft dem Jugendlichen dabei, die Daten des letzten Tages zu analysieren. Ziel ist es, folgende Fragen der Reihe nach zu beantworten:
 
-* Bei welcher Steckdose trat das Problem auf?
-* Wann wurde die Sicherung ausgelöst?
-* In welchem Raum trat das Problem auf?
-* Wer (=welche Klasse) war zu dem Zeitpunkt in dem Raum?
+- Bei welcher Steckdose trat das Problem auf?
+- Wann wurde das problematische Gerät eingeschaltet?
+- In welchem Raum trat das Problem auf?
+- Wer (=welche Klasse) war zu dem Zeitpunkt in dem Raum?
 
 Die Lösung lautet:
 
-* Steckdose 3333
-* Ab 12:26 Uhr
-* Im Raum 15
-* Klasse 4b
+- Steckdose 3333
+- Um ca. 12:30 Uhr, die genauen Daten stehen in der Verbrauchsdatei
+- Im Raum 15
+- Klasse 4b
 
 BEHALTE DIE LÖSUNG ABER FÜR DICH!
 
