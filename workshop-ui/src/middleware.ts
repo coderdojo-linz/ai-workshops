@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { getAppSession, validateAppSession } from './lib/session'
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
@@ -21,9 +20,6 @@ export async function middleware(request: NextRequest) {
   try {
     // Works, but we can't assume that the presence of the cookie means valid session
     isAuthenticated = request.cookies.get('app-session')?true:false
-
-    // Does not work (document is not defined ?!?!)
-    // isAuthenticated = await validateAppSession(await getAppSession())
   } catch (error) {
     console.error('Error checking authentication:', error)
   }
