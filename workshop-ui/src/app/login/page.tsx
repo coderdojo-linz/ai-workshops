@@ -95,7 +95,7 @@ export default function LoginPage() {
         const destination = fromPath && fromPath !== '/login' ? fromPath : '/'
         router.replace(destination)
       } else {
-        setErrorMessage(response.status === 401 ? 'Invalid access code' : 'Login failed')
+        setErrorMessage(response.status === 401 ? 'Ungültiger Workshop-Code' : 'Login fehlgeschlagen')
         if (response.status === 401) {
           setCode(Array(6).fill(''))
           inputRefs.current[0]?.focus()
@@ -104,7 +104,7 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.error('Login failed:', error)
-      setErrorMessage('Login failed')
+      setErrorMessage('Login fehlgeschlagen')
       setIsSubmitting(false)
     }
   }
@@ -123,8 +123,8 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <div className={styles.loginPrompt}>
-        <h1>Login Page</h1>
-        <p>Please log in to access the workshops. You can get the access code from a mentor.</p>
+        <h1>Login</h1>
+        <p>Bitte logge dich ein, um auf die Workshops zuzugreifen. Du erhältst den Zugangscode von einem Mentor.</p>
         <div className={styles.inputForm}>
           <input type="text" maxLength={1} value={code[0]} onChange={(e) => setCodeDigit(0, e.target.value)} onKeyDown={(e) => handleKeyDown(0, e)} ref={(el) => { inputRefs.current[0] = el }} />
           <input type="text" maxLength={1} value={code[1]} onChange={(e) => setCodeDigit(1, e.target.value)} onKeyDown={(e) => handleKeyDown(1, e)} ref={(el) => { inputRefs.current[1] = el }} />
