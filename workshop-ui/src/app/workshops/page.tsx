@@ -5,6 +5,7 @@ import styles from './page.module.css';
 import WorkshopForm from '@/components/WorkshopForm';
 import type { WorkshopInput } from '@/lib/workshop-schema';
 import { Clipboard, ClipboardCheck, Pencil } from 'lucide-react';
+import { th } from 'zod/v4/locales';
 interface Workshop {
   id: number;
   title: string;
@@ -46,6 +47,11 @@ export default function WorkshopsPage() {
     setLoading(true);
     fetch('/api/workshops')
       .then(async res => {
+        if (res.status === 401) {
+          // Wenn 401 Unauthorized, weiterleiten zur Login-Seite
+          router.push('/login?from=/');
+          throw new Error('Nicht autorisiert');
+        }
         if (!res.ok) throw new Error('Fehler beim Laden der Workshops');
         return res.json();
       })

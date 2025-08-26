@@ -3,6 +3,9 @@ import styles from './page.module.css';
 import { getExercises } from '@/lib/exercise-file-manager';
 import { trace } from '@opentelemetry/api';
 import LogoutButton from '@/components/LogoutButton';
+import { getAppSession, validateAppSession } from '@/lib/session';
+import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 
 export default async function Home() {
   const exercisesResult = await getExercises();
@@ -37,6 +40,14 @@ export default async function Home() {
       default:
         return '';
     }
+  }
+  
+  // redirect to login if not authenticated
+  const isAuthenticated = await validateAppSession(await getAppSession());
+  if (!isAuthenticated) {
+    const headersList = await headers();
+    const pathname = headersList.get('x-pathname') || '/';
+    redirect('/login?from=' + encodeURIComponent(pathname));
   }
 
   return (

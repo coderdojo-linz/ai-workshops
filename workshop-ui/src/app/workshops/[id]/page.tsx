@@ -29,6 +29,11 @@ export default function EditWorkshopPage() {
     setLoading(true);
     fetch(`/api/workshops/${id}`)
       .then(async res => {
+        if (res.status === 401) {
+          // Wenn 401 Unauthorized, weiterleiten zur Login-Seite
+          router.push('/login?from=/');
+          throw new Error('Nicht autorisiert');
+        }
         if (!res.ok) throw new Error('Workshop nicht gefunden');
         return res.json();
       })

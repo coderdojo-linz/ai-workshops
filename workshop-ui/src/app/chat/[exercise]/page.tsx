@@ -98,10 +98,15 @@ export default function Home() {
     const fetchExerciseMetadata = async () => {
       try {
         const response = await fetch(`/api/exercises/${exercise}`);
+        if (response.status === 401) {
+          // Wenn 401 Unauthorized, weiterleiten zur Login-Seite
+          router.push('/login?from=/');
+          throw new Error('Nicht autorisiert');
+        }
         if (response.ok) {
           const metadata = await response.json();
           setExerciseTitle(metadata.title);
-          
+
           // Add welcome message as first assistant message if it exists
           if (metadata.welcome_message && !welcomeMessageLoaded) {
             const welcomeMessage: MessageType = {
@@ -286,7 +291,7 @@ export default function Home() {
         </div>
       </div>
 
-            {/* System Prompt Modal */}
+      {/* System Prompt Modal */}
       <Modal isOpen={isSystemPromptModalOpen} onClose={() => setIsSystemPromptModalOpen(false)} title="System Prompt">
         <SystemPrompt exerciseId={exercise} type="system-prompt" />
       </Modal>
