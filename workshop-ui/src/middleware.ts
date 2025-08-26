@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { getAppSession, validateAppSession } from './lib/session'
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
@@ -9,28 +10,22 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/images/') || // Static images
     pathname.startsWith('/api/') || // API routes (handled separately)
     pathname.startsWith('/_next/') || // Next.js internals
-    pathname.startsWith('/workshops') || // TODO: Add proper auth for workshops
     pathname === '/login' || // Allow access to login page
     pathname === '/favicon.ico'
   ) {
     return NextResponse.next()
   }
 
-  // Check authentication status by calling the auth API
+  // Check authentication status by checking the session cookie
   let isAuthenticated = false // Default to false
   try {
-    const response = await fetch(new URL('/api/auth', request.url), {
-      method: 'GET',
-      headers: request.headers,
-      credentials: 'include',
-    })
-    const data = await response.json()
-    if (data.authenticated) {
-      isAuthenticated = true
-    }
+    // Works, but we can't assume that the presence of the cookie means valid session
+    isAuthenticated = request.cookies.get('app-session')?true:false
+
+    // Does not work (document is not defined ?!?!)
+    // isAuthenticated = await validateAppSession(await getAppSession())
   } catch (error) {
     console.error('Error checking authentication:', error)
-    isAuthenticated = false
   }
 
   // If not authenticated, redirect to login page with "from" parameter
