@@ -3,17 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import styles from '../page.module.css';
 import WorkshopForm from '@/components/WorkshopForm';
-import type { WorkshopInput } from '@/lib/workshop-schema';
-
-interface Workshop {
-  id: number;
-  title: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  description: string;
-  code: string;
-}
+import type { Workshop, WorkshopInput } from '@/lib/workshop-schema';
 
 export default function EditWorkshopPage() {
   const router = useRouter();
