@@ -2,14 +2,19 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { StatusCodes } from 'http-status-codes';
 import { readWorkshops, writeWorkshops } from '@/lib/workshopService';
+import { verifyAdmin } from '@/lib/session';
 
 /** 
  * @route   GET /api/workshops/:id
  * @desc    Get a single workshop by ID
  * @response 200 { workshop: Workshop } or 404 { error: string }
- * @access  Admin only // TODO
+ * @access  Admin only
  */
 export async function GET(_: NextRequest, context: { params: Promise<{ id: string }> }) {
+  if (! (await verifyAdmin())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: StatusCodes.UNAUTHORIZED });
+  }
+
   const { id } = await context.params;
   const workshops = await readWorkshops();
   const workshop = workshops.find((w: any) => String(w.id) === id);
@@ -26,9 +31,14 @@ export async function GET(_: NextRequest, context: { params: Promise<{ id: strin
  * @desc    Update a workshop by ID
  * @body    { any fields from WorkshopProps (see schema) }
  * @response 200 { workshop: Workshop } or 400/404 { error: string }
- * @access  Admin only // TODO
+ * @access  Admin only
  */
 export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  if (! (await verifyAdmin())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: StatusCodes.UNAUTHORIZED });
+  }
+
+
   const { id } = await context.params;
   const updateFields = await req.json();
   const workshops = await readWorkshops();
@@ -53,9 +63,13 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ id: str
  * @route   DELETE /api/workshops/:id
  * @desc    Delete a workshop by ID
  * @response 200 { success: boolean } or 404 { error: string }
- * @access  Admin only // TODO
+ * @access  Admin only
  */
 export async function DELETE(_: NextRequest, context: { params: Promise<{ id: string }> }) {
+  if (! (await verifyAdmin())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: StatusCodes.UNAUTHORIZED });
+  }
+
   const { id } = await context.params;
   const workshops = await readWorkshops();
 

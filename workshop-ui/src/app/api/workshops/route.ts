@@ -1,20 +1,22 @@
 import { NextResponse } from 'next/server';
 import { StatusCodes } from 'http-status-codes';
-import { readWorkshops,writeWorkshops } from '@/lib/workshopService';
+import { readWorkshops, writeWorkshops } from '@/lib/workshopService';
 import { WorkshopSchema } from '@/lib/workshop-schema';
+import { verify } from 'crypto';
+import { verifyAdmin } from '@/lib/session';
 
 // Funktion zur Generierung eines eindeutigen Workshop-Codes
 function generateWorkshopCode(): string {
   // Erlaubte Zeichen: Großbuchstaben und Zahlen, aber ohne 1, 0, O, I
   const allowedChars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = '';
-  
+
   // Generiere einen 6-stelligen Code
   for (let i = 0; i < 6; i++) {
     const randomIndex = Math.floor(Math.random() * allowedChars.length);
     code += allowedChars[randomIndex];
   }
-  
+
   return code;
 }
 
@@ -28,16 +30,16 @@ function generateUniqueCode(workshops: any[]): string {
   let code: string;
   let attempts = 0;
   const maxAttempts = 100;
-  
+
   do {
     code = generateWorkshopCode();
     attempts++;
   } while (!isCodeUnique(code, workshops) && attempts < maxAttempts);
-  
+
   if (attempts >= maxAttempts) {
     throw new Error('Could not generate unique workshop code');
   }
-  
+
   return code;
 }
 
@@ -45,9 +47,13 @@ function generateUniqueCode(workshops: any[]): string {
  * @route   GET /api/workshops
  * @desc    Get all workshops (sorted by date and time descending)
  * @response 200 { workshops: Workshop[] }
- * @access  Admin only // TODO
+ * @access  Admin only
  */
 export async function GET() {
+  if (! (await verifyAdmin())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: StatusCodes.UNAUTHORIZED });
+  }
+
   const workshops = await readWorkshops();
 
   workshops.sort((a: { date: string; startTime: string }, b: { date: string; startTime: string }) => {
@@ -65,9 +71,13 @@ export async function GET() {
  * @desc    Create a new workshop
  * @body    { WorkshopProps (see schema) without id and code }
  * @response 201 { workshop: Workshop } or 400 { error: string }
- * @access  Admin only // TODO
+ * @access  Admin only
  */
 export async function POST(req: Request) {
+  if (! (await verifyAdmin())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: StatusCodes.UNAUTHORIZED });
+  }
+
   try {
     const body = await req.json();
     const parseResult = WorkshopSchema.safeParse(body);
@@ -81,10 +91,10 @@ export async function POST(req: Request) {
 
     const data = parseResult.data;
     const workshops = await readWorkshops();
-    
+
     // Generiere einen eindeutigen Code für den Workshop
     const code = generateUniqueCode(workshops);
-    
+
     const newWorkshop = {
       ...data,
       id: Date.now(),

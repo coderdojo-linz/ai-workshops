@@ -84,6 +84,12 @@ export async function validateAccessCode(accessCode: string): Promise<boolean> {
     return false;
   }
 
+  // TODO: proper admin verification
+  // Exclude admin workshop from time check
+  if (String(workshop.id) === "1756200608981") {
+    return true;
+  }
+
   // Check if we are in between start and end time
   const now = new Date();
   const startTime = new Date(`${workshop.date}T${workshop.startTime}`);
@@ -98,4 +104,19 @@ export async function validateAccessCode(accessCode: string): Promise<boolean> {
   }
 
   return true;
+}
+
+// TODO: proper admin verification
+export async function verifyAdmin(): Promise<boolean> {
+  const adminWorkshopId = "1756200608981"
+
+  const workshops = await readWorkshops();
+  const workshop = workshops.find((w: Workshop) => String(w.id) === adminWorkshopId);
+  if (!workshop) {
+    return false;
+  }
+  const adminCode = workshop.code;
+
+  const appSession = await getAppSession();
+  return appSession.isAuthenticated === true && appSession.accessCode === adminCode;
 }
