@@ -91,14 +91,14 @@ export async function validateAccessCode(accessCode: string): Promise<boolean> {
   }
 
   // Check if we are in between start and end time
-  const now = new Date();
-  const startTime = new Date(`${workshop.date}T${workshop.startTime}`);
-  const endTime = new Date(`${workshop.date}T${workshop.endTime}`);
-
   // Allow 30 minutes before start and 30 minutes after end
+  const now = new Date();
+  const startTime = new Date(workshop.startDateTime);
   startTime.setMinutes(startTime.getMinutes() - 30);
+  const endTime = new Date(workshop.endDateTime);
   endTime.setMinutes(endTime.getMinutes() + 30);
 
+  // If now is before start or after end, return false 
   if (now < startTime || now > endTime) {
     return false;
   }

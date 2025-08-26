@@ -56,11 +56,10 @@ export async function GET() {
 
   const workshops = await readWorkshops();
 
-  workshops.sort((a: { date: string; startTime: string }, b: { date: string; startTime: string }) => {
-    if (a.date !== b.date) {
-      return b.date.localeCompare(a.date); // descending date
-    }
-    return b.startTime.localeCompare(a.startTime); // descending time
+  workshops.sort((a: any, b: any) => {
+    const dateA = new Date(a.startDateTime);
+    const dateB = new Date(b.startDateTime);
+    return dateB.getTime() - dateA.getTime();
   });
 
   return NextResponse.json(workshops, { status: StatusCodes.OK });

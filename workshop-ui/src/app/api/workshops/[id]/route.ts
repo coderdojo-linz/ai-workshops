@@ -38,7 +38,6 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ id: str
     return NextResponse.json({ error: 'Unauthorized' }, { status: StatusCodes.UNAUTHORIZED });
   }
 
-
   const { id } = await context.params;
   const updateFields = await req.json();
   const workshops = await readWorkshops();

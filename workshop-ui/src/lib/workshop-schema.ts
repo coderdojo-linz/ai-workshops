@@ -1,19 +1,23 @@
 import {z} from "zod";
-import { id } from "zod/v4/locales";
 
 export const WorkshopSchema = z.object({
   title: z.string().min(1),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Ungültiges Datum"),
-  startTime: z.string().regex(/^\d{2}:\d{2}$/, "Ungültige Startzeit"),
-  endTime: z.string().regex(/^\d{2}:\d{2}$/, "Ungültige Endzeit"),
+  // ISO 8601 Date-Time Format (Using UTC time)
+  // Example: 2023-03-15T10:00:00Z
+  startDateTime: z.string().min(1).refine((date) => !isNaN(Date.parse(date)), {
+    message: "Ungültiges Startdatum und -uhrzeit.",
+  }),
+  endDateTime: z.string().min(1).refine((date) => !isNaN(Date.parse(date)), {
+    message: "Ungültiges Enddatum und -uhrzeit.",
+  }),
   description: z.string().optional(),
 }).refine(data => {
-  const start = new Date(`1970-01-01T${data.startTime}`);
-  const end = new Date(`1970-01-01T${data.endTime}`);
+  const start = new Date(data.startDateTime);
+  const end = new Date(data.endDateTime);
   return end > start;
 }, {
   message: "Endzeit darf nicht vor oder gleich der Startzeit sein.",
-  path: ['endTime'],
+  path: ['endDateTime'],
 });
 
 export interface Workshop extends z.infer<typeof WorkshopSchema> {
