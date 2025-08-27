@@ -8,6 +8,14 @@ import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
 
 export default async function Home() {
+  // redirect to login if not authenticated
+  const isAuthenticated = await validateAppSession(await getAppSession());
+  if (!isAuthenticated) {
+    const headersList = await headers();
+    const pathname = headersList.get('x-pathname') || '/';
+    redirect('/login?from=' + encodeURIComponent(pathname));
+  }
+  
   const exercisesResult = await getExercises();
   if (!exercisesResult.success) {
     const span = trace.getActiveSpan();
@@ -41,37 +49,29 @@ export default async function Home() {
         return '';
     }
   }
-  
-  // redirect to login if not authenticated
-  const isAuthenticated = await validateAppSession(await getAppSession());
-  if (!isAuthenticated) {
-    const headersList = await headers();
-    const pathname = headersList.get('x-pathname') || '/';
-    redirect('/login?from=' + encodeURIComponent(pathname));
-  }
 
   return (
     <>
-    <LogoutButton className={styles.logoutContainer} />
-    <img src="/images/background1.svg" alt="Decorative image" className={styles.vectorBg1} />
-    <img src="/images/background2.svg" alt="Decorative image" className={styles.vectorBg2} />
-    <div className={styles.container}>
-      <h1 className={styles.title}>AI Workshop Exercises</h1>
-      <div className={styles.exerciseGrid}>
-        {Object.entries(exercisesData).map(([key, exercise]) => (
-          <div key={key} className={styles.exerciseCard}>
-            <Link href={`/chat/${key}`} className={styles.exerciseLink}>
-              <span className={`${styles.exerciseDifficulty} ${difficultyToClass(exercise.difficulty)}`}>{difficultyToName(exercise.difficulty)}</span>
+      <LogoutButton className={styles.logoutContainer} />
+      <img src="/images/background1.svg" alt="Decorative image" className={styles.vectorBg1} />
+      <img src="/images/background2.svg" alt="Decorative image" className={styles.vectorBg2} />
+      <div className={styles.container}>
+        <h1 className={styles.title}>AI Workshop Exercises</h1>
+        <div className={styles.exerciseGrid}>
+          {Object.entries(exercisesData).map(([key, exercise]) => (
+            <div key={key} className={styles.exerciseCard}>
+              <Link href={`/chat/${key}`} className={styles.exerciseLink}>
+                <span className={`${styles.exerciseDifficulty} ${difficultyToClass(exercise.difficulty)}`}>{difficultyToName(exercise.difficulty)}</span>
                 <img src={exercise.image || '/images/elementor-placeholder-image.png'} alt={`${exercise.title}'s descriptive image`} />
-              <div className={styles.exerciseContent}>
-                <h2 className={styles.exerciseTitle}>{exercise.title}</h2>
-                <p className={styles.exerciseDescription}>{exercise.summary}</p>
-              </div>
-            </Link>
-          </div>
-        ))}
+                <div className={styles.exerciseContent}>
+                  <h2 className={styles.exerciseTitle}>{exercise.title}</h2>
+                  <p className={styles.exerciseDescription}>{exercise.summary}</p>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
 }
