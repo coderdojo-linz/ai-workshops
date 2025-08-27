@@ -1,4 +1,3 @@
-// TODO: re-enable OpenTelemetry
 export async function register() {
   // Only register OpenTelemetry in Node.js runtime, not in edge runtime (middleware)
   // Skip initialization if we're in edge runtime
