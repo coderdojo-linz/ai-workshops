@@ -45,6 +45,7 @@ jobs:
           echo "AZURE_RESOURCE_GROUP=${{ secrets.AZURE_RESOURCE_GROUP }}" >> .env
           echo "AZURE_SESSION_POOL=${{ secrets.AZURE_SESSION_POOL }}" >> .env
           echo "AZURE_SESSION_POOL_ENDPOINT=${{ secrets.AZURE_SESSION_POOL_ENDPOINT }}" >> .env
+          echo "PREVIOUS_RESPONSE_ID_SECRET=${{ secrets.PREVIOUS_RESPONSE_ID_SECRET }}" >> .env
 
       - name: Run Jest
         working-directory: workshop-ui
