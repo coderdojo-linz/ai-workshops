@@ -24,10 +24,36 @@ Deine Aufgabe ist es, Barbie und Ken bei allen drei Rätseln zu helfen. Du bist 
 2.  Entschlüssle die Schminkanleitung.
 3.  Hilf Barbie, ihre Finanzen zu ordnen, indem du unnötige Ausgaben identifizierst und streichst, damit sie ihre Sparziele erreicht und die letzte Tür sich öffnet.
 
-**Beispiele für erste Prompts:**
+---
 
-*   „Wie können Barbie und Ken kommunizieren?“ (Rätsel 1)
-*   „Was machen die beiden Tasten an der Wand?“ (Rätsel 1)
-*   „Kannst du die Schmink-Daten als Bild zeichnen?“ (Rätsel 2)
-*   „Zeig mir Barbies Ausgaben.“ (Rätsel 3)
-*   „Was sind Barbies Sparziele?“ (Rätsel 3)
+# Barbies Glamour-Dungeon: Die Flucht aus dem Zauberschloss
+
+Ein aufregender Ausflug nimmt eine unerwartete Wendung! Barbie und Ken erkunden ein altes, verwunschenes Schloss und entdecken eine geheimnisvolle Doppeltür. Neugierig treten sie ein, doch die Türen schlagen hinter ihnen zu! Sie sind in getrennten Räumen gefangen! 😱
+
+Zum Glück bist du da, um ihnen zu helfen. In den Spiegeln der Räume erscheint **Nova**, eine magische KI, die dir bei den Rätseln zur Seite steht.
+
+**Deine Mission:** Löse drei knifflige Rätsel, um Barbie und Ken wieder zu vereinen und ihnen zur Flucht aus dem Glamour-Dungeon zu verhelfen.
+
+## So arbeitest du mit Nova (der KI)
+
+- Stelle Nova klare Fragen, immer einen Schritt nach dem anderen.
+- Bitte Nova, dir Dinge zu zeigen (wie Daten oder Bilder), anstatt nur lange Erklärungen zu geben.
+- Wenn du etwas nicht verstehst, frag einfach! Nova ist da, um dir zu helfen.
+
+## Schritt 1: Rätsel 1 – Die binäre Brücke
+
+Barbie und Ken sind durch eine undurchsichtige Wand getrennt und können sich nicht sehen. An der Wand befindet sich ein Bildschirm und zwei Tasten. In Kens Raum steht eine verschlossene Truhe, die den Schlüssel zur nächsten Tür enthält. Die Truhe lässt sich nur mit einem Passwort öffnen, das Barbie kennt.
+
+**Dein Ziel:** Finde heraus, wie die Kommunikations-Apparatur an der Wand funktioniert, damit Barbie Ken das Passwort (ein Wort, keine Zahl) übermitteln kann.
+
+## Schritt 2: Rätsel 2 – Der königliche Glamour
+
+Barbie und Ken sind wieder vereint, aber die nächste Tür ist verschlossen! Um sie zu öffnen, muss Ken Barbie nach einer Anleitung schminken. Das Problem: Die Anleitung liegt nur als seltsamer Datencode vor.
+
+**Dein Ziel:** Hilf Nova, die Daten zu entschlüsseln und als Bild darzustellen, damit Ken die Schminkanleitung versteht.
+
+## Schritt 3: Rätsel 3 – Die Finanz-Falle
+
+Die letzte Tür führt in die „Kammer der Abrechnung“. Hier flattert Barbie eine Mahnung ins Haus! Sie hat viel zu viel Geld ausgegeben. Um die letzte Tür zu öffnen, musst du ihr helfen, ihre Finanzen in den Griff zu bekommen und ihre Sparziele zu erreichen.
+
+**Dein Ziel:** Analysiere Barbies Ausgaben, finde heraus, wo sie sparen kann, und hilf ihr, ihr Budget einzuhalten.
