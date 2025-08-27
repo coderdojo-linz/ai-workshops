@@ -3,17 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import styles from '../page.module.css';
 import WorkshopForm from '@/components/WorkshopForm';
-import type { WorkshopInput } from '@/lib/workshop-schema';
-
-interface Workshop {
-  id: number;
-  title: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  description: string;
-  code: string;
-}
+import type { Workshop, WorkshopInput } from '@/lib/workshop-schema';
 
 export default function EditWorkshopPage() {
   const router = useRouter();
@@ -29,6 +19,11 @@ export default function EditWorkshopPage() {
     setLoading(true);
     fetch(`/api/workshops/${id}`)
       .then(async res => {
+        if (res.status === 401) {
+          // Wenn 401 Unauthorized, weiterleiten zur Login-Seite
+          router.push('/login?from=/');
+          throw new Error('Nicht autorisiert');
+        }
         if (!res.ok) throw new Error('Workshop nicht gefunden');
         return res.json();
       })

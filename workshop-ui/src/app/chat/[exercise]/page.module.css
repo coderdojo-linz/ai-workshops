@@ -22,7 +22,7 @@
   border: none;
   cursor: pointer;
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 10px 0 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +30,70 @@
 
   &:hover {
     background-color: #f5f5f5;
+  }
+}
+
+.dropdown {
+  position: relative;
+}
+
+.filler {
+  height: 10px;
+  position: absolute;
+  top: 100%;
+  width: 165px;
+  right: 0;
+}
+
+.dropdownButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 5px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 160px;
+  overflow: hidden;
+}
+
+.dropdownItem {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #ddd;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
   }
 }
 
@@ -43,7 +107,8 @@
 }
 
 .headerSpacer {
-  width: 36px; /* Same width as back button to center the title */
+  width: 36px;
+  /* Same width as back button to center the title */
 }
 
 .messagesContainer {
@@ -58,100 +123,41 @@
   flex-direction: column;
 }
 
-.message {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 6px;
-  width: 90%;
-  &.botMessageContainer {
-    background-color: #007bffaa;
+.loader {
+  height: 30px;
+  width: calc(30px * 2.5);
+  --_g: no-repeat radial-gradient(farthest-side, #000 90%, #0000);
+  background: var(--_g), var(--_g), var(--_g), var(--_g);
+  background-size: 20% 50%;
+  animation: l43 1s infinite linear;
+}
+
+@keyframes l43 {
+  0% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 50%, calc(2*100%/3) 50%, calc(3*100%/3) 50%
   }
-  &.userMessageContainer {
-    background-color: #009999aa;
-    /* Align user messages to the right */
-    align-self: flex-end;
+
+  16.67% {
+    background-position: calc(0*100%/3) 0, calc(1*100%/3) 50%, calc(2*100%/3) 50%, calc(3*100%/3) 50%
   }
-}
 
-.userMessage {
-  font-style: italic;
-  background-color: #007bff;
-}
+  33.33% {
+    background-position: calc(0*100%/3) 100%, calc(1*100%/3) 0, calc(2*100%/3) 50%, calc(3*100%/3) 50%
+  }
 
-.botMessage {
-  font-style: normal;
-}
+  50% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 100%, calc(2*100%/3) 0, calc(3*100%/3) 50%
+  }
 
-.inputForm {
-  display: flex;
-  gap: 10px;
-}
+  66.67% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 50%, calc(2*100%/3) 100%, calc(3*100%/3) 0
+  }
 
-.textInput {
-  flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+  83.33% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 50%, calc(2*100%/3) 50%, calc(3*100%/3) 100%
+  }
 
-.textInput:disabled {
-  background-color: #f5f5f5;
-}
-
-.sendButton {
-  padding: 10px 20px;
-  font-size: 17px;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #007bff;
-
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.sendButton:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.messageCounter {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #666;
-  text-align: center;
-}
-
-/* Code snippet styles */
-.message pre {
-  background-color: #f5f5f5;
-  padding: 12px;
-  border-radius: 6px;
-  margin: 8px 0;
-  overflow-x: auto;
-}
-
-.message pre code {
-  background-color: transparent;
-  padding: 0;
-  font-family: 'Courier New', Consolas, Monaco, monospace;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.message code:not(pre code) {
-  background-color: #f5f5f5;
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-family: 'Courier New', Consolas, Monaco, monospace;
-  font-size: 14px;
-}
-
-.htmlFrame {
-  margin-top: 8px;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  100% {
+    background-position: calc(0*100%/3) 50%, calc(1*100%/3) 50%, calc(2*100%/3) 50%, calc(3*100%/3) 50%
+  }
 }

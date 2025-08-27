@@ -1,5 +1,7 @@
 # 🕵️‍♀️🔍 **Cyber-Spürnasen: Rettet den Lichtkristall!**
 
+## Die Geschichte
+
 Willkommen bei der **Cyberwerk AG** – hier tüfteln schlaue Köpfe an fantastischen Erfindungen!
 Doch eines Nachts schleicht sich ein schlauer **Daten-Dieb** heimlich an unsere Computer.
 Er will unsere Geheimnisse stehlen und so tun, **als wäre er einer von uns** – das nennt man **Identitätsdiebstahl**!
@@ -7,24 +9,12 @@ Er will unsere Geheimnisse stehlen und so tun, **als wäre er einer von uns** �
 Eure Mission: Helft **Cyber-Spürnase**, den falschen „Mitarbeiter“ zu entlarven und den **Lichtkristall** zu schützen.
 Der Lichtkristall bringt ganze Städte zum Leuchten – wir dürfen ihn nicht verlieren! 🚀✨
 
----
-
-## 1️⃣ Unsere geheime Mission
+### Was ist passiert?
 
 Der Bösewicht will sich mit den **Passwort-Daten eines echten Mitarbeiters** einloggen und so tun, als gehöre er zur Cyberwerk AG.
 🔑 **Identitätsdiebstahl heißt:** Jemand klaut z. B. dein Passwort oder deinen Namen und benutzt ihn, um Dinge zu tun, die nur du dürftest – wie ein Dieb, der deinen Hausschlüssel stiehlt.
 
----
-
-## 2️⃣ Was ist IT-Forensik?
-
-**IT-Forensik** bedeutet: Wir spielen **Computer-Detektiv**.
-Wir schauen uns das **Computer-Tagebuch** (Logdateien) an und suchen nach **ungewöhnlichem Verhalten** (= Anomalien).
-So finden wir heraus, wenn jemand Fremdes versucht, sich als ein echter Mitarbeiter auszugeben. 👀
-
----
-
-## 3️⃣ Spuren, die der Daten-Dieb hinterlässt
+## Spuren, die der Daten-Dieb hinterlässt
 
 | Spur                         | Erklärung                                                                                                                               |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |

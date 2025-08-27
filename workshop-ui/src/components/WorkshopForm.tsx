@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import styles from '@/app/workshops/page.module.css';
-import { WorkshopSchema, type WorkshopInput } from '@/lib/workshop-schema';
 import type { ZodFormattedError } from 'zod';
+
+import { WorkshopSchema, type WorkshopInput } from '@/lib/workshop-schema';
+
+import styles from '@/app/workshops/page.module.css';
 
 interface WorkshopFormProps {
   initialWorkshop?: WorkshopInput & { id?: number; code?: string };
@@ -12,16 +14,14 @@ interface WorkshopFormProps {
   onDelete?: () => Promise<void>;
 }
 
-export default function WorkshopForm({ initialWorkshop, onSave, onCancel, onDelete }: WorkshopFormProps) {
+export default function WorkshopForm({ initialWorkshop, onSave, onCancel, onDelete }: Readonly<WorkshopFormProps>) {
+  const [loading, setLoading] = useState(false);
   const [workshop, setWorkshop] = useState<WorkshopInput>({
     title: initialWorkshop?.title ?? '',
-    date: initialWorkshop?.date ?? '',
-    startTime: initialWorkshop?.startTime ?? '',
-    endTime: initialWorkshop?.endTime ?? '',
+    startDateTime: initialWorkshop?.startDateTime ? initialWorkshop.startDateTime.slice(0,16) : '',
+    endDateTime: initialWorkshop?.endDateTime ? initialWorkshop.endDateTime.slice(0,16) : '',
     description: initialWorkshop?.description ?? '',
   });
-
-  const [loading, setLoading] = useState(false);
 
   const validation = WorkshopSchema.safeParse(workshop);
   const errors: ZodFormattedError<WorkshopInput> = validation.success ? ({} as any) : validation.error.format();
@@ -46,36 +46,28 @@ export default function WorkshopForm({ initialWorkshop, onSave, onCancel, onDele
         onChange={e => setWorkshop({ ...workshop, title: e.target.value })}
         className={styles.input}
       />
-      {errors?.title?._errors?.[0] && <p className={styles.error}>{errors.title._errors[0]}</p>}
+      {errors.title && <div className={styles.errorText}>{errors.title._errors.join(', ')}</div>}
 
       <div className={styles.dateTimeRow}>
+        <label htmlFor="startDateTime">Startdatum und -uhrzeit</label>
         <input
-          type="date"
-          name="date"
-          value={workshop.date}
-          onChange={e => setWorkshop({ ...workshop, date: e.target.value })}
+          type="datetime-local"
+          name="startDateTime"
+          value={workshop.startDateTime}
+          onChange={e => setWorkshop({ ...workshop, startDateTime: e.target.value })}
+          className={styles.input}
+          min={new Date().toISOString().slice(0,16)}
+        />
+        {errors.startDateTime && <div className={styles.errorText}>{errors.startDateTime._errors.join(', ')}</div>}
+        <label htmlFor="endDateTime">Enddatum und -uhrzeit</label>
+        <input
+          type="datetime-local"
+          name="endDateTime"
+          value={workshop.endDateTime}
+          onChange={e => setWorkshop({ ...workshop, endDateTime: e.target.value })}
           className={styles.input}
         />
-        <div className={styles.timeInputGroup}>
-          <label className={styles.timeLabel}>Von:</label>
-          <input
-            type="time"
-            name="startTime"
-            value={workshop.startTime}
-            onChange={e => setWorkshop({ ...workshop, startTime: e.target.value })}
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.timeInputGroup}>
-          <label className={styles.timeLabel}>Bis:</label>
-          <input
-            type="time"
-            name="endTime"
-            value={workshop.endTime}
-            onChange={e => setWorkshop({ ...workshop, endTime: e.target.value })}
-            className={styles.input}
-          />
-        </div>
+        {errors.endDateTime && <div className={styles.errorText}>{errors.endDateTime._errors.join(', ')}</div>}
       </div>
 
       <textarea
@@ -85,6 +77,7 @@ export default function WorkshopForm({ initialWorkshop, onSave, onCancel, onDele
         onChange={e => setWorkshop({ ...workshop, description: e.target.value })}
         className={styles.textarea}
       />
+      {errors.description && <div className={styles.errorText}>{errors.description._errors.join(', ')}</div>}
 
       <div className={styles.editButtonsRow}>
         <button onClick={handleSubmit} disabled={!validation.success || loading} className={styles.saveButton}>

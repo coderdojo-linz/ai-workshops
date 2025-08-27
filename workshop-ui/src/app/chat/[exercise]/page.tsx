@@ -1,109 +1,82 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import styles from './page.module.css';
-import DOMPurify from 'dompurify';
-import { marked } from 'marked';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, FileText, Send } from 'lucide-react';
+import { ArrowLeft, FileText, ChevronDown, Book } from 'lucide-react';
+
 import Modal from '@/components/Modal';
 import SystemPrompt from '@/components/SystemPrompt';
+import ChatInputArea from '@/components/chat/ChatInputArea';
 
-type Message = {
-  role: 'user' | 'assistant';
-  content: string;
-  html: string;
-  type?: 'text' | 'html';
-};
+import { extractFirstHtmlIsland } from './htmlDataReplacer';
+
+import styles from './page.module.css';
+
+import 'highlight.js/styles/github.css';
+import Message, { Message as MessageType } from '@/components/chat/Message';
+import { hashMessage } from '@/lib/utility';
 
 export default function Home() {
   const params = useParams();
   const router = useRouter();
   const exercise = params.exercise as string;
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [currentBotMessage, setCurrentBotMessage] = useState('');
   const [exerciseTitle, setExerciseTitle] = useState(exercise); // Start with exercise ID
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [welcomeMessageLoaded, setWelcomeMessageLoaded] = useState(false);
+  const [isSystemPromptModalOpen, setIsSystemPromptModalOpen] = useState(false);
+  const [isTaskSheetModalOpen, setIsTaskSheetModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isFirstCall, setIsFirstCall] = useState(true);
+  const [responseId, setResponseId] = useState<string | undefined>(undefined);
 
   // Cache for data file content - only fetch once per component session
   const dataFileContentCache = useRef<string | null>(null);
   const dataFileContentFetched = useRef<boolean>(false);
 
-  // Function to extract the first HTML code island from markdown content and process <|DATA|> placeholders
-  const extractFirstHtmlIsland = async (content: string): Promise<string | null> => {
-    const lines = content.split('\n');
-    let inHtmlBlock = false;
-    let currentHtmlBlock = '';
+  async function loadDataFileContent(): Promise<string | undefined> {
+    // Check cache first
+    if (!dataFileContentFetched.current) {
+      try {
+        // Fetch exercise data with data file content only once
+        const exerciseResponse = await fetch(`/api/exercises/${exercise}?includeDataFileContent=true`);
+        if (exerciseResponse.ok) {
+          const exerciseData = await exerciseResponse.json();
 
-    for (const line of lines) {
-      if (line.trim() === '```html' && !inHtmlBlock) {
-        inHtmlBlock = true;
-        currentHtmlBlock = '';
-      } else if (line.trim() === '```' && inHtmlBlock) {
-        if (currentHtmlBlock.trim()) {
-          let htmlContent = currentHtmlBlock.trim();
-
-          // Check if HTML island contains <|DATA|> placeholder
-          if (htmlContent.includes('<|DATA|>')) {
-            // Check cache first
-            if (!dataFileContentFetched.current) {
-              try {
-                // Fetch exercise data with data file content only once
-                const exerciseResponse = await fetch(`/api/exercises/${exercise}?includeDataFileContent=true`);
-                if (exerciseResponse.ok) {
-                  const exerciseData = await exerciseResponse.json();
-
-                  // Only process <|DATA|> if there's exactly one data file
-                  if (exerciseData.data_files && exerciseData.data_files.length === 1) {
-                    const singleFileName = exerciseData.data_files[0];
-                    dataFileContentCache.current = exerciseData.data_files_content?.[singleFileName] || null;
-                  } else {
-                    // Multiple files - don't process <|DATA|> placeholders
-                    dataFileContentCache.current = null;
-                  }
-                }
-              } catch (error) {
-                console.error('Error fetching exercise data:', error);
-                dataFileContentCache.current = null;
-              } finally {
-                dataFileContentFetched.current = true;
-              }
-            }
-
-            // Replace <|DATA|> with the cached data file content (only for single file exercises)
-            if (dataFileContentCache.current) {
-              htmlContent = htmlContent.replace(/<\|DATA\|>/g, dataFileContentCache.current);
-            }
+          // Only process <|DATA|> if there's exactly one data file
+          if (exerciseData.data_files && exerciseData.data_files.length === 1) {
+            const singleFileName = exerciseData.data_files[0];
+            dataFileContentCache.current = exerciseData.data_files_content?.[singleFileName] || null;
+          } else {
+            // Multiple files - don't process <|DATA|> placeholders
+            dataFileContentCache.current = null;
           }
-
-          return htmlContent;
         }
-        return null;
-      } else if (inHtmlBlock) {
-        currentHtmlBlock += line + '\n';
+      } catch (error) {
+        console.error('Error fetching exercise data:', error);
+        dataFileContentCache.current = null;
+      } finally {
+        dataFileContentFetched.current = true;
       }
     }
 
-    return null;
-  };
+    // Replace <|DATA|> with the cached data file content (only for single file exercises)
+    if (dataFileContentCache.current) {
+      return dataFileContentCache.current;
+    }
+  }
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // const renderer = {
-  //   image(image: any) {
-  //     console.log('rendering', JSON.stringify(image));
-  //     return `<pre>${JSON.stringify(image)}</pre>`;
-  //   },
-  // };
-  // marked.use({ renderer });
 
   useEffect(() => {
     scrollToBottom();
@@ -121,14 +94,30 @@ export default function Home() {
     }
   }, [messages]);
 
-  // Fetch exercise metadata on component mount
+  // Fetch exercise metadata and welcome message on component mount
   useEffect(() => {
     const fetchExerciseMetadata = async () => {
       try {
         const response = await fetch(`/api/exercises/${exercise}`);
+        if (response.status === 401) {
+          // Wenn 401 Unauthorized, weiterleiten zur Login-Seite
+          router.push('/login?from=/');
+          throw new Error('Nicht autorisiert');
+        }
         if (response.ok) {
           const metadata = await response.json();
           setExerciseTitle(metadata.title);
+
+          // Add welcome message as first assistant message if it exists
+          if (metadata.welcome_message && !welcomeMessageLoaded) {
+            const welcomeMessage: MessageType = {
+              role: 'assistant',
+              content: metadata.welcome_message,
+              type: 'text',
+            };
+            setMessages([welcomeMessage]);
+            setWelcomeMessageLoaded(true);
+          }
         }
       } catch (error) {
         console.error('Error fetching exercise metadata:', error);
@@ -137,7 +126,7 @@ export default function Home() {
     };
 
     fetchExerciseMetadata();
-  }, [exercise]);
+  }, [exercise, welcomeMessageLoaded]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -156,7 +145,6 @@ export default function Home() {
       {
         role: 'user' as const,
         content: userMessage,
-        html: DOMPurify.sanitize(marked.parse(userMessage) as string),
         type: 'text' as const,
       },
     ];
@@ -171,7 +159,7 @@ export default function Home() {
         },
         body: JSON.stringify({
           message: userMessage,
-          resetConversation: isFirstCall
+          encryptedPreviousResponseId: responseId,
         }),
       });
 
@@ -203,30 +191,25 @@ export default function Home() {
             const data = line.slice(6);
             if (data === '[DONE]') {
               // Finalize the assistant message
-              const assistantMsg: Message = {
+              const assistantMsg: MessageType = {
                 role: 'assistant',
                 content: assistantMessage,
-                html: DOMPurify.sanitize(marked.parse(assistantMessage) as string),
                 type: 'text',
               };
 
               // Extract first HTML island and create additional HTML message if found
-              const firstHtmlIsland = await extractFirstHtmlIsland(assistantMessage);
-              const messagesToAdd = [assistantMsg];
+              const firstHtmlIsland = await extractFirstHtmlIsland(assistantMessage, loadDataFileContent);
+              const messagesToAdd: MessageType[] = [assistantMsg];
 
               if (firstHtmlIsland) {
                 messagesToAdd.push({
                   role: 'assistant',
-                  content: firstHtmlIsland,
                   html: firstHtmlIsland, // Store processed HTML for iframe srcdoc
                   type: 'html',
                 });
               }
 
-              setMessages((prev) => [
-                ...prev,
-                ...messagesToAdd,
-              ]);
+              setMessages((prev) => [...prev, ...messagesToAdd]);
               setCurrentBotMessage('');
             } else {
               try {
@@ -235,7 +218,11 @@ export default function Home() {
                   assistantMessage += parsed.delta;
                   setCurrentBotMessage(assistantMessage);
                 }
-              } catch (error) {
+                if (parsed.encryptedResponseId) {
+                  setResponseId(parsed.encryptedResponseId);
+                  console.log('Received encryptedResponseId:', parsed.encryptedResponseId);
+                }
+              } catch {
                 // Ignore parsing errors for SSE data
               }
             }
@@ -249,7 +236,6 @@ export default function Home() {
         {
           role: 'assistant',
           content: 'Sorry, there was an error processing your message.',
-          html: DOMPurify.sanitize(marked.parse('Sorry, there was an error processing your message.') as string),
           type: 'text',
         },
       ]);
@@ -258,23 +244,26 @@ export default function Home() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    if (value.length <= 1000) {
-      setInput(value);
-    }
-  };
-
   const handleBack = () => {
     router.push('/');
   };
 
-  const handleShowSystemPrompt = () => {
-    setIsModalOpen(true);
+  const handleToggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleDropdownOption = (option: string) => {
+    setIsDropdownOpen(false);
+    switch (option) {
+      case 'system-prompt':
+        setIsSystemPromptModalOpen(true);
+        break;
+      case 'task-sheet':
+        setIsTaskSheetModalOpen(true);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -285,80 +274,56 @@ export default function Home() {
           <ArrowLeft size={20} />
         </button>
         <h1 className={styles.exerciseTitle}>{exerciseTitle}</h1>
-        <button onClick={handleShowSystemPrompt} className={styles.backButton} title="Show System Prompt">
-          <FileText size={20} />
-        </button>
+        <div className={styles.dropdown} ref={dropdownRef} onMouseEnter={handleToggleDropdown} onMouseLeave={handleToggleDropdown}>
+          <button className={styles.dropdownButton} title="Options">
+            <ChevronDown size={20} />
+          </button>
+          {isDropdownOpen && (
+            <>
+              <div className={styles.filler} />
+              <div className={styles.dropdownMenu}>
+                <button onClick={() => handleDropdownOption('system-prompt')} className={styles.dropdownItem}>
+                  <FileText size={16} />
+                  <span>System Prompt</span>
+                </button>
+                <button onClick={() => handleDropdownOption('task-sheet')} className={styles.dropdownItem}>
+                  <Book size={16} />
+                  <span>Task Sheet</span>
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {/* System Prompt Modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title="System Prompt"
-      >
-        <SystemPrompt exerciseId={exercise} />
+      <Modal isOpen={isSystemPromptModalOpen} onClose={() => setIsSystemPromptModalOpen(false)} title="System Prompt">
+        <SystemPrompt exerciseId={exercise} type="system-prompt" />
+      </Modal>
+
+      {/* Task Sheet Modal */}
+      <Modal isOpen={isTaskSheetModalOpen} onClose={() => setIsTaskSheetModalOpen(false)} title="Task Sheet">
+        <SystemPrompt exerciseId={exercise} type="task-sheet" />
       </Modal>
 
       {/* Conversation History */}
-      <div className={styles.messagesContainer}>
-        {messages.map((message, index) => (
-          <div key={index} className={[styles.message, message.role === 'user' ? styles.userMessageContainer : styles.botMessageContainer].join(' ')}>
-            <strong>{message.role === 'user' ? 'You' : 'Bot'}:</strong>{' '}
-            {message.type === 'html' ? (
-              <iframe
-                srcDoc={message.html}
-                className={styles.htmlFrame}
-                sandbox="allow-scripts allow-same-origin"
-                style={{ width: '100%', minHeight: '200px', border: '1px solid #ccc', borderRadius: '4px' }}
-                title='HTML Content'
-              />
-            ) : (
-              <span className={message.role === 'user' ? styles.userMessage : styles.botMessage} dangerouslySetInnerHTML={{ __html: message.html }} />
-            )}
-          </div>
+      <div className={styles.messagesContainer} ref={messagesContainerRef}>
+        {messages.map((message) => (
+          <Message message={message} key={hashMessage(message)} />
         ))}
-        {currentBotMessage && (
-          <div className={styles.message}>
-            <strong>Bot:</strong>{' '}
-            <span
-              className={styles.botMessage}
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(marked.parse(currentBotMessage) as string),
-              }}
-            />
-          </div>
-        )}
+
+        {currentBotMessage &&
+          <Message message={{
+            role: 'assistant',
+            content: currentBotMessage,
+            type: 'text'
+          }} />
+        }
+
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Form */}
-      <form onSubmit={handleSubmit} className={styles.inputForm}>
-        <textarea
-          ref={inputRef}
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSubmit(e as any);
-            }
-          }}
-          placeholder="Type your message..."
-          disabled={isLoading}
-          className={styles.textInput}
-          rows={1}
-          style={{ resize: 'none' }}
-        />
-        <button type="submit" disabled={!input.trim() || isLoading || messages.length >= 100} className={styles.sendButton}>
-          <Send />
-          {isLoading ? 'Sending...' : 'Send'}
-        </button>
-      </form>
-
-      {/* Message Counter */}
-      <div className={styles.messageCounter}>
-        {messages.length}/100 messages | {input.length}/1000 characters
-      </div>
+      <ChatInputArea inputRef={inputRef} inputValue={input} setInputValue={setInput} onSubmit={handleSubmit} isLoading={isLoading} messageCount={messages.length} />
     </div>
   );
-} 
+}

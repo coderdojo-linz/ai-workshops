@@ -1,0 +1,57 @@
+/* Callout.module.css */
+.callout {
+  border-left: 4px solid rgb(var(--callout-color));
+  background-color: rgba(var(--callout-color), 0.1);
+  padding: 0.75rem 1rem 1rem 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.title {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  width: 100%;
+}
+
+/* When title is a button we reset native button styles */
+.title[role="button"],
+.title:where(button) {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.foldable .title {
+  cursor: pointer;
+}
+
+.titleLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.foldArrow {
+  transition: transform 0.2s ease;
+}
+
+.collapsed .foldArrow {
+  transform: rotate(-90deg);
+}
+
+.content {
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+.collapsed .content {
+  display: none;
+}

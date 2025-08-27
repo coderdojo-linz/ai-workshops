@@ -1,14 +1,15 @@
 {
   "exercises": {
     "data-cave": {
-        "title": "Die Daten-Höhle",
-        "folder": "01-data-cave",
-        "difficulty": "easy",
-        "summary": "Du bist in einer Höhle gefangen und musst mithilfe der KI „Nova“ in einem Datensatz herausfinden, welches Tier darin versteckt ist, um die Tür zu öffnen und aus der Höhle zu entkommen.",
-        "reference": "tasksheet.md",
-        "system_prompt_file": "system-prompt.md",
-        "data_files": "data-cave.csv",
-        "image": "/images/covers/01-data-cave.svg"
+      "title": "Die Daten-Höhle",
+      "folder": "01-data-cave",
+      "difficulty": "easy",
+      "summary": "Du bist in einer Höhle gefangen und musst mithilfe der KI „Nova“ in einem Datensatz herausfinden, welches Tier darin versteckt ist, um die Tür zu öffnen und aus der Höhle zu entkommen.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
+      "data_files": "data-cave.csv",
+      "image": "/images/covers/01-data-cave.svg"
     },
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",
@@ -17,6 +18,7 @@
       "summary": "Ein Hacker will bei der Cyberwerk AG den Lichtkristall stehlen, indem er sich mit gestohlenen Passwörtern als Mitarbeiter ausgibt. Mit IT-Forensik durchsucht ihr Logdateien nach verdächtigen Spuren wie zum Beispiel viele falsche Login-Versuched, ungewöhnlichen Zeiten oder fremden Geräten, um den Täter zu entlarven.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
       "data_files": "detective-beginners.csv",
       "image": "/images/covers/02-detective-beginners.svg"
     },
@@ -27,6 +29,7 @@
       "summary": "Die Comic-Gruppe BKCW will per GPS-Daten ein Bild zweier berühmter Zeichentrickfiguren „malen“, um den Standort ihres nächsten Ladens zu verraten. Deine Aufgabe ist, mithilfe von KI aus den Daten herauszufinden, in welchem Land sie ihren neuen Laden eröffnen und welche beiden Figuren sie gezeichnet haben.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
       "data_files": "gps-art.csv",
       "image": "/images/covers/03-gps-art.svg"
     },
@@ -43,6 +46,36 @@
         "verbrauch.csv"
       ],
       "image": "/images/covers/04-time-line.svg"
+    },
+    "barbies-glamour-dungeon": {
+      "title": "Barbies Glamour-Dungeon",
+      "folder": "05-barbies-dungeon",
+      "difficulty": "easy",
+      "summary": "Barbie und Ken sind in einem magischen Dungeon gefangen! Helft ihnen zu entkommen, indem ihr mit der KI Nova eine geheimnisvolle Schmink-Anleitung entschlüsselt. Hier geht es nicht um Schönheit, sondern um das richtige Lesen von Daten und Koordinaten!",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [ "ascii-table.csv", "barbie_expenses.csv", "makeup-instructions.csv" ],
+      "image": "/images/covers/05-barbies-dungeon.svg"
+    },
+    "improve-p5js-code": {
+      "title": "Verbessere deinen p5.js Code",
+      "folder": "06-improve-p5js-code",
+      "difficulty": "medium",
+      "summary": "In diesem Workshop lernen Kinder, wie sie mithilfe von KI ihren p5.js Code verbessern können. Sie werden dabei von der KI Nova unterstützt, die ihnen hilft, ihre Programme zu optimieren und zu erweitern.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [],
+      "image": "/images/covers/06-improve-p5js-code.svg"
+    },
+    "test": {
+      "title": "Test Exercise",
+      "folder": "99-test",
+      "difficulty": "hard",
+      "summary": "You should not see this exercise in the UI.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [],
+      "image": "/images/covers/99-test.svg"
     }
   }
 }

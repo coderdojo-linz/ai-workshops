@@ -7,3 +7,6 @@ export const testEnvironment = "node";
 export const transform = {
   ...tsJestTransformCfg,
 };
+export const moduleNameMapper = {
+  "^@/(.*)$": "<rootDir>/src/$1",
+};

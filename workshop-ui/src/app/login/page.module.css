@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: max(100vh, 100%);
+}
+
+.loginPrompt {
+    font-family: "Roboto", sans-serif;
+    background-color: #eee;
+
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 0 2rem;
+    max-width: 600px;
+
+    h1,
+    p {
+        text-align: center;
+        margin-bottom: 0.2rem;
+    }
+}
+
+.inputForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    width: 100%;
+    gap: 1rem;
+    margin: 1rem 0 0.4rem 0;
+
+    input {
+        width: 100%;
+        aspect-ratio: 1/1;
+        border: 3px solid #ccc;
+        border-radius: 8px;
+        font-size: 3rem;
+        text-align: center;
+    }
+}
+
+.errorMessage {
+    color: red;
+    text-align: center;
+}
+
+.loginButton {
+    display: block;
+    margin: 0.6rem auto 0 auto;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background-color: #0039aa;
+    color: white;
+
+    &:hover {
+        background-color: #0046be;
+    }
+
+    &:disabled {
+        background-color: #999;
+        cursor: not-allowed;
+    }
+}

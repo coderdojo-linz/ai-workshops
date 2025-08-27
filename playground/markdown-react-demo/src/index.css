@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  border-radius: 5px;
+}
+
+.content {
+  padding: 20px;
+  max-width: 800px;
+  margin: 10px auto;
+  background-color: #dddddd;
+  border-radius: 8px;
+  min-height: 100%;
+}
+
+.copyButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* Place it on top right corner of the following element */
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+}
+
+pre {
+  margin: 0;
+}
