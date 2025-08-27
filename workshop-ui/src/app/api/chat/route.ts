@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI, { AzureOpenAI } from 'openai';
 import fs from 'fs';
 import path from 'path';
 import { getAppSessionFromRequest, getChatSession, validateAppSession } from '@/lib/session';
@@ -9,17 +8,14 @@ import { trace, Span } from '@opentelemetry/api';
 import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
 import { executePython } from './codeExecutionTool';
 import { runOpenAI } from './openaiRunner';
+import { decrypt, encrypt } from '@/lib/encryption';
 
 const tracer = trace.getTracer('ai-workshop-chat');
-
-// In-memory store for session ID -> OpenAI response ID mapping
-// TODO: Persist this to a database later
-const sessionResponseMap = new Map<string, { previousResponseId: string; sessionInstanceId: string }>();
 
 /**
  * @route   POST /api/chat
  * @desc    Send a chat message
- * @body    { message: string, resetConversation: boolean }
+ * @body    { message: string, encryptedPreviousResponseId: string | undefined }
  * @urlParam exercise: string
  * @response 200 { response: string } or 400 { error: string }
  * @access  Protected (any authenticated user/workshop)
@@ -34,7 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get body payload and query string parameters
-    const { message, resetConversation } = await request.json();
+    const { message, encryptedPreviousResponseId } = await request.json();
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
@@ -60,13 +56,14 @@ export async function POST(request: NextRequest) {
       await session.save();
     }
 
-    // Handle conversation reset if requested
-    if (resetConversation === true) {
-      sessionResponseMap.delete(sessionId);
+    let previousResponseId: string | undefined = undefined;
+    if (encryptedPreviousResponseId) {
+      // console.log('Received encryptedPreviousResponseId:', encryptedPreviousResponseId);
+      try {
+        previousResponseId = decrypt(encryptedPreviousResponseId, Buffer.from(process.env.PREVIOUS_RESPONSE_ID_SECRET!, 'hex'));
+      } catch {
+      }
     }
-
-    // Get previous response ID from in-memory store
-    let { previousResponseId, sessionInstanceId } = sessionResponseMap.get(sessionId) || { previousResponseId: undefined, sessionInstanceId: crypto.randomUUID() };
 
     // Read system prompt
     const systemPromptPath = path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.system_prompt_file);
@@ -105,24 +102,35 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
                 const result = await executePython(
                   script,
                   exerciseData.data_files.map(f => path.join(process.cwd(), 'prompts', exerciseData.folder, f)),
-                  sessionInstanceId
+                  sessionId
                 );
                 if (result.resultFiles) {
                   for (const resultFile of result.resultFiles) {
+                    // TODO: handle non-image files differently (see GH issue #29)
                     const markdownImage = `![Generated Image](${resultFile.url})`;
                     const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
                     controller.enqueue(encoder.encode(`data: ${data}\n\n`));
                   }
+                }
+                if (result.stdout || result.stderr) {
+                  // TODO: send the output as a collapsed section (see GH issue #17)
                 }
                 return JSON.stringify(result);
               },
               welcomeMessage
             );
 
-            sessionResponseMap.set(sessionId, {
-              previousResponseId: newPreviousResponseId,
-              sessionInstanceId,
-            });
+            // Update session with new response ID
+            // Encrypt previousResponseId before sending to client
+            let encryptedResponseId: string | undefined;
+            // console.log('New previousResponseId:', newPreviousResponseId);
+            // console.log('Encryption key:', process.env.PREVIOUS_RESPONSE_ID_SECRET);
+            // Revert key.toString('hex') first
+
+            encryptedResponseId = encrypt(newPreviousResponseId, Buffer.from(process.env.PREVIOUS_RESPONSE_ID_SECRET!, 'hex'));
+
+            const data = JSON.stringify({ encryptedResponseId });
+            controller.enqueue(encoder.encode(`data: ${data}\n\n`));
 
             controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
           } catch (error) {

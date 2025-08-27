@@ -35,6 +35,7 @@ export default function Home() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isFirstCall, setIsFirstCall] = useState(true);
+  const [responseId, setResponseId] = useState<string | undefined>(undefined);
 
   // Cache for data file content - only fetch once per component session
   const dataFileContentCache = useRef<string | null>(null);
@@ -158,7 +159,7 @@ export default function Home() {
         },
         body: JSON.stringify({
           message: userMessage,
-          resetConversation: isFirstCall,
+          encryptedPreviousResponseId: responseId,
         }),
       });
 
@@ -216,6 +217,10 @@ export default function Home() {
                 if (parsed.delta) {
                   assistantMessage += parsed.delta;
                   setCurrentBotMessage(assistantMessage);
+                }
+                if (parsed.encryptedResponseId) {
+                  setResponseId(parsed.encryptedResponseId);
+                  console.log('Received encryptedResponseId:', parsed.encryptedResponseId);
                 }
               } catch {
                 // Ignore parsing errors for SSE data
