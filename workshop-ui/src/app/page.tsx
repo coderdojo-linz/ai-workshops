@@ -60,7 +60,7 @@ export default async function Home() {
         <div className={styles.exerciseGrid}>
           {Object.entries(exercisesData).map(([key, exercise]) => (
             <div key={key} className={styles.exerciseCard}>
-              <Link href={`/chat/${key}`} className={styles.exerciseLink}>
+              <Link href={exercise.url ?? `/chat/${key}`} className={styles.exerciseLink}>
                 <span className={`${styles.exerciseDifficulty} ${difficultyToClass(exercise.difficulty)}`}>{difficultyToName(exercise.difficulty)}</span>
                 <img src={exercise.image || '/images/elementor-placeholder-image.png'} alt={`${exercise.title}'s descriptive image`} />
                 <div className={styles.exerciseContent}>

@@ -57,6 +57,17 @@
       "data_files": [ "ascii-table.csv", "barbie_expenses.csv", "makeup-instructions.csv" ],
       "image": "/images/covers/05-barbies-dungeon.svg"
     },
+    "prompt-engineering": {
+      "title": "Dein eigener KI-Assistent",
+      "folder": "05-prompt-engineering",
+      "difficulty": "hard",
+      "summary": "Lerne, wie du deine eigenen KI-Assistenten entwickelst und mit effektiven Prompts zum Leben erweckst.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [],
+      "image": "/images/covers/05-prompt-engineering.svg",
+      "url": "/prompt-engineering"
+    },
     "improve-p5js-code": {
       "title": "Verbessere deinen p5.js Code",
       "folder": "06-improve-p5js-code",
