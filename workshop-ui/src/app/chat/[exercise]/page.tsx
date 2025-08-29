@@ -220,7 +220,6 @@ export default function Home() {
                 }
                 if (parsed.encryptedResponseId) {
                   setResponseId(parsed.encryptedResponseId);
-                  console.log('Received encryptedResponseId:', parsed.encryptedResponseId);
                 }
               } catch {
                 // Ignore parsing errors for SSE data
@@ -230,7 +229,7 @@ export default function Home() {
         }
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error processing message:', error);
       setMessages((prev) => [
         ...prev,
         {
@@ -275,7 +274,7 @@ export default function Home() {
         </button>
         <h1 className={styles.exerciseTitle}>{exerciseTitle}</h1>
         <div className={styles.dropdown} ref={dropdownRef} onMouseEnter={handleToggleDropdown} onMouseLeave={handleToggleDropdown}>
-          <button className={styles.dropdownButton} title="Options">
+          <button className={styles.dropdownButton}>
             <ChevronDown size={20} />
           </button>
           {isDropdownOpen && (

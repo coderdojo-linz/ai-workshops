@@ -40,19 +40,19 @@ export default function ChatInputArea({
                             onSubmit(e as any);
                         }
                     }}
-                    placeholder="Type your message..."
+                    placeholder="Schreibe deine Nachricht hier..."
                     disabled={isLoading}
                     className={styles.textInput}
                     rows={2}
                 />
                 <button type="submit" disabled={!inputValue.trim() || isLoading || messageCount >= 100} className={styles.sendButton}>
                     <Send />
-                    {isLoading ? 'Sending...' : 'Send'}
+                    {isLoading ? 'Wird gesendet...' : 'Senden'}
                 </button>
             </form>
 
             <div className={styles.messageCounter}>
-                {messageCount}/100 messages | {inputValue.length}/1000 characters
+                {messageCount}/100 Nachrichten | {inputValue.length}/1000 Zeichen
             </div>
         </>
     );

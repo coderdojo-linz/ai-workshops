@@ -25,7 +25,6 @@ export default function LoginPage() {
         
         if (data.authenticated) {
           // User is already authenticated, redirect to home
-          console.log('User already authenticated, redirecting to home.')
           
           // Get the "from" parameter if it exists
           const urlParams = new URLSearchParams(window.location.search)
@@ -109,12 +108,34 @@ export default function LoginPage() {
     }
   }
 
+  const handlePaste = (pasteIndex: number, e: React.ClipboardEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    const pasteData = e.clipboardData.getData('Text').toUpperCase().slice(0, 6).split('')
+    const newCode = [...code]
+
+    for (let i = 0; i < pasteData.length; i++) {
+      if (pasteIndex + i < 6) {
+        newCode[pasteIndex + i] = pasteData[i]
+      }
+    }
+
+    setCode(newCode)
+
+    // Focus the next empty input or login button
+    const firstEmptyIndex = newCode.findIndex((digit) => digit === '')
+    if (firstEmptyIndex !== -1) {
+      inputRefs.current[firstEmptyIndex]?.focus()
+    } else {
+      loginButtonRef.current?.focus()
+    }
+  }
+
   // Show loading while checking authentication
   if (isLoading) {
     return (
       <div className={styles.container}>
         <div className={styles.loginPrompt}>
-          <p>Checking authentication...</p>
+          <p>Prüfe Login-Status...</p>
         </div>
       </div>
     )
@@ -126,12 +147,12 @@ export default function LoginPage() {
         <h1>Login</h1>
         <p>Bitte logge dich ein, um auf die Workshops zuzugreifen. Du erhältst den Zugangscode von einem Mentor.</p>
         <div className={styles.inputForm}>
-          <input type="text" maxLength={1} value={code[0]} onChange={(e) => setCodeDigit(0, e.target.value)} onKeyDown={(e) => handleKeyDown(0, e)} ref={(el) => { inputRefs.current[0] = el }} />
-          <input type="text" maxLength={1} value={code[1]} onChange={(e) => setCodeDigit(1, e.target.value)} onKeyDown={(e) => handleKeyDown(1, e)} ref={(el) => { inputRefs.current[1] = el }} />
-          <input type="text" maxLength={1} value={code[2]} onChange={(e) => setCodeDigit(2, e.target.value)} onKeyDown={(e) => handleKeyDown(2, e)} ref={(el) => { inputRefs.current[2] = el }} />
-          <input type="text" maxLength={1} value={code[3]} onChange={(e) => setCodeDigit(3, e.target.value)} onKeyDown={(e) => handleKeyDown(3, e)} ref={(el) => { inputRefs.current[3] = el }} />
-          <input type="text" maxLength={1} value={code[4]} onChange={(e) => setCodeDigit(4, e.target.value)} onKeyDown={(e) => handleKeyDown(4, e)} ref={(el) => { inputRefs.current[4] = el }} />
-          <input type="text" maxLength={1} value={code[5]} onChange={(e) => setCodeDigit(5, e.target.value)} onKeyDown={(e) => handleKeyDown(5, e)} ref={(el) => { inputRefs.current[5] = el }} />
+          <input type="text" maxLength={1} value={code[0]} onChange={(e) => setCodeDigit(0, e.target.value)} onKeyDown={(e) => handleKeyDown(0, e)} ref={(el) => { inputRefs.current[0] = el }} onPaste={(e) => handlePaste(0, e)}/>
+          <input type="text" maxLength={1} value={code[1]} onChange={(e) => setCodeDigit(1, e.target.value)} onKeyDown={(e) => handleKeyDown(1, e)} ref={(el) => { inputRefs.current[1] = el }} onPaste={(e) => handlePaste(1, e)}/>
+          <input type="text" maxLength={1} value={code[2]} onChange={(e) => setCodeDigit(2, e.target.value)} onKeyDown={(e) => handleKeyDown(2, e)} ref={(el) => { inputRefs.current[2] = el }} onPaste={(e) => handlePaste(2, e)}/>
+          <input type="text" maxLength={1} value={code[3]} onChange={(e) => setCodeDigit(3, e.target.value)} onKeyDown={(e) => handleKeyDown(3, e)} ref={(el) => { inputRefs.current[3] = el }} onPaste={(e) => handlePaste(3, e)}/>
+          <input type="text" maxLength={1} value={code[4]} onChange={(e) => setCodeDigit(4, e.target.value)} onKeyDown={(e) => handleKeyDown(4, e)} ref={(el) => { inputRefs.current[4] = el }} onPaste={(e) => handlePaste(4, e)}/>
+          <input type="text" maxLength={1} value={code[5]} onChange={(e) => setCodeDigit(5, e.target.value)} onKeyDown={(e) => handleKeyDown(5, e)} ref={(el) => { inputRefs.current[5] = el }} onPaste={(e) => handlePaste(5, e)}/>
         </div>
         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
         <button
@@ -140,7 +161,7 @@ export default function LoginPage() {
           disabled={isSubmitting}
           className={styles.loginButton}
         >
-          {isSubmitting ? 'Logging in...' : 'Log In'}
+          {isSubmitting ? 'Wird angemeldet...' : 'Anmelden'}
         </button>
       </div>
     </div>

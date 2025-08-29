@@ -1,11 +1,18 @@
 'use client';
 
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+import styles from './error.module.css';
+
+type ErrorProps = {
+  error: Error & { digest?: string };
+  reset: () => void;
+}
+
+export default function Error({ error, reset }: Readonly<ErrorProps>) {
   return (
-    <div>
-      <h2>Something went wrong</h2>
-      <p>{process.env.NODE_ENV === 'development' ? error.message : 'Please try again.'}</p>
-      <button onClick={() => reset()}>Retry</button>
+    <div className={styles.errorContainer}>
+      <h2 className={styles.errorTitle}>Etwas ist schiefgelaufen</h2>
+      <p className={styles.errorMessage}>{process.env.NODE_ENV === 'development' ? error.message : 'Bitte versuche es erneut.'}</p>
+      <button onClick={() => reset()} className={styles.errorButton}>Wiederholen</button>
     </div>
   );
 }
