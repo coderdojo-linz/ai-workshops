@@ -1,5 +1,7 @@
 # AI Projects
 
+[![Publish Docker image](https://github.com/coderdojo-linz/ai-workshops/actions/workflows/build-publish-docker.yaml/badge.svg)](https://github.com/coderdojo-linz/ai-workshops/actions/workflows/build-publish-docker.yaml)
+
 ## Summary
 
 ### English
