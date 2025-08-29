@@ -34,11 +34,11 @@ export default async function Home() {
   function parseDifficulty(difficulty: string): Difficulty {
     switch (difficulty) {
       case 'easy':
-        return { class: styles.difficultyEasy, label: 'Einsteiger' };
+        return { class: styles.easy, label: 'Einsteiger' };
       case 'medium':
-        return { class: styles.difficultyMedium, label: 'Fortgeschritten' };
+        return { class: styles.medium, label: 'Fortgeschritten' };
       case 'hard':
-        return { class: styles.difficultyHard, label: 'Experte' };
+        return { class: styles.hard, label: 'Experte' };
       default:
         return { class: '', label: '' };
     }
@@ -54,7 +54,7 @@ export default async function Home() {
         <div className={styles.exerciseGrid}>
           {Object.entries(exercisesData).map(([key, exercise]) => (
             <div key={key} className={styles.exerciseCard}>
-              <Link href={`/chat/${key}`} className={styles.exerciseLink}>
+              <Link href={exercise.url ?? `/chat/${key}`} className={styles.exerciseLink}>
                 <span className={`${styles.exerciseDifficulty} ${parseDifficulty(exercise.difficulty).class}`}>{parseDifficulty(exercise.difficulty).label}</span>
                 <img src={exercise.image || '/images/elementor-placeholder-image.png'} alt={`${exercise.title}'s beschreibendes Bild`} />
                 <div className={styles.exerciseContent}>
