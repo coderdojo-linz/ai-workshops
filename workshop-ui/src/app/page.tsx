@@ -40,11 +40,11 @@ export default async function Home() {
   function difficultyToName(difficulty: string) {
     switch (difficulty) {
       case 'easy':
-        return 'Beginner';
+        return 'Anfänger';
       case 'medium':
-        return 'Advanced';
+        return 'Fortgeschritten';
       case 'hard':
-        return 'Expert';
+        return 'Experte';
       default:
         return '';
     }
@@ -53,16 +53,16 @@ export default async function Home() {
   return (
     <>
       <LogoutButton className={styles.logoutContainer} />
-      <img src="/images/background1.svg" alt="Decorative image" className={styles.vectorBg1} />
-      <img src="/images/background2.svg" alt="Decorative image" className={styles.vectorBg2} />
+      <img src="/images/background1.svg" alt="Dekoratives Bild" className={styles.vectorBg1} />
+      <img src="/images/background2.svg" alt="Dekoratives Bild" className={styles.vectorBg2} />
       <div className={styles.container}>
-        <h1 className={styles.title}>AI Workshop Exercises</h1>
+        <h1 className={styles.title}>AI Workshopübungen</h1>
         <div className={styles.exerciseGrid}>
           {Object.entries(exercisesData).map(([key, exercise]) => (
             <div key={key} className={styles.exerciseCard}>
               <Link href={exercise.url ?? `/chat/${key}`} className={styles.exerciseLink}>
                 <span className={`${styles.exerciseDifficulty} ${difficultyToClass(exercise.difficulty)}`}>{difficultyToName(exercise.difficulty)}</span>
-                <img src={exercise.image || '/images/elementor-placeholder-image.png'} alt={`${exercise.title}'s descriptive image`} />
+                <img src={exercise.image || '/images/elementor-placeholder-image.png'} alt={`${exercise.title}'s beschreibendes Bild`} />
                 <div className={styles.exerciseContent}>
                   <h2 className={styles.exerciseTitle}>{exercise.title}</h2>
                   <p className={styles.exerciseDescription}>{exercise.summary}</p>
