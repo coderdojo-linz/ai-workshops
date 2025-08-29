@@ -1,0 +1,248 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.content {
+  display: flex;
+  /* Strech elements horizontally evenly to fill the available space, stretch them vertically so that they all have the same height, the remaining page height */
+  align-items: stretch;
+  height: 100%;
+  gap: 20px;
+
+  &>* {
+    flex: 1;
+
+    /* Make each direct column a flex column so inner scroll areas can expand */
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    /* allow children to shrink for overflow */
+  }
+}
+
+/** Header **/
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.dropdown {
+  position: relative;
+}
+
+.filler {
+  height: 10px;
+  position: absolute;
+  top: 100%;
+  width: 165px;
+  right: 0;
+}
+
+.dropdownButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 5px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 160px;
+  overflow: hidden;
+}
+
+.dropdownItem {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #ddd;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+}
+
+.exerciseTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  flex: 1;
+}
+
+.headerSpacer {
+  width: 36px;
+}
+
+/** Content Area **/
+
+.messagesContainer {
+  margin-bottom: 20px;
+  border: 3px solid #aaa;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #ededed;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: scroll;
+
+  &.feedbackChat {
+    margin: 0;
+  }
+}
+
+.systemPrompt {
+  margin-bottom: 0;
+  border-bottom: none;
+  resize: none;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  flex: 1;
+  /* fill vertical space in first column */
+  min-height: 0;
+  /* enable proper flexbox shrinking/scrolling */
+  overflow: auto;
+}
+
+.inputForm {
+  display: flex;
+  gap: 10px;
+}
+
+.textInput {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &:disabled {
+    background-color: #f5f5f5;
+  }
+}
+
+.buttonRow {
+  display: flex;
+  * {
+    text-wrap: nowrap;
+  }
+}
+
+.sendButton {
+  padding: 10px 20px;
+  font-size: 17px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  &.applyButton {
+    background-color: #28a745;
+    width: 100%;
+    border-radius: 0;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+
+  &.deleteButton {
+    background-color: #dc3545;
+    width: 100%;
+    border-radius: 0;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.messageCounter {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  background-color: #eeeeee;
+  border-radius: 5px;
+  padding: 2px;
+
+  &.messageCounterSystemPrompt {
+    background-color: #d4edda;
+    border-radius: 0 0 5px 5px;
+    margin-top: 0;
+
+    &.full {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  }
+}

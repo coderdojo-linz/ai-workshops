@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 import { getAppSessionFromRequest, getChatSession, validateAppSession } from '@/lib/session';
 import { randomUUID } from 'crypto';
 import '@/lib/files';
 import { trace, Span } from '@opentelemetry/api';
 import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
-import { executePython } from './codeExecutionTool';
-import { runOpenAI } from './openaiRunner';
+import { runOpenAI } from '../openaiRunner';
 import { decrypt, encrypt } from '@/lib/encryption';
+import path from 'path';
+import fs from 'fs';
 
 const tracer = trace.getTracer('ai-workshop-chat');
 
@@ -30,7 +29,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get body payload and query string parameters
-    const { message, encryptedPreviousResponseId } = await request.json();
+    const { message, encryptedPreviousResponseId, userSystemPrompt } = await request.json();
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
@@ -46,6 +45,8 @@ export async function POST(request: NextRequest) {
 
     const exerciseData = exerciseResult.value;
 
+    let systemPrompt = userSystemPrompt.trim();
+
     // Get or create session ID
     const session = await getChatSession();
     let sessionId = session.sessionId;
@@ -58,33 +59,15 @@ export async function POST(request: NextRequest) {
 
     let previousResponseId: string | undefined = undefined;
     if (encryptedPreviousResponseId) {
-      // console.log('Received encryptedPreviousResponseId:', encryptedPreviousResponseId);
       try {
         previousResponseId = decrypt(encryptedPreviousResponseId, Buffer.from(process.env.PREVIOUS_RESPONSE_ID_SECRET!, 'hex'));
-      } catch {
-      }
+      } catch {}
     }
 
-    // Read system prompt
-    const systemPromptPath = path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.system_prompt_file);
-    let systemPrompt = await fs.promises.readFile(systemPromptPath, { encoding: 'utf-8' });
-    systemPrompt += `\n\n# Verfügbare CSV-Dateien\n\nHier ist eine Liste der verfügbaren CSV-Dateien mit den jeweils ersten 5 Zeilen jeder Datei.
-Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Ordner /mnt/data abgelegt.\n\n<data-files>`;
-    for (const dataFile of exerciseData.data_files) {
-      systemPrompt += `<data-file fileName="/mnt/data/${dataFile}">\n`;
-      const dataFileContent = await fs.promises.readFile(path.join(process.cwd(), 'prompts', exerciseData.folder, dataFile), { encoding: 'utf-8' });
-      systemPrompt += `${dataFileContent.split('\n').slice(0, 5).join('\n')}\n`;
-      systemPrompt += `</data-file>\n\n`;
-    }
-    systemPrompt += `</data-files>\n\n`;
-
+    // Run OpenAI and stream response
     return await tracer.startActiveSpan('generating_response', async (span: Span) => {
       // Create encoder outside the stream
       const encoder = new TextEncoder();
-
-      // Read Welcome Message
-      const welcomeMessagePath = exerciseData.welcome_message_file ? path.join(process.cwd(), 'prompts', exerciseData.folder, exerciseData.welcome_message_file) : undefined;
-      const welcomeMessage = welcomeMessagePath && fs.existsSync(welcomeMessagePath) ? await fs.promises.readFile(welcomeMessagePath, { encoding: 'utf-8' }) : undefined;
 
       // Stream immediately as chunks arrive
       const stream = new ReadableStream({
@@ -97,28 +80,7 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
               (delta) => {
                 const data = JSON.stringify({ delta });
                 controller.enqueue(encoder.encode(`data: ${data}\n\n`));
-              },
-              welcomeMessage,
-              true,
-              async (script) => {
-                const result = await executePython(
-                  script,
-                  exerciseData.data_files.map(f => path.join(process.cwd(), 'prompts', exerciseData.folder, f)),
-                  sessionId
-                );
-                if (result.resultFiles) {
-                  for (const resultFile of result.resultFiles) {
-                    // TODO: handle non-image files differently (see GH issue #29)
-                    const markdownImage = `![Generated Image](${resultFile.url})`;
-                    const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
-                    controller.enqueue(encoder.encode(`data: ${data}\n\n`));
-                  }
-                }
-                if (result.stdout || result.stderr) {
-                  // TODO: send the output as a collapsed section (see GH issue #17)
-                }
-                return JSON.stringify(result);
-              },
+              }
             );
 
             // Update session with new response ID

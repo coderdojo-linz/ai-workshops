@@ -21,8 +21,9 @@ const tracer = trace.getTracer('ai-workshop-chat');
 export async function runOpenAI(message: string, instructions: string,
   previousResponseId: string | undefined,
   messageDeltaCallback: (delta: string) => void,
-  runScriptCallback: (script: string) => Promise<string>,
-  welcomeMessage: string | undefined
+  welcomeMessage?: string,
+  enableCodeInterpreter?: boolean,
+  runScriptCallback?: (script: string) => Promise<string>,
 ): Promise<string> {
 
   let input: any[] = []
@@ -40,7 +41,7 @@ export async function runOpenAI(message: string, instructions: string,
       store: true,
       previous_response_id: previousResponseId,
       parallel_tool_calls: false,
-      tools: [executePythonTool],
+      tools: enableCodeInterpreter ? [executePythonTool] : [],
     };
     if (model === 'gpt-5') {
       responseArgument = {
@@ -81,14 +82,16 @@ export async function runOpenAI(message: string, instructions: string,
           break;
         }
         case 'response.function_call_arguments.done': {
-          messageDeltaCallback('\n```\n\n');
-          const script: ExecutePythonParameters = JSON.parse(currentScript);
-          const result = await runScriptCallback(script.script);
-          input.push({
-            type: 'function_call_output',
-            call_id: currentFunctionCallId!,
-            output: result,
-          })
+          if (enableCodeInterpreter && runScriptCallback) {
+            messageDeltaCallback('\n```\n\n');
+            const script: ExecutePythonParameters = JSON.parse(currentScript);
+            const result = await runScriptCallback(script.script);
+            input.push({
+              type: 'function_call_output',
+              call_id: currentFunctionCallId!,
+              output: result,
+            })
+          }
           break;
         }
         default: {

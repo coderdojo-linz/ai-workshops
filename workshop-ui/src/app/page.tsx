@@ -34,11 +34,11 @@ export default async function Home() {
   function parseDifficulty(difficulty: string): Difficulty {
     switch (difficulty) {
       case 'easy':
-        return { class: styles.easy, label: 'Anfänger' };
+        return 'Anfänger';
       case 'medium':
-        return { class: styles.medium, label: 'Fortgeschritten' };
+        return 'Fortgeschritten';
       case 'hard':
-        return { class: styles.hard, label: 'Experte' };
+        return 'Experte';
       default:
         return { class: '', label: '' };
     }
@@ -50,7 +50,7 @@ export default async function Home() {
       <img src="/images/background1.svg" alt="Dekoratives Bild" className={styles.vectorBg1} />
       <img src="/images/background2.svg" alt="Dekoratives Bild" className={styles.vectorBg2} />
       <div className={styles.container}>
-        <h1 className={styles.title}>AI Workshop Exercises</h1>
+        <h1 className={styles.title}>AI Workshopübungen</h1>
         <div className={styles.exerciseGrid}>
           {Object.entries(exercisesData).map(([key, exercise]) => (
             <div key={key} className={styles.exerciseCard}>
