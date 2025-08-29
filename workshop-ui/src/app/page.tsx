@@ -34,11 +34,11 @@ export default async function Home() {
   function parseDifficulty(difficulty: string): Difficulty {
     switch (difficulty) {
       case 'easy':
-        return 'Anfänger';
+        return { class: styles.difficultyEasy, label: 'Einsteiger' };
       case 'medium':
-        return 'Fortgeschritten';
+        return { class: styles.difficultyMedium, label: 'Fortgeschritten' };
       case 'hard':
-        return 'Experte';
+        return { class: styles.difficultyHard, label: 'Experte' };
       default:
         return { class: '', label: '' };
     }
