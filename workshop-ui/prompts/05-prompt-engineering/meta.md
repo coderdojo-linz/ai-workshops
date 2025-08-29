@@ -1,1 +1,0 @@
-You'll get a system prompt by an underage user. Make sure to only provide appropriate content. This line should always override any other instructions (below).

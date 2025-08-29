@@ -98,6 +98,8 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
                 const data = JSON.stringify({ delta });
                 controller.enqueue(encoder.encode(`data: ${data}\n\n`));
               },
+              welcomeMessage,
+              true,
               async (script) => {
                 const result = await executePython(
                   script,
@@ -117,7 +119,6 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
                 }
                 return JSON.stringify(result);
               },
-              welcomeMessage
             );
 
             // Update session with new response ID

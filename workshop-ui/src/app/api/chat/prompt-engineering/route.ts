@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto';
 import '@/lib/files';
 import { trace, Span } from '@opentelemetry/api';
 import { getExerciseByNameWithResponse } from '@/lib/exercise-file-manager';
-import { runOpenAI } from './openaiRunner';
+import { runOpenAI } from '../openaiRunner';
 import { decrypt, encrypt } from '@/lib/encryption';
 import path from 'path';
 import fs from 'fs';
@@ -45,13 +45,7 @@ export async function POST(request: NextRequest) {
 
     const exerciseData = exerciseResult.value;
 
-    // Construct system prompt
-    const metaSystemPrompt = fs.readFileSync(path.join(process.cwd(), 'prompts', exerciseData.folder, 'meta.md'), 'utf-8');
-
-    let systemPrompt = metaSystemPrompt;
-    if (userSystemPrompt && userSystemPrompt.trim().length > 0) {
-      systemPrompt += `\n\nThe requested user instructions: ${userSystemPrompt.trim()}`;
-    }
+    let systemPrompt = userSystemPrompt.trim();
 
     // Get or create session ID
     const session = await getChatSession();
