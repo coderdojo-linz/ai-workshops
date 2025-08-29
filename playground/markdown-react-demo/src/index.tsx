@@ -6,7 +6,7 @@ import { CodeHighlight } from './utils/highlight';
 import Callout from './components/Callout'
 import './index.css';
 import 'highlight.js/styles/github.css';
-import { getTextFromChildren } from './utils/utility'
+import { getScriptContentFromChildren } from './utils/utility'
 import { Clipboard, ClipboardCheck } from 'lucide-react';
 
 const markdown = `
@@ -36,7 +36,7 @@ function App() {
             code(props) {
               const { children } = props;
               console.log('props', props);
-              const text = getTextFromChildren(children);
+              const text = getScriptContentFromChildren(children);
               return (
                 <Callout title='Code' icon='FileCode2' foldable content={
                   <>

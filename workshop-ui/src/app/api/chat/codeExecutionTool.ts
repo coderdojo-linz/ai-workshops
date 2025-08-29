@@ -23,6 +23,13 @@ export type ExecutePythonOutput = {
   executionResult: string;
 };
 
+export type ResultFile = {
+  fileName: string;
+  targetFileName: string;
+  url: string;
+  originalFileName: string;
+};
+
 export const executePythonTool: FunctionTool = {
   type: 'function',
   name: 'execute_python',
@@ -38,13 +45,6 @@ will return alongside the script output.`,
 
 export async function executePython(script: string, filePaths: string[], instanceId?: string) {
   var dynamicSession = new DynamicSession(instanceId);
-
-  type ResultFile = {
-    fileName: string;
-    targetFileName: string;
-    url: string;
-    originalFileName: string;
-  };
 
   const result = await dynamicSession.executeScript(script, filePaths);
   const resultFiles: ResultFile[] = (await dynamicSession.getExistingFiles())

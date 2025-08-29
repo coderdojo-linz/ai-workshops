@@ -72,7 +72,7 @@ export async function runOpenAI(message: string, instructions: string,
           if (event.item.type === 'function_call') {
             currentFunctionName = event.item.name;
             currentFunctionCallId = event.item.call_id;
-            messageDeltaCallback('\n\n```py\n');
+            messageDeltaCallback('\n\n```py\n<|TOOL_CODE_INTERPRETER|>\n');
           }
           break;
         }
@@ -83,13 +83,22 @@ export async function runOpenAI(message: string, instructions: string,
         }
         case 'response.function_call_arguments.done': {
           if (enableCodeInterpreter && runScriptCallback) {
-            messageDeltaCallback('\n```\n\n');
+            messageDeltaCallback('\n<|OUTPUT|>\n');
             const script: ExecutePythonParameters = JSON.parse(currentScript);
-            const result = await runScriptCallback(script.script);
+            const result = JSON.parse(await runScriptCallback(script.script));
+            messageDeltaCallback(JSON.stringify(result));
+            messageDeltaCallback('\n```\n\n');
+            if (result.resultFiles) {
+              for (const resultFile of result.resultFiles) {
+                // TODO: handle non-image files differently (see GH issue #29)
+                const markdownImage = `![Generated Image](${resultFile.url})`;
+                messageDeltaCallback(markdownImage);
+              }
+            }
             input.push({
               type: 'function_call_output',
               call_id: currentFunctionCallId!,
-              output: result,
+              output: JSON.stringify(result),
             })
           }
           break;

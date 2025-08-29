@@ -223,7 +223,6 @@ export default function Home() {
                 }
                 if (parsed.encryptedResponseId) {
                   setResponseId(parsed.encryptedResponseId);
-                  console.log('Received encryptedResponseId:', parsed.encryptedResponseId);
                 }
               } catch {
                 // Ignore parsing errors for SSE data
@@ -311,7 +310,6 @@ export default function Home() {
                 }
                 if (parsed.encryptedResponseId) {
                   setMetaResponseId(parsed.encryptedResponseId);
-                  console.log('Received encryptedResponseId:', parsed.encryptedResponseId);
                 }
               } catch {
                 // Ignore parsing errors for SSE data

@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import styles from './SystemPrompt.module.css';
 import Markdown from 'react-markdown';
 import remarkGfm from "remark-gfm";
-import { getTextFromChildren, hashString } from '@/lib/utility';
+import { getScriptContentFromChildren, hashString } from '@/lib/utility';
 import { Clipboard, ClipboardCheck } from 'lucide-react';
 import Callout from './Callout';
 import CodeHighlight from './CodeHighlight';
@@ -30,7 +30,7 @@ export default function SystemPrompt({ exerciseId, type = 'system-prompt' }: Rea
     // eslint-disable-next-line react/no-unstable-nested-components
     code(props: any) {
       const { children } = props;
-      const text = getTextFromChildren(children);
+      const text = getScriptContentFromChildren(children);
       const key = `code-${hashString(text || '')}`;
       return (
         <Callout

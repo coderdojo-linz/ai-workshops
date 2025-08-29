@@ -2,12 +2,15 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Clipboard, ClipboardCheck } from "lucide-react";
 import { useMemo, useState, memo } from "react";
+import { Quantum } from 'ldrs/react'
+import 'ldrs/react/Quantum.css'
 
 import styles from "./Message.module.css"
 
-import { getTextFromChildren, hashString } from "@/lib/utility";
+import { getOutputFromChildren, getScriptContentFromChildren, hashString } from "@/lib/utility";
 import Callout from "@/components/Callout";
 import CodeHighlight from "@/components/CodeHighlight";
+import { randomUUID } from "crypto";
 
 export type Message = TextMessage | HtmlMessage;
 
@@ -27,7 +30,7 @@ interface MessageProps {
     message: Message;
 }
 
-export default memo(function CurrentBotMessage({
+export default memo(function Message({
     message
 }: Readonly<MessageProps>) {
     const [isCopied, setIsCopied] = useState(false);
@@ -39,27 +42,81 @@ export default memo(function CurrentBotMessage({
     }
 
     const markdownComponents = useMemo(() => ({
-        // eslint-disable-next-line react/no-unstable-nested-components
+        // eslint-disable-next-line react/no-unstable-n<ested-components
         code(props: any) {
-            const { children } = props;
-            const text = getTextFromChildren(children);
-            const key = `code-${hashString(text || '')}`;
-            return (
-                <Callout
-                    key={key}
-                    title='Code'
-                    icon='FileCode2'
-                    foldable
-                    content={
-                        <>
-                            <button onClick={() => (text ? handleCopy(text) : true)} className={styles.copyButton}>
-                                {isCopied ? <ClipboardCheck size={18} /> : <Clipboard size={18} />}
-                            </button>
-                            <CodeHighlight className='hljs'>{text}</CodeHighlight>
-                        </>
-                    }
-                />
-            );
+            const { children, className } = props;
+            const language = className?.includes('language-') ? className : '';
+            const key = `code-${hashString(children || randomUUID())}`;
+
+            if (children.startsWith('<|TOOL_CODE_INTERPRETER|>')) {
+                const text = children;
+                const content = getScriptContentFromChildren(text.replace('<|TOOL_CODE_INTERPRETER|>', '').split('<|OUTPUT|>')[0].trim());
+                const output = getOutputFromChildren(text.split('<|OUTPUT|>')[1]?.trim() || null);
+                return (
+                    <Callout
+                        key={key}
+                        title='Code Interpreter'
+                        icon='SquareCode'
+                        foldable
+                        content={
+                            <>
+                                <button onClick={() => (content ? handleCopy(content) : true)} className={styles.copyButton}>
+                                    {isCopied ? <ClipboardCheck size={18} /> : <Clipboard size={18} />}
+                                </button>
+                                <CodeHighlight className={`${language} hljs`}>{content}</CodeHighlight>
+                                {(output.stdout || output.stderr || output.resultFiles.length > 0) ? (
+                                    <Callout
+                                        title='Code Interpreter Output'
+                                        icon='List'
+                                        foldable
+                                        folded
+                                        content={
+                                            <div className={styles.outputContainer}>
+                                                {output.stdout && <CodeHighlight className='hljs language-plaintext'>{output.stdout}</CodeHighlight>}
+                                                {output.stderr && <CodeHighlight className={`hljs language-plaintext ${styles.stderr}`}>{output.stderr}</CodeHighlight>}
+                                                {output.resultFiles.length > 0 && (
+                                                    <div className={styles.resultFilesContainer}>
+                                                        {output?.resultFiles.map((file) => (
+                                                            <a key={file.targetFileName} className={styles.resultFile} href={file.url} target='_blank' rel='noopener noreferrer'>{file.originalFileName}</a>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        }
+                                    />
+                                ) : (text.includes('<|OUTPUT|>') ? (
+                                    // Loading indicator
+                                    <div className={styles.loadingContainer}>
+                                        <Quantum
+                                            size="45"
+                                            speed="1.75"
+                                            color="black"
+                                        />
+                                    </div>
+                                ) : null)}
+                            </>
+                        }
+                    />
+                );
+            } else {
+                const text = getScriptContentFromChildren(children);
+                return (
+                    <Callout
+                        key={key}
+                        title='Code'
+                        icon='FileCode2'
+                        foldable
+                        content={
+                            <>
+                                <button onClick={() => (text ? handleCopy(text) : true)} className={styles.copyButton}>
+                                    {isCopied ? <ClipboardCheck size={18} /> : <Clipboard size={18} />}
+                                </button>
+                                <CodeHighlight className='hljs'>{text}</CodeHighlight>
+                            </>
+                        }
+                    />
+                );
+            }
         }
     }), [isCopied]);
 

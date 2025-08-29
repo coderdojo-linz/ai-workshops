@@ -58,11 +58,9 @@ export async function POST(request: NextRequest) {
 
     let previousResponseId: string | undefined = undefined;
     if (encryptedPreviousResponseId) {
-      // console.log('Received encryptedPreviousResponseId:', encryptedPreviousResponseId);
       try {
         previousResponseId = decrypt(encryptedPreviousResponseId, Buffer.from(process.env.PREVIOUS_RESPONSE_ID_SECRET!, 'hex'));
-      } catch {
-      }
+      } catch {}
     }
 
     // Read system prompt
@@ -106,29 +104,13 @@ Achtung! Die Dateien haben mehr Zeilen als hier gezeigt. Alle Dateien sind im Or
                   exerciseData.data_files.map(f => path.join(process.cwd(), 'prompts', exerciseData.folder, f)),
                   sessionId
                 );
-                if (result.resultFiles) {
-                  for (const resultFile of result.resultFiles) {
-                    // TODO: handle non-image files differently (see GH issue #29)
-                    const markdownImage = `![Generated Image](${resultFile.url})`;
-                    const data = JSON.stringify({ delta: `\n\n${markdownImage}\n\n` });
-                    controller.enqueue(encoder.encode(`data: ${data}\n\n`));
-                  }
-                }
-                if (result.stdout || result.stderr) {
-                  // TODO: send the output as a collapsed section (see GH issue #17)
-                }
                 return JSON.stringify(result);
               },
             );
 
             // Update session with new response ID
             // Encrypt previousResponseId before sending to client
-            let encryptedResponseId: string | undefined;
-            // console.log('New previousResponseId:', newPreviousResponseId);
-            // console.log('Encryption key:', process.env.PREVIOUS_RESPONSE_ID_SECRET);
-            // Revert key.toString('hex') first
-
-            encryptedResponseId = encrypt(newPreviousResponseId, Buffer.from(process.env.PREVIOUS_RESPONSE_ID_SECRET!, 'hex'));
+            let encryptedResponseId = encrypt(newPreviousResponseId, Buffer.from(process.env.PREVIOUS_RESPONSE_ID_SECRET!, 'hex'));
 
             const data = JSON.stringify({ encryptedResponseId });
             controller.enqueue(encoder.encode(`data: ${data}\n\n`));

@@ -85,12 +85,7 @@ export async function POST(request: NextRequest) {
 
             // Update session with new response ID
             // Encrypt previousResponseId before sending to client
-            let encryptedResponseId: string | undefined;
-            // console.log('New previousResponseId:', newPreviousResponseId);
-            // console.log('Encryption key:', process.env.PREVIOUS_RESPONSE_ID_SECRET);
-            // Revert key.toString('hex') first
-
-            encryptedResponseId = encrypt(newPreviousResponseId, Buffer.from(process.env.PREVIOUS_RESPONSE_ID_SECRET!, 'hex'));
+            let encryptedResponseId = encrypt(newPreviousResponseId, Buffer.from(process.env.PREVIOUS_RESPONSE_ID_SECRET!, 'hex'));
 
             const data = JSON.stringify({ encryptedResponseId });
             controller.enqueue(encoder.encode(`data: ${data}\n\n`));

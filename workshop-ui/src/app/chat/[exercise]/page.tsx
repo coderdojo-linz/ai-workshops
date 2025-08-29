@@ -188,7 +188,7 @@ export default function Home() {
 
         for (const line of lines) {
           if (line.startsWith('data: ')) {
-            const data = line.slice(6);
+            const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
               // Finalize the assistant message
               const assistantMsg: MessageType = {
@@ -312,11 +312,22 @@ export default function Home() {
         ))}
 
         {currentBotMessage &&
-          <Message message={{
-            role: 'assistant',
-            content: currentBotMessage,
-            type: 'text'
-          }} />
+          <>
+            <Message message={{
+              role: 'assistant',
+              content: currentBotMessage,
+              type: 'text'
+            }} />
+            {isLoading && (
+              <div className={`${styles.message} ${styles.assistantMessage}`}>
+                <div className={styles.loader}>
+                  <div className={styles.dot} />
+                  <div className={styles.dot} />
+                  <div className={styles.dot} />
+                </div>
+              </div>
+            )}
+          </>
         }
 
         <div ref={messagesEndRef} />
