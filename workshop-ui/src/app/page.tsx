@@ -1,11 +1,18 @@
 import Link from 'next/link';
-import styles from './page.module.css';
-import { getExercises } from '@/lib/exercise-file-manager';
-import { trace } from '@opentelemetry/api';
-import LogoutButton from '@/components/LogoutButton';
-import { getAppSession, validateAppSession } from '@/lib/session';
 import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
+import { trace } from '@opentelemetry/api';
+
+import { getExercises } from '@/lib/exercise-file-manager';
+import { getAppSession, validateAppSession } from '@/lib/session';
+import LogoutButton from '@/components/LogoutButton';
+
+import styles from './page.module.css';
+
+type Difficulty = {
+  class: string;
+  label: string;
+}
 
 export default async function Home() {
   // redirect to login if not authenticated
@@ -24,20 +31,7 @@ export default async function Home() {
   }
   const exercisesData = exercisesResult.value.exercises;
 
-  function difficultyToClass(difficulty: string) {
-    switch (difficulty) {
-      case 'easy':
-        return styles.easy;
-      case 'medium':
-        return styles.medium;
-      case 'hard':
-        return styles.hard;
-      default:
-        return '';
-    }
-  }
-
-  function difficultyToName(difficulty: string) {
+  function parseDifficulty(difficulty: string): Difficulty {
     switch (difficulty) {
       case 'easy':
         return 'Anfänger';
@@ -46,7 +40,7 @@ export default async function Home() {
       case 'hard':
         return 'Experte';
       default:
-        return '';
+        return { class: '', label: '' };
     }
   }
 
@@ -60,8 +54,8 @@ export default async function Home() {
         <div className={styles.exerciseGrid}>
           {Object.entries(exercisesData).map(([key, exercise]) => (
             <div key={key} className={styles.exerciseCard}>
-              <Link href={exercise.url ?? `/chat/${key}`} className={styles.exerciseLink}>
-                <span className={`${styles.exerciseDifficulty} ${difficultyToClass(exercise.difficulty)}`}>{difficultyToName(exercise.difficulty)}</span>
+              <Link href={`/chat/${key}`} className={styles.exerciseLink}>
+                <span className={`${styles.exerciseDifficulty} ${parseDifficulty(exercise.difficulty).class}`}>{parseDifficulty(exercise.difficulty).label}</span>
                 <img src={exercise.image || '/images/elementor-placeholder-image.png'} alt={`${exercise.title}'s beschreibendes Bild`} />
                 <div className={styles.exerciseContent}>
                   <h2 className={styles.exerciseTitle}>{exercise.title}</h2>

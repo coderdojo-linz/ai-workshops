@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "CoderDojo AI Workshops",
-  description: "The AI-powered coding platform for CoderDojo workshops",
+  description: "Die besten AI Workshops für Kinder und Jugendliche",
   icons: {
     icon: "/favicon.ico",           // default favicon
     apple: "/apple-icon.png",       // Apple touch icon
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="de">
       <body>{children}</body>
     </html>
   );

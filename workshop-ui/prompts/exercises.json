@@ -78,15 +78,15 @@
       "data_files": [],
       "image": "/images/covers/06-improve-p5js-code.svg"
     },
-    "test": {
-      "title": "Test Exercise",
-      "folder": "99-test",
+    "chatbot": {
+      "title": "Chatbot",
+      "folder": "99-chatbot",
       "difficulty": "hard",
-      "summary": "You should not see this exercise in the UI.",
+      "summary": "Das ist ein einfacher Chatbot, den du nutzen kannst, um irgendetwas zu fragen oder zu besprechen.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
       "data_files": [],
-      "image": "/images/covers/99-test.svg"
+      "image": "/images/covers/99-chatbot.svg"
     }
   }
 }

@@ -14,7 +14,7 @@ export default function LogoutButton(props: LogoutButtonProps) {
         fetch('/api/auth/me')
             .then((response) => response.json())
             .then((data) => {
-                setUsername(data.workshopName || 'User');
+                setUsername(data.workshopName || null);
             })
             .catch((error) => {
                 console.error('Error fetching auth status:', error);
@@ -42,7 +42,7 @@ export default function LogoutButton(props: LogoutButtonProps) {
     return (
         <div className={styles.logoutContainer} {...props}>
             {username && <span className={styles.username}>{username}</span>}
-            <button className={styles.logoutButton} onClick={handleLogout}>Log Out</button>
+            <button className={styles.logoutButton} onClick={handleLogout}>Abmelden</button>
         </div>
     );
 }
