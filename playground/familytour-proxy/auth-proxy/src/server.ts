@@ -69,7 +69,7 @@ if (fs.existsSync(usersFile)) {
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.set('trust proxy', process.env.NODE_ENV === 'production' ? 1 : 0);
+app.set('trust proxy', process.env.NODE_ENV === 'production');
 
 // Redact JWT token from logs to avoid leaking secrets via query string
 morgan.token('safe-url', (req: Request) => {
@@ -184,7 +184,6 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
 	}
 
 	if (session?.authenticated !== true) {
-		console.log(`Unauthenticated request for ${req.path}, redirecting to /login`);
 		return res.redirect('/login');
 	}
 
@@ -203,7 +202,6 @@ app.use('/', createProxyMiddleware({
 	ws: true,
 	on: {
 		proxyReq: (proxyReq: any, req: Request) => {
-			console.log(`   Proxying request for ${req.path}`);
 			const user = (req as any).sessionUser as User | undefined;
 			if (user) {
 				try {
@@ -216,7 +214,6 @@ app.use('/', createProxyMiddleware({
 			}
 		},
 		proxyReqWs: (proxyReq: any, req: Request) => {
-			console.log(`WS - Proxying request for ${req.url}`);
 			const user = (req as any).sessionUser as User | undefined;
 			if (user) {
 				try {
