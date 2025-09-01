@@ -3,24 +3,25 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "tsx src/server.ts"
+    "start": "node dist/server.js",
+    "build": "tsc && mkdir dist/views && cp src/views/* dist/views/",
+    "dev": "tsx watch src/server.ts"
   },
   "dependencies": {
-    "@types/jsonwebtoken": "^9.0.10",
-    "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "http-proxy-middleware": "^3.0.5",
     "iron-session": "^8.0.4",
     "jsonwebtoken": "^9.0.2",
-    "morgan": "^1.10.1",
-    "tsx": "^4.20.5"
+    "morgan": "^1.10.1"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.9",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/express": "^5.0.3",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.3.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "tsx": "^4.20.5"
   }
 }
