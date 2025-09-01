@@ -23,7 +23,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
     # Old way of mounting users file, now using JWTs (Old method still supported)
     # volumes:
-    #   - ./users.csv:/app/users.csv:ro
+    #   - ./users.csv:/app/data/users.csv:ro
     ports:
       - "80:3000"
     depends_on:
