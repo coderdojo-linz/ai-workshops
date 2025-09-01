@@ -12,6 +12,7 @@ services:
       - open-webui-data:/data
 
   auth-proxy:
+    image: rstropek/openwebui-auth-proxy:latest
     build:
       context: ./auth-proxy
     container_name: open-webui-auth-proxy
