@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Family Proxy Auth API
+  version: 1.0.0
+  description: |
+    Lightweight authentication proxy that protects an upstream Open WebUI instance.
+
+    This proxy provides:
+    - Session-based login via username/password form
+    - Optional single-click login via a signed JWT passed as a `token` query parameter
+    - A `/health` endpoint for container orchestrators
+    - Proxying of all other routes to the configured upstream with trusted identity headers (`X-User-Email`, `X-User-Name`, `X-User-Groups`).
+
+    Notes
+    - Session cookie name is `session` (HTTP-only). See the `sessionCookie` security scheme.
+    - JWT login expects HS256/384/512-signed tokens using `JWT_SECRET`. Optional `JWT_ISSUER` and
+      `JWT_AUDIENCE` can be enforced. Required claims: `email`, `name`. Optional: `groups`.
+    - User database is loaded from `users.csv` at startup; if empty, the form login is disabled and only JWT login works.
+servers:
+  - url: http://localhost:3000
+    description: Local development
+  - url: /
+    description: Relative server (behind reverse proxy)
+
+tags:
+  - name: Health
+  - name: Auth
+
+security:
+  # All proxied routes are protected by the session cookie. Public endpoints below clear this as needed.
+  - sessionCookie: []
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Health check
+      description: Returns `OK` when the proxy is up.
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+
+  /login:
+    get:
+      tags: [Auth]
+      summary: Render login page or accept JWT token login
+      description: |
+        - When called without parameters, returns the HTML login page (unless no users are available).
+        - When called with a `token` query parameter containing a valid JWT, authenticates the user and redirects to `/`.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/token'
+      responses:
+        '200':
+          description: HTML login page
+          content:
+            text/html:
+              schema:
+                type: string
+        '302':
+          description: Successful JWT login; redirects to '/'
+          headers:
+            Set-Cookie:
+              description: HTTP-only session cookie named `session`
+              schema:
+                type: string
+        '401':
+          description: Invalid token; returns HTML login page with error
+          content:
+            text/html:
+              schema:
+                type: string
+        '503':
+          description: No users available; login form hidden; instructs to use JWT login
+          content:
+            text/html:
+              schema:
+                type: string
+    post:
+      tags: [Auth]
+      summary: Form login
+      description: Authenticates a user using username and password submitted as `application/x-www-form-urlencoded`.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginForm'
+      responses:
+        '302':
+          description: Successful login; redirects to '/'
+          headers:
+            Set-Cookie:
+              description: HTTP-only session cookie named `session`
+              schema:
+                type: string
+        '401':
+          description: Invalid credentials; returns HTML login page with error
+          content:
+            text/html:
+              schema:
+                type: string
+        '503':
+          description: No user database available
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /logout:
+    get:
+      tags: [Auth]
+      summary: Logout and redirect to login page
+      description: Destroys the current session and redirects to `/login`.
+      # Public endpoint; destroys session if present
+      security: []
+      responses:
+        '302':
+          description: Redirect to '/login' after destroying the session
+          headers:
+            Set-Cookie:
+              description: Session cookie invalidation
+              schema:
+                type: string
+
+  # Note: All other paths are reverse-proxied to the upstream and require a valid session.
+
+components:
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session
+      description: HTTP-only session cookie set after successful login.
+    jwtQueryToken:
+      type: apiKey
+      in: query
+      name: token
+      description: JWT used only for the `GET /login` token login flow.
+  parameters:
+    token:
+      name: token
+      in: query
+      required: false
+      description: |
+        HS256/HS384/HS512-signed JWT for token-based login. Must include `email` and `name` claims.
+        Optional `groups` claim. Verified using `JWT_SECRET`; optional `JWT_ISSUER` and `JWT_AUDIENCE` may be enforced.
+      schema:
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+  schemas:
+    LoginForm:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          description: Display name of the user
+          minLength: 1
+          maxLength: 64
+          pattern: "^[A-Za-z0-9 ._'-]{1,64}$"
+          example: Jane Doe
+        password:
+          type: string
+          format: password
+          example: hunter2
+      additionalProperties: false
+
+externalDocs:
+  description: Project README
+  url: https://github.com/coderdojo-linz/ai-workshops/tree/main/familytour-proxy
