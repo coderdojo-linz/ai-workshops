@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "tsc && mkdir dist/views && cp src/views/* dist/views/",
+    "build": "tsc && cp -r src/views dist",
     "dev": "tsx watch src/server.ts"
   },
   "dependencies": {
