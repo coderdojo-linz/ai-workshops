@@ -20,7 +20,7 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_ISSUER = process.env.JWT_ISSUER; // optional
 const JWT_AUDIENCE = process.env.JWT_AUDIENCE; // optional
-const USER_GROUPS = "users"; // Default groups assigned to all users
+const USER_GROUPS = "Ars Users"; // Default groups assigned to all users
 
 if (!SESSION_SECRET || !JWT_SECRET) {
 	console.error('Missing required environment variables. Please set SESSION_SECRET and JWT_SECRET.');
