@@ -42,7 +42,7 @@ type SessionData = {
 
 
 const users: User[] = [];
-const usersFile = path.join(__dirname, '..', 'data', 'users.csv');
+const usersFile = "/app/data/users.csv";
 
 if (fs.existsSync(usersFile)) {
 	try {
