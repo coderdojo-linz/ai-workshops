@@ -1,0 +1,33 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    environment:
+      - WEBUI_URL=http://localhost
+      - DEFAULT_LOCALE=en
+      - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=X-User-Email
+      - WEBUI_AUTH_TRUSTED_NAME_HEADER=X-User-Name
+      - WEBUI_AUTH_TRUSTED_GROUPS_HEADER=X-User-Groups
+    volumes:
+      - open-webui-data:/data
+
+  auth-proxy:
+    build:
+      context: ./auth-proxy
+    container_name: open-webui-auth-proxy
+    environment:
+      - PORT=3000
+      - PROXY_TARGET=http://open-webui:8080
+      - SESSION_SECRET=${SESSION_SECRET}
+      - JWT_SECRET=${JWT_SECRET}
+    # Old way of mounting users file, now using JWTs (Old method still supported)
+    # volumes:
+    #   - ./users.csv:/app/users.csv:ro
+    ports:
+      - "80:3000"
+    depends_on:
+      - open-webui
+    restart: unless-stopped
+
+volumes:
+  open-webui-data:

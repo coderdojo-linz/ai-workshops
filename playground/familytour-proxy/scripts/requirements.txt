@@ -1,0 +1,2 @@
+pyjwt>=2.8.0,<3
+python-dotenv>=1.0.1,<2  # optional; script uses a tiny built-in loader but you can use dotenv if preferred
