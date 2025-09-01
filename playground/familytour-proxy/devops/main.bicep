@@ -1,4 +1,5 @@
 param siteName string
+param containerImageTag string
 
 @secure()
 param jwtSecret string
@@ -87,7 +88,7 @@ resource autoProxyApp 'Microsoft.Web/sites/sitecontainers@2024-11-01' = {
   name: 'auth-proxy'
   parent: webApp
   properties: {
-    image: 'acrars2025.azurecr.io/openwebui-auth-proxy:latest'
+    image: 'acrars2025.azurecr.io/openwebui-auth-proxy:${containerImageTag}'
     authType: 'SystemIdentity'
     isMain: true
     targetPort: '3000'

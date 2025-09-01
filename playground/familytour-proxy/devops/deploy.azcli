@@ -1,6 +1,8 @@
 source ../.env
 
-# az acr build --registry acrars2025 -t openwebui-auth-proxy .
+CONTAINER_IMAGE_TAG=v1
+
+# az acr build --registry acrars2025 -t openwebui-auth-proxy:$CONTAINER_IMAGE_TAG .
 # az acr import --name acrars2025 --source ghcr.io/open-webui/open-webui:main --image open-webui:main
 
 az deployment group create \
@@ -10,4 +12,5 @@ az deployment group create \
     --parameters \
         siteName=ars-family-tour-guide \
         jwtSecret=$JWT_SECRET \
-        sessionSecret=$SESSION_SECRET
+        sessionSecret=$SESSION_SECRET \
+        containerImageTag=$CONTAINER_IMAGE_TAG
