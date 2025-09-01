@@ -9,7 +9,7 @@ services:
       - WEBUI_AUTH_TRUSTED_NAME_HEADER=X-User-Name
       - WEBUI_AUTH_TRUSTED_GROUPS_HEADER=X-User-Groups
     volumes:
-      - open-webui-data:/data
+      - open-webui-data:/app/backend/data
 
   auth-proxy:
     image: rstropek/openwebui-auth-proxy:latest

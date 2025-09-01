@@ -111,6 +111,13 @@ app.get('/logout', async (req: Request, res: Response) => {
 	res.redirect('/login');
 });
 
+app.get('/api/v1/auths/signout', async (req: Request, res: Response) => {
+	// use SESSION_SECRET, cookieName is session, use optimal cookieOptions
+	const session = await getIronSession<SessionData>(req, res, sessionOptions);
+	session.destroy();
+	res.redirect('/login');
+});
+
 app.get('/login', async (req: Request, res: Response) => {
 	if (await isAuthenticated(req, res)) return res.redirect('/');
 	// If ?token=... is provided, use JWT auth
@@ -144,7 +151,7 @@ app.get('/login', async (req: Request, res: Response) => {
 	if (users.length > 0) {
 		return res.render('login', { error: null, hideForm: false });
 	} else {
-		return res.status(503).render('login', { error: 'No users available for login, please use the QR code to sign in.', hideForm: true });
+		return res.status(503).render('login', { error: 'Please use the QR code to sign in.', hideForm: true });
 	}
 });
 
