@@ -124,14 +124,17 @@ app.get('/login', async (req: Request, res: Response) => {
 			}) as { email?: string; name?: string; groups?: string };
 			if (decoded?.email && decoded?.name) {
 				// Find user by email
-				const user = users.find(u => u.email.toLowerCase() === decoded.email?.toLowerCase());
-				if (user) {
-					const session = await getIronSession<SessionData>(req, res, sessionOptions);
-					session.authenticated = true;
-					session.user = user;
-					await session.save();
-					return res.redirect('/');
-				}
+				const user = {
+					name: decoded.name,
+					email: decoded.email,
+					password: '',
+					groups: decoded.groups || USER_GROUPS,
+				};
+				const session = await getIronSession<SessionData>(req, res, sessionOptions);
+				session.authenticated = true;
+				session.user = user;
+				await session.save();
+				return res.redirect('/');
 			}
 		} catch (err) {
 			console.error('JWT verification failed:', err);
