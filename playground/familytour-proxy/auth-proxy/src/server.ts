@@ -119,7 +119,8 @@ app.get('/api/v1/auths/signout', async (req: Request, res: Response) => {
 });
 
 app.get('/login', async (req: Request, res: Response) => {
-	if (await isAuthenticated(req, res)) return res.redirect('/');
+	const session = await getIronSession<SessionData>(req, res, sessionOptions);
+	if (await isAuthenticated(req, res)) session.destroy();
 	// If ?token=... is provided, use JWT auth
 	const token = req.query.token;
 	if (token && typeof token === 'string') {

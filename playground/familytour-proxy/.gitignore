@@ -3,3 +3,7 @@ users*.csv
 .env
 .venv
 dist
+
+# Mail Merge letter and data (Confidential User Data)
+*.docx
+*.xlsx
