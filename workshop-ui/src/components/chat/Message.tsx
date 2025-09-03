@@ -10,7 +10,6 @@ import styles from "./Message.module.css"
 import { getOutputFromChildren, getScriptContentFromChildren, hashString } from "@/lib/utility";
 import Callout from "@/components/Callout";
 import CodeHighlight from "@/components/CodeHighlight";
-import { randomUUID } from "crypto";
 
 export type Message = TextMessage | HtmlMessage;
 
@@ -46,9 +45,8 @@ export default memo(function Message({
         code(props: any) {
             const { children, className } = props;
             const language = className?.includes('language-') ? className : '';
-            const key = `code-${hashString(children || randomUUID())}`;
-
-            if (children.startsWith('<|TOOL_CODE_INTERPRETER|>')) {
+            const key = `code-${hashString(children || crypto.randomUUID())}`;
+            if (children?.startsWith('<|TOOL_CODE_INTERPRETER|>')) {
                 const text = children;
                 const content = getScriptContentFromChildren(text.replace('<|TOOL_CODE_INTERPRETER|>', '').split('<|OUTPUT|>')[0].trim());
                 const output = getOutputFromChildren(text.split('<|OUTPUT|>')[1]?.trim() || null);
