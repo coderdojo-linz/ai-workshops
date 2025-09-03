@@ -10,8 +10,7 @@ import { getAppSessionFromRequest, validateAppSession } from '@/lib/session';
  * @access  Protected (any authenticated user/workshop)
  */
 export async function POST(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  request: NextRequest
 ) {
   try {
     // Validate authentication
