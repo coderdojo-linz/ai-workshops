@@ -198,6 +198,10 @@
   align-items: center;
   justify-content: center;
 
+  svg {
+    flex: none;
+  }
+
   &:disabled {
     background-color: #ccc;
     cursor: not-allowed;
@@ -216,6 +220,17 @@
 
   &.deleteButton {
     background-color: #dc3545;
+    width: 100%;
+    border-radius: 0;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+
+    &.saveButton {
+    background-color: #ffc107;
     width: 100%;
     border-radius: 0;
 
@@ -244,5 +259,25 @@
       background-color: #f8d7da;
       color: #721c24;
     }
+  }
+}
+
+.qrContainer {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .qrCode {
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .qrLabel {
+    font-size: 12px;
+    color: #666;
+    margin-top: 8px;
   }
 }

@@ -2,13 +2,14 @@
 
 import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Book, ChevronDown, FileCheck2, FileText, FileX2 } from 'lucide-react';
+import { ArrowLeft, Book, ChevronDown, FileCheck2, FileText, FileX2, Save } from 'lucide-react';
 import ChatInputArea from '@/components/chat/ChatInputArea';
 import { useEffect, useRef, useState } from 'react';
 import Message, { Message as MessageType } from '@/components/chat/Message';
 import Modal from '@/components/Modal';
 import SystemPrompt from '@/components/SystemPrompt';
 import { hashMessage } from '@/lib/utility';
+import QRCode from 'react-qr-code';
 
 export default function Home() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function Home() {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [numberOfSystemPromptsApplied, setNumberOfSystemPromptsApplied] = useState(0);
   const [currentBotMessage, setCurrentBotMessage] = useState<string | null>(null);
+  const [saveCooldown, setSaveCooldown] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [metaMessages, setMetaMessages] = useState<MessageType[]>([]);
@@ -32,6 +34,10 @@ export default function Home() {
   const [isTaskSheetModalOpen, setIsTaskSheetModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const [savePopupVisible, setSavePopupVisible] = useState(false);
+  const [popupUrl, setPopupUrl] = useState<string | null>(null);
+  const [qrUrl, setQrUrl] = useState<string>('');
 
   const [exerciseTitle, setExerciseTitle] = useState<string | null>(null);
 
@@ -67,46 +73,35 @@ export default function Home() {
     setCurrentBotMessage(null);
   }
 
-  // Cache for data file content - only fetch once per component session
-  const dataFileContentCache = useRef<string | null>(null);
-  const dataFileContentFetched = useRef<boolean>(false);
-
-  async function loadDataFileContent(): Promise<string | undefined> {
-    // Check cache first
-    if (!dataFileContentFetched.current) {
-      try {
-        // Fetch exercise data with data file content only once
-        const exerciseResponse = await fetch(`/api/exercises/${exercise}?includeDataFileContent=true`);
-        if (exerciseResponse.ok) {
-          const exerciseData = await exerciseResponse.json();
-
-          // Only process <|DATA|> if there's exactly one data file
-          if (exerciseData.data_files && exerciseData.data_files.length === 1) {
-            const singleFileName = exerciseData.data_files[0];
-            dataFileContentCache.current = exerciseData.data_files_content?.[singleFileName] || null;
-          } else {
-            // Multiple files - don't process <|DATA|> placeholders
-            dataFileContentCache.current = null;
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching exercise data:', error);
-        dataFileContentCache.current = null;
-      } finally {
-        dataFileContentFetched.current = true;
-      }
-    }
-
-    // Replace <|DATA|> with the cached data file content (only for single file exercises)
-    if (dataFileContentCache.current) {
-      return dataFileContentCache.current;
-    }
-  }
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     metaMessagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    // get initial prompt from URL if available
+    const urlParams = new URLSearchParams(window.location.search);
+    const promptId = urlParams.get('prompt');
+    if (promptId) {
+      // Fetch the system prompt from the API
+      fetch(`/api/system-prompts/${promptId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch system prompt');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data?.prompt) {
+            console.log('Loaded system prompt from URL:', data.prompt);
+            setSystemPrompt(data.prompt.content);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching system prompt:', error);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -146,6 +141,20 @@ export default function Home() {
 
     fetchExerciseMetadata();
   }, [exercise]);
+
+  // Compute absolute URL for QR code when popupUrl changes
+  useEffect(() => {
+    if (!popupUrl) {
+      setQrUrl('');
+      return;
+    }
+    try {
+      const absolute = new URL(popupUrl, window.location.origin).toString();
+      setQrUrl(absolute);
+    } catch {
+      setQrUrl(popupUrl);
+    }
+  }, [popupUrl]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -249,12 +258,12 @@ export default function Home() {
   const handleSystemPromptApply = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!systemPrompt.trim() || isLoading || numberOfSystemPromptsApplied >= 100) {
+    if (!systemPrompt?.trim() || isLoading || numberOfSystemPromptsApplied >= 100) {
       return;
     }
     setNumberOfSystemPromptsApplied(numberOfSystemPromptsApplied + 1);
 
-    const userMessage = systemPrompt.trim();
+    const userMessage = systemPrompt?.trim();
     setIsMetaLoading(true);
 
     try {
@@ -333,6 +342,53 @@ export default function Home() {
     }
   };
 
+  function saveSystemPrompt() {
+    if (saveCooldown > 0) {
+      return; // Prevent saving if cooldown is active
+    }
+    setSaveCooldown(60);
+    
+    // Send an API request to save the system prompt
+    fetch(`/api/system-prompts/save`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: systemPrompt,
+      }),
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to save system prompt');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Start generating metadata
+      fetch(`/api/system-prompts/metadata/${data.id}`, {
+        method: 'POST',
+      })
+      // Start a 60-second cooldown
+      setSaveCooldown(60);
+      const cooldownInterval = setInterval(() => {
+        setSaveCooldown((prev) => {
+          if (prev <= 1) {
+            clearInterval(cooldownInterval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      // Show popup with URL
+      setPopupUrl(`/prompt-engineering/?prompt=${data.id}`);
+      setSavePopupVisible(true);
+    })
+    .catch((error) => {
+      console.error('Error saving system prompt:', error);
+    });
+  }
+
   return (
     <div className={styles.container}>
       {/* Header Bar */}
@@ -373,6 +429,30 @@ export default function Home() {
         <SystemPrompt exerciseId={exercise} type="task-sheet" />
       </Modal>
 
+      {/* Save Prompt Popup */}
+      <Modal isOpen={savePopupVisible} onClose={() => setSavePopupVisible(false)} title="System Prompt Saved">
+        <div>
+          <p>Your system prompt has been saved successfully!</p>
+          {popupUrl && (
+            <>
+              <p>
+                You can access it here: <a href={popupUrl} target="_blank" rel="noopener noreferrer">{popupUrl.replace('/prompt-engineering/?prompt=', '')}</a>
+              </p>
+              {qrUrl && (
+                <div className={styles.qrContainer}>
+                  <div className={styles.qrCode}>
+                    <QRCode value={qrUrl} size={180} bgColor="#ffffff" fgColor="#000000" />
+                  </div>
+                  <div className={styles.qrLabel}>
+                    Scan to open on your phone
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </Modal>
+
       {/* Content Area (Split into 3 Sub-Areas ) */}
       <div className={styles.content}>
         {/* System Prompt input */}
@@ -392,6 +472,10 @@ export default function Home() {
               <button className={`${styles.sendButton} ${styles.deleteButton}`} onClick={clearChat} disabled={isLoading || messages.length === 0}>
                 <FileX2 />
                 <span>Clear Chat</span>
+              </button>
+              <button className={`${styles.sendButton} ${styles.saveButton}`} onClick={saveSystemPrompt} disabled={saveCooldown > 0}>
+                <Save />
+                <span>{saveCooldown > 0 ? `Save in ${saveCooldown} seconds` : 'Save'}</span>
               </button>
             </div>
             <div className={`${styles.messageCounter} ${styles.messageCounterSystemPrompt} ${numberOfSystemPromptsApplied >= 100 ? styles.full : ''}`}>
