@@ -467,11 +467,11 @@ export default function Home() {
             <div className={styles.buttonRow}>
               <button className={`${styles.sendButton} ${styles.applyButton}`} onClick={handleSystemPromptApply} disabled={numberOfSystemPromptsApplied >= 100 || !systemPrompt.trim() || isMetaLoading}>
                 <FileCheck2 />
-                <span>Get Feedback</span>
+                <span>Feedback</span>
               </button>
               <button className={`${styles.sendButton} ${styles.deleteButton}`} onClick={clearChat} disabled={isLoading || messages.length === 0}>
                 <FileX2 />
-                <span>Clear Chat</span>
+                <span>Chat entleeren</span>
               </button>
               <button className={`${styles.sendButton} ${styles.saveButton}`} onClick={saveSystemPrompt} disabled={saveCooldown > 0}>
                 <Save />
