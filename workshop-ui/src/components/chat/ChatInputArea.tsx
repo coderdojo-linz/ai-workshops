@@ -28,7 +28,7 @@ export default function ChatInputArea({
         }
     };
     return (
-        <>
+        <div className={styles.wrapper}>
             <form onSubmit={onSubmit} className={styles.inputForm}>
                 <textarea
                     ref={inputRef}
@@ -43,7 +43,6 @@ export default function ChatInputArea({
                     placeholder="Schreibe deine Nachricht hier..."
                     disabled={isLoading}
                     className={styles.textInput}
-                    rows={2}
                 />
                 <button type="submit" disabled={!inputValue.trim() || isLoading || messageCount >= 100} className={styles.sendButton}>
                     <Send />
@@ -54,6 +53,6 @@ export default function ChatInputArea({
             <div className={styles.messageCounter}>
                 {messageCount}/100 Nachrichten | {inputValue.length}/1000 Zeichen
             </div>
-        </>
+        </div>
     );
 }

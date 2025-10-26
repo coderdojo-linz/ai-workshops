@@ -36,6 +36,8 @@ export default function Home() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isFirstCall, setIsFirstCall] = useState(true);
   const [responseId, setResponseId] = useState<string | undefined>(undefined);
+  const [inputAreaHeight, setInputAreaHeight] = useState(150); // Initial height in pixels
+  const [isDragging, setIsDragging] = useState(false);
 
   // Cache for data file content - only fetch once per component session
   const dataFileContentCache = useRef<string | null>(null);
@@ -127,6 +129,38 @@ export default function Home() {
 
     fetchExerciseMetadata();
   }, [exercise, welcomeMessageLoaded]);
+
+  // Handle drag for resizing input area
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      
+      // Calculate new height based on mouse position from bottom of viewport
+      const newHeight = window.innerHeight - e.clientY - 20; // 20px for padding
+      
+      // Constrain height between 100px and 500px
+      const constrainedHeight = Math.max(100, Math.min(500, newHeight));
+      setInputAreaHeight(constrainedHeight);
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      
+      // Prevent text selection while dragging
+      document.body.style.userSelect = 'none';
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.userSelect = '';
+    };
+  }, [isDragging]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -265,6 +299,10 @@ export default function Home() {
     }
   };
 
+  const handleDragStart = () => {
+    setIsDragging(true);
+  };
+
   return (
     <div className={styles.container}>
       {/* Header Bar */}
@@ -306,7 +344,7 @@ export default function Home() {
       </Modal>
 
       {/* Conversation History */}
-      <div className={styles.messagesContainer} ref={messagesContainerRef}>
+      <div className={styles.messagesContainer} ref={messagesContainerRef} style={{ marginBottom: `${inputAreaHeight + 30}px` }}>
         {messages.map((message) => (
           <Message message={message} key={hashMessage(message)} />
         ))}
@@ -333,7 +371,19 @@ export default function Home() {
         <div ref={messagesEndRef} />
       </div>
 
-      <ChatInputArea inputRef={inputRef} inputValue={input} setInputValue={setInput} onSubmit={handleSubmit} isLoading={isLoading} messageCount={messages.length} />
+      {/* Drag Handle */}
+      <div 
+        className={`${styles.dragHandle} ${isDragging ? styles.dragging : ''}`}
+        onMouseDown={handleDragStart}
+        style={{ bottom: `${inputAreaHeight + 10}px` }}
+      >
+        <div className={styles.dragHandleBar} />
+      </div>
+
+      {/* Input Area */}
+      <div className={styles.inputAreaContainer} style={{ height: `${inputAreaHeight}px` }}>
+        <ChatInputArea inputRef={inputRef} inputValue={input} setInputValue={setInput} onSubmit={handleSubmit} isLoading={isLoading} messageCount={messages.length} />
+      </div>
     </div>
   );
 }

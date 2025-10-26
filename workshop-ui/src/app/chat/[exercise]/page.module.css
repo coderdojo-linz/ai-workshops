@@ -114,13 +114,62 @@
 .messagesContainer {
   flex: 1;
   overflow-y: auto;
-  margin-bottom: 20px;
   border: 3px solid #aaa;
   padding: 15px;
   border-radius: 8px;
   background-color: #ededed;
   display: flex;
   flex-direction: column;
+}
+
+.dragHandle {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 10px;
+  cursor: ns-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  &.dragging {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+}
+
+.dragHandleBar {
+  width: 40px;
+  height: 4px;
+  background-color: #aaa;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+
+  .dragHandle:hover & {
+    background-color: #007bff;
+  }
+
+  .dragHandle.dragging & {
+    background-color: #007bff;
+  }
+}
+
+.inputAreaContainer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
 }
 
 .loader {
