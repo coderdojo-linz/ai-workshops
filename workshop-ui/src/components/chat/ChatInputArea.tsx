@@ -10,6 +10,7 @@ interface ChatInputAreaProps {
     onSubmit: (e: React.FormEvent) => void;
     isLoading: boolean;
     messageCount: number;
+    fillContainer?: boolean;
 }
 
 export default function ChatInputArea({
@@ -18,7 +19,8 @@ export default function ChatInputArea({
     setInputValue,
     onSubmit,
     isLoading,
-    messageCount
+    messageCount,
+    fillContainer = false
 }: Readonly<ChatInputAreaProps>) {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -28,7 +30,7 @@ export default function ChatInputArea({
         }
     };
     return (
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} ${fillContainer ? styles.fillContainer : ''}`}>
             <form onSubmit={onSubmit} className={styles.inputForm}>
                 <textarea
                     ref={inputRef}

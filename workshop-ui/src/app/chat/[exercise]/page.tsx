@@ -382,7 +382,7 @@ export default function Home() {
 
       {/* Input Area */}
       <div className={styles.inputAreaContainer} style={{ height: `${inputAreaHeight}px` }}>
-        <ChatInputArea inputRef={inputRef} inputValue={input} setInputValue={setInput} onSubmit={handleSubmit} isLoading={isLoading} messageCount={messages.length} />
+        <ChatInputArea inputRef={inputRef} inputValue={input} setInputValue={setInput} onSubmit={handleSubmit} isLoading={isLoading} messageCount={messages.length} fillContainer={true} />
       </div>
     </div>
   );
