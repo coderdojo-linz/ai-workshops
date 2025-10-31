@@ -11,6 +11,18 @@
       "data_files": "data-cave.csv",
       "image": "/images/covers/01-data-cave.svg"
     },
+    "data-cave-b": {
+      "title": "Die Daten-Höhle (Experiment)",
+      "folder": "01b-data-cave-playground",
+      "difficulty": "easy",
+      "summary": "Du bist in einer Höhle gefangen und musst mithilfe der KI „Nova“ in einem Datensatz herausfinden, welches Tier darin versteckt ist, um die Tür zu öffnen und aus der Höhle zu entkommen.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
+      "data_files": "data-cave.csv",
+      "image": "/images/covers/01-data-cave.svg",
+      "visibleByDefault": false
+    },
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",
       "folder": "02-detective-beginners",
