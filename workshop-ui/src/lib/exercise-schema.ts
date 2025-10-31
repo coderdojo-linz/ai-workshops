@@ -14,7 +14,8 @@ const ExerciseSchema = z.object({
     z.array(z.string())   // Mehrere Dateien
   ]).transform((val) => Array.isArray(val) ? val : [val]), // Immer Array intern
   image: z.string().optional(), // Bild als URL oder Pfad, optional
-  url: z.string().optional()
+  url: z.string().optional(),
+  visibleByDefault: z.boolean().optional().default(true) // Default visibility for exercises
 });
 
 // Schema for the entire exercises file

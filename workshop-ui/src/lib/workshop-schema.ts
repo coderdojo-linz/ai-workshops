@@ -11,6 +11,7 @@ export const WorkshopSchema = z.object({
     message: "Ungültiges Enddatum und -uhrzeit.",
   }),
   description: z.string().optional(),
+  exerciseCodes: z.array(z.string()).optional(), // List of exercise codes (keys from exercises.json)
 }).refine(data => {
   const start = new Date(data.startDateTime);
   const end = new Date(data.endDateTime);

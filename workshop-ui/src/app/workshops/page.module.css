@@ -102,110 +102,15 @@
     }
 }
 
-.newWorkshopButton,
-.submitButton,
-.saveButton,
-.cancelButton,
-.deleteButton {
+.newWorkshopButton {
     font-family: 'Poppins', sans-serif;
     padding: 0.5rem 1rem;
     border-radius: 6px;
     border: none;
     cursor: pointer;
-}
-
-.newWorkshopButton {
     background-color: #2563eb;
     color: white;
     white-space: nowrap;
-}
-
-.submitButton {
-    background-color: #2563eb;
-    color: white;
-}
-
-.saveButton {
-    background-color: #16a34a;
-    color: white;
-}
-
-.cancelButton {
-    background-color: #8f98a1;
-    color: white;
-}
-
-.deleteButton {
-    background-color: #dc2626; /* red for delete */
-    color: white;
-    transition: background-color 0.2s ease;
-}
-
-.deleteButton:hover {
-    background-color: #b91c1c; /* darker red on hover */
-}
-
-.formWrapper {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-}
-
-.input,
-.textarea {
-    border: 1px solid #d1d5db;
-    padding: 0.5rem;
-    width: 100%;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-}
-
-.textarea {
-    height: 4rem;
-    resize: vertical;
-}
-
-.timeRow {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.dateTimeRow {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-    align-items: center;
-}
-
-.timeInputGroup {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex: 1;
-}
-
-.timeLabel {
-    font-size: 0.875rem;
-    color: #374151;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.editButtonsRow {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-.submitButton:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 
 /* Workshop table styles */

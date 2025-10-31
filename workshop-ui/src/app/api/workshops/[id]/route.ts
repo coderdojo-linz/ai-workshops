@@ -50,7 +50,19 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ id: str
   // Code sollte nicht überschrieben werden - entferne es aus den Update-Feldern
   const { code, ...fieldsToUpdate } = updateFields;
 
+  // Handle exerciseCodes explicitly: convert empty arrays to undefined (meaning "use defaults")
+  // This ensures that removing all exercises works correctly
+  if ('exerciseCodes' in fieldsToUpdate) {
+    if (Array.isArray(fieldsToUpdate.exerciseCodes) && fieldsToUpdate.exerciseCodes.length === 0) {
+      // Convert empty array to undefined and explicitly delete the property to ensure it's cleared
+      delete fieldsToUpdate.exerciseCodes;
+      delete workshops[index].exerciseCodes;
+    }
+  }
+  
+  // Apply updates
   workshops[index] = { ...workshops[index], ...fieldsToUpdate };
+  
   if (await writeWorkshops(workshops)) {
     return NextResponse.json(workshops[index]);
   } else {
