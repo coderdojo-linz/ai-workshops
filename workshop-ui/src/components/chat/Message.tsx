@@ -45,7 +45,8 @@ export default memo(function Message({
         code(props: any) {
             const { children, className } = props;
             const language = className?.includes('language-') ? className : '';
-            const key = `code-${hashString(children || crypto.randomUUID())}`;
+            const fallbackId = `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+            const key = `code-${hashString(children || fallbackId)}`;
             if (children?.startsWith('<|TOOL_CODE_INTERPRETER|>')) {
                 const text = children;
                 const content = getScriptContentFromChildren(text.replace('<|TOOL_CODE_INTERPRETER|>', '').split('<|OUTPUT|>')[0].trim());
