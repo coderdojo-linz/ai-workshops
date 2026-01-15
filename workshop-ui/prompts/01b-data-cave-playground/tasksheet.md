@@ -2,16 +2,17 @@
 
 ## Die Geschichte
 
-Du wachst in einer Höhle auf. Eine Tür ist verschlossen. Daneben blinken vier Kristall-Knöpfe: Katze, Hund, Dino, Maus. Auf der Wand erscheint Nova (die KI): „In den Daten versteckt sich ein Tier. Finde heraus, welches – dann drücke den richtigen Knopf. Du hast nur einen Versuch!“
+Ihr wacht in einer Höhle auf. Eine Tür ist verschlossen. Daneben blinken vier Kristall-Knöpfe: Katze, Hund, Dino, Maus. Auf der Wand erscheint Hans (die KI): „In den Daten versteckt sich ein Tier. Findet heraus, welches – dann drückt den richtigen Knopf. Ihr habt nur einen Versuch!“
 
 ## Was ist ein Prompt?
 
-Ein Prompt ist das, was du Nova schreibst: eine Frage oder Anweisung. Mit Prompts leitest du Nova an, was sie tun soll – zum Beispiel etwas zeigen, untersuchen oder erklären.
+Ein Prompt ist das, was ihr Hans schreibt: eine Frage oder Anweisung. Mit Prompts leitet ihr Hans an, was er tun soll – zum Beispiel etwas zeigen, untersuchen oder erklären.
 
 Tipps für gute Prompts:
 
 - Kurz und klar formulieren (eine Sache pro Nachricht).
-- Wenn dir etwas unklar ist: Frag nach einer kurzen Erklärung in einfachen Worten.
-- Bitte Nova, ihre Schritte zu zeigen (z. B. zuerst denken/planen, dann ausführen).
+- Wenn euch etwas unklar ist: Fragt nach einer kurzen Erklärung in einfachen Worten.
+- Bittet Hans, seine Schritte zu zeigen (z. B. zuerst denken/planen, dann ausführen).
 
-Jetzt bist du dran: Nutze Prompts, um das Rätsel zu lösen. Denke selbst, probiere aus, und frag Nova gerne, wenn dir etwas unklar ist!
+Jetzt seid ihr dran: Nutzt Prompts, um das Rätsel zu lösen. Denkt selbst, probiert aus, und fragt Hans gerne, wenn euch etwas unklar ist!
+
