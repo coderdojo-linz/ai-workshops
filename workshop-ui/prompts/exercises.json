@@ -12,10 +12,10 @@
       "image": "/images/covers/01-data-cave.svg"
     },
     "data-cave-b": {
-      "title": "Die Daten-Höhle (Experiment)",
+      "title": "Der Daten-Tempel (Experiment)",
       "folder": "01b-data-cave-playground",
       "difficulty": "easy",
-      "summary": "Du bist in einer Höhle gefangen und musst mithilfe der KI „Hans“ in einem Datensatz herausfinden, welches Tier darin versteckt ist, um die Tür zu öffnen und aus der Höhle zu entkommen.",
+      "summary": "Ihr wollt ins Innerste des Tempels vordringen und müsst mithilfe der KI „Mira“ Datensätze untersuchen, um das richtige Tier zu finden und die Tür zu öffnen.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
       "welcome_message_file": "welcome-message.md",
