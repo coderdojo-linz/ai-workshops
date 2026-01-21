@@ -1,8 +1,20 @@
-# Die Daten-Höhle
+# Der Daten-Tempel
 
 ## Die Geschichte
 
-Ihr wacht in einer Höhle auf. Eine Tür ist verschlossen. Daneben blinken vier Kristall-Knöpfe: Katze, Hund, Dino, Maus. Auf der Wand erscheint Hans (die KI): „In den Daten versteckt sich ein Tier. Findet heraus, welches – dann drückt den richtigen Knopf. Ihr habt nur einen Versuch!“
+Bei der Erkundung des KI-Planeten seid ihr auf eine alte, verlassene Anlage gestoßen. Ihr seid durch enge Flure gegangen, habt große Hallen durchquert und dunkle Ecken erkundet. Nun steht ihr vor einer verschlossenen Tür. 
+Die Tür hat kein Schloss, aber vier Knöpfe mit Tiersymbolen darauf:  
++ Hund
++ Katze
++ Dino
++ Maus
+
+Welcher öffnet die Tür? Was passiert, wenn ihr den falschen Knopf drückt?  
+Ihr hört eine Stimme: „Willkommen, neugierige Menschen! Ich bin Mira, die Wächterin des Tempels. Nur wer erkennt, welches Tier sich in den Daten versteckt, darf sein Innerstes betreten. Aber Vorsicht - Ihr habt nur einen Versuch!“  
+Erst jetzt seht ihr den Computer neben der Tür, auf dem eine Datei mit dem Titel *Zahlen lügen nicht* liegt.
+
+#### Jetzt seid ihr dran: Durchforstet die Daten mit Miras Hilfe und öffnet die Tür.
+
 
 ## Was ist ein Prompt?
 
@@ -15,4 +27,5 @@ Tipps für gute Prompts:
 - Bittet Hans, seine Schritte zu zeigen (z. B. zuerst denken/planen, dann ausführen).
 
 Jetzt seid ihr dran: Nutzt Prompts, um das Rätsel zu lösen. Denkt selbst, probiert aus, und fragt Hans gerne, wenn euch etwas unklar ist!
+
 
