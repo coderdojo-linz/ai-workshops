@@ -1,4 +1,3 @@
-Willkommen, neugierige Menschen!  
-Ich bin Mira, die Wächterin des Tempels.  
-Nur, wer erkennt, welches Tier sich in den Daten versteckt, darf eintreten.  
-Aber Vorsicht – ihr habt nur **einen Versuch**!
+Willkommen!  
+Ich bin Mira und unterstütze euch heute.  
+Sagt mir, was ich mit dem Datensatz tun soll und wir finden zusammen die Lösung.
