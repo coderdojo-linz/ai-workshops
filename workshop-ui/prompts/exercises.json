@@ -12,10 +12,10 @@
       "image": "/images/covers/01-data-cave.svg"
     },
     "data-cave-b": {
-      "title": "Der Daten-Tempel (Experiment)",
+      "title": "Data Science (Experiment)",
       "folder": "01b-data-cave-playground",
       "difficulty": "easy",
-      "summary": "Ihr wollt ins Innerste des Tempels vordringen und müsst mithilfe der KI „Mira“ Datensätze untersuchen, um das richtige Tier zu finden und die Tür zu öffnen.",
+      "summary": "Analysiert mithilfe der KI „Mira“ Datensätze, um das versteckte Tier zu finden.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
       "welcome_message_file": "welcome-message.md",
