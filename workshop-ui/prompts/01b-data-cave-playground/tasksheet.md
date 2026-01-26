@@ -1,20 +1,8 @@
-# Der Daten-Tempel
+# Data Science und KI
 
-## Die Geschichte
+## Die Daten
 
-Bei der Erkundung des KI-Planeten seid ihr auf eine alte, verlassene Anlage gestoßen. Ihr seid durch enge Flure gegangen, habt große Hallen durchquert und dunkle Ecken erkundet. Nun steht ihr vor einer verschlossenen Tür. 
-Die Tür hat kein Schloss, aber vier Knöpfe mit Tiersymbolen darauf:  
-+ Hund
-+ Katze
-+ Dino
-+ Maus
-
-Welcher öffnet die Tür? Was passiert, wenn ihr den falschen Knopf drückt?  
-Ihr hört eine Stimme: „Willkommen, neugierige Menschen! Ich bin Mira, die Wächterin des Tempels. Nur wer erkennt, welches Tier sich in den Daten versteckt, darf sein Innerstes betreten. Aber Vorsicht - Ihr habt nur einen Versuch!“  
-Erst jetzt seht ihr den Computer neben der Tür, auf dem eine Datei mit dem Titel *Zahlen lügen nicht* liegt.
-
-#### Jetzt seid ihr dran: Durchforstet die Daten mit Miras Hilfe und öffnet die Tür.
-
+Ihr habt eine CSV-Datei mit DAten hochgeladen. Die müsst ihr jetzt untersuchen. Findet so viel wie möglich über die Daten heraus. Es versteckt sich ein Tier in dem Datenchaos. Findet ihr heraus welches es ist?
 
 ## Was ist ein Prompt?
 
@@ -27,5 +15,6 @@ Tipps für gute Prompts:
 - Bittet Hans, seine Schritte zu zeigen (z. B. zuerst denken/planen, dann ausführen).
 
 Jetzt seid ihr dran: Nutzt Prompts, um das Rätsel zu lösen. Denkt selbst, probiert aus, und fragt Hans gerne, wenn euch etwas unklar ist!
+
 
 
