@@ -488,7 +488,7 @@ export default function Home() {
           {/* Conversation History */}
           <div className={styles.messagesContainer}>
             {messages.map((message) => (
-              <Message message={message} key={hashMessage(message)} />
+              <Message message={message} key={hashMessage(message)} userDisplay='You' assistantDisplay='Assistant' />
             ))}
 
             {currentBotMessage &&
@@ -496,7 +496,7 @@ export default function Home() {
                 role: 'assistant',
                 content: currentBotMessage,
                 type: 'text'
-              }} />
+              }} userDisplay='You' assistantDisplay='Your Assistant' />
             }
 
             <div ref={messagesEndRef} />
@@ -506,7 +506,7 @@ export default function Home() {
 
         <div className={`${styles.messagesContainer} ${styles.feedbackChat}`}>
           {metaMessages.map((message) => (
-            <Message message={message} key={hashMessage(message)} />
+            <Message message={message} key={hashMessage(message)} userDisplay='You' assistantDisplay='Assistant' />
           ))}
 
           {currentMetaBotMessage &&
@@ -514,7 +514,7 @@ export default function Home() {
               role: 'assistant',
               content: currentMetaBotMessage,
               type: 'text'
-            }} />
+            }} assistantDisplay='Assistant' userDisplay='You' />
           }
 
           <div ref={metaMessagesEndRef} />
