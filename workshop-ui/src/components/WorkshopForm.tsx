@@ -28,8 +28,8 @@ export default function WorkshopForm({ initialWorkshop, onSave, onCancel, onDele
   const [exercisesLoading, setExercisesLoading] = useState(true);
   const [workshop, setWorkshop] = useState<WorkshopInput>({
     title: initialWorkshop?.title ?? '',
-    startDateTime: initialWorkshop?.startDateTime ? initialWorkshop.startDateTime.slice(0,16) : '',
-    endDateTime: initialWorkshop?.endDateTime ? initialWorkshop.endDateTime.slice(0,16) : '',
+    startDateTime: initialWorkshop?.startDateTime ? utcToLocal(initialWorkshop.startDateTime) : '',
+    endDateTime: initialWorkshop?.endDateTime ? utcToLocal(initialWorkshop.endDateTime) : '',
     description: initialWorkshop?.description ?? '',
     exerciseCodes: initialWorkshop?.exerciseCodes ?? [],
   });
@@ -111,7 +111,14 @@ export default function WorkshopForm({ initialWorkshop, onSave, onCancel, onDele
     if (!validation.success) return;
     setLoading(true);
     try {
-      await onSave({ ...workshop, id: initialWorkshop?.id });
+      // Convert local times to UTC before submitting
+      const workshopWithUTC = {
+        ...workshop,
+        startDateTime: localToUTC(workshop.startDateTime),
+        endDateTime: localToUTC(workshop.endDateTime),
+        id: initialWorkshop?.id,
+      };
+      await onSave(workshopWithUTC);
     } finally {
       setLoading(false);
     }
@@ -236,4 +243,46 @@ export default function WorkshopForm({ initialWorkshop, onSave, onCancel, onDele
       </div>
     </div>
   );
+}
+
+/**
+ * Converts a local datetime-local string (YYYY-MM-DDTHH:mm) to UTC ISO 8601 string
+ * @param localDateTimeString - Date string from datetime-local input (in user's local timezone)
+ * @returns ISO 8601 UTC string (YYYY-MM-DDTHH:mm:ssZ)
+ */
+export function localToUTC(localDateTimeString: string): string {
+  if (!localDateTimeString) {
+    return '';
+  }
+
+  // Parse the local datetime string
+  const localDate = new Date(localDateTimeString + ':00'); // Add seconds for parsing
+  
+  // Convert to UTC by getting the ISO string and trimming to desired format
+  const utcString = localDate.toISOString();
+  return utcString; // Returns format like "2024-02-09T10:30:00.000Z"
+}
+
+/**
+ * Converts a UTC ISO 8601 string to a local datetime-local string (YYYY-MM-DDTHH:mm)
+ * @param utcDateTimeString - ISO 8601 UTC string (e.g., "2024-02-09T10:30:00.000Z" or "2024-02-09T10:30:00Z")
+ * @returns Datetime-local string in user's local timezone (YYYY-MM-DDTHH:mm)
+ */
+export function utcToLocal(utcDateTimeString: string): string {
+  if (!utcDateTimeString) {
+    return '';
+  }
+
+  // Parse the UTC string
+  const utcDate = new Date(utcDateTimeString);
+  
+  // Convert to local datetime-local format
+  // We need to get the local date/time components
+  const year = utcDate.getFullYear();
+  const month = String(utcDate.getMonth() + 1).padStart(2, '0');
+  const day = String(utcDate.getDate()).padStart(2, '0');
+  const hours = String(utcDate.getHours()).padStart(2, '0');
+  const minutes = String(utcDate.getMinutes()).padStart(2, '0');
+  
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
 }

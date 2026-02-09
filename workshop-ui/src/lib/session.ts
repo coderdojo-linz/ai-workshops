@@ -94,9 +94,9 @@ export async function validateAccessCode(accessCode: string): Promise<boolean> {
   // Allow 30 minutes before start and 30 minutes after end
   const now = new Date();
   const startTime = new Date(workshop.startDateTime);
-  startTime.setMinutes(startTime.getMinutes() - 30);
+  startTime.setUTCMinutes(startTime.getUTCMinutes() - 30);
   const endTime = new Date(workshop.endDateTime);
-  endTime.setMinutes(endTime.getMinutes() + 30);
+  endTime.setUTCMinutes(endTime.getUTCMinutes() + 30);
 
   // If now is before start or after end, return false 
   if (now < startTime || now > endTime) {

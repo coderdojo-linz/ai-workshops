@@ -2,8 +2,9 @@ import {z} from "zod";
 
 export const WorkshopSchema = z.object({
   title: z.string().min(1),
-  // ISO 8601 Date-Time Format (Using UTC time)
-  // Example: 2023-03-15T10:00:00Z
+  // ISO 8601 Date-Time Format in UTC
+  // Stored format: 2023-03-15T10:00:00.000Z
+  // Frontend converts local input to UTC before sending to server
   startDateTime: z.string().min(1).refine((date) => !isNaN(Date.parse(date)), {
     message: "Ungültiges Startdatum und -uhrzeit.",
   }),
