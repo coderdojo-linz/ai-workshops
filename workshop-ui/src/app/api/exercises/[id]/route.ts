@@ -11,6 +11,8 @@ type ExerciseResponse = {
   welcome_message?: string;
   data_files: string[];
   data_files_content?: { [filename: string]: string };
+  user_display_name?: string;
+  assistant_display_name?: string;
 };
 
 /** 
@@ -50,7 +52,9 @@ export async function GET(
       title: exercise.title,
       folder: exercise.folder,
       system_prompt_file: exercise.system_prompt_file,
-      data_files: exercise.data_files
+      data_files: exercise.data_files,
+      user_display_name: exercise.user_display_name,
+      assistant_display_name: exercise.assistant_display_name,
     };
     
     // Read welcome message (only if the field is present)

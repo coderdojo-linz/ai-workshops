@@ -21,7 +21,9 @@
       "welcome_message_file": "welcome-message.md",
       "data_files": "data-cave.csv",
       "image": "/images/covers/01-data-cave.svg",
-      "visibleByDefault": false
+      "visibleByDefault": false,
+      "assistant_display_name": "Mira",
+      "user_display_name": "Spieler"
     },
     "detective-beginners": {
       "title": "Wer klaut uns die Daten?",

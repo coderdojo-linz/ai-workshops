@@ -38,6 +38,7 @@ export default function Home() {
   const [responseId, setResponseId] = useState<string | undefined>(undefined);
   const [inputAreaHeight, setInputAreaHeight] = useState(150); // Initial height in pixels
   const [isDragging, setIsDragging] = useState(false);
+  const [displayNames, setDisplayNames] = useState({ user: 'You', assistant: 'Bot' });
 
   // Cache for data file content - only fetch once per component session
   const dataFileContentCache = useRef<string | null>(null);
@@ -120,6 +121,8 @@ export default function Home() {
             setMessages([welcomeMessage]);
             setWelcomeMessageLoaded(true);
           }
+
+          setDisplayNames({user: metadata.user_display_name || "You", assistant: metadata.assistant_display_name || "Bot"})
         }
       } catch (error) {
         console.error('Error fetching exercise metadata:', error);
@@ -346,7 +349,7 @@ export default function Home() {
       {/* Conversation History */}
       <div className={styles.messagesContainer} ref={messagesContainerRef} style={{ marginBottom: `${inputAreaHeight + 30}px` }}>
         {messages.map((message) => (
-          <Message message={message} key={hashMessage(message)} />
+          <Message message={message} key={hashMessage(message)} userDisplay={displayNames.user} assistantDisplay={displayNames.assistant} />
         ))}
 
         {currentBotMessage &&
@@ -355,7 +358,7 @@ export default function Home() {
               role: 'assistant',
               content: currentBotMessage,
               type: 'text'
-            }} />
+            }} userDisplay={displayNames.user} assistantDisplay={displayNames.assistant} />
             {isLoading && (
               <div className={`${styles.message} ${styles.assistantMessage}`}>
                 <div className={styles.loader}>

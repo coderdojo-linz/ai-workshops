@@ -27,10 +27,14 @@ type HtmlMessage = {
 
 interface MessageProps {
     message: Message;
+    userDisplay: string;
+    assistantDisplay: string;
 }
 
 export default memo(function Message({
-    message
+    message,
+    userDisplay,
+    assistantDisplay
 }: Readonly<MessageProps>) {
     const [isCopied, setIsCopied] = useState(false);
 
@@ -41,7 +45,6 @@ export default memo(function Message({
     }
 
     const markdownComponents = useMemo(() => ({
-        // eslint-disable-next-line react/no-unstable-n<ested-components
         code(props: any) {
             const { children, className } = props;
             const language = className?.includes('language-') ? className : '';
@@ -126,7 +129,7 @@ export default memo(function Message({
             )}
             className={[styles.message, message.role === 'user' ? styles.userMessageContainer : styles.botMessageContainer].join(' ')}
         >
-            <strong>{message.role === 'user' ? 'You' : 'Bot'}:</strong>{' '}
+            <strong>{message.role === 'user' ? userDisplay : assistantDisplay}:</strong>{' '}
             {message.type === 'html' ? (
                 <iframe
                     srcDoc={message.html}
