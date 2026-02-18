@@ -12,10 +12,10 @@
       "image": "/images/covers/01-data-cave.svg"
     },
     "data-cave-b": {
-      "title": "Data Science (Experiment)",
+      "title": "Die Datenhöhle",
       "folder": "01b-data-cave-playground",
       "difficulty": "easy",
-      "summary": "Analysiert mithilfe der KI „Mira“ Datensätze, um das versteckte Tier zu finden.",
+      "summary": "Findet das versteckte Tier, um aus der Höhle zu entkommen.",
       "reference": "tasksheet.md",
       "system_prompt_file": "system-prompt.md",
       "welcome_message_file": "welcome-message.md",
