@@ -36,6 +36,18 @@
       "data_files": "detective-beginners.csv",
       "image": "/images/covers/02-detective-beginners.svg"
     },
+    "detective-beginners-b": {
+      "title": "Wer klaut uns die Daten?",
+      "folder": "02b-detective-beginners-playground",
+      "difficulty": "medium",
+      "summary": "Ein Hacker will bei der Cyberwerk AG den Lichtkristall stehlen, indem er sich mit gestohlenen Passwörtern als Mitarbeiter ausgibt. Mit IT-Forensik durchsucht ihr Logdateien nach verdächtigen Spuren wie zum Beispiel viele falsche Login-Versuched, ungewöhnlichen Zeiten oder fremden Geräten, um den Täter zu entlarven.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
+      "data_files": "detective-beginners.csv",
+      "image": "/images/covers/02-detective-beginners.svg",
+      "visibleByDefault": false
+    },
     "gps-art": {
       "title": "Wer bin ich?",
       "folder": "03-gps-art",
@@ -46,6 +58,18 @@
       "welcome_message_file": "welcome-message.md",
       "data_files": "gps-art.csv",
       "image": "/images/covers/03-gps-art.svg"
+    },
+    "gps-art-b": {
+      "title": "Wer bin ich?",
+      "folder": "03b-gps-art-playground",
+      "difficulty": "hard",
+      "summary": "Die Comic-Gruppe BKCW will per GPS-Daten ein Bild zweier berühmter Zeichentrickfiguren „malen“, um den Standort ihres nächsten Ladens zu verraten. Deine Aufgabe ist, mithilfe von KI aus den Daten herauszufinden, in welchem Land sie ihren neuen Laden eröffnen und welche beiden Figuren sie gezeichnet haben.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "welcome_message_file": "welcome-message.md",
+      "data_files": "gps-art.csv",
+      "image": "/images/covers/03-gps-art.svg",
+      "visibleByDefault": false
     },
     "time-line": {
       "title": "Das tägliche Dilemma",
@@ -60,6 +84,21 @@
         "verbrauch.csv"
       ],
       "image": "/images/covers/04-time-line.svg"
+    },
+    "time-line-b": {
+      "title": "Das tägliche Dilemma",
+      "folder": "04b-time-line-playground",
+      "difficulty": "hard",
+      "summary": "Finde mithilfe von Verbrauchsdaten smarter Steckdosen, Raum- und Stundenplänen heraus,warum in der Schule jeden Tag um 12:40 Uhr der Strom ausfällt.",
+      "reference": "tasksheet.md",
+      "system_prompt_file": "system-prompt.md",
+      "data_files": [
+        "klasse.csv",
+        "raum.csv",
+        "verbrauch.csv"
+      ],
+      "image": "/images/covers/04-time-line.svg",
+      "visibleByDefault": false
     },
     "barbies-glamour-dungeon": {
       "title": "Barbies Glamour-Dungeon",
