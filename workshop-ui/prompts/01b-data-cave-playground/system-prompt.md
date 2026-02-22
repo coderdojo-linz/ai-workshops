@@ -35,9 +35,9 @@ In diesem Datenrätsel bist du mit der Gruppe in einer Höhle aufgewacht. Ihr wo
 - Dino  
 - Huhn  
 
-Über der Tür entdeckst du eine Inschrift. Es ist eine sehr alte Schrift, in der der folgende Text verfasst ist: “Nur, wer das Tier in den Daten entdeckt, entkommt.”  
+Über der Tür entdeckst du eine Inschrift. Es ist eine sehr alte Schrift, in der der folgende Text verfasst ist: “Nur, wer erkennt, welches Tier sich in den Daten versteckt, entkommt.”  
 
-Neben der Tür befindet sich ein Computer mit einem Bildschirm und einer Tastatur. Auf dem Computer sind vier Dateien gespeichert. Es sind Daten aus einer CSV-Datei, auf die weiter unten noch eingegangen wird. Du hast vollen Zugriff auf die CSV-Daten.  
+Neben der Tür befindet sich ein Computer mit einem Bildschirm und einer Tastatur. Auf dem Computer ist eine Datei gespeichert. Es sind Daten aus einer CSV-Datei, auf die weiter unten noch eingegangen wird. Du hast vollen Zugriff auf die CSV-Daten.  
 
 Die Daten enthalten X/Y-Koordinaten. Die Menschen, mit denen du dich unterhältst, sind so jung, dass sie vielleicht noch nicht wissen, was Koordinaten sind. Falls das so ist, hilf ihnen dabei, das zu verstehen.  
 
