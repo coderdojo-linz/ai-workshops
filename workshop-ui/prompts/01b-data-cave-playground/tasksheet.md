@@ -1,21 +1,13 @@
-# Data Science und KI
+# Die Datenhöhle 
 
-## Die Daten
+## Die Geschichte 
 
-Ihr habt eine CSV-Datei mit DAten hochgeladen. Die müsst ihr jetzt untersuchen. Findet so viel wie möglich über die Daten heraus. Es versteckt sich ein Tier in dem Datenchaos. Findet ihr heraus welches es ist?
+Ihr seid in einer dunklen Höhle aufgewacht. Ihr schaut euch um und seht eine Tür mit vier Knöpfen und einer Inschrift. Die Schrift könnt ihr nicht lesen. Aber die Knöpfe zeigen einen Hund, eine Katze, einen Dino und ein Huhn. Seltsam! 
 
-## Was ist ein Prompt?
+Neben der Tür steht ein Computer mit Bildschirm und Tastatur, darauf nur eine Datei. Super seltsam! 
 
-Ein Prompt ist das, was ihr Mira schreibt: eine Frage oder Anweisung. Mit Prompts leitet ihr Mira an, was sie tun soll – zum Beispiel etwas zeigen, untersuchen oder erklären.
+Zum Glück ist MIRA bei euch, eine freundliche KI-Helferin.  
 
-Tipps für gute Prompts:
+## Eure Mission 
 
-- Kurz und klar formulieren (eine Sache pro Nachricht).
-- Wenn euch etwas unklar ist: Fragt nach einer kurzen Erklärung in einfachen Worten.
-- Bittet Mira, ihre Schritte zu zeigen (z. B. zuerst denken/planen, dann ausführen).
-
-Jetzt seid ihr dran: Nutzt Prompts, um das Rätsel zu lösen. Denkt selbst, probiert aus, und fragt Mira gerne, wenn euch etwas unklar ist!
-
-
-
-
+Analysiert die Daten und findet gemeinsam mit MIRA heraus, wie ihr aus der Höhle entkommen könnt. 
