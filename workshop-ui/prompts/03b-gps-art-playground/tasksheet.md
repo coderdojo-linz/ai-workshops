@@ -1,32 +1,24 @@
-# Aufabenblatt "Wer bin ich?"
+# Auftrag „Geheimnisvolle Eröffnung“  
 
-**Eine außergewöhnliche Gruppe von Comic-Fans** mit dem Namen **„BKCW – Besondere Comics Weltweit“** hatte nur ein Ziel 😳:
-Sie wollte um die ganze Welt 🌎 reisen und in jedem Land eine ganz besondere Art von Comics verkaufen 💥.
+Löst gemeinsam mit der künstlichen Intelligenz das Datenrätsel. Achtet dabei auf gute Prompts und navigiert euch mit der KI durch die Daten.  
 
-Doch wie sollten sie allen verraten, **wo** ihr nächster Laden eröffnet wird und **welche berühmten Comic-Figuren** es dort geben wird 🤨?
+## Die Geschichte 
 
-💡 Sie hatten eine verrückte Idee:
-Statt einfach nur zu sagen, wo sie sind, wollten sie ein riesiges Kunstwerk erschaffen – **ein Bild, das aus GPS-Daten gemalt wird** 🖌️🗺️!
-*(GPS-Daten sind Punkte auf einer Karte, die genau zeigen, wo etwas ist.)*
+Der berühmte Comicbuchladen “BCW – Besondere Comics Weltweit” plant eine außergewöhnliche Aktion: Zum 50-jährigen Jubiläum soll ein Jahr lang jeden Monat ein neuer Pop-Up-Store eröffnet werden: Immer in einem anderen Land und immer mit einer anderen berühmten Comicserie als Thema. 
+Aber wie erfahren die Fans den Standort des Stores und um welche Comics sich alles dreht? 
 
-🎨 Das Motiv? Zwei der bekanntesten Zeichentrick-Figuren der Welt!
-Der Ort, an dem dieses Bild entsteht, soll auch der neue Standort ❤️ ihres besonderen Comicladens sein – und dort gibt es dann **nur Comics mit genau diesen beiden Figuren** 🧞‍♀️.
+Statt einfach nur die Informationen zu verraten, wollten sie ein riesiges Kunstwerk erschaffen – ein Bild, das aus GPS-Daten gemalt wird! Das Motiv? Zwei der bekanntesten Zeichentrick-Figuren der Welt! Der Ort, an dem dieses Bild entsteht, soll auch der erste Standort️ ihres besonderen Comicbuchladens sein. 
+ 
+**Versucht** herauszufinden, wo die Eröffnung stattfinden soll und welche beiden Comicfiguren euch den entscheidenden Hinweis dazu liefern. 
+   
+**Nutzt** dafür die Hilfe von unserer KI-Assistentin MIRA und seht in den Daten nach, ob ihr etwas herausfinden könnt.    
 
-Eines Morgens stiegen die Künstler in ein kleines Flugzeug ✈️, bereit für ihre Mission.
-Die Menschen warteten schon gespannt:
-Wo würden die Comic-Fans landen?
-Wo eröffnet der nächste Laden?
-Und vor allem – **welche Figuren würden sie enthüllen**?
+#### Dazu kann MIRA auf zwei wichtige Datensätze zugreifen:  
 
-Doch statt einer klaren Antwort gab es nur einen geheimnisvollen Hinweis:
-📄 eine große Menge seltsamer Daten!
+- **GPS-Daten:** Zeigen die Punkte auf einer Landkarte an, die gemeinsam das Bild der Comic-Figuren ergeben.  
+- **Karten-Daten:** Zeigen eine Landkarte mit Informationen wie Städtenamen.  
 
----
 
-🕵️ **Jetzt bist du dran!**
-Mit Hilfe von KI und deinem Detektiv-Spürsinn kannst du das Rätsel lösen:
+## Eure Mission  
 
-1. **In welchem Land** sind die Künstler gelandet?
-2. **Welche beiden Figuren** haben sie mit den GPS-Daten gezeichnet?
-
-Du kannst der KI **alles** fragen – auch wenn du gar nicht weißt, wo du anfangen sollst oder nicht mehr weiterkommst!
+Analysiert die Daten und findet gemeinsam mit MIRA heraus, wo die nächste Eröffnung stattfinden wird und was das Thema sein wird.   
