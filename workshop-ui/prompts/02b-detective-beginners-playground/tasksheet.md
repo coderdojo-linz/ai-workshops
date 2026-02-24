@@ -1,21 +1,26 @@
-# Data Science und KI
+# Auftrag „Datendiebstahl“ 
 
-## Die Daten
+Löst gemeinsam mit der künstlichen Intelligenz das Datenrätsel. Achtet dabei auf gute Prompts und navigiert euch mit der KI durch die Daten.  
 
-Ihr habt eine CSV-Datei mit DAten hochgeladen. Die müsst ihr jetzt untersuchen. Findet so viel wie möglich über die Daten heraus. Es versteckt sich ein Tier in dem Datenchaos. Findet ihr heraus welches es ist?
+## Die Geschichte 
 
-## Was ist ein Prompt?
+Willkommen bei der Cyberwerk AG – hier tüfteln schlaue Köpfe an fantastischen Erfindungen! Alle wichtigen Firmendaten speichern wir auf unseren Servern ab und arbeiten täglich damit, um neue Innovationen zu schaffen.  
+ 
+Leider ist es hier kürzlich zu einem Zwischenfall gekommen.  
+Offensichtlicht haben Hacker versucht, sich Zugang zu wichtigen Firmendaten zu verschaffen.  
 
-Ein Prompt ist das, was ihr Mira schreibt: eine Frage oder Anweisung. Mit Prompts leitet ihr Mira an, was sie tun soll – zum Beispiel etwas zeigen, untersuchen oder erklären.
+**Helft** uns dabei, die Sicherheitslücke zu finden, mit der sich der Hacker Zutritt verschaffen wollte.  
+ 
+**Nutzt** dafür die Hilfe von unserer KI-Assistentin MIRA und seht in den Daten nach, ob ihr etwas herausfinden könnt.    
 
-Tipps für gute Prompts:
+#### Dazu kann MIRA auf vier wichtige Datensätze zugreifen:  
 
-- Kurz und klar formulieren (eine Sache pro Nachricht).
-- Wenn euch etwas unklar ist: Fragt nach einer kurzen Erklärung in einfachen Worten.
-- Bittet Mira, ihre Schritte zu zeigen (z. B. zuerst denken/planen, dann ausführen).
-
-Jetzt seid ihr dran: Nutzt Prompts, um das Rätsel zu lösen. Denkt selbst, probiert aus, und fragt Mira gerne, wenn euch etwas unklar ist!
-
+- **Zugriffs-Daten:** Zeitpunkt und Account, der Zugriff auf die Daten hatte. 
+- **Geo-Daten:** Orte, von denen aus auf die Daten zugegriffen wurde. 
+- **Geräte-Daten:** IP-Adressen, über die auf die Daten zugegriffen wurde. 
+- **Ergebnis-Daten:** Aufzeichnung erfolgreicher und gescheiterter Log-In-Versuche  
 
 
+## Eure Mission  
 
+Analysiert die Daten und findet gemeinsam mit MIRA heraus, wie sich die Hacker Zutritt verschaffen wollten und ob sie erfolgreich waren.  
