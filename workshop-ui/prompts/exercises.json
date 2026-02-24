@@ -46,7 +46,9 @@
       "welcome_message_file": "welcome-message.md",
       "data_files": "detective-beginners.csv",
       "image": "/images/covers/02-detective-beginners.svg",
-      "visibleByDefault": false
+      "visibleByDefault": false,
+      "assistant_display_name": "MIRA",
+      "user_display_name": "Ihr"
     },
     "gps-art": {
       "title": "Wer bin ich?",
@@ -69,7 +71,9 @@
       "welcome_message_file": "welcome-message.md",
       "data_files": "gps-art.csv",
       "image": "/images/covers/03-gps-art.svg",
-      "visibleByDefault": false
+      "visibleByDefault": false,
+      "assistant_display_name": "MIRA",
+      "user_display_name": "Ihr"
     },
     "time-line": {
       "title": "Das tägliche Dilemma",
@@ -98,7 +102,9 @@
         "verbrauch.csv"
       ],
       "image": "/images/covers/04-time-line.svg",
-      "visibleByDefault": false
+      "visibleByDefault": false,
+      "assistant_display_name": "MIRA",
+      "user_display_name": "Ihr"
     },
     "barbies-glamour-dungeon": {
       "title": "Barbies Glamour-Dungeon",
