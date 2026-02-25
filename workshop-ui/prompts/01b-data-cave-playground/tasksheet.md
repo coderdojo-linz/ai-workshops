@@ -23,6 +23,6 @@ Zum Glück ist MIRA bei euch, eine künstliche Intelligenz, die euch seit dem Be
 ## Eure Mission  
 
 Analysiert die Daten und findet gemeinsam mit MIRA heraus, wie ihr aus der Höhle entkommen könnt.  
-m mit MIRA heraus, wie ihr aus der Höhle entkommen könnt. 
+
 
 
